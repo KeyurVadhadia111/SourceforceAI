@@ -1,7 +1,7 @@
 import { classNames } from "components/utils";
 import { Button } from "components/utils/Button";
 import Icon from "components/utils/Icon";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SimpleBar from "simplebar-react";
 
 const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
@@ -23,6 +23,147 @@ function Badge({ className, variant, ...props }: any) {
 		/>
 	);
 }
+
+interface Tag {
+	label: string;
+}
+
+interface Supplier {
+	id: string;
+	name: string;
+	image: string;
+	country: string;
+	rating: number;
+	isBookmarked: boolean;
+	isVIP: boolean;
+	isVerified: boolean;
+	moq: number;
+	location: string;
+	responseRate: number;
+	tags: Tag[];
+}
+
+const suppliers: Supplier[] = [
+	{
+		id: "1",
+		name: "Global Tools Ltd",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		country: "China",
+		rating: 4.8,
+		isBookmarked: false,
+		isVIP: true,
+		isVerified: false,
+		moq: 500,
+		location: "Guangzhou, Guangdong",
+		responseRate: 94,
+		tags: [
+			{ label: "Portable" },
+			{ label: "OEM Available" }
+		]
+	},
+	{
+		id: "2",
+		name: "TechCorp Manufacturing",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-16.svg",
+		country: "China",
+		rating: 4.8,
+		isBookmarked: false,
+		isVIP: true,
+		isVerified: true,
+		moq: 500,
+		location: "Dongguan, Guangdong",
+		responseRate: 95,
+		tags: [
+			{ label: "Kitchen Appliances" },
+			{ label: "Portable" },
+			{ label: "OEM Available" }
+		]
+	},
+	{
+		id: "1",
+		name: "Global Tools Ltd",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		country: "China",
+		rating: 4.8,
+		isBookmarked: false,
+		isVIP: true,
+		isVerified: false,
+		moq: 500,
+		location: "Guangzhou, Guangdong",
+		responseRate: 94,
+		tags: [
+			{ label: "Portable" },
+			{ label: "OEM Available" }
+		]
+	},
+	{
+		id: "3",
+		name: "Pacific Electronics",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-19.svg",
+		country: "China",
+		rating: 4.8,
+		isBookmarked: false,
+		isVIP: false,
+		isVerified: true,
+		moq: 500,
+		location: "Ningbo, Zhejiang",
+		responseRate: 90,
+		tags: [
+			{ label: "Kitchen Appliances" },
+			{ label: "OEM Available" }
+		]
+	},
+	{
+		id: "1",
+		name: "Global Tools Ltd",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		country: "China",
+		rating: 4.8,
+		isBookmarked: false,
+		isVIP: true,
+		isVerified: false,
+		moq: 500,
+		location: "Guangzhou, Guangdong",
+		responseRate: 94,
+		tags: [
+			{ label: "Portable" },
+			{ label: "OEM Available" }
+		]
+	},
+	{
+		id: "4",
+		name: "BlendTech Manufacturing",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-18.svg",
+		country: "China",
+		rating: 4.8,
+		isBookmarked: false,
+		isVIP: true,
+		isVerified: true,
+		moq: 500,
+		location: "Dongguan, Guangdong",
+		responseRate: 87,
+		tags: [
+			{ label: "OEM Available" }
+		]
+	},
+	{
+		id: "3",
+		name: "Pacific Electronics",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-19.svg",
+		country: "China",
+		rating: 4.8,
+		isBookmarked: false,
+		isVIP: false,
+		isVerified: true,
+		moq: 500,
+		location: "Ningbo, Zhejiang",
+		responseRate: 90,
+		tags: [
+			{ label: "Kitchen Appliances" },
+			{ label: "OEM Available" }
+		]
+	}
+];
 
 const ChatSectionPage = () => {
 	const engagementPoints = [
@@ -56,57 +197,39 @@ const ChatSectionPage = () => {
 	// Data for filter tags
 	const filterTags = ["Kitchen Appliances", "Portable", "OEM Available"];
 
-	// Data for suppliers
-	const suppliers = [
-		{
-			id: 1,
-			name: "TechCorp Manufacturing",
-			logo: "/random-pp-2.svg",
-			country: "China",
-			rating: "4.8",
-			badges: ["VIP", "Verified"],
-			moq: "500 pieces",
-			location: "Dongguan, Guangdong",
-			responseRate: "95% response",
-			tags: ["Kitchen Appliances", "Portable", "OEM Available"],
-		},
-		{
-			id: 2,
-			name: "Global Tools Ltd",
-			logo: "/random-pp.svg",
-			country: "China",
-			rating: "4.8",
-			badges: ["VIP"],
-			moq: "500 pieces",
-			location: "Guangzhou, Guangdong",
-			responseRate: "94% response",
-			tags: ["Portable", "OEM Available"],
-		},
-		{
-			id: 3,
-			name: "Pacific Electronics",
-			logo: "/random-pp-3.svg",
-			country: "China",
-			rating: "4.8",
-			badges: ["Verified"],
-			moq: "500 pieces",
-			location: "Ningbo, Zhejiang",
-			responseRate: "90% response",
-			tags: ["Kitchen Appliances", "OEM Available"],
-		},
-		{
-			id: 4,
-			name: "BlendTech Manufacturing",
-			logo: "/random-pp-1.svg",
-			country: "China",
-			rating: "4.8",
-			badges: ["VIP", "Verified"],
-			moq: "500 pieces",
-			location: "Dongguan, Guangdong",
-			responseRate: "87% response",
-			tags: ["OEM Available"],
-		},
-	];
+	const [bookmarkedSuppliers, setBookmarkedSuppliers] = useState<Set<string>>(new Set());
+	const [loading, setLoading] = useState(true);
+	const [displaySuppliers, setDisplaySuppliers] = useState<Supplier[]>([]);
+
+	useEffect(() => {
+		// Simulating API call
+		const fetchSuppliers = async () => {
+			setLoading(true);
+			try {
+				// Replace with actual API call
+				await new Promise(resolve => setTimeout(resolve, 1000));
+				setDisplaySuppliers(suppliers);
+			} catch (error) {
+				console.error("Error fetching suppliers:", error);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchSuppliers();
+	}, []);
+
+	const toggleBookmark = (supplierId: string) => {
+		setBookmarkedSuppliers(prev => {
+			const newBookmarks = new Set(prev);
+			if (newBookmarks.has(supplierId)) {
+				newBookmarks.delete(supplierId);
+			} else {
+				newBookmarks.add(supplierId);
+			}
+			return newBookmarks;
+		});
+	};
 
 	return (
 		<div className="flex w-full">
@@ -308,1205 +431,159 @@ const ChatSectionPage = () => {
 					{/* Supplier Cards */}
 					<div className="w-full">
 						<div className="grid grid-cols-2 items-start gap-6 relative w-full">
-							<div className="flex flex-col items-start justify-center gap-4 p-4 relative flex-1 grow bg-white rounded-[20px] border border-solid border-[#ced6d3]">
-								<div className="flex flex-col items-start gap-3 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
-										<div className="flex items-start justify-between relative flex-1 grow">
-											<div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-												<img
-													className="relative w-[42.5px] h-[42px] ml-[-0.50px]"
-													alt="Random PP"
-													src="https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg"
-												/>
+							{loading ? (
+								// Loading skeleton
+								<>
+									{[1, 2, 3, 4].map((index) => (
+										<div
+											key={`skeleton-${index}`}
+											className="flex flex-col gap-4 p-4 animate-pulse bg-white rounded-[20px] border border-solid border-[#ced6d3]"
+										>
+											<div className="flex items-center gap-3">
+												<div className="w-[42px] h-[42px] bg-gray-200 rounded-full"></div>
+												<div className="flex-1">
+													<div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+													<div className="h-4 bg-gray-200 rounded w-1/2"></div>
+												</div>
+											</div>
+											<div className="h-[26px] bg-gray-200 rounded w-1/3"></div>
+											<div className="h-[34px] bg-gray-200 rounded"></div>
+											<div className="flex gap-4">
+												<div className="h-10 bg-gray-200 rounded-full flex-1"></div>
+												<div className="h-10 bg-gray-200 rounded-full flex-1"></div>
+											</div>
+										</div>
+									))}
+								</>
+							) : (
+								displaySuppliers.map((supplier) => (
+									<div
+										key={supplier.id}
+										className="flex flex-col items-start justify-center gap-4 p-4 relative flex-1 grow bg-white rounded-[20px] border border-solid border-[#ced6d3]"
+									>
+										<div className="flex flex-col items-start gap-3 relative self-stretch w-full flex-[0_0_auto]">
+											<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
+												<div className="flex items-start justify-between relative flex-1 grow">
+													<div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
+														<img
+															className="relative w-[42px] h-[42px]"
+															alt={`${supplier.name} logo`}
+															src={supplier.image}
+														/>
 
-												<div className="inline-flex items-start gap-3 relative flex-[0_0_auto]">
-													<div className="inline-flex flex-col items-start gap-1 relative flex-[0_0_auto]">
-														<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
-															Global Tools Ltd
-														</div>
+														<div className="inline-flex items-start gap-3 relative flex-[0_0_auto]">
+															<div className="inline-flex flex-col items-start gap-1 relative flex-[0_0_auto]">
+																<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
+																	{supplier.name}
+																</div>
 
-														<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-															<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																China
-															</div>
+																<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
+																	<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
+																		{supplier.country}
+																	</div>
 
-															<div className="relative w-1.5 h-1.5 bg-[#ced6d3] rounded-[3px]" />
+																	<div className="relative w-1.5 h-1.5 bg-[#ced6d3] rounded-[3px]" />
 
-															<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-																<img
-																	className="relative w-[11.07px] h-[10.62px]"
-																	alt="Star"
-																	src="https://c.animaapp.com/wtIZUsNi/img/star-5-27.svg"
-																/>
-
-																<div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] relative w-fit mt-[-1.00px] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																	4.8
+																	<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
+																		<Icon icon="star" size={11} className="text-[#F5B14C]" />
+																		<div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] relative w-fit mt-[-1.00px] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
+																			{supplier.rating}
+																		</div>
+																	</div>
 																</div>
 															</div>
 														</div>
 													</div>
+
+													<button
+														onClick={() => toggleBookmark(supplier.id)}
+														className="relative w-6 h-6 hover:opacity-80 transition-opacity"
+													>
+														<Icon
+															icon={bookmarkedSuppliers.has(supplier.id) ? "bookmark-fill" : "bookmark"}
+															size={24}
+															className={bookmarkedSuppliers.has(supplier.id) ? "text-[#529e7e]" : "text-[#CED6D3]"}
+														/>
+													</button>
 												</div>
 											</div>
 
-											<img
-												className="relative w-6 h-6"
-												alt="Bookmark simple"
-												src="https://c.animaapp.com/wtIZUsNi/img/bookmarksimple-15.svg"
-											/>
-										</div>
-									</div>
+											<div className="flex h-[26px] items-center gap-2.5 relative self-stretch w-full">
+												<div className="inline-flex items-center gap-2.5 relative self-stretch flex-[0_0_auto]">
+													{supplier.isVIP && (
+														<div className="inline-flex items-center justify-center gap-2 px-3 py-1 relative flex-[0_0_auto] bg-[#f5b14c1a] rounded-[30px] border-[0.5px] border-solid border-[#f5b14c]">
+															<Icon icon="crown" size={16} className="text-[#F5B14C]" />
+															<div className="relative w-fit mt-[-0.50px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#f5b14c] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
+																VIP
+															</div>
+														</div>
+													)}
 
-									<div className="flex h-[26px] items-center gap-2.5 relative self-stretch w-full">
-										<div className="inline-flex items-center gap-2.5 relative self-stretch flex-[0_0_auto]">
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-1 relative flex-[0_0_auto] bg-[#f5b14c1a] rounded-[30px] border-[0.5px] border-solid border-[#f5b14c]">
-												<img
-													className="relative w-4 h-4"
-													alt="Crown"
-													src="https://c.animaapp.com/wtIZUsNi/img/crown-26.svg"
-												/>
-
-												<div className="relative w-fit mt-[-0.50px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#f5b14c] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													VIP
+													{supplier.isVerified && (
+														<div className="inline-flex items-center justify-center gap-2 px-3 py-0 relative self-stretch flex-[0_0_auto] bg-[#67c6941a] rounded-[30px] border-[0.5px] border-solid border-[#529e7e]">
+															<Icon icon="shield-check" size={16} className="text-[#529e7e]" />
+															<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
+																Verified
+															</div>
+														</div>
+													)}
 												</div>
 											</div>
 										</div>
-									</div>
-								</div>
 
-								<div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
-									<div className="inline-flex flex-col items-start justify-center gap-3 relative flex-[0_0_auto]">
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Cube"
-												src="https://c.animaapp.com/wtIZUsNi/img/cube-30.svg"
-											/>
+										<div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
+											<div className="inline-flex flex-col items-start justify-center gap-3 relative flex-[0_0_auto]">
+												<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
+													<Icon icon="cube" size={20} className="text-[#657471]" />
+													<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
+														MOQ: {supplier.moq} pieces
+													</div>
+												</div>
 
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												MOQ: 500 pieces
-											</div>
-										</div>
-
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Map pin area"
-												src="https://c.animaapp.com/wtIZUsNi/img/mappinarea-28.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												Guangzhou, Guangdong
-											</div>
-										</div>
-									</div>
-
-									<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-										94% response
-									</div>
-								</div>
-
-								<div className="flex flex-wrap w-[361.5px] h-[34px] items-start gap-[10px_10px] relative">
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											Portable
-										</div>
-									</div>
-
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											OEM Available
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex h-10 items-center justify-center gap-4 px-8 py-1.5 relative flex-1 grow rounded-[50px] overflow-hidden border border-solid border-[#529e7e]">
-										<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-											<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-												View Profile
-											</div>
-										</div>
-									</div>
-
-									<div className="flex h-10 items-center justify-center gap-2.5 px-8 py-1.5 relative flex-1 grow bg-[#529e7e] rounded-[50px] overflow-hidden">
-										<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-											Send RFQ
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="flex flex-col items-start justify-center gap-4 p-4 relative flex-1 grow bg-white rounded-[20px] border border-solid border-[#ced6d3]">
-								<div className="flex flex-col items-start gap-3 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
-										<div className="flex items-start justify-between relative flex-1 grow">
-											<div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-												<img
-													className="relative w-[42px] h-[42px]"
-													alt="Random PP"
-													src="https://c.animaapp.com/wtIZUsNi/img/random-pp-16.svg"
-												/>
-
-												<div className="inline-flex items-start gap-3 relative flex-[0_0_auto]">
-													<div className="inline-flex flex-col items-start gap-1 relative flex-[0_0_auto]">
-														<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
-															TechCorp Manufacturing
-														</div>
-
-														<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-															<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																China
-															</div>
-
-															<div className="relative w-1.5 h-1.5 bg-[#ced6d3] rounded-[3px]" />
-
-															<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-																<img
-																	className="relative w-[11.07px] h-[10.62px]"
-																	alt="Star"
-																	src="https://c.animaapp.com/wtIZUsNi/img/star-5-22.svg"
-																/>
-
-																<div className="relative w-fit mt-[-1.00px] opacity-70 [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs text-right tracking-[0] leading-[18px] whitespace-nowrap">
-																	4.8
-																</div>
-															</div>
-														</div>
+												<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
+													<Icon icon="map-pin" size={20} className="text-[#657471]" />
+													<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
+														{supplier.location}
 													</div>
 												</div>
 											</div>
 
-											<img
-												className="relative w-6 h-6"
-												alt="Bookmark simple"
-												src="https://c.animaapp.com/wtIZUsNi/img/bookmarksimple-13.svg"
-											/>
-										</div>
-									</div>
-
-									<div className="flex h-[26px] items-center gap-2.5 relative self-stretch w-full">
-										<div className="inline-flex items-center gap-2.5 relative self-stretch flex-[0_0_auto]">
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-1 relative flex-[0_0_auto] bg-[#f5b14c1a] rounded-[30px] border-[0.5px] border-solid border-[#f5b14c]">
-												<img
-													className="relative w-4 h-4"
-													alt="Crown"
-													src="https://c.animaapp.com/wtIZUsNi/img/crown-21.svg"
-												/>
-
-												<div className="relative w-fit mt-[-0.50px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#f5b14c] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													VIP
-												</div>
-											</div>
-
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-0 relative self-stretch flex-[0_0_auto] bg-[#67c6941a] rounded-[30px] border-[0.5px] border-solid border-[#529e7e]">
-												<img
-													className="relative w-4 h-4"
-													alt="Target"
-													src="https://c.animaapp.com/wtIZUsNi/img/target-15.svg"
-												/>
-
-												<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													Verified
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
-									<div className="inline-flex flex-col items-start justify-center gap-3 relative flex-[0_0_auto]">
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Cube"
-												src="https://c.animaapp.com/wtIZUsNi/img/cube-22.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												MOQ: 500 pieces
+											<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
+												{supplier.responseRate}% response
 											</div>
 										</div>
 
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Map pin area"
-												src="https://c.animaapp.com/wtIZUsNi/img/mappinarea-23.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												Dongguan, Guangdong
-											</div>
-										</div>
-									</div>
-
-									<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-										95% response
-									</div>
-								</div>
-
-								<div className="flex flex-wrap w-[361.5px] h-[34px] items-start gap-[10px_10px] relative">
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											Kitchen Appliances
-										</div>
-									</div>
-
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											Portable
-										</div>
-									</div>
-
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											OEM Available
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex h-10 items-center justify-center gap-4 px-8 py-1.5 relative flex-1 grow rounded-[50px] overflow-hidden border border-solid border-[#529e7e]">
-										<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-											<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-												View Profile
-											</div>
-										</div>
-									</div>
-
-									<div className="flex h-10 items-center justify-center gap-2.5 px-8 py-1.5 relative flex-1 grow bg-[#529e7e] rounded-[50px] overflow-hidden">
-										<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-											Send RFQ
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="flex flex-col items-start justify-center gap-4 p-4 relative flex-1 grow bg-white rounded-[20px] border border-solid border-[#ced6d3]">
-								<div className="flex flex-col items-start gap-3 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
-										<div className="flex items-start justify-between relative flex-1 grow">
-											<div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-												<img
-													className="relative w-[42.5px] h-[42px] ml-[-0.50px]"
-													alt="Random PP"
-													src="https://c.animaapp.com/wtIZUsNi/img/random-pp-17.svg"
-												/>
-
-												<div className="inline-flex items-start gap-3 relative flex-[0_0_auto]">
-													<div className="inline-flex flex-col items-start gap-1 relative flex-[0_0_auto]">
-														<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
-															Global Tools Ltd
-														</div>
-
-														<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-															<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																China
-															</div>
-
-															<div className="relative w-1.5 h-1.5 bg-[#ced6d3] rounded-[3px]" />
-
-															<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-																<img
-																	className="relative w-[11.07px] h-[10.62px]"
-																	alt="Star"
-																	src="https://c.animaapp.com/wtIZUsNi/img/star-5-23.svg"
-																/>
-
-																<div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] relative w-fit mt-[-1.00px] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																	4.8
-																</div>
-															</div>
-														</div>
+										<div className="flex flex-wrap w-[361.5px] h-[34px] items-start gap-[10px_10px] relative">
+											{supplier.tags.map((tag, index) => (
+												<div
+													key={index}
+													className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]"
+												>
+													<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
+														{tag.label}
 													</div>
 												</div>
-											</div>
-
-											<img
-												className="relative w-6 h-6"
-												alt="Bookmark simple"
-												src="https://c.animaapp.com/wtIZUsNi/img/bookmarksimple-11.svg"
-											/>
-										</div>
-									</div>
-
-									<div className="flex h-[26px] items-center gap-2.5 relative self-stretch w-full">
-										<div className="inline-flex items-center gap-2.5 relative self-stretch flex-[0_0_auto]">
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-1 relative flex-[0_0_auto] bg-[#f5b14c1a] rounded-[30px] border-[0.5px] border-solid border-[#f5b14c]">
-												<img
-													className="relative w-4 h-4"
-													alt="Crown"
-													src="https://c.animaapp.com/wtIZUsNi/img/crown-22.svg"
-												/>
-
-												<div className="relative w-fit mt-[-0.50px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#f5b14c] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													VIP
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
-									<div className="inline-flex flex-col items-start justify-center gap-3 relative flex-[0_0_auto]">
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Cube"
-												src="https://c.animaapp.com/wtIZUsNi/img/cube-23.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												MOQ: 500 pieces
-											</div>
+											))}
 										</div>
 
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Map pin area"
-												src="https://c.animaapp.com/wtIZUsNi/img/mappinarea-24.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												Guangzhou, Guangdong
-											</div>
-										</div>
-									</div>
-
-									<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-										94% response
-									</div>
-								</div>
-
-								<div className="flex flex-wrap w-[361.5px] h-[34px] items-start gap-[10px_10px] relative">
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											Portable
-										</div>
-									</div>
-
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											OEM Available
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex h-10 items-center justify-center gap-4 px-8 py-1.5 relative flex-1 grow rounded-[50px] overflow-hidden border border-solid border-[#529e7e]">
-										<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-											<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-												View Profile
-											</div>
-										</div>
-									</div>
-
-									<div className="flex h-10 items-center justify-center gap-2.5 px-8 py-1.5 relative flex-1 grow bg-[#529e7e] rounded-[50px] overflow-hidden">
-										<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-											Send RFQ
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="flex flex-col items-start justify-center gap-4 p-4 relative flex-1 grow bg-white rounded-[20px] border border-solid border-[#ced6d3]">
-								<div className="flex flex-col items-start gap-3 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
-										<div className="flex items-start justify-between relative flex-1 grow">
-											<div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-												<img
-													className="relative w-[42px] h-[42px]"
-													alt="Random PP"
-													src="https://c.animaapp.com/wtIZUsNi/img/random-pp-18.svg"
-												/>
-
-												<div className="inline-flex items-start gap-3 relative flex-[0_0_auto]">
-													<div className="inline-flex flex-col items-start gap-1 relative flex-[0_0_auto]">
-														<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
-															BlendTech Manufacturing
-														</div>
-
-														<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-															<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																China
-															</div>
-
-															<div className="relative w-1.5 h-1.5 bg-[#ced6d3] rounded-[3px]" />
-
-															<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-																<img
-																	className="relative w-[11.07px] h-[10.62px]"
-																	alt="Star"
-																	src="https://c.animaapp.com/wtIZUsNi/img/star-5-27.svg"
-																/>
-
-																<div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] relative w-fit mt-[-1.00px] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																	4.8
-																</div>
-															</div>
-														</div>
+										<div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
+											<button className="flex h-10 items-center justify-center gap-4 px-8 py-1.5 relative flex-1 grow rounded-[50px] overflow-hidden border border-solid border-[#529e7e] hover:bg-[#529e7e10] transition-colors">
+												<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
+													<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-sm tracking-[0] leading-[22px] whitespace-nowrap">
+														View Profile
 													</div>
 												</div>
-											</div>
+											</button>
 
-											<img
-												className="relative w-6 h-6"
-												alt="Bookmark simple"
-												src="https://c.animaapp.com/wtIZUsNi/img/bookmarksimple-12.svg"
-											/>
-										</div>
-									</div>
-
-									<div className="flex h-[26px] items-center gap-2.5 relative self-stretch w-full">
-										<div className="inline-flex items-center gap-2.5 relative self-stretch flex-[0_0_auto]">
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-1 relative flex-[0_0_auto] bg-[#f5b14c1a] rounded-[30px] border-[0.5px] border-solid border-[#f5b14c]">
-												<img
-													className="relative w-4 h-4"
-													alt="Crown"
-													src="https://c.animaapp.com/wtIZUsNi/img/crown-26.svg"
-												/>
-
-												<div className="relative w-fit mt-[-0.50px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#f5b14c] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													VIP
+											<button className="flex h-10 items-center justify-center gap-2.5 px-8 py-1.5 relative flex-1 grow bg-[#529e7e] rounded-[50px] overflow-hidden hover:bg-[#408968] transition-colors">
+												<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm tracking-[0] leading-[22px] whitespace-nowrap">
+													Send RFQ
 												</div>
-											</div>
-
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-0 relative self-stretch flex-[0_0_auto] bg-[#67c6941a] rounded-[30px] border-[0.5px] border-solid border-[#529e7e]">
-												<img
-													className="relative w-4 h-4"
-													alt="Target"
-													src="https://c.animaapp.com/wtIZUsNi/img/target-19.svg"
-												/>
-
-												<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													Verified
-												</div>
-											</div>
+											</button>
 										</div>
 									</div>
-								</div>
-
-								<div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
-									<div className="inline-flex flex-col items-start justify-center gap-3 relative flex-[0_0_auto]">
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Cube"
-												src="https://c.animaapp.com/wtIZUsNi/img/cube-30.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												MOQ: 500 pieces
-											</div>
-										</div>
-
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Map pin area"
-												src="https://c.animaapp.com/wtIZUsNi/img/mappinarea-28.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												Dongguan, Guangdong
-											</div>
-										</div>
-									</div>
-
-									<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-										87% response
-									</div>
-								</div>
-
-								<div className="flex flex-wrap w-[361.5px] h-[34px] items-start gap-[10px_10px] relative">
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											OEM Available
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex h-10 items-center justify-center gap-4 px-8 py-1.5 relative flex-1 grow rounded-[50px] overflow-hidden border border-solid border-[#529e7e]">
-										<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-											<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-												View Profile
-											</div>
-										</div>
-									</div>
-
-									<div className="flex h-10 items-center justify-center gap-2.5 px-8 py-1.5 relative flex-1 grow bg-[#529e7e] rounded-[50px] overflow-hidden">
-										<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-											Send RFQ
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="flex flex-col items-start justify-center gap-4 p-4 relative flex-1 grow bg-white rounded-[20px] border border-solid border-[#ced6d3]">
-								<div className="flex flex-col items-start gap-3 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex items-center gap-8 relative self-stretch w-full flex-[0_0_auto]">
-										<div className="flex items-start justify-between relative flex-1 grow">
-											<div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-												<img
-													className="relative w-[42px] h-[42px]"
-													alt="Random PP"
-													src="https://c.animaapp.com/wtIZUsNi/img/random-pp-19.svg"
-												/>
-
-												<div className="inline-flex items-start gap-3 relative flex-[0_0_auto]">
-													<div className="inline-flex flex-col items-start gap-1 relative flex-[0_0_auto]">
-														<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
-															Pacific Electronics
-														</div>
-
-														<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-															<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																China
-															</div>
-
-															<div className="relative w-1.5 h-1.5 bg-[#ced6d3] rounded-[3px]" />
-
-															<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-																<img
-																	className="relative w-[11.07px] h-[10.62px]"
-																	alt="Star"
-																	src="https://c.animaapp.com/wtIZUsNi/img/star-5-22.svg"
-																/>
-
-																<div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] relative w-fit mt-[-1.00px] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																	4.8
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<img
-												className="relative w-6 h-6"
-												alt="Bookmark simple"
-												src="https://c.animaapp.com/wtIZUsNi/img/bookmarksimple-13.svg"
-											/>
-										</div>
-									</div>
-
-									<div className="flex h-[26px] items-center gap-2.5 relative self-stretch w-full">
-										<div className="inline-flex items-center gap-2.5 relative self-stretch flex-[0_0_auto]">
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-0 relative self-stretch flex-[0_0_auto] bg-[#67c6941a] rounded-[30px] border-[0.5px] border-solid border-[#529e7e]">
-												<img
-													className="relative w-4 h-4"
-													alt="Target"
-													src="https://c.animaapp.com/wtIZUsNi/img/target-15.svg"
-												/>
-
-												<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													Verified
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
-									<div className="inline-flex flex-col items-start justify-center gap-3 relative flex-[0_0_auto]">
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Cube"
-												src="https://c.animaapp.com/wtIZUsNi/img/cube-22.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												MOQ: 500 pieces
-											</div>
-										</div>
-
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Map pin area"
-												src="https://c.animaapp.com/wtIZUsNi/img/mappinarea-23.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												Ningbo, Zhejiang
-											</div>
-										</div>
-									</div>
-
-									<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-										90% response
-									</div>
-								</div>
-
-								<div className="flex flex-wrap w-[361.5px] h-[34px] items-start gap-[10px_10px] relative">
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											Kitchen Appliances
-										</div>
-									</div>
-
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											OEM Available
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex h-10 items-center justify-center gap-4 px-8 py-1.5 relative flex-1 grow rounded-[50px] overflow-hidden border border-solid border-[#529e7e]">
-										<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-											<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-												View Profile
-											</div>
-										</div>
-									</div>
-
-									<div className="flex h-10 items-center justify-center gap-2.5 px-8 py-1.5 relative flex-1 grow bg-[#529e7e] rounded-[50px] overflow-hidden">
-										<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-											Send RFQ
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="flex flex-col items-start justify-center gap-4 p-4 relative flex-1 grow bg-white rounded-[20px] border border-solid border-[#ced6d3]">
-								<div className="flex flex-col items-start gap-3 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
-										<div className="flex items-start justify-between relative flex-1 grow">
-											<div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-												<img
-													className="relative w-[42px] h-[42px]"
-													alt="Random PP"
-													src="https://c.animaapp.com/wtIZUsNi/img/random-pp-20.svg"
-												/>
-
-												<div className="inline-flex items-start gap-3 relative flex-[0_0_auto]">
-													<div className="inline-flex flex-col items-start gap-1 relative flex-[0_0_auto]">
-														<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
-															BlendTech Manufacturing
-														</div>
-
-														<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-															<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																China
-															</div>
-
-															<div className="relative w-1.5 h-1.5 bg-[#ced6d3] rounded-[3px]" />
-
-															<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-																<img
-																	className="relative w-[11.07px] h-[10.62px]"
-																	alt="Star"
-																	src="https://c.animaapp.com/wtIZUsNi/img/star-5-23.svg"
-																/>
-
-																<div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] relative w-fit mt-[-1.00px] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																	4.8
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<img
-												className="relative w-6 h-6"
-												alt="Bookmark simple"
-												src="https://c.animaapp.com/wtIZUsNi/img/bookmarksimple-17.svg"
-											/>
-										</div>
-									</div>
-
-									<div className="flex h-[26px] items-center gap-2.5 relative self-stretch w-full">
-										<div className="inline-flex items-center gap-2.5 relative self-stretch flex-[0_0_auto]">
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-1 relative flex-[0_0_auto] bg-[#f5b14c1a] rounded-[30px] border-[0.5px] border-solid border-[#f5b14c]">
-												<img
-													className="relative w-4 h-4"
-													alt="Crown"
-													src="https://c.animaapp.com/wtIZUsNi/img/crown-22.svg"
-												/>
-
-												<div className="relative w-fit mt-[-0.50px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#f5b14c] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													VIP
-												</div>
-											</div>
-
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-0 relative self-stretch flex-[0_0_auto] bg-[#67c6941a] rounded-[30px] border-[0.5px] border-solid border-[#529e7e]">
-												<img
-													className="relative w-4 h-4"
-													alt="Target"
-													src="https://c.animaapp.com/wtIZUsNi/img/target-14.svg"
-												/>
-
-												<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													Verified
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
-									<div className="inline-flex flex-col items-start justify-center gap-3 relative flex-[0_0_auto]">
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Cube"
-												src="https://c.animaapp.com/wtIZUsNi/img/cube-23.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												MOQ: 500 pieces
-											</div>
-										</div>
-
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Map pin area"
-												src="https://c.animaapp.com/wtIZUsNi/img/mappinarea-24.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												Dongguan, Guangdong
-											</div>
-										</div>
-									</div>
-
-									<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-										87% response
-									</div>
-								</div>
-
-								<div className="flex flex-wrap w-[361.5px] h-[34px] items-start gap-[10px_10px] relative">
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											OEM Available
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex h-10 items-center justify-center gap-4 px-8 py-1.5 relative flex-1 grow rounded-[50px] overflow-hidden border border-solid border-[#529e7e]">
-										<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-											<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-												View Profile
-											</div>
-										</div>
-									</div>
-
-									<div className="flex h-10 items-center justify-center gap-2.5 px-8 py-1.5 relative flex-1 grow bg-[#529e7e] rounded-[50px] overflow-hidden">
-										<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-											Send RFQ
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="flex flex-col items-start justify-center gap-4 p-4 relative flex-1 grow bg-white rounded-[20px] border border-solid border-[#ced6d3]">
-								<div className="flex flex-col items-start gap-3 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
-										<div className="flex items-start justify-between relative flex-1 grow">
-											<div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-												<img
-													className="relative w-[42.5px] h-[42px] ml-[-0.50px]"
-													alt="Random PP"
-													src="https://c.animaapp.com/wtIZUsNi/img/random-pp-21.svg"
-												/>
-
-												<div className="inline-flex items-start gap-3 relative flex-[0_0_auto]">
-													<div className="inline-flex flex-col items-start gap-1 relative flex-[0_0_auto]">
-														<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
-															Global Tools Ltd
-														</div>
-
-														<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-															<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																China
-															</div>
-
-															<div className="relative w-1.5 h-1.5 bg-[#ced6d3] rounded-[3px]" />
-
-															<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-																<img
-																	className="relative w-[11.07px] h-[10.62px]"
-																	alt="Star"
-																	src="https://c.animaapp.com/wtIZUsNi/img/star-5-27.svg"
-																/>
-
-																<div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] relative w-fit mt-[-1.00px] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																	4.8
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<img
-												className="relative w-6 h-6"
-												alt="Bookmark simple"
-												src="https://c.animaapp.com/wtIZUsNi/img/bookmarksimple-15.svg"
-											/>
-										</div>
-									</div>
-
-									<div className="flex h-[26px] items-center gap-2.5 relative self-stretch w-full">
-										<div className="inline-flex items-center gap-2.5 relative self-stretch flex-[0_0_auto]">
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-1 relative flex-[0_0_auto] bg-[#f5b14c1a] rounded-[30px] border-[0.5px] border-solid border-[#f5b14c]">
-												<img
-													className="relative w-4 h-4"
-													alt="Crown"
-													src="https://c.animaapp.com/wtIZUsNi/img/crown-26.svg"
-												/>
-
-												<div className="relative w-fit mt-[-0.50px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#f5b14c] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													VIP
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
-									<div className="inline-flex flex-col items-start justify-center gap-3 relative flex-[0_0_auto]">
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Cube"
-												src="https://c.animaapp.com/wtIZUsNi/img/cube-30.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												MOQ: 500 pieces
-											</div>
-										</div>
-
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Map pin area"
-												src="https://c.animaapp.com/wtIZUsNi/img/mappinarea-28.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												Guangzhou, Guangdong
-											</div>
-										</div>
-									</div>
-
-									<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-										94% response
-									</div>
-								</div>
-
-								<div className="flex flex-wrap w-[361.5px] h-[34px] items-start gap-[10px_10px] relative">
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											Portable
-										</div>
-									</div>
-
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											OEM Available
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex h-10 items-center justify-center gap-4 px-8 py-1.5 relative flex-1 grow rounded-[50px] overflow-hidden border border-solid border-[#529e7e]">
-										<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-											<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-												View Profile
-											</div>
-										</div>
-									</div>
-
-									<div className="flex h-10 items-center justify-center gap-2.5 px-8 py-1.5 relative flex-1 grow bg-[#529e7e] rounded-[50px] overflow-hidden">
-										<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-											Send RFQ
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="flex flex-col items-start justify-center gap-4 p-4 relative flex-1 grow bg-white rounded-[20px] border border-solid border-[#ced6d3]">
-								<div className="flex flex-col items-start gap-3 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
-										<div className="flex items-start justify-between relative flex-1 grow">
-											<div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-												<img
-													className="relative w-[42px] h-[42px]"
-													alt="Random PP"
-													src="https://c.animaapp.com/wtIZUsNi/img/random-pp-22.svg"
-												/>
-
-												<div className="inline-flex items-start gap-3 relative flex-[0_0_auto]">
-													<div className="inline-flex flex-col items-start gap-1 relative flex-[0_0_auto]">
-														<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
-															TechCorp Manufacturing
-														</div>
-
-														<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-															<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																China
-															</div>
-
-															<div className="relative w-1.5 h-1.5 bg-[#ced6d3] rounded-[3px]" />
-
-															<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-																<img
-																	className="relative w-[11.07px] h-[10.62px]"
-																	alt="Star"
-																	src="https://c.animaapp.com/wtIZUsNi/img/star-5-22.svg"
-																/>
-
-																<div className="relative w-fit mt-[-1.00px] opacity-70 [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs text-right tracking-[0] leading-[18px] whitespace-nowrap">
-																	4.8
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<img
-												className="relative w-6 h-6"
-												alt="Bookmark simple"
-												src="https://c.animaapp.com/wtIZUsNi/img/bookmarksimple-16.svg"
-											/>
-										</div>
-									</div>
-
-									<div className="flex h-[26px] items-center gap-2.5 relative self-stretch w-full">
-										<div className="inline-flex items-center gap-2.5 relative self-stretch flex-[0_0_auto]">
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-1 relative flex-[0_0_auto] bg-[#f5b14c1a] rounded-[30px] border-[0.5px] border-solid border-[#f5b14c]">
-												<img
-													className="relative w-4 h-4"
-													alt="Crown"
-													src="https://c.animaapp.com/wtIZUsNi/img/crown-21.svg"
-												/>
-
-												<div className="relative w-fit mt-[-0.50px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#f5b14c] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													VIP
-												</div>
-											</div>
-
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-0 relative self-stretch flex-[0_0_auto] bg-[#67c6941a] rounded-[30px] border-[0.5px] border-solid border-[#529e7e]">
-												<img
-													className="relative w-4 h-4"
-													alt="Target"
-													src="https://c.animaapp.com/wtIZUsNi/img/target-15.svg"
-												/>
-
-												<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													Verified
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
-									<div className="inline-flex flex-col items-start justify-center gap-3 relative flex-[0_0_auto]">
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Cube"
-												src="https://c.animaapp.com/wtIZUsNi/img/cube-22.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												MOQ: 500 pieces
-											</div>
-										</div>
-
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Map pin area"
-												src="https://c.animaapp.com/wtIZUsNi/img/mappinarea-23.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												Dongguan, Guangdong
-											</div>
-										</div>
-									</div>
-
-									<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-										95% response
-									</div>
-								</div>
-
-								<div className="flex flex-wrap w-[361.5px] h-[34px] items-start gap-[10px_10px] relative">
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											Kitchen Appliances
-										</div>
-									</div>
-
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											Portable
-										</div>
-									</div>
-
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											OEM Available
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex h-10 items-center justify-center gap-4 px-8 py-1.5 relative flex-1 grow rounded-[50px] overflow-hidden border border-solid border-[#529e7e]">
-										<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-											<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-												View Profile
-											</div>
-										</div>
-									</div>
-
-									<div className="flex h-10 items-center justify-center gap-2.5 px-8 py-1.5 relative flex-1 grow bg-[#529e7e] rounded-[50px] overflow-hidden">
-										<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-											Send RFQ
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="flex flex-col items-start justify-center gap-4 p-4 relative flex-1 grow bg-white rounded-[20px] border border-solid border-[#ced6d3]">
-								<div className="flex flex-col items-start gap-3 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
-										<div className="flex items-start justify-between relative flex-1 grow">
-											<div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-												<img
-													className="relative w-[42.5px] h-[42px] ml-[-0.50px]"
-													alt="Random PP"
-													src="https://c.animaapp.com/wtIZUsNi/img/random-pp-23.svg"
-												/>
-
-												<div className="inline-flex items-start gap-3 relative flex-[0_0_auto]">
-													<div className="inline-flex flex-col items-start gap-1 relative flex-[0_0_auto]">
-														<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
-															Global Tools Ltd
-														</div>
-
-														<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-															<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																China
-															</div>
-
-															<div className="relative w-1.5 h-1.5 bg-[#ced6d3] rounded-[3px]" />
-
-															<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-																<img
-																	className="relative w-[11.07px] h-[10.62px]"
-																	alt="Star"
-																	src="https://c.animaapp.com/wtIZUsNi/img/star-5-23.svg"
-																/>
-
-																<div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#5f726e] relative w-fit mt-[-1.00px] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
-																	4.8
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<img
-												className="relative w-6 h-6"
-												alt="Bookmark simple"
-												src="https://c.animaapp.com/wtIZUsNi/img/bookmarksimple-17.svg"
-											/>
-										</div>
-									</div>
-
-									<div className="flex h-[26px] items-center gap-2.5 relative self-stretch w-full">
-										<div className="inline-flex items-center gap-2.5 relative self-stretch flex-[0_0_auto]">
-											<div className="inline-flex items-center justify-center gap-2 px-3 py-1 relative flex-[0_0_auto] bg-[#f5b14c1a] rounded-[30px] border-[0.5px] border-solid border-[#f5b14c]">
-												<img
-													className="relative w-4 h-4"
-													alt="Crown"
-													src="https://c.animaapp.com/wtIZUsNi/img/crown-22.svg"
-												/>
-
-												<div className="relative w-fit mt-[-0.50px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#f5b14c] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-													VIP
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
-									<div className="inline-flex flex-col items-start justify-center gap-3 relative flex-[0_0_auto]">
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Cube"
-												src="https://c.animaapp.com/wtIZUsNi/img/cube-23.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												MOQ: 500 pieces
-											</div>
-										</div>
-
-										<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-											<img
-												className="relative w-5 h-5"
-												alt="Map pin area"
-												src="https://c.animaapp.com/wtIZUsNi/img/mappinarea-24.svg"
-											/>
-
-											<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-												Guangzhou, Guangdong
-											</div>
-										</div>
-									</div>
-
-									<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-										94% response
-									</div>
-								</div>
-
-								<div className="flex flex-wrap w-[361.5px] h-[34px] items-start gap-[10px_10px] relative">
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											Portable
-										</div>
-									</div>
-
-									<div className="inline-flex items-center gap-2.5 px-4 py-2 relative flex-[0_0_auto] rounded-[90px] border border-solid border-[#ced6d3]">
-										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#5f726e] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-											OEM Available
-										</div>
-									</div>
-								</div>
-
-								<div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
-									<div className="flex h-10 items-center justify-center gap-4 px-8 py-1.5 relative flex-1 grow rounded-[50px] overflow-hidden border border-solid border-[#529e7e]">
-										<div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-											<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-												View Profile
-											</div>
-										</div>
-									</div>
-
-									<div className="flex h-10 items-center justify-center gap-2.5 px-8 py-1.5 relative flex-1 grow bg-[#529e7e] rounded-[50px] overflow-hidden">
-										<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm tracking-[0] leading-[22px] whitespace-nowrap">
-											Send RFQ
-										</div>
-									</div>
-								</div>
-							</div>
+								))
+							)}
 						</div>
 						{/* <ScrollBar orientation="vertical" /> */}
 					</div>
