@@ -1,0 +1,24 @@
+{
+	"mcp": {
+		"inputs": [
+			{
+				"type": "promptString",
+				"id": "WlH1Ei2hW5Q9FjF6TQs2O77mk4VTf8qb",
+				"description": "API Key",
+				"password": true
+			}
+		],
+		"servers": {
+			"motiff": {
+				"type": "stdio",
+				"command": "npx",
+				"args": ["-y", "@motiffcom/motiff-mcp-server@latest"],
+				"env": {
+					"MOTIFF_TOKEN": "WlH1Ei2hW5Q9FjF6TQs2O77mk4VTf8qb"
+				}
+			}
+		}
+	},
+	"chat.mcp.discovery.enabled": true,
+	"chat.mcp.enabled": true
+}
