@@ -17,7 +17,7 @@ function App() {
 
 	return (
 		<div className="bg-bgc dark:bg-bgcDark flex flex-row justify-center w-full">
-			<div className="w-full h-full min-h-screen">
+			<div className="w-full">
 				<div className="flex flex-col w-full items-end relative">
 					{/* <div
 						className={`absolute  w-full h-[785px] sm:h-[818px] top-0 left-auto overflow-visible bg-no-repeat bg-position-[center_top] bg-[length:360%] sm:bg-[length:120%] bg-[url('/assets/images/bg/bg-header.png')]`}
@@ -27,7 +27,7 @@ function App() {
 					/> */}
 
 					{/* Header Navigation */}
-					<div className="flex w-full">
+					<div className="flex w-full sm:text-base text-sm [font-family:'Satoshi-Bold',Helvetica]">
 						{!isAuthPage ? <Sidebar /> : ""}
 						{/* Main Content */}
 						<main className={`z-[1] relative w-full`}>
@@ -35,7 +35,6 @@ function App() {
 							<Outlet />
 						</main>
 					</div>
-
 
 					{/* Footer Section */}
 

@@ -6,7 +6,7 @@ import App from "pages/App";
 import AccessDisabled from "pages/AccessDisabled";
 import Register from "pages/Register";
 import ForgotPasswordPage from "pages/ForgotPasswordPage";
-import Dashboard from "pages/Dashboard";
+import NewsSourcingRequest from "pages/NewsSourcingRequest";
 
 declare global {
 	interface Window {
@@ -88,10 +88,10 @@ const createRoutes: React.FC = () => {
 								}
 							/>
 							<Route
-								path="/dashboard"
+								path="/news-sourcing-request"
 								element={
 									<ProtectedRoute>
-										<Dashboard />
+										<NewsSourcingRequest />
 									</ProtectedRoute>
 								}
 							/>

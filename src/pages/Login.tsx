@@ -68,7 +68,7 @@ function Login() {
 		setAppState({ userDetails: userDetails });
 		toast.success("Login successful!");
 		reset();
-		navigate("/dashboard");
+		navigate("/news-sourcing-request");
 	};
 
 	return (
