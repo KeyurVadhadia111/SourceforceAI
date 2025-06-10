@@ -83,12 +83,12 @@ export default function Sidebar() {
 		setAppState({ userDetails: JSON.parse(localStorage.getItem("auth") || "{}") });
 		// Check for dark mode preference
 		if (localStorage.theme === "dark") {
-			setThemeMode(true);
-			setAppState({ isDark: true });
+			// setThemeMode(true);
+			// setAppState({ isDark: true });
 		}
 		if (window.matchMedia("(prefers-color-scheme: dark)").matches && localStorage?.theme === undefined) {
-			setThemeMode(true);
-			setAppState({ isDark: true });
+			// setThemeMode(true);
+			// setAppState({ isDark: true });
 		}
 	}, []);
 

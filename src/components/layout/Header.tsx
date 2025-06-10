@@ -1,9 +1,7 @@
-import { Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react";
-import Sidebar, { sidebarItems } from "components/common/Sidebar";
+import { Menu, Transition } from "@headlessui/react";
+import { sidebarItems } from "components/common/Sidebar";
 import { classNames } from "components/utils";
 import Icon from "components/utils/Icon";
-import MenuComponent from "components/utils/MenuComponent";
-import ProfileMenu from "components/utils/ProfileMenu";
 import { useAppState } from "components/utils/useAppState";
 import { Fragment, use, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -16,12 +14,12 @@ export default function Header() {
 		setAppState({ userDetails: JSON.parse(localStorage.getItem("auth") || "{}") });
 		// Check for dark mode preference
 		if (localStorage.theme === "dark") {
-			setThemeMode(true);
-			setAppState({ isDark: true });
+			// setThemeMode(true);
+			// setAppState({ isDark: true });
 		}
 		if (window.matchMedia("(prefers-color-scheme: dark)").matches && localStorage?.theme === undefined) {
-			setThemeMode(true);
-			setAppState({ isDark: true });
+			// setThemeMode(true);
+			// setAppState({ isDark: true });
 		}
 	}, []);
 
