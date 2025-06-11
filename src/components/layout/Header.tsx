@@ -1,13 +1,15 @@
 import { Menu, Transition } from "@headlessui/react";
 import { sidebarItems } from "components/common/Sidebar";
 import { classNames } from "components/utils";
+import { Button } from "components/utils/Button";
 import Icon from "components/utils/Icon";
 import { useAppState } from "components/utils/useAppState";
+import { cn } from "lib/utils";
 import { Fragment, use, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Header() {
-	const [{ isDark, userDetails }, setAppState] = useAppState();
+	const [{ isDark, userDetails, isExpanded }, setAppState] = useAppState();
 	const [activeItem, setActiveItem] = useState(sidebarItems[0]);
 
 	useEffect(() => {
@@ -15,21 +17,21 @@ export default function Header() {
 		// Check for dark mode preference
 		if (localStorage.theme === "dark") {
 			// setThemeMode(true);
-			// setAppState({ isDark: true });
+			setAppState({ isDark: true });
 		}
 		if (window.matchMedia("(prefers-color-scheme: dark)").matches && localStorage?.theme === undefined) {
 			// setThemeMode(true);
-			// setAppState({ isDark: true });
+			setAppState({ isDark: true });
 		}
 	}, []);
 
 	const setThemeMode = (isDark: boolean) => {
 		if (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-			document.documentElement.classList.add("dark");
+			// document.documentElement.classList.add("dark");
 			isDark = true;
 		}
 		if (isDark) {
-			document.documentElement.classList.add("dark");
+			document.documentElement.classList.remove("dark");
 		} else {
 			document.documentElement.classList.remove("dark");
 		}
@@ -37,24 +39,22 @@ export default function Header() {
 	};
 
 	return (
-		<div className="sm:bg-transparent bg-[#1e2d2a]">
-			<div className="flex w-full items-center justify-between sm:px-8 sm:py-6 py-3 px-6 relative border-b border-[#ced6d3] ">
+		<div className="sm:bg-transparent bg-text">
+			<div className="flex w-full items-center justify-between sm:px-8 sm:py-6 py-3 px-6 relative border-b border-border ">
 				<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-					<img className="relative h-8 sm:hidden block" alt="Group" src="/assets/images/logo/logo-full.png" />
-
-					<img
-						className="relative w-[189.66px] h-[21.2px] sm:block hidden"
-						alt="Union"
-						src="https://c.animaapp.com/wtIZUsNi/img/union-9.svg"
-					/>
-
-					<div className="relative w-6 h-6 sm:block hidden">
-						<img
-							className="w-3 h-1.5 top-[9px] absolute left-1.5"
-							alt="Direction down"
-							src="https://c.animaapp.com/wtIZUsNi/img/direction-down-9@2x.png"
-						/>
-					</div>
+					{!isExpanded ? (
+						<>
+							<img className="relative h-8 sm:hidden block" alt="Group" src="/assets/images/logo/logo-full.png" />
+							<img
+								className="relative w-[189.66px] h-[21.2px] sm:block hidden"
+								alt="Union"
+								src="assets/images/logo/union-9.svg"
+							/>
+							<div className="relative w-6 h-6 sm:block hidden text-textSecondary">
+								<Icon className=" w-6 h-6" icon="chevron-down" />
+							</div>
+						</>
+					) : ''}
 				</div>
 				<div className="relative sm:hidden block ">
 					<Menu as="div" className="relative">
@@ -119,7 +119,7 @@ export default function Header() {
 													{item.icon && (
 														<Icon
 															icon={item.icon}
-															className="float-left mr-3 w-6 h-6 bg-[#1e2d2a] p-0.5 rounded-full"
+															className="float-left mr-3 w-6 h-6 bg-text p-0.5 rounded-full"
 															aria-hidden="true"
 														/>
 													)}
@@ -129,81 +129,61 @@ export default function Header() {
 										</Menu.Item>
 									);
 								})}
-								<div className="inline-flex items-center justify-center w-full gap-4 relative flex-[0_0_auto] mt-5">
-									<div className="inline-flex items-center p-1 relative flex-[0_0_auto] bg-[#eef1f0] rounded-[100px]">
+								<div className="inline-flex items-center gap-4 relative flex-[0_0_auto]">
+									<div className="inline-flex items-center p-1 relative flex-[0_0_auto] bg-tgc rounded-[100px]">
 										<div className="flex w-12 h-12 items-center justify-center gap-2.5 px-[3px] py-0.5 relative bg-white rounded-[100px]">
-											<img
-												className="relative w-6 h-6"
-												alt="Cloud sun"
-												src="https://c.animaapp.com/wtIZUsNi/img/cloudsun-7.svg"
-											/>
+											<Icon className="relative w-6 h-6" icon="cloud-sun" />
 										</div>
 
 										<div className="flex w-12 h-12 items-center justify-center gap-2.5 px-[3px] py-0.5 relative rounded-[100px] overflow-hidden">
-											<img
-												className="relative w-6 h-6"
-												alt="Cloud moon"
-												src="https://c.animaapp.com/wtIZUsNi/img/cloudmoon-9.svg"
-											/>
+											<Icon className="relative w-6 h-6" icon="cloud-moon" />
 										</div>
 									</div>
 
-									<div className="inline-flex items-center justify-center gap-3 px-8 py-4 relative flex-[0_0_auto] bg-[#529e7e] rounded-[40px]">
-										<img
-											className="relative w-6 h-6"
-											alt="Export"
-											src="https://c.animaapp.com/wtIZUsNi/img/export-9.svg"
-										/>
+									<Button className="inline-flex items-center justify-center gap-3 px-8 py-4 relative flex-[0_0_auto] bg-primary rounded-[40px]">
+										<Icon className="relative w-6 h-6" icon="export" />
 
 										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-white text-base tracking-[0] leading-6 whitespace-nowrap">
 											Share
 										</div>
-									</div>
+									</Button>
 								</div>
 							</Menu.Items>
 						</Transition>
 					</Menu>
 				</div>
-				<div className="sm:inline-flex items-center gap-4 relative flex-[0_0_auto] hidden">
-					<div className="inline-flex items-center p-1 relative flex-[0_0_auto] bg-[#eef1f0] rounded-[100px]">
-						<div className="flex w-12 h-12 items-center justify-center gap-2.5 px-[3px] py-0.5 relative bg-white rounded-[100px]">
-							<img
-								className="relative w-6 h-6"
-								alt="Cloud sun"
-								src="https://c.animaapp.com/wtIZUsNi/img/cloudsun-7.svg"
-							/>
+				<div className="hidden sm:inline-flex items-center gap-4 relative flex-[0_0_auto]">
+					<div className="inline-flex items-center p-1 relative flex-[0_0_auto] bg-tgc rounded-[100px]">
+						<div
+							onClick={() => {
+								setThemeMode(false);
+							}}
+							className={cn(
+								"cursor-pointer flex w-12 h-12 items-center justify-center gap-2.5 px-[3px] py-0.5 relative rounded-[100px]",
+								!isDark && "bg-white",
+							)}>
+							<Icon className="relative w-6 h-6 text-primary" icon="cloud-sun" />
 						</div>
 
-						<div className="flex w-12 h-12 items-center justify-center gap-2.5 px-[3px] py-0.5 relative rounded-[100px] overflow-hidden">
-							<img
-								className="relative w-6 h-6"
-								alt="Cloud moon"
-								src="https://c.animaapp.com/wtIZUsNi/img/cloudmoon-9.svg"
-							/>
+						<div
+							onClick={() => {
+								setThemeMode(true);
+							}}
+							className={cn(
+								"cursor-pointer flex w-12 h-12 items-center justify-center gap-2.5 px-[3px] py-0.5 relative rounded-[100px]",
+								isDark && "bg-white",
+							)}>
+							<Icon className="relative w-6 h-6" icon="cloud-moon" />
 						</div>
 					</div>
 
-					<div className="inline-flex items-center justify-center gap-3 px-8 py-4 relative flex-[0_0_auto] bg-[#529e7e] rounded-[40px]">
-						<img
-							className="relative w-6 h-6"
-							alt="Export"
-							src="https://c.animaapp.com/wtIZUsNi/img/export-9.svg"
-						/>
+					<Button className="inline-flex items-center justify-center gap-3 px-8 py-4 relative text-white flex-[0_0_auto] bg-primary rounded-[40px]">
+						<Icon className="relative w-6 h-6" icon="export" />
 
-						<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-white text-base tracking-[0] leading-6 whitespace-nowrap">
+						<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-base tracking-[0] leading-6 whitespace-nowrap">
 							Share
 						</div>
-					</div>
-				</div>
-
-				<div className="absolute w-6 h-6 top-10 -left-3 bg-white rounded-[100px] sm:block hidden">
-					<div className="relative w-4 h-4 top-1 left-1">
-						<img
-							className="w-1 h-2 top-1 absolute left-1.5"
-							alt="Direction right"
-							src="https://c.animaapp.com/wtIZUsNi/img/direction-right-9@2x.png"
-						/>
-					</div>
+					</Button>
 				</div>
 			</div>
 		</div>

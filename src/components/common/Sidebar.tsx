@@ -6,49 +6,49 @@ import { Link } from "react-router-dom";
 
 export const sidebarItems: MenuItemProps[] = [
 	{
-		title: "Sourcing Request",
+		title: "New Sourcing Request",
 		icon: "asterisk-simple",
 		url: "/news-sourcing-request",
 		active: false,
 		id: 1,
 	},
 	{
-		title: "Suppliers",
+		title: "Supplier Search Filters",
 		icon: "cube-focus",
-		url: "/news-sourcing-request",
+		url: "/supplier-search-summary",
 		active: false,
 		id: 2,
 	},
 	{
-		title: "Factory",
+		title: "Manufacturer Directory",
 		icon: "factory",
 		url: "/news-sourcing-request",
 		active: false,
 		id: 3,
 	},
 	{
-		title: "Presentation",
+		title: "Market Intelligence",
 		icon: "presentation-chart",
 		url: "/news-sourcing-request",
 		active: false,
 		id: 4,
 	},
 	{
-		title: "Manufacturers",
+		title: "Saved Suppliers",
 		icon: "heart-half",
-		url: "/news-sourcing-request",
+		url: "/saved-manufacturers",
 		active: false,
 		id: 5,
 	},
 	{
-		title: "RFQs",
+		title: "Compliance Check",
 		icon: "policy",
 		url: "/news-sourcing-request",
 		active: false,
 		id: 6,
 	},
 	{
-		title: "Terms & Conditions",
+		title: "Supplier Messages",
 		icon: "chat-circle-text",
 		url: "/news-sourcing-request",
 		active: false,
@@ -57,18 +57,25 @@ export const sidebarItems: MenuItemProps[] = [
 ];
 
 export default function Sidebar() {
-	const [{ isDark, userDetails }, setAppState] = useAppState();
-	const [isOpen, setIsOpen] = useState(false);
+	const [{ isDark, isExpanded }, setAppState] = useAppState();
 	const sidebarRef = useRef<HTMLDivElement>(null);
 	const [sidebarItem, setSidebarItem] = useState(sidebarItems[0]);
+
 	const handleClickOutside = (event: MouseEvent) => {
 		if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
-			setIsOpen(false); // Close the sidebar
+			setAppState({ isExpanded: false });
+			localStorage.setItem('sidebarExpanded', 'false');
 		}
 	};
 
-	useEffect(() => {
-		if (isOpen) {
+	const toggleSidebar = () => {
+		const newState = !isExpanded;
+		setAppState({ isExpanded: newState });
+		localStorage.setItem('sidebarExpanded', JSON.stringify(newState));
+	};
+
+	/* useEffect(() => {
+		if (isExpanded) {
 			document.addEventListener("mousedown", handleClickOutside);
 		} else {
 			document.removeEventListener("mousedown", handleClickOutside);
@@ -77,9 +84,12 @@ export default function Sidebar() {
 		return () => {
 			document.removeEventListener("mousedown", handleClickOutside);
 		};
-	}, [isOpen]);
+	}, [isExpanded]); */
 
 	useEffect(() => {
+		const savedState = localStorage.getItem('sidebarExpanded');
+		setAppState({ isExpanded: savedState ? JSON.parse(savedState) : false });
+
 		setAppState({ userDetails: JSON.parse(localStorage.getItem("auth") || "{}") });
 		// Check for dark mode preference
 		if (localStorage.theme === "dark") {
@@ -94,11 +104,11 @@ export default function Sidebar() {
 
 	const setThemeMode = (isDark: boolean) => {
 		if (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-			document.documentElement.classList.add("dark");
+			// document.documentElement.classList.add("dark");
 			isDark = true;
 		}
 		if (isDark) {
-			document.documentElement.classList.add("dark");
+			// document.documentElement.classList.add("dark");
 		} else {
 			document.documentElement.classList.remove("dark");
 		}
@@ -107,12 +117,24 @@ export default function Sidebar() {
 
 	return (
 		<>
-			<div className="w-[104px] sm:block hidden">
-				<div className=" inline-flex flex-col items-center justify-between p-6 relative flex-[0_0_auto] bg-[#1e2d2a] h-full">
-					<div className="inline-flex flex-col items-start gap-12 relative flex-[0_0_auto]">
-						<img className="relative w-14 h-14" alt="Group" src="/assets/images/logo/logo-primary.svg" />
+			<div
+				ref={sidebarRef}
+				className={`relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[104px]"} transition-all duration-300 ease-in-out sm:block hidden`}
+			>
+				<div
+					onClick={toggleSidebar}
+					className={`absolute w-6 h-6 top-10 -right-3 bg-white rounded-[100px] sm:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${isExpanded ? "rotate-180" : ""
+						}`}
+				>
+					<div className="relative w-4 h-4 top-1 left-1 flex justify-center items-center">
+						<Icon className="w-4 h-4" icon="chevron-right" />
+					</div>
+				</div>
+				<div className="inline-flex flex-col items-center justify-between p-6 relative flex-[0_0_auto] bg-text h-screen w-full">
+					<div className="inline-flex flex-col items-start gap-12 relative flex-[0_0_auto] w-full">
+						<img className={`relative  h-14 ${isExpanded ? 'w-full' : 'w-14'}`} alt="Group" src={`/assets/images/logo/${isExpanded ? 'logo-primary-full.svg' : 'logo-primary.svg'}`} />
 
-						<div className="inline-flex flex-col items-start gap-3 relative flex-[0_0_auto]">
+						<div className={`inline-flex flex-col gap-3 relative flex-[0_0_auto] w-full ${isExpanded ? "items-start" : "items-center"}`}>
 							{sidebarItems.map(item => {
 								return (
 									<Link
@@ -121,26 +143,38 @@ export default function Sidebar() {
 										onClick={() => {
 											setSidebarItem(item);
 										}}
-										className="relative w-14 h-14 flex items-center justify-center">
+										className={`relative h-14 flex items-center justify-center transition-all duration-300 rounded-xl`}
+									>
 										{item.id === sidebarItem.id && (
-											<img
-												className="absolute w-[3px] h-[59px] top-[0] -left-6"
-												alt="Line"
-												src="https://c.animaapp.com/wtIZUsNi/img/line-3-7.svg"
-											/>
+											<div className="absolute w-[3px] h-[59px] top-[0] -left-6 bg-primary"></div>
 										)}
-										<Icon icon={item.icon || ""} className="w-8 h-8" />
+										<div className="w-14 h-14 flex items-center justify-center">
+											<Icon icon={item.icon || ""} className={`w-8 h-8`} />
+										</div>
+										{isExpanded && (
+											<span className="font-medium text-textDark">
+												{item.title}
+											</span>
+										)}
 									</Link>
 								);
 							})}
 						</div>
 					</div>
 
-					<img
-						className="relative w-14 h-14 object-cover"
-						alt="Photo by evan wise"
-						src="https://c.animaapp.com/wtIZUsNi/img/photo-by-evan-wise-9@2x.png"
-					/>
+					<div className="w-full flex items-center gap-2">
+						<img
+							className="relative w-14 h-14 object-cover"
+							alt="Photo by evan wise"
+							src="/assets/images/photo-by-evan-wise.png"
+						/>
+						{isExpanded && (
+							<div className="transition-all  duration-300 text-textDark flex flex-col items-start gap-2">
+								<div className="font-medium">James Forgey</div>
+								<div className="font-medium text-[10px]">James121@gmail.com</div>
+							</div>
+						)}
+					</div>
 				</div>
 			</div>
 		</>

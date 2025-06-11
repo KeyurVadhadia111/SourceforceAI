@@ -68,7 +68,7 @@ const MenuComponent: React.FC<MenuProps> = ({ items, children, isProfile = false
 										{item.icon && (
 											<Icon
 												icon={item.icon}
-												className="float-left mr-3 w-6 h-6 bg-[#1e2d2a] p-0.5 rounded-full"
+												className="float-left mr-3 w-6 h-6 bg-text p-0.5 rounded-full"
 												aria-hidden="true"
 											/>
 										)}
@@ -79,30 +79,18 @@ const MenuComponent: React.FC<MenuProps> = ({ items, children, isProfile = false
 						);
 					})}
 					<div className="inline-flex items-center gap-4 relative flex-[0_0_auto]">
-						<div className="inline-flex items-center p-1 relative flex-[0_0_auto] bg-[#eef1f0] rounded-[100px]">
+						<div className="inline-flex items-center p-1 relative flex-[0_0_auto] bg-tgc rounded-[100px]">
 							<div className="flex w-12 h-12 items-center justify-center gap-2.5 px-[3px] py-0.5 relative bg-white rounded-[100px]">
-								<img
-									className="relative w-6 h-6"
-									alt="Cloud sun"
-									src="https://c.animaapp.com/wtIZUsNi/img/cloudsun-7.svg"
-								/>
+								<Icon className="relative w-6 h-6" icon="cloud-sun" />
 							</div>
 
 							<div className="flex w-12 h-12 items-center justify-center gap-2.5 px-[3px] py-0.5 relative rounded-[100px] overflow-hidden">
-								<img
-									className="relative w-6 h-6"
-									alt="Cloud moon"
-									src="https://c.animaapp.com/wtIZUsNi/img/cloudmoon-9.svg"
-								/>
+								<Icon className="relative w-6 h-6" icon="cloud-moon" />
 							</div>
 						</div>
 
-						<div className="inline-flex items-center justify-center gap-3 px-8 py-4 relative flex-[0_0_auto] bg-[#529e7e] rounded-[40px]">
-							<img
-								className="relative w-6 h-6"
-								alt="Export"
-								src="https://c.animaapp.com/wtIZUsNi/img/export-9.svg"
-							/>
+						<div className="inline-flex items-center justify-center gap-3 px-8 py-4 relative flex-[0_0_auto] bg-primary rounded-[40px]">
+							<Icon className="relative w-6 h-6" icon="export" />
 
 							<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-white text-base tracking-[0] leading-6 whitespace-nowrap">
 								Share

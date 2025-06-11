@@ -7,6 +7,8 @@ import AccessDisabled from "pages/AccessDisabled";
 import Register from "pages/Register";
 import ForgotPasswordPage from "pages/ForgotPasswordPage";
 import NewsSourcingRequest from "pages/NewsSourcingRequest";
+import SupplierSearchSummary from "pages/SupplierSearchSummary";
+import SavedManufacturers from "pages/SavedManufacturers";
 
 declare global {
 	interface Window {
@@ -92,6 +94,22 @@ const createRoutes: React.FC = () => {
 								element={
 									<ProtectedRoute>
 										<NewsSourcingRequest />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/supplier-search-summary"
+								element={
+									<ProtectedRoute>
+										<SupplierSearchSummary />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/saved-manufacturers"
+								element={
+									<ProtectedRoute>
+										<SavedManufacturers />
 									</ProtectedRoute>
 								}
 							/>

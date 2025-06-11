@@ -1,52 +1,70 @@
+import { cn } from "lib/utils";
+import * as React from "react";
 import Icon from "./Icon";
 
-const Select = (props: any) => {
-	return (
-		<div className="relative">
-			{props.label && (
-				<label
-					htmlFor={props.name}
-					className="text-sm font-medium text-textSecondary dark:text-textDark mb-3 block">
-					{props.label} {props.required && <span className="text-red-500">*</span>}
-				</label>
-			)}
-			<div className="relative">
+export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+	error?: string;
+	icon?: string;
+	variant?: "default" | "secondary";
+	children: any;
+}
+
+const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
+	({ className, error, icon, children, variant = "default", id = "select", ...props }, ref) => {
+		// const methods = useFormContext();
+
+		return (
+			<div className="relative w-full">
+				{icon && (
+					<div
+						className={cn(
+							"absolute left-2 z-1 sm:w-11 sm:h-11 w-9 h-9 transform top-1/2 -translate-y-1/2 rounded-[22px] flex items-center justify-center",
+							variant === "default" && "bg-fgc dark:bg-fgcDark",
+							variant === "secondary" && "bg-white dark:bg-fgcDark",
+						)}>
+						<Icon className="w-5 h-5 text-neutral-400" icon={icon} />
+					</div>
+				)}
 				<select
-					name={props.name}
-					className={`appearance-none block px-3 py-3 sm:px-4 sm:py-[15px] w-full rounded-xl text-[14px] bg-bgc text-text dark:bg-fgcDark border border-textSecondary/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring dark:border-border-dark dark:border-border-dark-dark sm:text-base dark:text-white ${props.className || ""}  ${
-						props.error
+					className={cn(
+						"bg-none pr-0 sm:h-[60px] h-[48px] gap-2.5 pl-2 py-[15px] rounded-[56px] flex items-center relative self-stretch w-full font-normal text-text [font-family:'Satoshi-Regular',Helvetica] sm:text-sm text-xs tracking-[0] leading-[150%] transition-colors placeholder:text-textSecondary dark:placeholder:text-textDark/50  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border border-transparent sm:py-[17px] dark:text-textDark custom-select",
+						variant === "default" && "bg-white dark:bg-fgcDark",
+						variant === "secondary" && "bg-fgc dark:bg-fgcDark",
+						error
 							? "!border !border-red-500 focus-visible:!ring-red-500"
-							: "focus-visible:ring-neutral-300"
-					}`}
-					{...(props.register &&
-						props.register(props.name, {
-							onChange: (e: any) => {
-								props.trigger && props.trigger(props.name);
-							},
-						}))}>
-					{props.label === "Choose a topic" ? (
-						<option value="">{props.label}</option>
-					) : (
-						<option value="">Select {props.label}</option>
+							: "focus-visible:ring-neutral-300",
+						className,
+						icon && " indent-[50px]",
 					)}
-					{props.items &&
-						props.items.map((item: any) => (
-							<option value={item.value} key={item.value}>
-								{item.text}
-							</option>
-						))}
+					ref={ref}
+					id={id}
+					{...props}>
+					{children}
 				</select>
 
-				{/* Custom dropdown arrow */}
-				<div
-					className={`pointer-events-none absolute right-4 ${props.error ? "top-[35%]" : "top-1/2"}  -translate-y-1/2`}>
-					<Icon icon="arrow-down" className="w-4 h-4 sm:w-5 sm:h-5 text-textSecondary dark:text-textDark" />
-				</div>
+				<label
+					htmlFor={id}
+					className={cn(
+						"absolute right-2 z-1 sm:w-11 sm:h-11 w-9 h-9 transform top-1/2 -translate-y-1/2 rounded-[22px] flex items-center justify-center",
+						variant === "default" && "bg-fgc dark:bg-fgcDark  text-neutral-400",
+						variant === "secondary" && "bg-white dark:bg-fgcDark text-black",
+					)}>
+					<Icon icon={"chevron-down"} className="h-6 w-6 cursor-pointer" />
+				</label>
 
-				{props.error && <div className="text-red-500 px-5 inline-block">{props.error}</div>}
+				{error && (
+					<span className="text-red-500 px-5 inline-block">
+						{error && (
+							<>
+								<span>{error}</span>
+							</>
+						)}
+						&nbsp;
+					</span>
+				)}
 			</div>
-		</div>
-	);
-};
+		);
+	},
+);
 
 export default Select;
