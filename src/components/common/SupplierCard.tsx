@@ -37,7 +37,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 	onSendRFQ,
 }) => {
 	return (
-		<div className="flex flex-col h-full items-start justify-center sm:gap-4 gap-3 sm:p-4 p-3 relative flex-1 grow bg-white rounded-[20px] border border-solid border-border">
+		<div className="flex flex-col h-full items-start justify-center sm:gap-4 gap-3 sm:p-4 p-3 relative flex-1 grow bg-white rounded-[20px] outline outline-solid outline-border">
 			<div className="flex flex-col items-start sm:gap-3 gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
 				<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
 					<div className="flex items-start justify-between relative flex-1 grow">
@@ -49,13 +49,13 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 							/>
 
 							<div className="inline-flex items-start sm:gap-3 sgap-2.5 relative flex-[0_0_auto]">
-								<div className="inline-flex flex-col items-start gap-1 relative flex-[0_0_auto]">
-									<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-center tracking-[0] leading-[150%] whitespace-nowrap truncate">
+								<div className="inline-flex flex-col items-start gap-0.5 sm:gap-1 relative flex-[0_0_auto]">
+									<div className="relative w-fit [font-family:'Satoshi-Bold',Helvetica] font-bold text-center tracking-[0] leading-[150%] whitespace-nowrap truncate">
 										{supplier.name}
 									</div>
 
 									<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-										<div className="relative w-fit mt-[-1.00px] text-textSecondary sm:text-sm tracking-[0] leading-[150%] whitespace-nowrap text-xs">
+										<div className="relative w-fit text-textSecondary sm:text-sm tracking-[0] leading-[150%] whitespace-nowrap text-xs">
 											{supplier.country}
 										</div>
 
@@ -63,7 +63,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 
 										<div className="flex items-center gap-1 relative flex-[0_0_auto]">
 											<Icon icon="star" className="text-yellow w-4 h-4" />
-											<div className="text-textSecondary relative w-fit mt-[-1.00px] sm:text-sm text-xs tracking-[0] leading-[150%] whitespace-nowrap">
+											<div className="text-textSecondary relative w-fit sm:text-sm text-xs tracking-[0] leading-[150%] whitespace-nowrap">
 												{supplier.rating}
 											</div>
 										</div>
@@ -89,7 +89,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 						{supplier.isVIP && (
 							<div className="inline-flex items-center justify-center gap-2 sm:px-3 px-1.5 sm:py-1 py-0.5 relative flex-[0_0_auto] bg-yellow/10 rounded-[30px] border-[0.5px] border-solid border-yellow">
 								<Icon icon="crown" className="text-yellow sm:w-4 sm:h-4 w-[14px] h-[14px]" />
-								<div className="relative w-fit mt-[-0.50px]  font-medium text-yellow sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
+								<div className="relative w-fit font-medium text-yellow sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
 									VIP
 								</div>
 							</div>
@@ -124,7 +124,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 					</div>
 				</div>
 
-				<div className="relative w-fit mt-[-1.00px]  font-medium text-primary sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
+				<div className="relative w-fit  font-medium text-primary sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
 					{supplier.responseRate}% response
 				</div>
 			</div>
@@ -133,8 +133,8 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 				{supplier.tags.map((tag, index) => (
 					<div
 						key={index}
-						className="inline-flex items-center gap-2.5 px-4 sm:py-2 py-[5px] relative flex-[0_0_auto] rounded-[90px] border border-solid border-border">
-						<div className="relative w-fit mt-[-1.00px]  font-medium text-textSecondary sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
+						className="inline-flex items-center gap-2.5 px-[14px] sm:px-4 sm:py-2 py-[5.5px] relative flex-[0_0_auto] rounded-[90px] outline outline-solid outline-border">
+						<div className="relative w-fit font-medium text-textSecondary sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
 							{tag.label}
 						</div>
 					</div>

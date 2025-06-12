@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "lib/utils";
 
 const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
-	<div ref={ref} className={cn("rounded-xl bg-bgc dark:bg-bgcDark", className)} {...props} />
+	<div ref={ref} className={cn("p-6 rounded-xl border bg-card text-card-foreground shadow", className)} {...props} />
 ));
 Card.displayName = "Card";
 
@@ -37,4 +37,16 @@ const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 );
 CardFooter.displayName = "CardFooter";
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+const Badge = ({ className, variant, ...props }: any) => {
+	return (
+		<div
+			className={cn(
+				`inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground`,
+				className,
+			)}
+			{...props}
+		/>
+	);
+};
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, Badge };

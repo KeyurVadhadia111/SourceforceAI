@@ -1,5 +1,7 @@
 import { MenuItemProps } from "components/utils/datatypes";
 import Icon from "components/utils/Icon";
+import MenuComponent from "components/utils/MenuComponent";
+import ProfileMenu from "components/utils/ProfileMenu";
 import { useAppState } from "components/utils/useAppState";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -22,14 +24,14 @@ export const sidebarItems: MenuItemProps[] = [
 	{
 		title: "Manufacturer Directory",
 		icon: "factory",
-		url: "/news-sourcing-request",
+		url: "/manufacturer-directory",
 		active: false,
 		id: 3,
 	},
 	{
 		title: "Market Intelligence",
 		icon: "presentation-chart",
-		url: "/news-sourcing-request",
+		url: "/market-intelligence",
 		active: false,
 		id: 4,
 	},
@@ -43,14 +45,14 @@ export const sidebarItems: MenuItemProps[] = [
 	{
 		title: "Compliance Check",
 		icon: "policy",
-		url: "/news-sourcing-request",
+		url: "/rfq-center",
 		active: false,
 		id: 6,
 	},
 	{
 		title: "Supplier Messages",
 		icon: "chat-circle-text",
-		url: "/news-sourcing-request",
+		url: "/supplier-messages",
 		active: false,
 		id: 7,
 	},
@@ -64,14 +66,14 @@ export default function Sidebar() {
 	const handleClickOutside = (event: MouseEvent) => {
 		if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
 			setAppState({ isExpanded: false });
-			localStorage.setItem('sidebarExpanded', 'false');
+			localStorage.setItem("sidebarExpanded", "false");
 		}
 	};
 
 	const toggleSidebar = () => {
 		const newState = !isExpanded;
 		setAppState({ isExpanded: newState });
-		localStorage.setItem('sidebarExpanded', JSON.stringify(newState));
+		localStorage.setItem("sidebarExpanded", JSON.stringify(newState));
 	};
 
 	/* useEffect(() => {
@@ -87,7 +89,7 @@ export default function Sidebar() {
 	}, [isExpanded]); */
 
 	useEffect(() => {
-		const savedState = localStorage.getItem('sidebarExpanded');
+		const savedState = localStorage.getItem("sidebarExpanded");
 		setAppState({ isExpanded: savedState ? JSON.parse(savedState) : false });
 
 		setAppState({ userDetails: JSON.parse(localStorage.getItem("auth") || "{}") });
@@ -119,22 +121,26 @@ export default function Sidebar() {
 		<>
 			<div
 				ref={sidebarRef}
-				className={`relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[104px]"} transition-all duration-300 ease-in-out sm:block hidden`}
-			>
+				className={`relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[104px]"} transition-all duration-300 ease-in-out sm:block hidden bg-text`}>
 				<div
 					onClick={toggleSidebar}
-					className={`absolute w-6 h-6 top-10 -right-3 bg-white rounded-[100px] sm:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${isExpanded ? "rotate-180" : ""
-						}`}
-				>
+					className={`absolute w-6 h-6 top-10 -right-3 bg-white rounded-[100px] sm:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${
+						isExpanded ? "rotate-180" : ""
+					}`}>
 					<div className="relative w-4 h-4 top-1 left-1 flex justify-center items-center">
 						<Icon className="w-4 h-4" icon="chevron-right" />
 					</div>
 				</div>
-				<div className="inline-flex flex-col items-center justify-between p-6 relative flex-[0_0_auto] bg-text h-screen w-full">
+				<div className="inline-flex flex-col items-center justify-between p-6 relative flex-[0_0_auto] w-full h-screen">
 					<div className="inline-flex flex-col items-start gap-12 relative flex-[0_0_auto] w-full">
-						<img className={`relative  h-14 ${isExpanded ? 'w-full' : 'w-14'}`} alt="Group" src={`/assets/images/logo/${isExpanded ? 'logo-primary-full.svg' : 'logo-primary.svg'}`} />
+						<img
+							className={`relative  h-14 ${isExpanded ? "w-full" : "w-14"}`}
+							alt="Group"
+							src={`/assets/images/logo/${isExpanded ? "logo-primary-full.svg" : "logo-primary.svg"}`}
+						/>
 
-						<div className={`inline-flex flex-col gap-3 relative flex-[0_0_auto] w-full ${isExpanded ? "items-start" : "items-center"}`}>
+						<div
+							className={`inline-flex flex-col gap-3 relative flex-[0_0_auto] w-full ${isExpanded ? "items-start" : "items-center"}`}>
 							{sidebarItems.map(item => {
 								return (
 									<Link
@@ -143,19 +149,14 @@ export default function Sidebar() {
 										onClick={() => {
 											setSidebarItem(item);
 										}}
-										className={`relative h-14 flex items-center justify-center transition-all duration-300 rounded-xl`}
-									>
-										{item.id === sidebarItem.id && (
-											<div className="absolute w-[3px] h-[59px] top-[0] -left-6 bg-primary"></div>
+										className={`relative h-14 flex items-center justify-center transition-all duration-300 rounded-xl`}>
+										{item.url === location.pathname && (
+											<div className="absolute w-[3px] h-[59px] top-[0] -left-6 bg-primary rounded-full"></div>
 										)}
 										<div className="w-14 h-14 flex items-center justify-center">
 											<Icon icon={item.icon || ""} className={`w-8 h-8`} />
 										</div>
-										{isExpanded && (
-											<span className="font-medium text-textDark">
-												{item.title}
-											</span>
-										)}
+										{isExpanded && <span className="font-medium text-textDark">{item.title}</span>}
 									</Link>
 								);
 							})}
@@ -163,11 +164,8 @@ export default function Sidebar() {
 					</div>
 
 					<div className="w-full flex items-center gap-2">
-						<img
-							className="relative w-14 h-14 object-cover"
-							alt="Photo by evan wise"
-							src="/assets/images/photo-by-evan-wise.png"
-						/>
+						<ProfileMenu />
+
 						{isExpanded && (
 							<div className="transition-all  duration-300 text-textDark flex flex-col items-start gap-2">
 								<div className="font-medium">James Forgey</div>

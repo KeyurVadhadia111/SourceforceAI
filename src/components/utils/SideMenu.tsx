@@ -8,6 +8,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import Icon from "./Icon";
 import { Input } from "./Input";
 import Select from "./Select";
+import { countryOptions } from "./consts";
 
 type RequestType = {
 	isOpen: boolean;
@@ -25,28 +26,44 @@ type Option<T> = {
 	icon?: string;
 };
 
-const SelectBox: React.FC<{ selected: boolean; onClick: () => void; label: string; icon?: string }> = ({
-	onClick,
-	selected,
-	label,
-	icon,
-}) => {
+const SelectBox: React.FC<{
+	selected: boolean;
+	onClick: () => void;
+	label: string;
+	icon?: string;
+	className?: any;
+}> = ({ onClick, selected, label, icon, className = "" }) => {
 	return (
 		<div
 			onClick={() => {
 				onClick();
 			}}
-			className={`cursor-pointer sm:min-w-48 flex items-center justify-center sm:gap-2.5 gap-2 sm:px-8 px-[22px] py-3 sm:py-[13px] relative rounded-[50px] border border-solid ${selected ? "border-primary  bg-primary/10 text-primary" : "border-border bg-white text-text "}`}>
+			className={`cursor-pointer  flex items-center justify-center sm:gap-2.5 gap-2 sm:px-8 px-[22px] py-3 sm:py-[13px] relative rounded-[50px] border border-solid ${selected ? "border-primary  bg-primary/10 text-primary" : "border-border bg-white text-text "} ${className}`}>
 			{icon && <Icon className="sm:w-5 sm:h-5 w-4 h-4 text-primary" icon={icon} />}
-			<div className="font-medium sm:text-base text-sm leading-[22px] whitespace-nowrap [font-family:'Satoshi-Regular',Helvetica] tracking-[0]">
-				{label}
-			</div>
+			<div className="sm:text-base text-sm leading-[22px] whitespace-nowrap tracking-[0]">{label}</div>
 		</div>
 	);
 };
 
 const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 	const [{ user }, setAppState] = useAppState();
+
+	const supplierTypes = [
+		{ value: "manufacturer", label: "Manufacturer" },
+		{ value: "wholesaler", label: "Wholesaler" },
+		{ value: "distributor", label: "Distributor" },
+		{ value: "retailer", label: "Retailer" },
+		{ value: "importer", label: "Importer" },
+		{ value: "exporter", label: "Exporter" },
+		{ value: "service_provider", label: "Service Provider" },
+		{ value: "dropshipper", label: "Dropshipper" },
+		{ value: "contractor", label: "Contractor" },
+		{ value: "consultant", label: "Consultant" },
+		{ value: "trader", label: "Trader" },
+		{ value: "agent", label: "Agent" },
+		{ value: "local_vendor", label: "Local Vendor" },
+		{ value: "international_vendor", label: "International Vendor" },
+	];
 
 	const verificationOptions: Option<VerificationStatus>[] = [
 		{ value: "VIP", label: "VIP" },
@@ -114,25 +131,27 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 							<Dialog.Panel
 								className={classNames(
 									"relative",
-									`sm:w-3/4 w-full sm:mt-0 mt-[60px]`,
+									`sm:w-[900px] w-full sm:mt-0 mt-[60px]`,
 									"text-left align-middle h-full bg-bgc transition-all transform dark:bg-fgcDark",
 								)}>
-								<div className="flex flex-col items-start relative sm:px-0 px-6">
-									<div className="flex items-center justify-between sm:p-[30px] pt-6 pb-4 relative self-stretch w-full flex-[0_0_auto] border-b border-border">
-										<div className="relative w-fit font-bold text-text sm:text-2xl text-lg text-center leading-[140%] whitespace-nowrap">
-											Supplier Search Filters
-										</div>
+								<div className="flex flex-col items-start relative sm:px-0">
+									<div className="w-full px-6 sm:px-0">
+										<div className="flex items-center justify-between sm:p-[30px] sm:pb-[29.34px] pt-6 pb-[17.34px] relative self-stretch w-full flex-[0_0_auto] border-b border-border">
+											<div className="relative w-fit font-bold text-text sm:text-2xl text-lg text-center sm:leading-[34px] leading-[25px] whitespace-nowrap">
+												Supplier Search Filters
+											</div>
 
-										<Icon
-											onClick={() => {
-												setIsOpen(false);
-											}}
-											icon="x-mark"
-											className="cursor-pointer sm:w-[30px] sm:h-[30px] w-[20px] h-[20px] border-1 rounded-full sm:p-1 p-0.5"
-										/>
+											<Icon
+												onClick={() => {
+													setIsOpen(false);
+												}}
+												icon="x-mark"
+												className="cursor-pointer sm:w-[30px] sm:h-[30px] w-[20px] h-[20px] border-1 rounded-full sm:p-1 p-0.5"
+											/>
+										</div>
 									</div>
 
-									<div className="overflow-y-auto sm:h-[calc(100dvh-208px)] h-[calc(100dvh-237px)] w-full">
+									<div className="px-6 sm:px-0 overflow-y-auto sm:h-[calc(100dvh-208px)] h-[calc(100dvh-237px)] w-full">
 										<div className="flex flex-col items-start gap-[30px] sm:p-[30px] py-6 relative self-stretch w-full">
 											<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center sm:gap-6 gap-4 relative w-full flex-wrap">
 												<Input
@@ -142,11 +161,19 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 												/>
 												<Select icon="prohibit" variant="secondary" id="12">
 													<option value="Exclude Countries">Exclude Countries</option>
-													<option value="North-Korea">North Korea</option>
+													{countryOptions.map(country => (
+														<option key={country.value} value={country.value}>
+															{country.label}
+														</option>
+													))}
 												</Select>
 												<Select icon="prohibit" variant="secondary" id="234">
 													<option value="Supplier Type">Supplier Type</option>
-													<option value="North-Korea">North Korea</option>
+													{supplierTypes.map(type => (
+														<option key={type.value} value={type.value}>
+															{type.label}
+														</option>
+													))}
 												</Select>
 											</div>
 
@@ -155,7 +182,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 													Verification Status
 												</div>
 
-												<div className="flex items-center gap-4 relative flex-wrap w-full">
+												<div className="flex items-center sm:justify-between relative flex-wrap w-full sm:gap-0 gap-4">
 													{" "}
 													{verificationOptions.map(item => {
 														return (
@@ -166,6 +193,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 																	setVerificationStatus(item.value);
 																}}
 																selected={verificationStatus === item.value}
+																className="sm:!min-w-[198px]"
 															/>
 														);
 													})}
@@ -177,7 +205,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 													Shipping Time
 												</div>
 
-												<div className="flex items-center gap-4 relative flex-wrap w-full">
+												<div className="flex items-center sm:gap-0 gap-4 sm:justify-between relative flex-wrap w-full">
 													{" "}
 													{shippingOptions.map(item => {
 														return (
@@ -188,17 +216,18 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 																	setShippingTime(item.value);
 																}}
 																selected={shippingTime === item.value}
+																className="sm:!min-w-[269.33px]"
 															/>
 														);
 													})}
 												</div>
 											</div>
 
-											<div className="flex flex-col items-start gap-4 relative">
-												<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-text sm:text-xl text-base tracking-[0] leading-[150%] whitespace-nowrap">
+											<div className="flex flex-col items-start gap-4 relative w-full">
+												<div className="relative w-full [font-family:'Satoshi-Medium',Helvetica] font-medium text-text sm:text-xl text-base tracking-[0] leading-[150%] whitespace-nowrap">
 													Payment Methods
 												</div>{" "}
-												<div className="flex flex-wrap items-center gap-4 relative">
+												<div className="flex flex-wrap items-center gap-4 sm:gap-0 sm:justify-between relative w-full">
 													{paymentOptions.map(item => (
 														<SelectBox
 															key={item.value}
@@ -208,6 +237,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 																setPaymentMethod(item.value);
 															}}
 															selected={paymentMethod === item.value}
+															className="sm:!min-w-[198px]"
 														/>
 													))}
 												</div>
@@ -217,7 +247,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 												<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-text sm:text-xl text-base tracking-[0] leading-[150%] whitespace-nowrap">
 													Certifications
 												</div>{" "}
-												<div className="flex items-center gap-4 relative flex-wrap w-full">
+												<div className="flex items-center gap-4 sm:gap-0 sm:justify-between relative flex-wrap w-full">
 													{" "}
 													{certificationOptions.map(item => (
 														<SelectBox
@@ -227,6 +257,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 																setCertifications(item.value);
 															}}
 															selected={certifications === item.value}
+															className="sm:!min-w-[198px]"
 														/>
 													))}
 												</div>
@@ -237,18 +268,20 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 													Price Range ($)
 												</div>
 
-												<div className="flex items-center gap-6 relative">
+												<div className="flex sm:gap-5 gap-4 relative">
 													<Input
 														icon="coins"
 														placeholder="Min Price"
 														type="number"
 														variant="secondary"
+														className="sm:!w-[315px]"
 													/>
 													<Input
 														icon="coins"
 														placeholder="Max Price"
 														type="number"
 														variant="secondary"
+														className="sm:!w-[315px]"
 													/>
 												</div>
 											</div>
@@ -267,6 +300,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 																setMinimumRating(rating);
 															}}
 															selected={minimumRating === rating}
+															className="sm:!min-w-[155.2px]"
 														/>
 													))}
 												</div>
@@ -274,30 +308,32 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 										</div>
 									</div>
 
-									<div className="flex items-center justify-end gap-[223px] sm:p-[30px] py-6 relative self-stretch w-full flex-[0_0_auto] border-t border-border">
-										<div className="inline-flex items-center sm:gap-4 gap-[14px] relative flex-[0_0_auto]">
-											<Button
-												variant="outline"
-												className="!border-primary sm:gap-2.5 gap-2 sm:pl-10 sm:pr-6 sm:py-4 p-[14px]">
-												<div className="relative [font-family:'Satoshi-Medium',Helvetica] font-medium text-primary sm:text-base text-sm leading-[150%] whitespace-nowrap">
-													Reset All Filters
-												</div>
+									<div className="w-full px-6 sm:px-0">
+										<div className="flex items-center justify-end gap-[223px] sm:p-[30px] py-6 relative self-stretch w-full flex-[0_0_auto] border-t border-border">
+											<div className="inline-flex items-center sm:gap-4 gap-[14px] relative flex-[0_0_auto]">
+												<Button
+													variant="outline"
+													className="!border-primary sm:gap-2.5 gap-2 sm:pl-10 sm:pr-6 sm:py-4 p-[14px] sm:!w-[207px]">
+													<div className="relative [font-family:'Satoshi-Medium',Helvetica] font-medium text-primary sm:text-base text-sm leading-[150%] whitespace-nowrap">
+														Reset All Filters
+													</div>
 
-												<Icon
-													icon="x-mark"
-													className="cursor-pointer w-[22px] h-[22px] border-2 rounded-full p-0.5 border-primary text-primary"
-												/>
-											</Button>
+													<Icon
+														icon="x-mark"
+														className="cursor-pointer w-[22px] h-[22px] border rounded-full p-0.5 border-primary text-primary"
+													/>
+												</Button>
 
-											<Button
-												onClick={() => {
-													setIsOpen(false);
-												}}
-												className="sm:gap-2.5 gap-2 px-8 py-4">
-												<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white sm:text-base text-sm tracking-[0] leading-[150%] whitespace-nowrap">
-													Apply Filters
-												</div>
-											</Button>
+												<Button
+													onClick={() => {
+														setIsOpen(false);
+													}}
+													className="sm:gap-2.5 gap-2 px-8 py-4 sm:!w-[187px]">
+													<div className="relative [font-family:'Satoshi-Medium',Helvetica] font-medium text-white sm:text-base text-sm tracking-[0] leading-[150%] whitespace-nowrap ">
+														Apply Filters
+													</div>
+												</Button>
+											</div>
 										</div>
 									</div>
 								</div>

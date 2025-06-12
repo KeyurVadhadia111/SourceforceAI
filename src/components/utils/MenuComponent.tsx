@@ -78,7 +78,7 @@ const MenuComponent: React.FC<MenuProps> = ({ items, children, isProfile = false
 							</Menu.Item>
 						);
 					})}
-					<div className="inline-flex items-center gap-4 relative flex-[0_0_auto]">
+					<div className="inline-flex items-center gap-4 relative justify-center">
 						<div className="inline-flex items-center p-1 relative flex-[0_0_auto] bg-tgc rounded-[100px]">
 							<div className="flex w-12 h-12 items-center justify-center gap-2.5 px-[3px] py-0.5 relative bg-white rounded-[100px]">
 								<Icon className="relative w-6 h-6" icon="cloud-sun" />

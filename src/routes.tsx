@@ -9,6 +9,7 @@ import ForgotPasswordPage from "pages/ForgotPasswordPage";
 import NewsSourcingRequest from "pages/NewsSourcingRequest";
 import SupplierSearchSummary from "pages/SupplierSearchSummary";
 import SavedManufacturers from "pages/SavedManufacturers";
+import RfqCenter from "pages/RfqCenter";
 
 declare global {
 	interface Window {
@@ -110,6 +111,14 @@ const createRoutes: React.FC = () => {
 								element={
 									<ProtectedRoute>
 										<SavedManufacturers />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/rfq-center"
+								element={
+									<ProtectedRoute>
+										<RfqCenter />
 									</ProtectedRoute>
 								}
 							/>
