@@ -129,7 +129,7 @@ const NewsSourcingRequest = () => {
 							<h1 className="sm:text-[40px] text-[32px] text-center text-text sm:mb-4 leading-[150%] [font-family:'Outfit',sans-serif] mb-[14px]">
 								Find High-Quality and <div className="font-bold ">Dependable Suppliers</div>
 							</h1>
-							<p className="sm:text-base text-sm leading-[150%] text-center text-textSecondary max-w-2xl [font-family:'Outfit',sans-serif]">
+							<p className="sm:text-base text-sm leading-[150%] text-center text-textSecondary max-w-2xl">
 								Discover top-rated, reliable suppliers instantly with our AI-powered sourcing tool.
 								Ensure quality and consistency for every product with smart supplier recommendations.
 							</p>
@@ -140,7 +140,7 @@ const NewsSourcingRequest = () => {
 								<div
 									key={index}
 									className="flex items-center outline outline-border rounded-full sm:px-5 px-4 sm:py-[9.5px] text-text font-normal cursor-pointer py-[6px]">
-									<span className="text-text sm:text-sm text-xs sm:leading-[21px] leading-[18px] [font-family:'Satoshi-Medium',Helvetica] flex gap-1 items-center">
+									<span className="text-text sm:text-sm text-xs sm:leading-[21px] leading-[18px] flex gap-1 items-center">
 										{category.title}
 										{category.icon && <Icon icon={category.icon} size={14} />}
 									</span>
@@ -239,7 +239,7 @@ const NewsSourcingRequest = () => {
 									id="message"
 									placeholder="Message..."
 									className={cn(
-										"border-none border-border focus:outline-none focus:ring-0 focus:ring-primary resize-none [font-family:'Satoshi-Regular',Helvetica] leading-[150%]",
+										"border-none border-border focus:outline-none focus:ring-0 focus:ring-primary resize-none leading-[150%]",
 										step === 1 ? "sm:w-full w-[calc(100%-32px)]" : "w-[calc(100%-32px)]",
 									)}
 									rows={1}
@@ -280,7 +280,7 @@ const NewsSourcingRequest = () => {
 												: "sm:h-[18px] sm:w-[18px] h-3 w-3",
 										)}
 									/>
-									<span className="text-textSecondary sm:text-sm text-xs [font-family:'Satoshi',Helvetica] leading-[16px] sm:leading-[18px]">
+									<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px]">
 										Attach
 									</span>
 								</button>
@@ -305,7 +305,7 @@ const NewsSourcingRequest = () => {
 													: "sm:h-[18px] sm:w-[18px] h-3 w-3",
 											)}
 										/>
-										<span className="text-textSecondary sm:text-sm text-xs [font-family:'Satoshi',Helvetica] leading-[16px] sm:leading-[18px]">
+										<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px]">
 											Company Search
 										</span>
 									</button>
@@ -325,7 +325,7 @@ const NewsSourcingRequest = () => {
 													: "sm:h-[18px] sm:w-[18px] h-3 w-3",
 											)}
 										/>
-										<span className="text-textSecondary sm:text-sm text-xs [font-family:'Satoshi',Helvetica] leading-[16px] sm:leading-[18px]">
+										<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px]">
 											Pro
 										</span>
 										<Icon
@@ -358,7 +358,7 @@ const NewsSourcingRequest = () => {
 					className={`flex transition-[width] duration-100 flex-col w-full md:border border-solid border-border ${isExpanded ? "md:w-[calc(100%-446px)]" : "md:w-[calc(100%-446px)]"} h-[calc(100dvh-105px)] overflow-auto sm:px-0 px-6`}>
 					{/* Header */}
 					<div className="flex items-center flex-wrap justify-between sm:p-6 sm:pb-[23.34px] pb-[15.34px] border-b border-border sm:gap-0 gap-4">
-						<div className="flex items-center gap-2">
+						<div className="flex items-center gap-4 sm:gap-2 ">
 							<div className="md:hidden block h-6 w-6 p-0.5">
 								<Icon
 									icon="arrow-up"
@@ -373,7 +373,7 @@ const NewsSourcingRequest = () => {
 							</h2>
 						</div>
 
-						<div className="flex items-center gap-3 flex-wrap sm:pl-0 pl-8">
+						<div className="flex items-center gap-3 flex-wrap sm:pl-0 pl-9">
 							<button className="inline-flex items-center justify-center gap-2 whitespace-nowrap !bg-tgc px-5 sm:py-[9.5px] py-2 !text-textSecondary !rounded-full !border-none sm:text-sm text-xs leading-[150%]">
 								Export
 								<Icon icon="chevron-down" className="text-textSecondary sm:w-5 sm:h-5 w-4 h-4" />
@@ -387,7 +387,7 @@ const NewsSourcingRequest = () => {
 					</div>
 
 					{/* Statistics */}
-					<div className="flex items-start flex-wrap sm:gap-6 gap-4 sm:pt-[23.34px] pb-[13.34px] sm:px-6 pt-4 border-b border-border">
+					<div className="flex items-start flex-wrap sm:gap-6 gap-4 sm:pt-[24px] sm:pb-[15.34px] pb-[13.34px] sm:px-6 pt-4 border-b border-border">
 						{statistics.map((stat, index) => (
 							<div key={index} className="flex items-start gap-4 sm:gap-6 flex-1">
 								<div className="flex sm:w-10 sm:h-10 w-[32px] h-[32px] items-center justify-center p-2 bg-fgc rounded-full">
@@ -406,7 +406,7 @@ const NewsSourcingRequest = () => {
 					</div>
 
 					{/* Filter Tags */}
-					<div className="flex items-center flex-wrap sm:gap-6 pt-[14px] sm:pb-[23.34px] sm:px-6 pb-[15.34px] gap-4 border-b border-border">
+					<div className="flex items-center flex-wrap sm:gap-6 sm:pt-4 pt-[14px] sm:pb-[23.34px] sm:px-6 pb-[15.34px] gap-4 border-b border-border">
 						<div className="font-medium text-text sm:text-sm text-xs leading-[150%]">
 							Best Match Summary
 						</div>
@@ -415,7 +415,7 @@ const NewsSourcingRequest = () => {
 								<Badge
 									key={index}
 									variant="outline"
-									className="sm:px-6 sm:py-2.5 !px-4 !py-1.5 sm:h-10 h-[30px] !rounded-full text-textSecondary sm:text-sm text-xs leading-[150%] !font-medium !border-border [font-family:'Satoshi-Bold',Helvetica]">
+									className="sm:!px-6 sm:!py-2.5 !px-4 !py-1.5 sm:h-10 h-[30px] !rounded-full text-textSecondary sm:text-sm text-xs leading-[150%] !font-medium !border-border">
 									{tag}
 								</Badge>
 							))}
@@ -465,7 +465,7 @@ const NewsSourcingRequest = () => {
 
 						{/* Supplier Cards */}
 						<div className="w-full">
-							<div className="grid 2xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 items-start sm:gap-6 relative gap-4 w-full">
+							<div className={`grid 3xl:grid-cols-3 ${isExpanded ? '2xl:grid-cols-2' : '2xl:grid-cols-2'} xl:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 relative gap-4 w-full`}>
 								{loading ? (
 									// Loading skeleton
 									<>

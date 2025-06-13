@@ -58,24 +58,24 @@ const RfqCenter = () => {
 	return (
 		<div>
 			<SimpleBar className="sm:h-[calc(100dvh-105px)] h-[calc(100dvh-57px)]">
-				<div className="flex flex-col sm:gap-6 gap-4 sm:p-6 p-6 relative">
-					<div className="flex flex-col sm:gap-4">
+				<div className="flex flex-col sm:gap-6 gap-[15px] sm:p-6 p-6 relative">
+					<div className="flex flex-col sm:gap-4 gap-3">
 						<div className="relative w-fit [font-family:'Satoshi-Bold',Helvetica] font-bold text-text sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
 							RFQs Center
 						</div>
 						<div className="flex items-center justify-between relative self-stretch w-full flex-wrap gap-3">
-							<div className="inline-flex items-center relative flex-[0_0_auto] border-b border-[#ced6d3]">
+							<div className="inline-flex items-center relative flex-[0_0_auto]">
 								<div
 									onClick={() => {
 										setSelectedTab("inbox");
 									}}
 									className={cn(
-										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-2 relative flex-[0_0_auto] border-b-2 sm:h-[54px] h-[34px]",
+										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-[7px] relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px]",
 										selectedTab === "inbox"
-											? "border-[#529e7e] text-primary font-bold "
-											: "border-transparent text-[#5f726e] font-normal",
+											? "border-primary text-primary font-bold "
+											: "text-textSecondary font-normal",
 									)}>
-									<div className="relative w-fit [font-family:'Satoshi',Helvetica] sm:text-base text-xs sm:leading-[1.4] leading-[150%]">
+									<div className="relative w-fit  sm:text-base text-xs sm:leading-[1.4] leading-[150%]">
 										Inbox
 									</div>
 								</div>
@@ -84,12 +84,12 @@ const RfqCenter = () => {
 										setSelectedTab("sent");
 									}}
 									className={cn(
-										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-2 relative flex-[0_0_auto] border-b-2 sm:h-[54px] h-[34px]",
+										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-2 relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px]",
 										selectedTab === "sent"
-											? "border-[#529e7e] text-primary font-bold "
-											: "border-transparent text-[#5f726e] font-normal",
+											? "border-primary text-primary font-bold "
+											: "text-textSecondary font-normal",
 									)}>
-									<div className="relative w-fit [font-family:'Satoshi',Helvetica] sm:text-base text-xs sm:leading-[1.4] leading-[150%]">
+									<div className="relative w-fit  sm:text-base text-xs sm:leading-[1.4] leading-[150%]">
 										Sent
 									</div>
 								</div>
@@ -98,7 +98,7 @@ const RfqCenter = () => {
 							<div className="inline-flex items-center justify-center sm:gap-3 gap-2 relative flex-[0_0_auto]">
 								<Button
 									variant="none"
-									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc rounded-[50px]">
+									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-[6px] sm:!p-2 relative bg-tgc rounded-[50px]">
 									<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon="checker-board" />
 								</Button>
 
@@ -115,12 +115,12 @@ const RfqCenter = () => {
 									onClick={() => {
 										setIsOpen(true);
 									}}
-									className="inline-flex items-center justify-center sm:!gap-2.5 !gap-1.5 sm:!px-4 !px-3 !py-2 relative flex-[0_0_auto] bg-[#529e7e] rounded-[40px]">
-									<div className="flex w-4 h-4 text-white rounded-full border border-white p-0.5 items-center justify-center">
+									className="inline-flex items-center justify-center sm:!gap-2.5 !gap-1.5 sm:!px-4 !px-3 !py-[7px] relative flex-[0_0_auto] bg-primary rounded-[40px]">
+									<div className="flex w-4 h-4 text-white rounded-full outline outline-white p-0.5 items-center justify-center">
 										<Icon icon="plus" className="h-full w-full" />
 									</div>
 
-									<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white sm:text-sm text-xs tracking-[0] sm:leading-[21px] leading-[150%] whitespace-nowrap">
+									<div className="relative w-fit font-medium text-white sm:text-sm text-xs sm:leading-[21px]  leading-[150%] whitespace-nowrap">
 										Create RFQ
 									</div>
 								</Button>
@@ -130,7 +130,7 @@ const RfqCenter = () => {
 
 					{/* Supplier Cards */}
 					<div className="w-full">
-						<div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full">
+						<div className={`grid 3xl:grid-cols-4 2xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full`}>
 							{loading ? (
 								// Loading skeleton
 								<>

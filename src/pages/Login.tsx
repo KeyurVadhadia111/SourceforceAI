@@ -90,7 +90,7 @@ function Login() {
 
 							<div className="flex flex-col w-[445px] gap-5 items-center relative flex-[0_0_auto]">
 								<div className="flex flex-col gap-4 self-stretch w-full items-center relative flex-[0_0_auto]">
-									<div className="w-[525px] ml-[-40.00px] mr-[-40.00px] text-white relative mt-[-1.00px] font-bold text-4xl text-center tracking-[0] leading-[50.4px] transition-opacity duration-500">
+									<div className="w-[525px] pl-[50.00px] pr-[50.00px] text-white relative mt-[-1.00px] font-bold text-4xl text-center tracking-[0] leading-[50.4px] transition-opacity duration-500">
 										{slides[currentSlide].title}
 									</div>
 

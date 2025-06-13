@@ -30,7 +30,7 @@ interface SupplierCardProps {
 
 const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onViewProfile, onSendRFQ }) => {
 	return (
-		<div className="flex flex-col h-full items-start justify-center sm:gap-4 gap-3 sm:p-4 p-3 relative flex-1 grow bg-white rounded-[20px] border border-solid border-border">
+		<div className="flex flex-col h-full items-start justify-center sm:gap-4 gap-3 sm:p-4 p-3 relative flex-1 grow bg-white rounded-[20px] border border-solid border-border -m-px">
 			<div className="flex flex-col items-start sm:gap-3 gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
 				<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
 					<div className="flex items-start justify-between relative flex-1 grow">
@@ -43,7 +43,7 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 
 							<div className="inline-flex items-start sm:gap-3 gap-2.5 relative flex-[0_0_auto]">
 								<div className="inline-flex flex-col items-start sm:gap-1 gap-0.5 relative flex-[0_0_auto]">
-									<div className="relative w-fit [font-family:'Satoshi-Bold',Helvetica] font-bold text-center leading-[150%] whitespace-nowrap truncate">
+									<div className="relative w-fit font-bold text-center leading-[150%] whitespace-nowrap truncate">
 										{supplier.name}
 									</div>
 
@@ -110,12 +110,17 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 				</div>
 			)}
 
-			<div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
-				<div className="inline-flex flex-col items-start justify-center sm:gap-3 gap-2.5 relative flex-[0_0_auto]">
-					<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-						<Icon icon="cube" className="sm:w-5 sm:h-5 w-4 h-4 " />
-						<div className="relative w-fit  font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
-							MOQ: {supplier.moq} pieces
+			<div className="flex items-start justify-between relative self-stretch w-full">
+				<div className="inline-flex flex-col items-start justify-center sm:gap-3 gap-2.5 relative w-full">
+					<div className="inline-flex items-center gap-2.5 relative w-full">
+						<div className="inline-flex justify-between items-center gap-2.5 relative flex-[0_0_auto]">
+							<Icon icon="cube" className="sm:w-5 sm:h-5 w-4 h-4 " />
+							<div className="relative w-fit  font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
+								MOQ: {supplier.moq} pieces
+							</div>
+						</div>
+						<div className="relative w-fit mt-[-1.00px]  font-medium text-primary sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
+							{supplier.responseRate}% response
 						</div>
 					</div>
 
@@ -135,10 +140,6 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 						</div>
 					)}
 				</div>
-
-				<div className="relative w-fit mt-[-1.00px]  font-medium text-primary sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
-					{supplier.responseRate}% response
-				</div>
 			</div>
 
 			<div className="sm:text-xs text-[10px] leading-[150%] font-medium gap-1 flex flex-col">
@@ -150,12 +151,12 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 				</div>
 			</div>
 
-			<div className="flex flex-wrap items-start sm:gap-[10px_10px] relative gap-2">
+			<div className="flex flex-nowrap sm:flex-wrap items-start sm:gap-[10px_10px] relative gap-2">
 				{supplier.tags.map((tag, index) => (
 					<div
 						key={index}
-						className="inline-flex items-center gap-2.5 px-4 sm:py-[7px] py-[5px] relative flex-[0_0_auto] rounded-[90px] border border-solid border-border">
-						<div className="relative w-fit font-medium text-textSecondary sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap [font-family:'Satoshi',Helvetica]">
+						className="inline-flex items-center gap-2.5 px-4 sm:py-[7px] py-[4.839px] relative flex-[0_0_auto] rounded-[90px] border border-solid border-border">
+						<div className="relative w-fit font-medium text-textSecondary sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap ">
 							{tag.label}
 						</div>
 					</div>
@@ -169,17 +170,17 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 					</div>
 				)}
 				<Button
-					className="sm:h-10 h-[34px] grow sm:text-sm text-xs text-primary border-primary hover:bg-primary/10"
+					className="sm:h-10 h-[34px] sm:text-sm text-xs text-primary border-primary hover:bg-primary/10 flex-1"
 					onClick={onViewProfile}
 					variant="outline">
 					View Profile
 				</Button>
 				{isRfqSent ? (
-					<Button className="sm:h-10 h-[34px] grow sm:text-sm text-xs" onClick={onSendRFQ}>
+					<Button className="sm:h-10 h-[34px] flex-1 sm:text-sm text-xs" onClick={onSendRFQ}>
 						Edit
 					</Button>
 				) : (
-					<Button className="sm:h-10 h-[34px] grow sm:text-sm text-xs" onClick={onSendRFQ}>
+					<Button className="sm:h-10 h-[34px] flex-1 sm:text-sm text-xs" onClick={onSendRFQ}>
 						Reply
 					</Button>
 				)}

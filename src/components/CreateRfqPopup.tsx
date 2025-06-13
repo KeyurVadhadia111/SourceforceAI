@@ -6,6 +6,7 @@ import { Input } from "./utils/Input";
 import Select from "./utils/Select";
 import { Button } from "./utils/Button";
 import { countryOptions } from "./utils/consts";
+import { Separator } from "./utils/Separator";
 
 type RequestType = {
 	isOpen: boolean;
@@ -56,12 +57,12 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 							<Dialog.Panel
 								className={cn(
 									"relative",
-									`sm:w-3/4 w-full sm:mt-0 mt-[60px]`,
+									`sm:max-w-[900px] w-full sm:mt-0 mt-[56px]`,
 									"text-left align-middle h-full bg-bgc transition-all transform dark:bg-fgcDark",
 								)}>
-								<div className="flex flex-col items-start relative sm:px-0">
+								<div className="flex flex-col sm:gap-0 gap-4 items-start relative sm:px-0">
 									<div className="w-full px-6 sm:px-0">
-										<div className="flex items-center justify-between sm:p-[30px] pt-6 pb-4 relative self-stretch w-full flex-[0_0_auto] border-b border-border">
+										<div className="flex items-start justify-between sm:p-[30px] pt-6 relative w-full flex-[0_0_auto]">
 											<div className="relative w-fit font-bold text-text sm:text-2xl text-lg text-center leading-[140%] whitespace-nowrap">
 												Create New RFQ
 											</div>
@@ -70,15 +71,17 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 												onClick={() => {
 													setIsOpen(false);
 												}}
-												icon="x-mark"
-												className="cursor-pointer sm:w-[30px] sm:h-[30px] w-[20px] h-[20px] border-1 rounded-full sm:p-1 p-0.5"
+												icon="x-mark-circle"
+												className="cursor-pointer sm:w-[30px] sm:h-[30px] w-[20px] h-[20px]"
 											/>
 										</div>
 									</div>
-
-									<div className="px-6 sm:px-0 overflow-y-auto sm:h-[calc(100dvh-208px)] h-[calc(100dvh-237px)] w-full">
+									<div className="px-6 sm:px-[30px] w-full">
+										<Separator />
+									</div>
+									<div className="px-6 sm:px-0 overflow-y-auto sm:h-[calc(100dvh-208px)] h-[calc(100dvh-239px)] w-full">
 										{" "}
-										<div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-[30px] gap-4 sm:p-[30px] py-6">
+										<div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-[30px] gap-4 sm:p-[30px] py-0">
 											<Input
 												variant="transparentBorder"
 												placeholder="e.g., LED Strip Lights 5050 SMD"
@@ -115,7 +118,7 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 
 											<Input
 												variant="transparentBorder"
-												placeholder="e.g., 5000"
+												placeholder="e.g., 1000"
 												label="Quantity Required"
 												className="placeholder:text-textSecondary placeholder:text-sm flex-1"
 												required
@@ -138,7 +141,7 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 
 											<Input
 												variant="transparentBorder"
-												placeholder="e.g., 8543.70.00"
+												placeholder="e.g., 8541.41.00"
 												label="HS Code (Optional)"
 												className="placeholder:text-textSecondary placeholder:text-sm w-40"
 											/>
@@ -165,7 +168,7 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 											</div>
 
 											<div className="sm:col-span-2">
-												<label className="pl-1 leading-[150%] text-text dark:text-textDark [font-family:'Satoshi-Regular',Helvetica] sm:mb-2 mb-1.5 block sm:text-base text-xs">
+												<label className="leading-[150%] text-text dark:text-textDark sm:mb-2 mb-1.5 block sm:text-base text-xs font-medium">
 													Reference File (Optional)
 												</label>
 												<div className="relative">
@@ -194,7 +197,7 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 																className="sm:w-8 sm:h-8 w-6 h-6 text-textSecondary"
 															/>
 															<div className="text-center text-textSecondary">
-																<p className="[font-family:'Satoshi-Regular',Helvetica] sm:text-base text-xs leading-[150%]">
+																<p className="sm:text-base text-xs leading-[150%]">
 																	Drag & drop your image here or{" "}
 																	<span className="text-primary cursor-pointer">
 																		Browse
@@ -202,10 +205,10 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 																</p>
 															</div>
 															<div className="text-center text-textSecondary">
-																<p className="sm:text-xs text-[10px] [font-family:'Satoshi',Helvetica] leading-[150%]">
-																	Support Files (PNG, JPG)
+																<p className="sm:text-xs text-[10px]  leading-[150%]">
+																	Supports PNG, JPG
 																</p>
-																<p className="sm:text-[10px] text-[8px] font-light [font-family:'Satoshi',Helvetica] leading-[150%]">
+																<p className="sm:text-[10px] text-[8px] font-light  leading-[150%]">
 																	Max: 15 MB
 																</p>
 															</div>
@@ -215,9 +218,12 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 											</div>
 										</div>
 									</div>
+									<div className="block sm:hidden px-6 sm:px-[30px] w-full">
+										<Separator />
+									</div>
 
 									<div className="w-full px-6 sm:px-0">
-										<div className="flex items-center justify-end gap-[223px] sm:p-[30px] py-6 relative self-stretch w-full flex-[0_0_auto] border-t border-border">
+										<div className="flex items-center justify-end gap-[223px] sm:p-[30px] pb-6 relative self-stretch w-full flex-[0_0_auto]">
 											<div className="inline-flex items-center sm:gap-4 gap-[14px] relative flex-[0_0_auto]">
 												<Button
 													variant="outline"

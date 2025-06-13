@@ -18,7 +18,9 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 		return (
 			<div className="relative w-full">
 				{label && (
-					<label className="pl-1 leading-[150%] text-text dark:text-textDark [font-family:'Satoshi-Regular',Helvetica] sm:mb-2 mb-1.5 block sm:text-base text-xs">
+					<label
+						className="leading-[150%] text-text dark:text-textDark 
+					 sm:mb-2 mb-1.5 block sm:text-base text-xs font-medium">
 						{label}
 						{required && <span className="text-error">*</span>}
 					</label>
@@ -36,11 +38,11 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 					)}
 					<select
 						className={cn(
-							"bg-none sm:h-[60px] h-[48px] gap-2.5 px-6 py-[15px] rounded-[56px] flex items-center relative self-stretch w-full font-normal text-text [font-family:'Satoshi-Regular',Helvetica] sm:text-sm text-xs tracking-[0] leading-[150%] transition-colors placeholder:text-textSecondary dark:placeholder:text-textDark/50  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border sm:py-[17px] dark:text-textDark custom-select",
+							"bg-none sm:h-[60px] h-[48px] gap-2.5 px-3 sm:px-6 py-[15px] rounded-[56px] flex items-center relative self-stretch w-full font-normal text-text sm:text-sm text-xs tracking-[0] leading-[150%] transition-colors placeholder:text-textSecondary dark:placeholder:text-textDark/50  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border sm:py-[17px] dark:text-textDark custom-select",
 							variant === "default" && "bg-white dark:bg-fgcDark border-transparent",
 							variant === "secondary" && "bg-fgc dark:bg-fgcDark border-transparent",
 							variant === "transparentBorder" &&
-								"bg-transparent border border-border focus-visible:ring-primary",
+							"bg-transparent border border-border focus-visible:ring-primary",
 							error
 								? "!border !border-red-500 focus-visible:!ring-red-500"
 								: "focus-visible:ring-neutral-300",

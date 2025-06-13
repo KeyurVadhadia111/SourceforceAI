@@ -74,11 +74,13 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 
 						<button
 							onClick={() => onBookmarkToggle(supplier.id)}
-							className="relative w-6 h-6 hover:opacity-80 transition-opacity">
+							className="relative sm:w-6 sm:h-6 w-5 h-5 hover:opacity-80 transition-opacity">
 							<Icon
 								icon={isBookmarked ? "bookmark-fill" : "bookmark"}
 								size={24}
-								className={isBookmarked ? "text-primary" : "text-border"}
+								className={
+									isBookmarked ? "text-primary w-5 h-5" : "text-border sm:w-6 sm:h-6 !w-5 !h-5"
+								}
 							/>
 						</button>
 					</div>
@@ -107,25 +109,26 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 				</div>
 			</div>
 
-			<div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
-				<div className="inline-flex flex-col items-start justify-center sm:gap-3 gap-2.5 relative flex-[0_0_auto]">
-					<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-						<Icon icon="cube" className="sm:w-5 sm:h-5 w-4 h-4 " />
-						<div className="relative w-fit  font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
-							MOQ: {supplier.moq} pieces
+			<div className="flex items-start justify-between relative w-full">
+				<div className="inline-flex flex-col items-start justify-center sm:gap-3 gap-2.5 relative w-full">
+					<div className="inline-flex justify-between items-center gap-2.5 relative w-full">
+						<div className="inline-flex items-center gap-2.5 relative w-full">
+							<Icon icon="cube" className="sm:w-5 sm:h-5 w-4 h-4 " />
+							<div className="relative w-fit  font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
+								MOQ: {supplier.moq} pieces
+							</div>
+						</div>
+						<div className="relative w-fit  font-medium text-primary sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
+							{supplier.responseRate}% response
 						</div>
 					</div>
 
 					<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
 						<Icon icon="map-pin" className="sm:w-5 sm:h-5 w-4 h-4 " />
-						<div className="relative w-fit  font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
+						<div className="relative w-fit  font-medium sm:text-xs tracking-[0] leading-[15px] sm:leading-[18px] text-[10px] whitespace-nowrap">
 							{supplier.location}
 						</div>
 					</div>
-				</div>
-
-				<div className="relative w-fit  font-medium text-primary sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
-					{supplier.responseRate}% response
 				</div>
 			</div>
 

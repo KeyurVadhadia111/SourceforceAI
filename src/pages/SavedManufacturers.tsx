@@ -53,9 +53,9 @@ const SavedManufacturers = () => {
 	return (
 		<div>
 			<SimpleBar className="sm:h-[calc(100dvh-105px)] h-[calc(100dvh-57px)]">
-				<div className="flex flex-col sm:gap-6 gap-4 sm:p-6 p-4 relative">
+				<div className="flex flex-col sm:gap-6 gap-4 p-6 relative">
 					<div className="flex items-center justify-between relative self-stretch w-full flex-wrap gap-4">
-						<p className="relative w-fit [font-family:'Satoshi-Bold',Helvetica] font-bold text-text sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
+						<p className="relative w-fit font-bold text-text sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
 							Saved manufacturers (14 Results)
 						</p>
 
@@ -76,7 +76,7 @@ const SavedManufacturers = () => {
 
 					{/* Saved manufacturers */}
 					<div className="w-full">
-						<div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full">
+						<div className={`grid 3xl:grid-cols-4 2xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full`}>
 							{loading ? (
 								// Loading skeleton
 								<>
