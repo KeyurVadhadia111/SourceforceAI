@@ -10,6 +10,12 @@ import NewsSourcingRequest from "pages/NewsSourcingRequest";
 import SupplierSearchSummary from "pages/SupplierSearchSummary";
 import SavedManufacturers from "pages/SavedManufacturers";
 import RfqCenter from "pages/RfqCenter";
+import TermsConditions from "pages/TermsConditions";
+import ContactUsPage from "pages/ContactUsPage";
+import ProfileSettingPage from "pages/ProfileSettingPage";
+import SecurityPage from "pages/SecurityPage";
+import SubscriptionPage from "pages/SubscriptionPage";
+import HelpAndSupportPage from "pages/HelpAndSupportPage";
 
 declare global {
 	interface Window {
@@ -119,6 +125,54 @@ const createRoutes: React.FC = () => {
 								element={
 									<ProtectedRoute>
 										<RfqCenter />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/terms-u38-conditions"
+								element={
+									<ProtectedRoute>
+										<TermsConditions />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/contact-us"
+								element={
+									<ProtectedRoute>
+										<ContactUsPage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/profile"
+								element={
+									<ProtectedRoute>
+										<ProfileSettingPage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/security"
+								element={
+									<ProtectedRoute>
+										<SecurityPage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/subscription"
+								element={
+									<ProtectedRoute>
+										<SubscriptionPage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/help-support"
+								element={
+									<ProtectedRoute>
+										<HelpAndSupportPage />
 									</ProtectedRoute>
 								}
 							/>

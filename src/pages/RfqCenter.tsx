@@ -1,6 +1,6 @@
+import CreateRfqPopup from "components/common/CreateRfqPopup";
 import RfqSupplierCard from "components/common/RfqsSupplierCard";
 import { Supplier } from "components/common/SupplierCard";
-import CreateRfqPopup from "components/CreateRfqPopup";
 import { Button } from "components/utils/Button";
 import { suppliers } from "components/utils/consts";
 import Icon from "components/utils/Icon";
@@ -58,22 +58,22 @@ const RfqCenter = () => {
 	return (
 		<div>
 			<SimpleBar className="sm:h-[calc(100dvh-105px)] h-[calc(100dvh-57px)]">
-				<div className="flex flex-col sm:gap-6 gap-[15px] sm:p-6 p-6 relative">
+				<div className="flex flex-col sm:gap-6 gap-4 sm:p-6 p-6 relative">
 					<div className="flex flex-col sm:gap-4 gap-3">
-						<div className="relative w-fit [font-family:'Satoshi-Bold',Helvetica] font-bold text-text sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
+						<div className="relative w-fit  font-bold text-text sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
 							RFQs Center
 						</div>
 						<div className="flex items-center justify-between relative self-stretch w-full flex-wrap gap-3">
-							<div className="inline-flex items-center relative flex-[0_0_auto]">
+							<div className="inline-flex items-center relative flex-[0_0_auto] border-b border-border">
 								<div
 									onClick={() => {
 										setSelectedTab("inbox");
 									}}
 									className={cn(
-										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-[7px] relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px]",
+										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-2 relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px] box-border",
 										selectedTab === "inbox"
 											? "border-primary text-primary font-bold "
-											: "text-textSecondary font-normal",
+											: "border-transparent text-textSecondary font-normal",
 									)}>
 									<div className="relative w-fit  sm:text-base text-xs sm:leading-[1.4] leading-[150%]">
 										Inbox
@@ -87,7 +87,7 @@ const RfqCenter = () => {
 										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-2 relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px]",
 										selectedTab === "sent"
 											? "border-primary text-primary font-bold "
-											: "text-textSecondary font-normal",
+											: "border-transparent text-textSecondary font-normal",
 									)}>
 									<div className="relative w-fit  sm:text-base text-xs sm:leading-[1.4] leading-[150%]">
 										Sent
@@ -115,7 +115,7 @@ const RfqCenter = () => {
 									onClick={() => {
 										setIsOpen(true);
 									}}
-									className="inline-flex items-center justify-center sm:!gap-2.5 !gap-1.5 sm:!px-4 !px-3 !py-[7px] relative flex-[0_0_auto] bg-primary rounded-[40px]">
+									className="inline-flex items-center justify-center sm:!gap-2.5 !gap-1.5 sm:!px-4 !px-[11px] !py-[7px] relative flex-[0_0_auto] bg-primary rounded-[40px]">
 									<div className="flex w-4 h-4 text-white rounded-full outline outline-white p-0.5 items-center justify-center">
 										<Icon icon="plus" className="h-full w-full" />
 									</div>
@@ -130,7 +130,8 @@ const RfqCenter = () => {
 
 					{/* Supplier Cards */}
 					<div className="w-full">
-						<div className={`grid 3xl:grid-cols-4 2xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full`}>
+						<div
+							className={`grid 3xl:grid-cols-4 2xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full`}>
 							{loading ? (
 								// Loading skeleton
 								<>

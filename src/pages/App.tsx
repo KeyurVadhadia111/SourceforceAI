@@ -7,6 +7,7 @@ import { ToastIcons } from "components/utils/toast-icons";
 import { useAppState } from "components/utils/useAppState";
 import "simplebar-react/dist/simplebar.min.css";
 import Sidebar from "components/common/Sidebar";
+import { useEffect, useState } from "react";
 
 function App() {
 	const [{ premiumStep }, setAppState] = useAppState();
@@ -14,6 +15,12 @@ function App() {
 	const location = useLocation();
 	const isAuthPage =
 		location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forgot-password";
+
+	useEffect(() => {
+		const onResize = () => setAppState({ isMobile: window.innerWidth <= 768 });
+		window.addEventListener("resize", onResize);
+		return () => window.removeEventListener("resize", onResize);
+	}, []);
 
 	return (
 		<div className="bg-bgc dark:bg-bgcDark flex flex-row justify-center w-full">
@@ -27,11 +34,12 @@ function App() {
 					/> */}
 
 					{/* Header Navigation */}
-					<div className="flex w-full sm:text-base text-sm [font-family:'Satoshi-Bold',Helvetica]">
+					<div className="flex w-full sm:text-base text-sm ">
 						{!isAuthPage ? <Sidebar /> : ""}
 						{/* Main Content */}
 						<main className={`z-[1] relative w-full`}>
 							{!isAuthPage ? <Header /> : ""}
+
 							<Outlet />
 						</main>
 					</div>

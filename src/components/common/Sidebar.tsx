@@ -52,7 +52,7 @@ export const sidebarItems: MenuItemProps[] = [
 	{
 		title: "Supplier Messages",
 		icon: "chat-circle-text",
-		url: "/supplier-messages",
+		url: "/terms-u38-conditions",
 		active: false,
 		id: 7,
 	},
@@ -61,7 +61,6 @@ export const sidebarItems: MenuItemProps[] = [
 export default function Sidebar() {
 	const [{ isDark, isExpanded }, setAppState] = useAppState();
 	const sidebarRef = useRef<HTMLDivElement>(null);
-	const [sidebarItem, setSidebarItem] = useState(sidebarItems[0]);
 
 	const handleClickOutside = (event: MouseEvent) => {
 		if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
@@ -121,7 +120,7 @@ export default function Sidebar() {
 		<>
 			<div
 				ref={sidebarRef}
-				className={`relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[104px]"} transition-all duration-300 ease-in-out sm:block hidden bg-text`}>
+				className={`relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[103px]"} transition-all duration-300 ease-in-out sm:block hidden bg-text`}>
 				<div
 					onClick={toggleSidebar}
 					className={`absolute w-6 h-6 top-10 -right-3 bg-white rounded-[100px] sm:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${
@@ -146,9 +145,6 @@ export default function Sidebar() {
 									<Link
 										key={item.id}
 										to={item.url || ""}
-										onClick={() => {
-											setSidebarItem(item);
-										}}
 										className={`relative h-14 flex items-center justify-center transition-all duration-300 rounded-xl`}>
 										{item.url === location.pathname && (
 											<div className="absolute w-[3px] h-[59px] top-[0] -left-6 bg-primary rounded-full"></div>

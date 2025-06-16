@@ -30,31 +30,33 @@ const ProfileMenu: React.FC<Props> = () => {
 					{({ active }) => (
 						<div className="px-4 py-2 text-sm font-medium items-center border-b border-border dark:border-border-dark">
 							<div className="leading-[150%]">signed in as</div>
-							<div className="text-textSecondary dark:text-textDark">
+							<div className="text-textSecondary dark:text-textDark truncate">
 								{userDetails?.email || "riddhi@gmail.com"}
 							</div>
 						</div>
 					)}
 				</Menu.Item>
-				{/* <MenuItem>
-					<Link
-						to="/settings"
-						className="block px-4 py-2 text-sm text-text dark:text-textDark data-focus:bg-gray-100 data-focus:outline-hidden hover:bg-bgc dark:hover:bg-bgcDark">
-						Settings
-					</Link>
-				</MenuItem> */}
+				<div className="py-1.5">
+					<MenuItem>
+						<Link
+							to="/profile"
+							className={`block px-4 py-1.5 text-sm data-focus:bg-gray-100 data-focus:outline-hidden hover:bg-bgc dark:hover:bg-bgcDark font-medium ${location.pathname === "/profile" ? "text-primary" : "text-text dark:text-textDark"}`}>
+							Profile
+						</Link>
+					</MenuItem>
 
-				<MenuItem>
-					<Link
-						to="/login"
-						className="block px-4 py-2 text-sm text-text dark:text-textDark data-focus:bg-gray-100 data-focus:outline-hidden hover:bg-bgc dark:hover:bg-bgcDark"
-						onClick={() => {
-							localStorage.removeItem("auth");
-							setAppState({ userDetails: {} });
-						}}>
-						Logout
-					</Link>
-				</MenuItem>
+					<MenuItem>
+						<Link
+							to="/login"
+							className="block px-4 py-1.5 text-sm text-text dark:text-textDark data-focus:bg-gray-100 data-focus:outline-hidden hover:bg-bgc dark:hover:bg-bgcDark font-medium"
+							onClick={() => {
+								localStorage.removeItem("auth");
+								setAppState({ userDetails: {} });
+							}}>
+							Logout
+						</Link>
+					</MenuItem>
+				</div>
 			</MenuItems>
 		</Menu>
 	);

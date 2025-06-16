@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Icon from "components/utils/Icon";
-import SideMenu from "components/utils/SideMenu";
+import SideMenu from "components/common/SideMenu";
 import SupplierCard, { Supplier } from "components/common/SupplierCard";
 import { useAppState } from "components/utils/useAppState";
 import { suppliers } from "components/utils/consts";
@@ -8,6 +8,7 @@ import SimpleBar from "simplebar-react";
 import { Button } from "components/utils/Button";
 import { cn } from "lib/utils";
 import { Badge, Card } from "components/utils/Card";
+import { Separator } from "components/utils/Separator";
 
 const categories = [
 	{ title: "LED Light Strips", icon: "" },
@@ -122,12 +123,13 @@ const NewsSourcingRequest = () => {
 					: "md:flex-row flex-col",
 			)}>
 			{/* Content */}
-			<div className={cn("w-full", step === 1 ? "max-w-[858px]" : "md:w-[446px]")}>
+			<div className={cn("w-full", step === 1 ? "max-w-[858px]" : "md:w-[445px] sm:border-r sm:border-border")}>
 				{step === 1 ? (
 					<>
-						<div className="flex flex-col items-center sm:justify-center justify-start overflow-auto w-full px-6 sm:px-0">
-							<h1 className="sm:text-[40px] text-[32px] text-center text-text sm:mb-4 leading-[150%] [font-family:'Outfit',sans-serif] mb-[14px]">
-								Find High-Quality and <div className="font-bold ">Dependable Suppliers</div>
+						<div className="flex flex-col items-center sm:justify-center justify-start overflow-auto w-full px-6 sm:px-0 sm:gap-4 gap-[14px]">
+							<h1 className="sm:text-[40px] text-[32px] text-center text-text leading-[150%]">
+								Find High-Quality and{" "}
+								<div className="font-bold tracking-tight">Dependable Suppliers</div>
 							</h1>
 							<p className="sm:text-base text-sm leading-[150%] text-center text-textSecondary max-w-2xl">
 								Discover top-rated, reliable suppliers instantly with our AI-powered sourcing tool.
@@ -151,7 +153,7 @@ const NewsSourcingRequest = () => {
 				) : (
 					<>
 						{(!isMobile || !showSummary) && (
-							<section className="flex flex-col w-full md:border-r border-border self-stretch items-center justify-start overflow-auto">
+							<section className="flex flex-col w-full self-stretch items-center justify-start overflow-auto">
 								<SimpleBar
 									className={cn(
 										"flex flex-col overflow-auto justify-start gap-6 w-full p-6 py-0 sm:py-6",
@@ -161,7 +163,7 @@ const NewsSourcingRequest = () => {
 									<div className="flex flex-col items-end gap-2.5 pl-[72px] pr-0 py-0 w-full sm:mb-6 mb-4">
 										<Card className="w-full bg-tgc rounded-[20px] sm:!p-5 !p-4 shadow-none border-none">
 											<div className="">
-												<p className="font-normal text-text sm:text-sm text-xs leading-[150%] [font-family:'Satoshi-Bold',Helvetica]">
+												<p className="font-normal text-text sm:text-sm text-xs leading-[150%] ">
 													I need top suppliers for portable blenders from China with high
 													response rates and good reviews.
 												</p>
@@ -178,7 +180,7 @@ const NewsSourcingRequest = () => {
 												icon="ai"
 											/>
 											{/* AI response text */}
-											<p className="font-normal text-text w-full leading-[150%] [font-family:'Satoshi-Bold',Helvetica]">
+											<p className="font-normal text-text w-full leading-[150%] ">
 												Here are top-rated suppliers for portable blenders from China. Filtered
 												by high response rates (&gt;85%) and average rating above 4.0.
 											</p>
@@ -187,7 +189,7 @@ const NewsSourcingRequest = () => {
 										{/* B2B Platform Engagement Indicators card */}
 										<Card className="w-full bg-tgc rounded-[20px] sm:!p-5 !p-4 shadow-none border-none">
 											<div className="flex flex-col sm:gap-4 gap-3">
-												<h3 className="font-bold text-text sm:text-sm text-xs leading-[150%] [font-family:'Satoshi-Bold',Helvetica]">
+												<h3 className="font-bold text-text sm:text-sm text-xs leading-[150%] ">
 													B2B Platform Engagement Indicators
 												</h3>
 
@@ -195,14 +197,14 @@ const NewsSourcingRequest = () => {
 													{engagementPoints.map((point, index) => (
 														<p
 															key={index}
-															className="font-normal text-text sm:text-sm text-xs leading-[150%] [font-family:'Satoshi-Bold',Helvetica]">
+															className="font-normal text-text sm:text-sm text-xs leading-[150%] ">
 															{point}
 														</p>
 													))}
 
 													<button
 														onClick={() => setShowSummary(true)}
-														className="text-left font-bold text-primary sm:text-sm text-xs leading-[150%] [font-family:'Satoshi-Bold',Helvetica]">
+														className="text-left font-bold text-primary sm:text-sm text-xs leading-[150%] ">
 														Read More
 													</button>
 												</div>
@@ -268,8 +270,8 @@ const NewsSourcingRequest = () => {
 									className={cn(
 										"flex items-center bg-white rounded-full",
 										step === 1
-											? "sm:px-4 px-2.5 py-2 sm:gap-2 gap-1.5"
-											: "sm:px-3 px-2.5 py-2 sm:gap-2 gap-1.5",
+											? "sm:px-4 px-2.5 py-2 sm:gap-2 gap-1"
+											: "sm:px-3 px-2.5 py-2 sm:gap-2 gap-1",
 									)}>
 									{/* Replace with your own Icon */}
 									<Icon
@@ -294,8 +296,8 @@ const NewsSourcingRequest = () => {
 										className={cn(
 											"flex items-center bg-white rounded-full",
 											step === 1
-												? "sm:px-4 px-2.5 py-2 sm:gap-2 gap-1.5"
-												: "sm:px-3 px-2.5 py-2 sm:gap-2 gap-1.5",
+												? "sm:px-4 px-2.5 py-2 sm:gap-2 gap-1"
+												: "sm:px-3 px-2.5 py-2 sm:gap-2 gap-1",
 										)}>
 										<Icon
 											icon="magnifying-glass"
@@ -314,8 +316,8 @@ const NewsSourcingRequest = () => {
 										className={cn(
 											"flex items-center bg-white rounded-full",
 											step === 1
-												? "sm:px-4 px-2.5 py-2 sm:gap-2 gap-1.5"
-												: "sm:px-3 px-2.5 py-2 sm:gap-1.5 gap-1.5",
+												? "sm:px-4 px-2.5 py-2 sm:gap-2 gap-1"
+												: "sm:px-3 px-2.5 py-2 sm:gap-1.5 gap-1",
 										)}>
 										<Icon
 											icon="crown-fill"
@@ -355,9 +357,9 @@ const NewsSourcingRequest = () => {
 			{/* Summary Section */}
 			{(!isMobile || showSummary) && step === 2 && (
 				<SimpleBar
-					className={`flex transition-[width] duration-100 flex-col w-full md:border border-solid border-border ${isExpanded ? "md:w-[calc(100%-446px)]" : "md:w-[calc(100%-446px)]"} h-[calc(100dvh-105px)] overflow-auto sm:px-0 px-6`}>
+					className={`flex transition-[width] duration-100 flex-col w-full md:border border-solid border-border ${isExpanded ? "md:w-[calc(100%-445px)]" : "md:w-[calc(100%-445px)]"} h-[calc(100dvh-105px)] overflow-auto sm:px-0 px-6`}>
 					{/* Header */}
-					<div className="flex items-center flex-wrap justify-between sm:p-6 sm:pb-[23.34px] pb-[15.34px] border-b border-border sm:gap-0 gap-4">
+					<div className="flex items-center flex-wrap justify-between sm:p-6 sm:pl-[23px] sm:mt-[-1px] pb-[14px] sm:gap-0 gap-4">
 						<div className="flex items-center gap-4 sm:gap-2 ">
 							<div className="md:hidden block h-6 w-6 p-0.5">
 								<Icon
@@ -385,9 +387,10 @@ const NewsSourcingRequest = () => {
 							</button>
 						</div>
 					</div>
+					<Separator className="-mt-px" />
 
 					{/* Statistics */}
-					<div className="flex items-start flex-wrap sm:gap-6 gap-4 sm:pt-[24px] sm:pb-[15.34px] pb-[13.34px] sm:px-6 pt-4 border-b border-border">
+					<div className="flex items-start flex-wrap sm:gap-6 gap-4 sm:pt-[24px] sm:pb-[15px] pb-[13px] sm:px-6 sm:pl-[23px] pt-4">
 						{statistics.map((stat, index) => (
 							<div key={index} className="flex items-start gap-4 sm:gap-6 flex-1">
 								<div className="flex sm:w-10 sm:h-10 w-[32px] h-[32px] items-center justify-center p-2 bg-fgc rounded-full">
@@ -404,9 +407,11 @@ const NewsSourcingRequest = () => {
 							</div>
 						))}
 					</div>
+					<Separator className="" />
+
 
 					{/* Filter Tags */}
-					<div className="flex items-center flex-wrap sm:gap-6 sm:pt-4 pt-[14px] sm:pb-[23.34px] sm:px-6 pb-[15.34px] gap-4 border-b border-border">
+					<div className="flex items-center flex-wrap sm:gap-6 sm:pt-4 pt-[14px] sm:pb-[23px] sm:px-6 pb-[15px] sm:pl-[23px] gap-4 border-b border-border">
 						<div className="font-medium text-text sm:text-sm text-xs leading-[150%]">
 							Best Match Summary
 						</div>
@@ -423,7 +428,7 @@ const NewsSourcingRequest = () => {
 					</div>
 
 					{/* Results */}
-					<div className="flex flex-col gap-4 sm:gap-6 sm:p-6 py-4 relative">
+					<div className="flex flex-col gap-4 sm:gap-6 sm:p-6 sm:pb-[23px] sm:pl-[23px] sm:pr-[23px] py-4 relative">
 						<div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
 							<p className="font-bold text-text sm:text-xl tracking-[0] text-base leading-[150%] whitespace-nowrap">
 								Results (32)
@@ -465,7 +470,8 @@ const NewsSourcingRequest = () => {
 
 						{/* Supplier Cards */}
 						<div className="w-full">
-							<div className={`grid 3xl:grid-cols-3 ${isExpanded ? '2xl:grid-cols-2' : '2xl:grid-cols-2'} xl:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 relative gap-4 w-full`}>
+							<div
+								className={`grid 3xl:grid-cols-3 ${isExpanded ? "2xl:grid-cols-2" : "2xl:grid-cols-2"} xl:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 relative gap-4 w-full`}>
 								{loading ? (
 									// Loading skeleton
 									<>

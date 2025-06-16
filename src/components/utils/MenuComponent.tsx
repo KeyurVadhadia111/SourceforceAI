@@ -92,7 +92,7 @@ const MenuComponent: React.FC<MenuProps> = ({ items, children, isProfile = false
 						<div className="inline-flex items-center justify-center gap-3 px-8 py-4 relative flex-[0_0_auto] bg-primary rounded-[40px]">
 							<Icon className="relative w-6 h-6" icon="export" />
 
-							<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-white text-base tracking-[0] leading-6 whitespace-nowrap">
+							<div className="relative w-fit mt-[-1.00px]  font-bold text-white text-base tracking-[0] leading-6 whitespace-nowrap">
 								Share
 							</div>
 						</div>
