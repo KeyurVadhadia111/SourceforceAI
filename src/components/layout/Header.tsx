@@ -1,6 +1,5 @@
 import { Menu, Transition } from "@headlessui/react";
 import { sidebarItems } from "components/common/Sidebar";
-import { classNames } from "components/utils";
 import { Button } from "components/utils/Button";
 import Icon from "components/utils/Icon";
 import ProfileMenu from "components/utils/ProfileMenu";
@@ -99,7 +98,7 @@ export default function Header() {
 							leaveFrom="translate-x-0 opacity-100"
 							leaveTo="translate-x-full opacity-0">
 							<Menu.Items
-								className={classNames(
+								className={cn(
 									"fixed min-w-[250px] w-[250px] m-px",
 									"right-0 top-0 z-10",
 									"rounded-none",

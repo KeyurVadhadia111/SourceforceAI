@@ -30,7 +30,7 @@ interface SupplierCardProps {
 
 const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onViewProfile, onSendRFQ }) => {
 	return (
-		<div className="flex flex-col items-start justify-center sm:gap-4 gap-3 sm:p-4 p-3 relative flex-1 grow bg-white rounded-[20px] outline outline-solid outline-border">
+		<div className="flex flex-col items-start justify-center sm:gap-4 gap-3 sm:p-[15px] p-[11px] relative flex-1 grow bg-white rounded-2xl sm:rounded-[20px] border border-border">
 			<div className="flex flex-col items-start sm:gap-3 gap-[10px] relative self-stretch w-full flex-[0_0_auto]">
 				<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
 					<div className="flex items-start justify-between relative flex-1 grow">
@@ -52,19 +52,19 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 											To: PlastiCorp Industries
 										</div>
 									) : (
-										<div className="inline-flex items-center gap-2.5 relative">
+										<div className="inline-flex items-center gap-2 sm:gap-2.5 relative">
 											<div className="relative w-fit text-textSecondary sm:text-sm tracking-[0] leading-[150%] whitespace-nowrap text-xs">
 												{supplier.country}
 											</div>
 
 											<div className="relative sm:!w-1.5 sm:!h-1.5 !w-1 !h-1 bg-border rounded-[3px]" />
 
-											<div className="flex items-center gap-1 relative flex-[0_0_auto]">
+											<div className="flex items-center gap-0.5 sm:gap-1 relative flex-[0_0_auto]">
 												<Icon
 													icon="star"
 													className="text-yellow sm:!w-4 sm:!h-4 !w-[14px] !h-[14px]"
 												/>
-												<div className="text-textSecondary relative w-fit sm:text-sm text-xs tracking-[0] leading-[150%] whitespace-nowrap">
+												<div className="text-textSecondary relative w-fit sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
 													{supplier.rating}
 												</div>
 											</div>
@@ -79,9 +79,9 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 				<div className="flex sm:h-[26px] h-[22px] items-center gap-2 sm:gap-2.5 relative self-stretch w-full">
 					<div className="inline-flex items-center gap-2 sm:gap-2.5 relative self-stretch flex-[0_0_auto]">
 						{supplier.isVIP && !isRfqSent && (
-							<div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 sm:px-3 px-[10px] sm:py-1 py-0.5 relative flex-[0_0_auto] bg-yellow/10 rounded-[30px] border-[0.5px] border-solid border-yellow h-full">
+							<div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 sm:px-[11.5px] px-[10.5px] sm:py-[3.5px] py-[2.5px] relative flex-[0_0_auto] bg-yellow/10 rounded-[30px] border-[0.5px] border-yellow h-full">
 								<Icon icon="crown" className="text-yellow sm:w-4 sm:h-4 w-[14px] h-[14px]" />
-								<div className="relative w-fit mt-[-0.50px]  font-medium text-yellow sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
+								<div className="relative w-fit font-medium text-yellow sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
 									VIP
 								</div>
 							</div>
@@ -97,8 +97,8 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 						)}
 
 						{isRfqSent && (
-							<div className="inline-flex items-center justify-center gap-2 sm:px-3 px-[10px] sm:py-0 py-0.5 relative self-stretch flex-[0_0_auto] bg-teal/10 rounded-[30px] border-[0.5px] border-solid border-primary">
-								<div className="relative w-fit  font-medium text-teal sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
+							<div className="inline-flex items-center justify-center gap-2 sm:px-3 px-[10px] sm:py-0 py-0.5 relative self-stretch flex-[0_0_auto] bg-teal/10 rounded-[30px] border-[0.5px] border-primary">
+								<div className="relative w-fit font-medium text-teal sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
 									Quoted
 								</div>
 							</div>
@@ -145,21 +145,21 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 				</div>
 			</div>
 
-			<div className="sm:text-xs text-[10px] leading-[150%] font-medium gap-1 flex flex-col">
-				<div className="text-textSecondary">Message:</div>
-				<div>
+			<div className="gap-1 flex flex-col">
+				<div className="text-textSecondary sm:text-xs text-[10px] leading-[150%] font-normal">Message:</div>
+				<div className="sm:text-xs text-[10px] leading-[150%] font-normal">
 					{isRfqSent
 						? "Food-grade material required, white color preferred"
 						: "High-quality LED strips with 5-year warranty. MOQ: 1000 pieces. Sample available."}
 				</div>
 			</div>
 
-			<div className="flex flex-nowrap sm:flex-wrap items-start sm:gap-[10px_10px] relative gap-2">
+			<div className="flex flex-nowrap sm:flex-wrap items-start sm:gap-[10px_10px] relative gap-2 h-[26px] sm:h-[34px]">
 				{supplier.tags.map((tag, index) => (
 					<div
 						key={index}
-						className="inline-flex items-center gap-2.5 px-[14px] sm:py-2 py-[5.5px] relative flex-[0_0_auto] rounded-[90px] outline outline-solid outline-border ">
-						<div className="relative w-fit font-medium text-textSecondary sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap ">
+						className="inline-flex items-center gap-2.5 px-[13px] sm:px-[15px] sm:py-[7px] py-[4.5px] relative flex-[0_0_auto] rounded-[90px] border border-border h-full">
+						<div className="relative w-fit font-medium text-textSecondary sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
 							{tag.label}
 						</div>
 					</div>
@@ -173,17 +173,17 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 					</div>
 				)}
 				<Button
-					className="sm:h-10 h-[34px] sm:text-sm text-xs text-primary border-primary hover:bg-primary/10 flex-1"
+					className="sm:h-10 h-[34px] text-sm text-primary border-primary hover:bg-primary/10 flex-1"
 					onClick={onViewProfile}
 					variant="outline">
 					View Profile
 				</Button>
 				{isRfqSent ? (
-					<Button className="sm:h-10 h-[34px] flex-1 sm:text-sm text-xs" onClick={onSendRFQ}>
+					<Button className="sm:h-10 h-[34px] flex-1 text-sm" onClick={onSendRFQ}>
 						Edit
 					</Button>
 				) : (
-					<Button className="sm:h-10 h-[34px] flex-1 sm:text-sm text-xs" onClick={onSendRFQ}>
+					<Button className="sm:h-10 h-[34px] flex-1 text-sm" onClick={onSendRFQ}>
 						Reply
 					</Button>
 				)}

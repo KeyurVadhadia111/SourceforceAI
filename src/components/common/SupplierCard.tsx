@@ -37,7 +37,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 	onSendRFQ,
 }) => {
 	return (
-		<div className="flex flex-col h-full items-start justify-center sm:gap-4 gap-3 sm:p-4 sm:py-[15px] p-3 relative flex-1 grow bg-white rounded-[20px] border border-border">
+		<div className="flex flex-col h-full items-start justify-center sm:gap-4 gap-3 sm:p-[15px] p-[11px] relative flex-1 grow bg-white rounded-[20px] border border-border">
 			<div className="flex flex-col items-start sm:gap-3 gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
 				<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
 					<div className="flex items-start justify-between relative flex-1 grow">
@@ -114,7 +114,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 
 			<div className="flex items-start justify-between relative w-full">
 				<div className="inline-flex flex-col items-start justify-center sm:gap-3 gap-2.5 relative w-full">
-					<div className="inline-flex justify-between items-center gap-2.5 relative w-full">
+					<div className="inline-flex justify-between items-start gap-2.5 relative w-full">
 						<div className="inline-flex items-center gap-2 sm:gap-2.5 relative w-full">
 							<Icon icon="cube" className="sm:w-5 sm:h-5 w-4 h-4 " />
 							<div className="relative w-fit  font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">

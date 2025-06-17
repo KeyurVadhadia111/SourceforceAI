@@ -64,16 +64,16 @@ const RfqCenter = () => {
 							RFQs Center
 						</div>
 						<div className="flex items-center justify-between relative self-stretch w-full flex-wrap gap-3">
-							<div className="inline-flex items-center relative flex-[0_0_auto] border-b border-border">
+							<div className="inline-flex items-center relative flex-[0_0_auto]">
 								<div
 									onClick={() => {
 										setSelectedTab("inbox");
 									}}
 									className={cn(
-										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-2 relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px] box-border",
+										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-2 sm:pb-[14px] pb-[7px] relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px] box-border",
 										selectedTab === "inbox"
 											? "border-primary text-primary font-bold "
-											: "border-transparent text-textSecondary font-normal",
+											: "border-border text-textSecondary font-normal",
 									)}>
 									<div className="relative w-fit  sm:text-base text-xs sm:leading-[1.4] leading-[150%]">
 										Inbox
@@ -84,10 +84,10 @@ const RfqCenter = () => {
 										setSelectedTab("sent");
 									}}
 									className={cn(
-										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-2 relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px]",
+										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-2 sm:pb-[14px] pb-[7px] relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px]",
 										selectedTab === "sent"
 											? "border-primary text-primary font-bold "
-											: "border-transparent text-textSecondary font-normal",
+											: "border-border text-textSecondary font-normal",
 									)}>
 									<div className="relative w-fit  sm:text-base text-xs sm:leading-[1.4] leading-[150%]">
 										Sent

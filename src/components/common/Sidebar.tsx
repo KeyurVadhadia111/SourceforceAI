@@ -120,7 +120,7 @@ export default function Sidebar() {
 		<>
 			<div
 				ref={sidebarRef}
-				className={`relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[103px]"} transition-all duration-300 ease-in-out sm:block hidden bg-text`}>
+				className={`relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[104px]"} transition-all duration-300 ease-in-out sm:block hidden bg-text`}>
 				<div
 					onClick={toggleSidebar}
 					className={`absolute w-6 h-6 top-10 -right-3 bg-white rounded-[100px] sm:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${

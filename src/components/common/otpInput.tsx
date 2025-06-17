@@ -13,7 +13,7 @@ const OtpInput: React.FC<OtpInputProps> = ({
 	disbaled,
 	className = "",
 	containerClass = "",
-	otpDigit = 6,
+	otpDigit = 4,
 }) => {
 	const [otp, setOtp] = useState<string[]>(Array(otpDigit).fill(""));
 	const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
@@ -41,7 +41,7 @@ const OtpInput: React.FC<OtpInputProps> = ({
 
 	const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>, index: number) => {
 		const pastedData = e.clipboardData.getData("Text");
-		if (pastedData.length === otpDigit && /^[0-9]{6}$/.test(pastedData)) {
+		if (pastedData.length === otpDigit && /^[0-9]{4}$/.test(pastedData)) {
 			e.preventDefault();
 
 			const newOtp = pastedData.split("");
@@ -74,7 +74,7 @@ const OtpInput: React.FC<OtpInputProps> = ({
 	};
 
 	return (
-		<div className={`${containerClass} flex gap-4 phone:gap-3 justify-center otp-input`}>
+		<div className={`${containerClass} flex gap-4 phone:gap-3 sm:gap-6 justify-center otp-input`}>
 			{otp.map((value, index) => (
 				<input
 					key={index}

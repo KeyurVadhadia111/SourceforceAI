@@ -2,6 +2,7 @@ import { Button } from "components/utils/Button";
 import Icon from "components/utils/Icon";
 import { useAppState } from "components/utils/useAppState";
 import { cn } from "lib/utils";
+import { GetHelp } from "pages/HelpAndSupportPage";
 import React from "react";
 import { Link } from "react-router-dom";
 import SimpleBar from "simplebar-react";
@@ -89,19 +90,8 @@ const ProfileLayout: React.FC<{ children: any; title: string; desc: string }> = 
 							{children}
 						</div>
 					)}
-					{isMobile && location.pathname === "/help-support" && (
-						<div className="flex flex-col items-center sm:gap-6 gap-4 relative self-stretch w-full border border-border dark:border-borderDark sm:p-[23px] p-[15px] rounded-2xl">
-							<img src="/assets/images/customer-service-agent-1.svg" className="sm:h-[118px] h-[60px]" />
-							<div className="flex flex-col gap-2 items-center text-center">
-								<div className="[font-family:'Satoshi',Helvetica] font-bold sm:text-2xl text-lg sm:leading-[100%] leading-[140%] tracking-[0]">
-									Get help
-								</div>
-								<div className="[font-family:'Satoshi',Helvetica] font-normal sm:text-base text-xs leading-[150%] tracking-[0] text-textSecondary">
-									Our dedicated support team is here to assist you with any inquiries you may have.
-								</div>
-							</div>
-							<Button className="w-full !py-[13px]">Get Help</Button>
-						</div>
+					{isMobile && location.pathname === "/help-support" && !isProfileSettingTab && (
+						<GetHelp className="!flex" />
 					)}
 				</div>
 			</div>

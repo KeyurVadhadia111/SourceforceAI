@@ -27,9 +27,8 @@ const CountDown: React.FC<{
 	return (
 		<div>
 			{timeLeft ? (
-				<div className="text-textSecondary">
-					Resend in {minutes < 10 ? `0${minutes}` : minutes}:
-					{seconds < 10 ? `0${seconds}` : seconds}
+				<div className="!text-primary font-medium">
+					Resend Code ({seconds < 10 ? ` 0${seconds}` : seconds}s)
 				</div>
 			) : (
 				<Link
@@ -39,7 +38,7 @@ const CountDown: React.FC<{
 						onCountDownComplete();
 					}}
 					className={"h-auto font-medium !text-primary"}
-				// varient="outline"
+					// varient="outline"
 				>
 					{"Click to resend"}
 				</Link>

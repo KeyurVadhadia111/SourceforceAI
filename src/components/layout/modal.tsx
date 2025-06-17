@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { classNames } from "components/utils";
+import { cn } from "lib/utils";
 import { useAppState } from "components/utils/useAppState";
 import React, { Fragment, JSX, useRef } from "react";
 
@@ -53,7 +53,7 @@ const Modal: React.FC<RequestType> = ({ openModal, setOpenModal, size, children,
 									leaveFrom="opacity-100 scale-100"
 									leaveTo="opacity-0 scale-95">
 									<Dialog.Panel
-										className={classNames(
+										className={cn(
 											"relative",
 											`${ModalSize[size]}`,
 											"overflow-hidden p-4 sm:p-8 text-left align-middle bg-bgc rounded-2xl sm:rounded-3xl shadow-xl transition-all transform dark:bg-fgcDark",

@@ -17,6 +17,7 @@ function ForgotPasswordPage() {
 	const [step, setStep] = useState(1);
 	const [countDownTimer, setCountDownTimer] = useState(Date.now() + 10);
 	const [currentSlide, setCurrentSlide] = useState(0);
+	const [enteredEmail, setEnteredEmail] = useState("");
 
 	const slides = [
 		{
@@ -54,9 +55,9 @@ function ForgotPasswordPage() {
 				then: schema =>
 					schema
 						.required("OTP is required")
-						.matches(/^\d{6}$/, "Invalid OTP. Please enter 6 digits")
-						.min(6, "OTP must be 6 digits")
-						.max(6, "OTP must be 6 digits"),
+						.matches(/^\d{4}$/, "Invalid OTP. Please enter 4 digits")
+						.min(4, "OTP must be 4 digits")
+						.max(4, "OTP must be 4 digits"),
 				otherwise: schema => schema.optional(),
 			}),
 		password: yup
@@ -102,6 +103,8 @@ function ForgotPasswordPage() {
 
 	const onSubmit = (data: IForgotPasswordFormData) => {
 		if (step === 1) {
+			// Save entered email for display in step 2
+			setEnteredEmail(data.email);
 			// Send OTP to email
 			toast.success("OTP sent to your email!");
 			setStep(2);
@@ -149,7 +152,7 @@ function ForgotPasswordPage() {
 
 							<div className="flex flex-col w-[445px] gap-5 items-center relative flex-[0_0_auto]">
 								<div className="flex flex-col gap-4 self-stretch w-full items-center relative flex-[0_0_auto]">
-									<div className="w-[525px] ml-[-40.00px] mr-[-40.00px] text-white relative mt-[-1.00px] font-bold text-4xl text-center tracking-[0] leading-[50.4px] transition-opacity duration-500">
+									<div className="w-[520px] pl-[50.00px] pr-[50.00px] text-white relative mt-[-1.00px] font-bold text-4xl text-center tracking-[0] leading-[50px] transition-opacity duration-500">
 										{slides[currentSlide].title}
 									</div>
 
@@ -163,8 +166,9 @@ function ForgotPasswordPage() {
 										<div
 											key={index}
 											onClick={() => setCurrentSlide(index)}
-											className={`relative w-[60px] h-[5px] bg-white rounded-[30px] transition-opacity duration-300 cursor-pointer ${index === currentSlide ? "opacity-100" : "opacity-20"
-												}`}
+											className={`relative w-[60px] h-[5px] bg-white rounded-[30px] transition-opacity duration-300 cursor-pointer ${
+												index === currentSlide ? "opacity-100" : "opacity-20"
+											}`}
 										/>
 									))}
 								</div>
@@ -174,7 +178,7 @@ function ForgotPasswordPage() {
 
 					{/* Start Right side */}
 					<div className="flex flex-col w-full items-center gap-6 h-screen justify-center px-4 sm:px-0">
-						<div className="flex flex-col items-center gap-4 relative w-full max-w-[448px]">
+						<div className="flex flex-col items-center sm:gap-8 gap-4 relative w-full max-w-[448px]">
 							{step === 4 ? (
 								<>
 									<div className="w-[177px] h-[177px] bg-green-100 rounded-full mx-auto  flex items-center justify-center p-[26px]">
@@ -200,7 +204,7 @@ function ForgotPasswordPage() {
 							) : (
 								<>
 									<div className="flex flex-col items-center gap-4 relative self-stretch w-full">
-										<h1 className="self-stretch text-text relative font-bold text-4xl text-center tracking-[0] leading-[50.4px]">
+										<h1 className="self-stretch text-text relative font-bold text-4xl text-center tracking-[0] leading-[50px]">
 											{step === 1 && "Forgot Password?"}
 											{step === 2 && "Verify Your Email"}
 											{step === 3 && "Reset Your Password"}
@@ -209,8 +213,15 @@ function ForgotPasswordPage() {
 										<p className="text-textSecondary relative w-[429px] font-normal text-base text-center tracking-[0] leading-6">
 											{step === 1 &&
 												"Enter your email address and we'll send you instructions to reset your password."}
-											{step === 2 &&
-												"We have sent a verification code to your email ID. Please check."}
+											{step === 2 && (
+												<div className="flex flex-col items-center gap-2">
+													<span>
+														We've sent a 4-digit verification code to
+														<br />
+													</span>
+													<span className="text-primary font-medium">{enteredEmail}</span>
+												</div>
+											)}
 											{step === 3 &&
 												"Enter your new password below. Make sure it's strong and memorable."}
 										</p>
@@ -218,8 +229,8 @@ function ForgotPasswordPage() {
 
 									<form
 										onSubmit={handleSubmit(onSubmit)}
-										className="flex flex-col w-full items-start gap-6 relative self-stretch">
-										<div className="flex flex-col w-full gap-6">
+										className="flex flex-col w-full gap-6 relative self-stretch justify-center items-center">
+										<div className="flex flex-col sm:w-[400px] gap-4 sm:mx-auto">
 											{step === 1 && (
 												<Input
 													icon="envelope"
@@ -265,30 +276,35 @@ function ForgotPasswordPage() {
 											)}
 										</div>
 
-										<Button size="lg" type="submit" className="w-full">
+										<Button size="lg" type="submit" className="w-full sm:w-[400px] mx-auto">
 											{step === 1 && "Continue"}
-											{step === 2 && "Verify"}
+											{step === 2 && "Continue"}
 											{step === 3 && "Reset Password"}
 										</Button>
-									</form>
 
-									{step === 2 && (
-										<div className="flex items-center justify-center gap-2 text-sm sm:text-base">
-											<span className="font-normal text-text dark:text-textDark text-center">
-												Didn't receive the code?
-											</span>
-											<CountDown targetTime={countDownTimer} onCountDownComplete={resendOtp} />
-										</div>
-									)}
+										{step === 2 && (
+											<div className="flex items-center justify-center sm:gap-3 gap-2 text-sm sm:text-base leading-[150%]">
+												<span className="font-normal text-text dark:text-textDark text-center">
+													Didn't receive the code?
+												</span>
+												<CountDown
+													targetTime={countDownTimer}
+													onCountDownComplete={resendOtp}
+												/>
+											</div>
+										)}
+									</form>
 
 									<div className="flex items-center justify-center gap-2">
 										<span className="font-normal text-textSecondary text-base text-center leading-6">
-											Back to
+											{step === 2 && ""}
+											{step === 3 && "Back to "}
 										</span>
 										<Link
 											to="/login"
 											className="font-bold text-text text-base text-center leading-6">
-											Sign in
+											{step === 2 && "Back"}
+											{step === 3 && "Sign in"}
 										</Link>
 									</div>
 								</>

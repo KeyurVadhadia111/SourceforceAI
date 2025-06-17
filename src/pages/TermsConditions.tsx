@@ -5,7 +5,7 @@ const TermsConditions = () => {
 	return (
 		<div>
 			<SimpleBar className="sm:h-[calc(100dvh-104px)] h-[calc(100dvh-56px)] w-full">
-				<div className="flex flex-col items-start justify-center sm:gap-6 gap-4 p-6 relative w-full flex-[0_0_auto] sm:-mt-px sm:-mb-px sm:border-t sm:border-b border-border">
+				<div className="flex flex-col items-start justify-center sm:gap-6 gap-4 p-6 sm:pt-[23px] sm:pb-[23px] relative w-full flex-[0_0_auto] sm:border-t sm:border-b border-border">
 					<div className="relative w-fit [font-family:'Satoshi',Helvetica] font-bold text-text sm:text-2xl text-lg tracking-[0] leading-[150%] whitespace-nowrap">
 						Legal Notices
 					</div>

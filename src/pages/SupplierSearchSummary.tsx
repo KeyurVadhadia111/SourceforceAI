@@ -23,8 +23,8 @@ const initialFilterTags: FilterTag[] = [
 ];
 
 const SupplierSearchSummary = () => {
-	const [{ isDark, isExpanded }, setAppState] = useAppState();
-	const [filterTags, setFilterTags] = useState<FilterTag[]>(initialFilterTags);
+	const [{ isDark, isExpanded, supplierSearchQueries }, setAppState] = useAppState();
+	const [filterTags, setFilterTags] = useState<FilterTag[]>(supplierSearchQueries);
 	const [bookmarkedSuppliers, setBookmarkedSuppliers] = useState<Set<string>>(new Set());
 	const [loading, setLoading] = useState(true);
 	const [displaySuppliers, setDisplaySuppliers] = useState<Supplier[]>([]);
@@ -47,6 +47,14 @@ const SupplierSearchSummary = () => {
 
 		fetchSuppliers();
 	}, []);
+
+	useEffect(() => {
+		setFilterTags(supplierSearchQueries);
+
+		return () => {
+			true;
+		};
+	}, [supplierSearchQueries]);
 
 	const toggleBookmark = (supplierId: string) => {
 		setBookmarkedSuppliers(prev => {
@@ -72,6 +80,7 @@ const SupplierSearchSummary = () => {
 
 	const handleRemoveFilter = (tagId: string) => {
 		setFilterTags(prevTags => prevTags.filter(tag => tag.id !== tagId));
+		setAppState({ supplierSearchQueries: supplierSearchQueries.filter((tag: any) => tag.id !== tagId) });
 	};
 
 	return (
@@ -112,13 +121,8 @@ const SupplierSearchSummary = () => {
 					</div>
 
 					<div className="inline-flex items-center sm:gap-4 gap-2 flex-wrap">
-						{filterTags.map((tag) => (
-							<FilterTag
-								key={tag.id}
-								id={tag.id}
-								label={tag.label}
-								onRemove={handleRemoveFilter}
-							/>
+						{filterTags.map(tag => (
+							<FilterTag key={tag.id} id={tag.id} label={tag.label} onRemove={handleRemoveFilter} />
 						))}
 					</div>
 
@@ -165,7 +169,7 @@ const SupplierSearchSummary = () => {
 					</div>
 				</div>
 			</SimpleBar>
-			{isOpen && <SideMenu isOpen={isOpen} setIsOpen={setIsOpen} />}
+			{isOpen && <SideMenu isOpen={isOpen} openFrom={'supplierSearch'} setIsOpen={setIsOpen} />}
 		</div>
 	);
 };

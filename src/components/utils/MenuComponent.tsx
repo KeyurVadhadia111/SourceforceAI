@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useAppState } from "./useAppState";
 import Icon from "./Icon";
-import { classNames } from ".";
+import { cn } from ".";
 import { MenuProps } from "./datatypes";
 
 const MenuComponent: React.FC<MenuProps> = ({ items, children, isProfile = false, className }) => {
@@ -22,7 +22,7 @@ const MenuComponent: React.FC<MenuProps> = ({ items, children, isProfile = false
 				leaveFrom="transform opacity-100 scale-100"
 				leaveTo="transform opacity-0 scale-95">
 				<Menu.Items
-					className={classNames(
+					className={cn(
 						"absolute",
 						"right-0 z-10",
 						"mt-2",
@@ -57,7 +57,7 @@ const MenuComponent: React.FC<MenuProps> = ({ items, children, isProfile = false
 									<Link
 										onClick={item.onClick}
 										to={item.url || "#"}
-										className={classNames(
+										className={cn(
 											active || item.active ? "bg-fgc dark:bg-fgc-dark  text-primary" : "",
 											"block px-4 py-2 text-sm",
 											"hover:bg-fgc dark:hover:bg-fgc-dark",

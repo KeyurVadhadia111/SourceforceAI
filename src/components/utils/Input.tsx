@@ -55,7 +55,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 					<input
 						type={inputType == "password" && showPassword ? "text" : inputType}
 						className={cn(
-							"sm:h-[60px] h-[48px] gap-2.5 px-3 sm:px-6 py-[15px] rounded-[56px] flex items-center relative self-stretch w-full text-text text-xs sm:text-sm tracking-[0] leading-[150%] transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-text dark:placeholder:text-textDark/50  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 border sm:py-[17px] dark:text-textDark [font-family:'Satoshi',Helvetica] font-medium",
+							"sm:h-[60px] h-[48px] gap-2.5 px-3 sm:px-6 py-[15px] rounded-[56px] flex items-center relative self-stretch w-full text-text text-xs sm:text-sm tracking-[0] leading-[150%] transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-text dark:placeholder:text-textDark/50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 border sm:py-[17px] dark:text-textDark font-satoshi font-medium ",
 							variant === "default" && "bg-white dark:bg-fgcDark border-transparent",
 							variant === "secondary" && "bg-fgc dark:bg-fgcDark border-transparent",
 							variant === "secondaryTransparentIcon" && "bg-fgc dark:bg-fgcDark border-transparent",
@@ -65,7 +65,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 								? "!border !border-red-500 focus-visible:!ring-red-500"
 								: "focus-visible:ring-neutral-300",
 							className,
-							icon && " sm:pl-[62px] pl-[44px]",
+							icon && "sm:pl-[61px] pl-[44px]",
 						)}
 						disabled={disabled}
 						ref={ref}

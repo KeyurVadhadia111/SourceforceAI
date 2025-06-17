@@ -60,7 +60,7 @@ const SubscriptionPage = () => {
 					return (
 						<div
 							key={"subscription_pan_" + ind}
-							className="overflow-hidden flex flex-col items-start sm:gap-6 gap-4 sm:px-6 px-4 sm:py-[30px] py-5 relative flex-1 bg-white rounded-2xl border border-border h-full -m-px">
+							className="overflow-hidden flex flex-col items-start sm:gap-6 gap-4 sm:px-[23px] px-[15px] sm:py-[29px] py-[19px] relative flex-1 bg-white rounded-2xl border border-border h-full">
 							<div className="flex flex-col items-start sm:gap-2 gap-1.5 relative self-stretch w-full flex-[0_0_auto]">
 								<div className="self-stretch [font-family:'Satoshi',Helvetica] font-medium sm:text-2xl text-base relative text-text tracking-[0] leading-[100%]">
 									{plan.title}
@@ -95,7 +95,7 @@ const SubscriptionPage = () => {
 										<div
 											key={"features_" + i}
 											className="flex items-center sm:gap-3 gap-2 relative w-full">
-											<div className="relative sm:w-5 sm:h-5 w-3.5 h-3.5 flex items-center justify-center bg-primary rounded-full">
+											<div className="relative sm:p-0.5 sm:w-6 sm:h-6 w-4 h-4 p-[1.33px] flex items-center justify-center bg-primary rounded-full">
 												<Icon icon="check" className="sm:w-3.5 sm:h-3.5 w-2 h-2 text-white" />
 											</div>
 

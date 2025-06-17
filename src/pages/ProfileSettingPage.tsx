@@ -52,7 +52,7 @@ const ProfileSettingPage = () => {
 
 	return (
 		<ProfileLayout title="Profile" desc="Customize your profile settings.">
-			<div className="flex items-center sm:gap-5 gap-4 relative self-stretch w-full flex-[0_0_auto]">
+			<div className="flex items-center sm:gap-5 gap-4 relative w-full flex-[0_0_auto]">
 				<input
 					type="file"
 					name="imageUpload"
@@ -75,7 +75,7 @@ const ProfileSettingPage = () => {
 					</label>
 				)}
 
-				<div className="flex flex-col w-[180px] items-start gap-[2px] relative">
+				<div className="flex flex-col w-[180px] items-start sm:gap-[2px] relative sm:py-[9px] py-[3px]">
 					<div className="text-text sm:text-2xl text-base leading-[150%] relative self-stretch [font-family:'Satoshi',Helvetica] font-medium tracking-[0]">
 						{getValues("name")}
 					</div>
@@ -87,7 +87,7 @@ const ProfileSettingPage = () => {
 
 				<label
 					htmlFor="imageUpload"
-					className="absolute sm:w-8 sm:h-8 w-5 h-5 sm:top-[52px] sm:left-[52px] top-[32px] left-[32px] flex items-center justify-center bg-white rounded-full shadow-[0px_10px_35px_#0000000d]">
+					className="absolute sm:w-8 sm:h-8 w-5 h-5 sm:top-[52px] sm:left-[52px] top-[31px] left-[33px] flex items-center justify-center bg-white rounded-full shadow-[0px_10px_35px_#0000000d]">
 					<Icon icon="pen" className="sm:w-4 sm:h-4 w-2.5 h-2.5 text-text" />
 				</label>
 			</div>
@@ -100,6 +100,7 @@ const ProfileSettingPage = () => {
 						disabled={disableUserDetails.name}
 						{...register("name")}
 						error={errors?.name?.message?.toString()}
+						className="sm:!py-[18.5px]"
 					/>
 
 					<div
@@ -107,7 +108,7 @@ const ProfileSettingPage = () => {
 							disableUserDetails.name = false;
 							setDisableUserDetails({ ...disableUserDetails });
 						}}
-						className="cursor-pointer absolute sm:right-6 right-[17px] sm:top-[18px] top-4 [font-family:'Satoshi',Helvetica] font-medium text-primary sm:text-sm text-xs tracking-[0] sm:leading-[21px] leading-[18px] underline underline-offset-2 whitespace-nowrap">
+						className="cursor-pointer absolute sm:right-6 right-[17px] sm:top-[18.5px] top-4 [font-family:'Satoshi',Helvetica] font-medium text-primary sm:text-sm text-xs tracking-[0] sm:leading-[21px] leading-[18px] underline underline-offset-[3px] whitespace-nowrap">
 						Change
 					</div>
 				</div>
@@ -118,6 +119,7 @@ const ProfileSettingPage = () => {
 						disabled={disableUserDetails.email}
 						{...register("email")}
 						error={errors?.email?.message?.toString()}
+						className="sm:!py-[18.5px]"
 					/>
 
 					<div
@@ -125,7 +127,7 @@ const ProfileSettingPage = () => {
 							disableUserDetails.email = false;
 							setDisableUserDetails({ ...disableUserDetails });
 						}}
-						className="cursor-pointer absolute sm:right-6 right-[17px] sm:top-[18px] top-4 [font-family:'Satoshi',Helvetica] font-medium text-primary sm:text-sm text-xs tracking-[0] sm:leading-[21px] leading-[18px] underline underline-offset-2 whitespace-nowrap">
+						className="cursor-pointer absolute sm:right-6 right-[17px] sm:top-[18.5px] top-4 [font-family:'Satoshi',Helvetica] font-medium text-primary sm:text-sm text-xs tracking-[0] sm:leading-[21px] leading-[18px] underline underline-offset-[3px] whitespace-nowrap">
 						Change
 					</div>
 				</div>
@@ -144,6 +146,7 @@ const ProfileSettingPage = () => {
 							disabled={disableUserDetails.googleEmail}
 							{...register("googleEmail")}
 							error={errors?.googleEmail?.message?.toString()}
+							className="sm:!py-[18.5px] sm:pl-[61px] pl-[49px]"
 						/>
 
 						<div
@@ -151,7 +154,7 @@ const ProfileSettingPage = () => {
 								disableUserDetails.googleEmail = false;
 								setDisableUserDetails({ ...disableUserDetails });
 							}}
-							className="cursor-pointer absolute sm:right-6 right-[17px] sm:top-[18px] top-4 [font-family:'Satoshi',Helvetica] font-medium text-primary sm:text-sm text-xs tracking-[0] sm:leading-[21px] leading-[18px] underline underline-offset-2 whitespace-nowrap">
+							className="cursor-pointer absolute sm:right-6 right-[17px] sm:top-[18.5px] top-4 [font-family:'Satoshi',Helvetica] font-medium text-primary sm:text-sm text-xs tracking-[0] sm:leading-[21px] leading-[18px] underline underline-offset-[3px] whitespace-nowrap">
 							Change
 						</div>
 					</div>
@@ -162,6 +165,7 @@ const ProfileSettingPage = () => {
 							disabled={disableUserDetails.appleEmail}
 							{...register("appleEmail")}
 							error={errors?.appleEmail?.message?.toString()}
+							className="sm:!py-[18.5px] sm:pl-[61px] pl-[49px]"
 						/>
 
 						<div
@@ -169,7 +173,7 @@ const ProfileSettingPage = () => {
 								disableUserDetails.appleEmail = false;
 								setDisableUserDetails({ ...disableUserDetails });
 							}}
-							className="cursor-pointer absolute sm:right-6 right-[17px] sm:top-[18px] top-4 [font-family:'Satoshi',Helvetica] font-medium text-primary sm:text-sm text-xs tracking-[0] sm:leading-[21px] leading-[18px] underline underline-offset-2 whitespace-nowrap">
+							className="cursor-pointer absolute sm:right-6 right-[17px] sm:top-[18.5px] top-4 [font-family:'Satoshi',Helvetica] font-medium text-primary sm:text-sm text-xs tracking-[0] sm:leading-[21px] leading-[18px] underline underline-offset-[3px] whitespace-nowrap">
 							Change
 						</div>
 					</div>

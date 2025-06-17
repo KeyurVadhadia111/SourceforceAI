@@ -129,7 +129,7 @@ const createRoutes: React.FC = () => {
 								}
 							/>
 							<Route
-								path="/terms-and-conditions"
+								path="/terms-u38-conditions"
 								element={
 									<ProtectedRoute>
 										<TermsConditions />

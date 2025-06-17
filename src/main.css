@@ -138,6 +138,7 @@ select {
 	--color-borderDark: #494949;
 	--color-teal: #086b76;
 	--breakpoint-3xl: 120rem;
+	--font-satoshi: "Satoshi", Helvetica;
 }
 
 button {

@@ -141,8 +141,8 @@ const NewsSourcingRequest = () => {
 							{categories.map((category, index) => (
 								<div
 									key={index}
-									className="flex items-center outline outline-border rounded-full sm:px-5 px-4 sm:py-[9.5px] text-text font-normal cursor-pointer py-[6px]">
-									<span className="text-text sm:text-sm text-xs sm:leading-[21px] leading-[18px] flex gap-1 items-center">
+									className="flex items-center border border-border rounded-full sm:px-[19px] px-[15px] sm:py-[9px] text-text font-normal cursor-pointer py-[5px]">
+									<span className="text-text sm:text-sm text-xs sm:leading-[21px] leading-[18px] flex sm:gap-[10px] gap-1 items-center">
 										{category.title}
 										{category.icon && <Icon icon={category.icon} size={14} />}
 									</span>
@@ -157,7 +157,7 @@ const NewsSourcingRequest = () => {
 								<SimpleBar
 									className={cn(
 										"flex flex-col overflow-auto justify-start gap-6 w-full p-6 py-0 sm:py-6",
-										"sm:h-[calc(100dvh-277px)] h-[calc(100dvh-253px)]",
+										"sm:h-[calc(100dvh-274px)] h-[calc(100dvh-253px)]",
 									)}>
 									{/* User query */}
 									<div className="flex flex-col items-end gap-2.5 pl-[72px] pr-0 py-0 w-full sm:mb-6 mb-4">
@@ -263,7 +263,7 @@ const NewsSourcingRequest = () => {
 									"flex flex-row-reverse justify-between items-center flex-wrap",
 									step == 1
 										? "sm:gap-4 gap-[9px] sm:!flex-row !flex-row-reverse"
-										: "sm:gap-[15px] gap-[9px]",
+										: "sm:gap-1",
 								)}>
 								{/* Attach */}
 								<button
@@ -317,7 +317,7 @@ const NewsSourcingRequest = () => {
 											"flex items-center bg-white rounded-full",
 											step === 1
 												? "sm:px-4 px-2.5 py-2 sm:gap-2 gap-1"
-												: "sm:px-3 px-2.5 py-2 sm:gap-1.5 gap-1",
+												: "sm:px-3 px-2.5 py-2 sm:gap-2 gap-1",
 										)}>
 										<Icon
 											icon="crown-fill"
@@ -327,16 +327,18 @@ const NewsSourcingRequest = () => {
 													: "sm:h-[18px] sm:w-[18px] h-3 w-3",
 											)}
 										/>
-										<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px]">
-											Pro
+										<span className="flex gap-1">
+											<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px]">
+												Pro
+											</span>
+											<Icon
+												icon="chevron-down"
+												className={cn(
+													"text-textSecondary",
+													step === 1 ? "sm:w-5 sm:h-5 w-[14px] h-[14px]" : "w-[14px] h-[14px]",
+												)}
+											/>
 										</span>
-										<Icon
-											icon="chevron-down"
-											className={cn(
-												"text-textSecondary",
-												step === 1 ? "sm:w-5 sm:h-5 w-[14px] h-[14px]" : "w-[14px] h-[14px]",
-											)}
-										/>
 									</button>
 									{/* Send */}
 									{step === 1 && (
@@ -376,13 +378,14 @@ const NewsSourcingRequest = () => {
 						</div>
 
 						<div className="flex items-center gap-3 flex-wrap sm:pl-0 pl-9">
-							<button className="inline-flex items-center justify-center gap-2 whitespace-nowrap !bg-tgc px-5 sm:py-[9.5px] py-2 !text-textSecondary !rounded-full !border-none sm:text-sm text-xs leading-[150%]">
-								Export
+							<button className="inline-flex items-center justify-center sm:gap-2.5 gap-2 whitespace-nowrap !bg-tgc px-5 sm:py-[10px] py-2 sm:px-[24px] !text-textSecondary !rounded-full !border-none sm:text-sm text-xs leading-[100%] font-medium">
+								<span className="self-center">Export</span>
 								<Icon icon="chevron-down" className="text-textSecondary sm:w-5 sm:h-5 w-4 h-4" />
 							</button>
 
-							<button className="inline-flex items-center justify-center gap-2 whitespace-nowrap !bg-tgc px-5 sm:py-[9.5px] py-2 !text-textSecondary !rounded-full !border-none sm:text-sm text-xs leading-[150%]">
-								Create
+							<button className="inline-flex items-center justify-center sm:gap-2.5 gap-2 whitespace-nowrap !bg-tgc sm:px-[24px] px-5 sm:py-[10px] py-2 !text-textSecondary !rounded-full !border-none sm:text-sm text-xs leading-[100%]">
+								<span className="self-center">Create</span>
+
 								<Icon icon="chevron-down" className="text-textSecondary sm:w-5 sm:h-5 w-4 h-4" />
 							</button>
 						</div>
@@ -408,7 +411,6 @@ const NewsSourcingRequest = () => {
 						))}
 					</div>
 					<Separator className="" />
-
 
 					{/* Filter Tags */}
 					<div className="flex items-center flex-wrap sm:gap-6 sm:pt-4 pt-[14px] sm:pb-[23px] sm:px-6 pb-[15px] sm:pl-[23px] gap-4 border-b border-border">

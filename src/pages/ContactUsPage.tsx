@@ -57,9 +57,9 @@ const ContactUsPage = () => {
 							</div>
 
 							<div className="flex flex-col items-start gap-8 relative self-stretch w-full ">
-								<div className="flex items-start sm:gap-6 gap-3 sm:px-6 sm:py-[30px] p-[15.34px] relative self-stretch w-full  sm:rounded-3xl rounded-2xl outline outline-border -outline-offset-1">
+								<div className="flex items-start sm:gap-6 gap-3 sm:px-[23px] sm:py-[29px] p-[15px] relative self-stretch w-full  sm:rounded-3xl rounded-2xl border border-border">
 									<div className="relative sm:w-14 sm:h-14 w-9 h-9 bg-fgc rounded-[28px] flex justify-center items-center">
-										<Icon className="sm:w-6 sm:h-6 w-4 h-4" icon="phone" />
+										<Icon className="sm:w-[19px] sm:h-[19px] w-4 h-4" icon="phone" />
 									</div>
 
 									<div className="flex flex-col items-start sm:gap-1.5 gap-1 relative flex-1 grow">
@@ -73,9 +73,9 @@ const ContactUsPage = () => {
 									</div>
 								</div>
 
-								<div className="flex items-start sm:gap-6 gap-3 sm:px-6 sm:py-[30px] p-[15.34px] relative self-stretch w-full  sm:rounded-3xl rounded-2xl outline outline-border -outline-offset-1">
+								<div className="flex items-start sm:gap-6 gap-3 sm:px-[23px] sm:py-[29px] p-[15px] relative self-stretch w-full  sm:rounded-3xl rounded-2xl border border-border">
 									<div className="relative sm:w-14 sm:h-14 w-9 h-9 bg-fgc rounded-[28px] flex justify-center items-center">
-										<Icon className="sm:w-6 sm:h-6 w-4 h-4" icon="envelope" />
+										<Icon className="sm:w-[19px] sm:h-[19px] w-4 h-4" icon="envelope" />
 									</div>
 
 									<div className="flex flex-col items-start sm:gap-1.5 gap-1 relative flex-1 grow">
@@ -89,9 +89,9 @@ const ContactUsPage = () => {
 									</div>
 								</div>
 
-								<div className="flex sm:items-center sm:gap-6 gap-3 sm:px-6 sm:py-[30px] p-[15.34px] relative self-stretch w-full  sm:rounded-3xl rounded-2xl outline outline-border -outline-offset-1">
+								<div className="flex sm:items-center sm:gap-6 gap-3 sm:px-[23px] sm:py-[29px] p-[15px] relative self-stretch w-full  sm:rounded-3xl rounded-2xl border border-border">
 									<div className="relative sm:w-14 sm:h-14 w-9 h-9 bg-fgc rounded-[28px] flex justify-center items-center">
-										<Icon className="sm:w-6 sm:h-6 w-4 h-4" icon="location" />
+										<Icon className="sm:w-[19px] sm:h-[19px] w-4 h-4" icon="location" />
 									</div>
 
 									<div className="flex flex-col items-start sm:gap-1.5 gap-1 relative flex-1 grow">

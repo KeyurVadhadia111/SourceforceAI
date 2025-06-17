@@ -134,7 +134,7 @@ function Register() {
 
 						<div className="flex flex-col w-[445px] gap-5 items-center relative flex-[0_0_auto]">
 							<div className="flex flex-col gap-4 self-stretch w-full items-center relative flex-[0_0_auto]">
-								<div className="w-[525px] ml-[-40.00px] mr-[-40.00px] text-white relative mt-[-1.00px] font-bold text-4xl text-center tracking-[0] leading-[50.4px] transition-opacity duration-500">
+								<div className="w-[520px] pl-[50.00px] pr-[50.00px] text-white relative mt-[-1.00px] font-bold text-4xl text-center tracking-[0] leading-[50.4px] transition-opacity duration-500">
 									{slides[currentSlide].title}
 								</div>
 								<p className="text-white relative w-[429px] font-normal text-base text-center tracking-[0] leading-6 transition-opacity duration-500">
@@ -162,15 +162,14 @@ function Register() {
 					<div className="flex flex-col items-center gap-8 relative w-full max-w-[448px]">
 						{step === 3 ? (
 							<div className="text-center flex flex-col gap-8 w-full">
-								<div className="w-[177px] h-[177px] bg-green-100 rounded-full mx-auto  flex items-center justify-center p-[26px]">
-									<Icon
-										icon="check"
-										className="w-full h-full text-white bg-primary rounded-full p-5 rotate-1"
-									/>
-								</div>
+								<img
+									src="assets/images/create-acc.svg"
+									alt=""
+									className="w-[279px] h-[177.09] self-center"
+								/>
 								<div className="">
 									<div className="flex flex-col gap-4">
-										<h1 className="self-stretch text-text relative font-bold text-4xl text-center tracking-[0] leading-[50.4px]">
+										<h1 className="self-stretch text-text relative font-bold text-4xl text-center tracking-[0] leading-[50px]">
 											Account Created Successfully!
 										</h1>
 
