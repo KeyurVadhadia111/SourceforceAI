@@ -104,9 +104,8 @@ function Login() {
 										<div
 											key={index}
 											onClick={() => setCurrentSlide(index)}
-											className={`relative w-[60px] h-[5px] bg-white rounded-[30px] transition-opacity duration-300 cursor-pointer ${
-												index === currentSlide ? "opacity-100" : "opacity-20"
-											}`}
+											className={`relative w-[60px] h-[5px] bg-white rounded-[30px] transition-opacity duration-300 cursor-pointer ${index === currentSlide ? "opacity-100" : "opacity-20"
+												}`}
 										/>
 									))}
 								</div>
@@ -115,7 +114,7 @@ function Login() {
 					</div>
 
 					{/* Start Right side */}
-					<div className="flex flex-col w-full items-center gap-6 h-[calc(100vh-56px)] lg:h-screen p-6 sm:px-0 justify-start sm:justify-center-safe overflow-auto sm:py-8">
+					<div className="flex flex-col w-full items-center gap-6 h-[calc(100vh-56px)] lg:h-screen p-6 sm:px-0 justify-start justify-center-safe overflow-auto sm:py-8">
 						<div className="flex flex-col items-center sm:gap-8 gap-6 relative w-full max-w-[448px] ">
 							<div className="flex flex-col items-center sm:gap-4 gap-[14px] relative self-stretch w-full">
 								<p className="self-stretch text-text relative mt-[-1.00px] font-bold sm:text-4xl text-[26px] leading-[36px] text-center tracking-[0] sm:leading-[50px]">

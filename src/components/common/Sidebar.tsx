@@ -88,9 +88,6 @@ export default function Sidebar() {
 	}, [isExpanded]); */
 
 	useEffect(() => {
-		const savedState = localStorage.getItem("sidebarExpanded");
-		setAppState({ isExpanded: savedState ? JSON.parse(savedState) : false });
-
 		setAppState({ userDetails: JSON.parse(localStorage.getItem("auth") || "{}") });
 		// Check for dark mode preference
 		if (localStorage.theme === "dark") {
@@ -120,10 +117,10 @@ export default function Sidebar() {
 		<>
 			<div
 				ref={sidebarRef}
-				className={`relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[104px]"} transition-all duration-300 ease-in-out md:block hidden bg-text`}>
+				className={`sidebar relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[104px]"} transition-all duration-300 ease-in-out md:block hidden bg-text`}>
 				<div
 					onClick={toggleSidebar}
-					className={`absolute w-6 h-6 top-10 -right-3 bg-white rounded-[100px] md:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${isExpanded ? "rotate-180" : ""
+					className={`sidebar-btn absolute w-6 h-6 top-10 -right-3 bg-white rounded-[100px] lg:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${isExpanded ? "rotate-180" : ""
 						}`}>
 					<div className="relative w-4 h-4 top-1 left-1 flex justify-center items-center">
 						<Icon className="w-4 h-4" icon="chevron-right" />

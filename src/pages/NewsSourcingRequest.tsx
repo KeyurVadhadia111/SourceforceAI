@@ -90,9 +90,9 @@ const NewsSourcingRequest = () => {
 	};
 
 	function useIsMobile() {
-		const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+		const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
 		useEffect(() => {
-			const onResize = () => setIsMobile(window.innerWidth <= 768);
+			const onResize = () => setIsMobile(window.innerWidth <= 1024);
 			window.addEventListener("resize", onResize);
 			return () => window.removeEventListener("resize", onResize);
 		}, []);
@@ -117,7 +117,7 @@ const NewsSourcingRequest = () => {
 	return (
 		<div
 			className={cn(
-				"flex px-0 w-full py-6 sm:py-0",
+				"flex px-0 sm:px-5 w-full py-6 sm:py-0",
 				step === 1
 					? "flex-col justify-center items-center sm:h-[calc(100dvh-104px)] h-[calc(100dvh-56px)]"
 					: "lg:flex-row flex-col",

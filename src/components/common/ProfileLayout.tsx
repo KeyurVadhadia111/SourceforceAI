@@ -36,60 +36,60 @@ const ProfileLayout: React.FC<{ children: any; title: string; desc: string }> = 
 						<div className="relative [font-family:'Satoshi',Helvetica] font-bold text-text sm:text-[32px] text-lg  sm:leading-[45px] leading-[25px] tracking-[0px]">
 							Settings
 						</div>
-						{(isProfileSettingTab) && (
-							<div className="flex flex-col items-start sm:gap-4 gap-3 relative self-stretch w-full flex-[0_0_auto] ">
-								{tabItems.map((tab, ind) => {
-									return (
-										<Link
-											key={"profile_tab_" + ind}
-											to={tab.url}
-											onClick={() => {
-												setAppState({ isProfileSettingTab: false });
-											}}
-											className={cn(
-												"flex items-center gap-2.5 sm:px-[30px] px-[20px] sm:py-3.5 py-[13.5px] relative self-stretch w-full rounded-[40px]",
-												location.pathname === tab.url
-													? "bg-primary text-white"
-													: "bg-fgc text-text",
-											)}>
-											<div className="relative w-fit [font-family:'Satoshi',Helvetica] font-medium sm:text-base text-sm tracking-[0] sm:!leading-[24px] !leading-[21px] whitespace-nowrap">
-												{tab.label}
-											</div>
-										</Link>
-									);
-								})}
-							</div>
-						)}
+						{/* {(isProfileSettingTab) && ( */}
+						<div className={`flex-col items-start sm:gap-4 gap-3 relative self-stretch w-full flex-[0_0_auto] ${!isProfileSettingTab ? "hidden" : "flex"} lg:flex`}>
+							{tabItems.map((tab, ind) => {
+								return (
+									<Link
+										key={"profile_tab_" + ind}
+										to={tab.url}
+										onClick={() => {
+											setAppState({ isProfileSettingTab: false });
+										}}
+										className={cn(
+											"flex items-center gap-2.5 sm:px-[30px] px-[20px] sm:py-3.5 py-[13.5px] relative self-stretch w-full rounded-[40px]",
+											location.pathname === tab.url
+												? "bg-primary text-white"
+												: "bg-fgc text-text",
+										)}>
+										<div className="relative w-fit [font-family:'Satoshi',Helvetica] font-medium sm:text-base text-sm tracking-[0] sm:!leading-[24px] !leading-[21px] whitespace-nowrap">
+											{tab.label}
+										</div>
+									</Link>
+								);
+							})}
+						</div>
+						{/* )} */}
 					</div>
 
-					{(!isProfileSettingTab) && (
-						<div className="flex flex-col lg:w-[calc(100%-274px)] w-full items-center sm:gap-[30px] gap-4 sm:p-[29px] p-[15px] relative bg-white sm:rounded-[20px] rounded-2xl border border-border">
-							<div className="flex flex-col items-start gap-2 relative self-stretch w-full">
-								<div className="relative  flex items-center gap-3">
-									<div className="md:!hidden w-[18px] h-[18px] flex justify-center items-center">
-										<Icon
-											onClick={() => {
-												setAppState({ isProfileSettingTab: true });
-											}}
-											icon="chevron-left"
-											size={9}
-										/>
-									</div>
-									<div className="max-sm:w-[calc(100%-30px)] [font-family:'Satoshi',Helvetica] font-bold text-text sm:text-2xl text-lg sm:leading-[33px] leading-[25px] tracking-normal">
-										{title}
-									</div>
+					{/* {(!isProfileSettingTab) && ( */}
+					<div className={`flex flex-col lg:w-[calc(100%-274px)] w-full items-center sm:gap-[30px] gap-4 sm:p-[29px] p-[15px] relative bg-white sm:rounded-[20px] rounded-2xl border border-border ${isProfileSettingTab ? "hidden" : "flex"} lg:flex`}>
+						<div className="flex flex-col items-start gap-2 relative self-stretch w-full">
+							<div className="relative  flex items-center gap-3">
+								<div className="lg:!hidden w-[18px] h-[18px] flex justify-center items-center">
+									<Icon
+										onClick={() => {
+											setAppState({ isProfileSettingTab: true });
+										}}
+										icon="chevron-left"
+										size={9}
+									/>
 								</div>
-
-								<div className="relative self-stretch [font-family:'Satoshi',Helvetica] font-normal text-textSecondary sm:text-base text-xs tracking-[0] leading-[150%]">
-									{desc}
+								<div className="max-sm:w-[calc(100%-30px)] [font-family:'Satoshi',Helvetica] font-bold text-text sm:text-2xl text-lg sm:leading-[33px] leading-[25px] tracking-normal">
+									{title}
 								</div>
 							</div>
 
-							<div className="w-full h-px bg-border" />
-
-							{children}
+							<div className="relative self-stretch [font-family:'Satoshi',Helvetica] font-normal text-textSecondary sm:text-base text-xs tracking-[0] leading-[150%]">
+								{desc}
+							</div>
 						</div>
-					)}
+
+						<div className="w-full h-px bg-border" />
+
+						{children}
+					</div>
+					{/* )} */}
 					{location.pathname === "/help-support" && !isProfileSettingTab && (
 						<div className="flex w-full sm:hidden">
 							<GetHelp />

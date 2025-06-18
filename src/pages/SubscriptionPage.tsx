@@ -58,7 +58,7 @@ const SubscriptionPage = () => {
 
 	return (
 		<ProfileLayout title="Subscription" desc="Choose the perfect plan for your business needs">
-			<div className={`grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 items-start gap-4 relative w-full flex-[0_0_auto] ${isExpanded ? "md:!grid-cols-1 lg:!grid-cols-1" : ""}`}>
+			<div className={`grid xl:grid-cols-3 lg:grid-cols-1 md:grid-cols-1 grid-cols-1 items-start gap-4 relative w-full flex-[0_0_auto] ${isExpanded ? "md:!grid-cols-1 lg:!grid-cols-1" : ""}`}>
 				{subscriptionPlans.map((plan, ind) => {
 					return (
 						<div

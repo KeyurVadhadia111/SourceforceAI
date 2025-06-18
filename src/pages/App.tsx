@@ -7,18 +7,29 @@ import { ToastIcons } from "components/utils/toast-icons";
 import { useAppState } from "components/utils/useAppState";
 import "simplebar-react/dist/simplebar.min.css";
 import Sidebar from "components/common/Sidebar";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import AuthHeader from "components/layout/AuthHeader";
 
 function App() {
-	const [{ premiumStep }, setAppState] = useAppState();
+	const [{ premiumStep, isExpanded }, setAppState] = useAppState();
+	const isExpandedRef = useRef(isExpanded);
 
 	const location = useLocation();
 	const isAuthPage =
 		location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forgot-password";
 
+	// Keep ref in sync with state
 	useEffect(() => {
-		const onResize = () => setAppState({ isMobile: window.innerWidth < 768 });
+		isExpandedRef.current = isExpanded;
+	}, [isExpanded]);
+
+	useEffect(() => {
+		const savedState = localStorage.getItem("sidebarExpanded");
+		setAppState({ isExpanded: window.innerWidth <= 1024 ? false : (savedState ? JSON.parse(savedState) : false), isMobile: window.innerWidth < 768 });
+
+		const onResize = () => {
+			setAppState({ isExpanded: window.innerWidth <= 1024 ? false : isExpandedRef.current, isMobile: window.innerWidth < 768 });
+		};
 		window.addEventListener("resize", onResize);
 		return () => window.removeEventListener("resize", onResize);
 	}, []);
