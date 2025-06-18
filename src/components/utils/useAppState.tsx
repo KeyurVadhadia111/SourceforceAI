@@ -12,7 +12,7 @@ export const initialState: any = {
 	questionTabs: "General Information",
 	premiumStep: 1,
 	currentPremiumPlan: {},
-	isMobile: window.innerWidth <= 425,
+	isMobile: window.innerWidth <= 768,
 	supplierSearchQueries: [
 		{ id: "country", label: "China" },
 		{ id: "shippingTime", label: "1--3 Days" },

@@ -36,7 +36,7 @@ const ProfileLayout: React.FC<{ children: any; title: string; desc: string }> = 
 						<div className="relative [font-family:'Satoshi',Helvetica] font-bold text-text sm:text-[32px] text-lg  sm:leading-[45px] leading-[25px] tracking-[0px]">
 							Settings
 						</div>
-						{(isProfileSettingTab || !isMobile) && (
+						{(isProfileSettingTab) && (
 							<div className="flex flex-col items-start sm:gap-4 gap-3 relative self-stretch w-full flex-[0_0_auto] ">
 								{tabItems.map((tab, ind) => {
 									return (
@@ -62,11 +62,11 @@ const ProfileLayout: React.FC<{ children: any; title: string; desc: string }> = 
 						)}
 					</div>
 
-					{(!isProfileSettingTab || !isMobile) && (
+					{(!isProfileSettingTab) && (
 						<div className="flex flex-col lg:w-[calc(100%-274px)] w-full items-center sm:gap-[30px] gap-4 sm:p-[29px] p-[15px] relative bg-white sm:rounded-[20px] rounded-2xl border border-border">
 							<div className="flex flex-col items-start gap-2 relative self-stretch w-full">
 								<div className="relative  flex items-center gap-3">
-									<div className="sm:!hidden w-[18px] h-[18px] flex justify-center items-center">
+									<div className="md:!hidden w-[18px] h-[18px] flex justify-center items-center">
 										<Icon
 											onClick={() => {
 												setAppState({ isProfileSettingTab: true });

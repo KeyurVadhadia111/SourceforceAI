@@ -12,7 +12,6 @@ const SavedManufacturers = () => {
 	const [loading, setLoading] = useState(true);
 	const [displaySuppliers, setDisplaySuppliers] = useState<Supplier[]>([]);
 
-
 	useEffect(() => {
 		// Simulating API call
 		const fetchSuppliers = async () => {
@@ -62,7 +61,7 @@ const SavedManufacturers = () => {
 							Saved manufacturers (14 Results)
 						</p>
 
-						<div className="inline-flex items-start justify-center gap-3 relative flex-[0_0_auto]">
+						<div className="inline-flex items-start justify-center  gap-2 sm:gap-3 relative flex-[0_0_auto]">
 							<Button
 								variant="none"
 								className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc rounded-[50px]">
@@ -79,7 +78,8 @@ const SavedManufacturers = () => {
 
 					{/* Saved manufacturers */}
 					<div className="w-full">
-						<div className={`grid 3xl:grid-cols-4 2xl:grid-cols-3 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full ${isExpanded ? "md:grid-cols-1" : "md:grid-cols-2"}`}>
+						<div
+							className={`grid 3xl:grid-cols-4 2xl:grid-cols-3 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full ${isExpanded ? "md:grid-cols-1" : "md:grid-cols-2"}`}>
 							{loading ? (
 								// Loading skeleton
 								<>

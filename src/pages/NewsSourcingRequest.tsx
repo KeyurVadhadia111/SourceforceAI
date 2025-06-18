@@ -90,9 +90,9 @@ const NewsSourcingRequest = () => {
 	};
 
 	function useIsMobile() {
-		const [isMobile, setIsMobile] = useState(window.innerWidth <= 425);
+		const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 		useEffect(() => {
-			const onResize = () => setIsMobile(window.innerWidth <= 425);
+			const onResize = () => setIsMobile(window.innerWidth <= 768);
 			window.addEventListener("resize", onResize);
 			return () => window.removeEventListener("resize", onResize);
 		}, []);
@@ -117,9 +117,9 @@ const NewsSourcingRequest = () => {
 	return (
 		<div
 			className={cn(
-				"flex px-0 sm:px-5 w-full py-6 sm:py-0",
+				"flex px-0 w-full py-6 sm:py-0",
 				step === 1
-					? "flex-col justify-center items-center sm:h-[calc(100dvh-104px)] h-[calc(100dvh-61px)]"
+					? "flex-col justify-center items-center sm:h-[calc(100dvh-104px)] h-[calc(100dvh-56px)]"
 					: "lg:flex-row flex-col",
 			)}>
 			{/* Content */}
@@ -137,7 +137,7 @@ const NewsSourcingRequest = () => {
 							</p>
 						</div>
 						{/* Categories */}
-						<div className="flex flex-wrap justify-center gap-3 sm:gap-4 sm:mb-6 mb-4 sm:mt-12 mt-8">
+						<div className="flex flex-wrap justify-center gap-3 sm:gap-4 sm:mb-6 mb-4 sm:mt-12 mt-8 sm:px-0 px-6">
 							{categories.map((category, index) => (
 								<div
 									key={index}
@@ -157,7 +157,7 @@ const NewsSourcingRequest = () => {
 								<SimpleBar
 									className={cn(
 										"flex flex-col overflow-auto justify-start gap-6 w-full p-6 py-0 sm:py-6 -ml-px",
-										"sm:h-[calc(100dvh-274px)] h-[calc(100dvh-253px)]",
+										"sm:h-[calc(100dvh-274px)] h-[calc(100dvh-248px)]",
 									)}>
 									{/* User query */}
 									<div className="flex flex-col items-end gap-2.5 pl-[72px] pr-0 py-0 w-full sm:mb-6 mb-4">
@@ -179,7 +179,10 @@ const NewsSourcingRequest = () => {
 												className="relative sm:w-[33px] sm:h-6 h-[22px] w-[30.25px] text-primary"
 												icon="ai"
 											/> */}
-											<img src="/assets/images/ai.svg" />
+											<img
+												src="/assets/images/ai.svg"
+												className="sm:w-[33px] sm:h-[24px] w-[30.25px] h-[22px]"
+											/>
 											{/* AI response text */}
 											<p className="font-normal text-text w-full leading-[150%] ">
 												Here are top-rated suppliers for portable blenders from China. Filtered
@@ -277,8 +280,8 @@ const NewsSourcingRequest = () => {
 										icon="paperclip"
 										className={cn(
 											step === 1
-												? "sm:h-[20px] sm:w-[20px] h-3 w-3"
-												: "sm:h-[18px] sm:w-[18px] h-3 w-3",
+												? "sm:h-[20px] sm:w-[20px] h-[14px] w-[14px]"
+												: "sm:h-[18px] sm:w-[18px] h-[14px] w-[14px]",
 										)}
 									/>
 									<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px] tracking-[0.045px]">
@@ -302,8 +305,8 @@ const NewsSourcingRequest = () => {
 											icon="magnifying-glass"
 											className={cn(
 												step === 1
-													? "sm:h-[20px] sm:w-[20px] h-3 w-3"
-													: "sm:h-[18px] sm:w-[18px] h-3 w-3",
+													? "sm:h-[20px] sm:w-[20px] h-[14px] w-[14px]"
+													: "sm:h-[18px] sm:w-[18px] h-[14px] w-[14px",
 											)}
 										/>
 										<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px] tracking-[0.01px]">
@@ -322,8 +325,8 @@ const NewsSourcingRequest = () => {
 											icon="crown-fill"
 											className={cn(
 												step === 1
-													? "sm:h-[20px] sm:w-[20px] h-3 w-3"
-													: "sm:h-[18px] sm:w-[18px] h-3 w-3",
+													? "sm:h-[20px] sm:w-[20px] h-[14px] w-[14px]"
+													: "sm:h-[18px] sm:w-[18px] h-[14px] w-[14px]",
 											)}
 										/>
 										<span className="flex sm:gap-2 gap-1">
@@ -362,9 +365,9 @@ const NewsSourcingRequest = () => {
 				<SimpleBar
 					className={`flex transition-[width] duration-100 flex-col w-full md:border border-solid border-border ${isExpanded ? "lg:w-[calc(100%-445px)]" : "lg:w-[calc(100%-445px)]"} h-[calc(100dvh-105px)] overflow-auto sm:px-0 px-6`}>
 					{/* Header */}
-					<div className="flex items-center flex-wrap justify-between sm:p-6 sm:pl-[23px] sm:mt-[-1px] pb-[14px] sm:gap-0 gap-4">
+					<div className="flex items-center flex-wrap justify-between sm:p-6 sm:pl-[23px] sm:mt-[-1px] pb-4 sm:gap-0 gap-4">
 						<div className="flex items-center gap-4 sm:gap-2 ">
-							<div className="md:hidden block h-6 w-6 p-0.5">
+							<div className="lg:hidden block h-6 w-6 p-0.5">
 								<Icon
 									icon="arrow-up"
 									className="-rotate-90 h-full w-full align-baseline"
@@ -378,13 +381,13 @@ const NewsSourcingRequest = () => {
 							</h2>
 						</div>
 
-						<div className="flex items-center gap-3 flex-wrap sm:pl-0 pl-9">
-							<button className="inline-flex items-center justify-center sm:gap-2.5 gap-2 whitespace-nowrap !bg-tgc px-5 sm:py-[10px] py-2 sm:px-[24px] !text-textSecondary !rounded-full !border-none sm:text-sm text-xs leading-[100%] font-medium">
+						<div className="flex items-center gap-3 flex-wrap sm:pl-0 pl-10">
+							<button className="inline-flex items-center justify-center sm:gap-2.5 gap-2 whitespace-nowrap !bg-tgc px-4 sm:py-[10px] py-2 sm:px-[24px] !text-textSecondary !rounded-full !border-none sm:text-sm text-xs leading-[150%] sm:leading-[100%] font-medium">
 								<span className="self-center">Export</span>
 								<Icon icon="chevron-down" className="text-textSecondary sm:w-5 sm:h-5 w-4 h-4" />
 							</button>
 
-							<button className="inline-flex items-center justify-center sm:gap-2.5 gap-2 whitespace-nowrap !bg-tgc sm:px-[24px] px-5 sm:py-[10px] py-2 !text-textSecondary !rounded-full !border-none sm:text-sm text-xs leading-[100%]">
+							<button className="inline-flex items-center justify-center sm:gap-2.5 gap-2 whitespace-nowrap !bg-tgc sm:px-[24px] px-4 sm:py-[10px] py-2 !text-textSecondary !rounded-full !border-none sm:text-sm text-xs leading-[150%] sm:leading-[100%]">
 								<span className="self-center">Create</span>
 
 								<Icon icon="chevron-down" className="text-textSecondary sm:w-5 sm:h-5 w-4 h-4" />
@@ -394,7 +397,7 @@ const NewsSourcingRequest = () => {
 					<Separator className="-mt-px" />
 
 					{/* Statistics */}
-					<div className="flex items-start flex-wrap sm:gap-6 gap-4 sm:pt-[24px] sm:pb-[15px] pb-[13px] sm:px-6 sm:pl-[23px] pt-4">
+					<div className="flex items-start flex-wrap sm:gap-6 gap-4 sm:pt-[24px] sm:pb-[15px] pb-[14px] sm:px-6 sm:pl-[23px] pt-4">
 						{statistics.map((stat, index) => (
 							<div key={index} className="flex items-start gap-4 sm:gap-6 flex-1">
 								<div className="flex sm:w-10 sm:h-10 w-[32px] h-[32px] items-center justify-center p-2 bg-fgc rounded-full">
@@ -440,13 +443,13 @@ const NewsSourcingRequest = () => {
 							<div className="inline-flex items-start justify-center gap-2 sm:gap-3 relative flex-[0_0_auto]">
 								<Button
 									variant="none"
-									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc rounded-[50px]">
+									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 sm:!p-2 !p-[6px] relative bg-tgc rounded-[50px]">
 									<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon="checker-board" />
 								</Button>
 
 								<Button
 									variant="none"
-									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc rounded-[50px]">
+									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 sm:!p-2 !p-[6px] relative bg-tgc rounded-[50px]">
 									<Icon
 										className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]"
 										icon="square-half-bottom"
@@ -458,13 +461,10 @@ const NewsSourcingRequest = () => {
 									onClick={() => {
 										setIsOpen(true);
 									}}
-									className="inline-flex sm:h-10 h-[34px] items-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] bg-tgc rounded-[90px]">
-									<Icon
-										className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]"
-										icon="circles-three-plus"
-									/>
+									className="inline-flex sm:h-10 h-[34px] items-center gap-[6px] sm:gap-2 sm:px-4 px-[14px] py-2 sm:py-2.5 relative flex-[0_0_auto] bg-tgc rounded-[90px]">
+									<Icon className="relative sm:w-5 sm:h-5 w-4 h-4" icon="circles-three-plus" />
 
-									<div className="relative w-fit mt-[-1.50px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-textSecondary text-sm tracking-[0] leading-[21px] whitespace-nowrap">
+									<div className="relative w-fit mt-[-1.50px] font-medium text-textSecondary text-sm leading-[21px] whitespace-nowrap tracking-tighter">
 										Filter
 									</div>
 								</Button>
@@ -474,7 +474,7 @@ const NewsSourcingRequest = () => {
 						{/* Supplier Cards */}
 						<div className="w-full">
 							<div
-								className={`grid 3xl:grid-cols-3 ${isExpanded ? "2xl:grid-cols-2" : "2xl:grid-cols-2"} xl:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 relative gap-4 w-full`}>
+								className={`grid 3xl:grid-cols-3 md:grid-cols-1 ${isExpanded ? " 2xl:grid-cols-2" : "2xl:grid-cols-2"} xl:grid-cols-2  lg:grid-cols-1 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 relative gap-4 w-full`}>
 								{loading ? (
 									// Loading skeleton
 									<>

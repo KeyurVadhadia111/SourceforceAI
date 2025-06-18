@@ -82,7 +82,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 								icon={isBookmarked ? "bookmark-fill" : "bookmark"}
 								size={24}
 								className={
-									isBookmarked ? "text-primary w-5 h-5" : "text-border sm:w-6 sm:h-6 w-5 h-5"
+									isBookmarked ? "text-primary w-5 h-5" : "text-border sm:!w-6 sm:!h-6 !w-5 !h-5"
 								}
 							/>
 						</button>
@@ -139,7 +139,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 				{supplier.tags.map((tag, index) => (
 					<div
 						key={index}
-						className="inline-flex items-center gap-2.5 px-[14px] sm:px-[15px] sm:py-[7px] py-[5.5px] relative flex-[0_0_auto] rounded-[90px] border border-border">
+						className="inline-flex items-center gap-2.5 px-[14px] sm:px-[15px] sm:py-[7px] py-[4.5px] relative flex-[0_0_auto] rounded-[90px] border border-border">
 						<div className="relative w-fit font-medium text-textSecondary sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
 							{tag.label}
 						</div>

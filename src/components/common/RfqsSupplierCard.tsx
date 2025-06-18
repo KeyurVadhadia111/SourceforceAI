@@ -88,7 +88,7 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 						)}
 
 						{supplier.isVerified && !isRfqSent && (
-							<div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 sm:px-3 px-[10px] sm:py-0 py-0.5 relative self-stretch flex-[0_0_auto] bg-primary/10 rounded-[30px] border-[0.5px] border-solid border-primary">
+							<div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 sm:px-3 px-[10px] sm:py-0 py-[1px] relative self-stretch flex-[0_0_auto] bg-primary/10 rounded-[30px] border-[0.5px] border-solid border-primary">
 								<Icon icon="target" className="text-primary sm:w-4 sm:h-4 w-[14px] h-[14px]" />
 								<div className="relative w-fit  font-medium text-primary sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
 									Verified
@@ -119,7 +119,7 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 						<div className="inline-flex justify-between items-center gap-2 sm:gap-2.5 relative flex-[0_0_auto]">
 							<Icon icon="cube" className="sm:w-5 sm:h-5 w-4 h-4 " />
 							<div className="relative w-fit  font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
-								MOQ: {supplier.moq} pieces
+								{isRfqSent ? "Items" : "MOQ"}: {supplier.moq} pieces
 							</div>
 						</div>
 						<div className="relative w-fit mt-[-1.00px]  font-medium text-primary sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
@@ -129,7 +129,7 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 
 					{isRfqSent ? (
 						<div className="inline-flex items-center gap-2 sm:gap-2.5 relative flex-[0_0_auto]">
-							<Icon icon="target" className="sm:w-5 sm:h-5 w-4 h-4 " />
+							<Icon icon="coins" className="sm:w-5 sm:h-5 w-4 h-4 " />
 							<div className="relative w-fit  font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
 								Target: $0.15 per piece:
 							</div>

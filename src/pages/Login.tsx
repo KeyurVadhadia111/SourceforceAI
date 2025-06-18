@@ -115,14 +115,14 @@ function Login() {
 					</div>
 
 					{/* Start Right side */}
-					<div className="flex flex-col w-full items-center gap-6 h-[calc(100vh-56px)] sm:h-screen p-6 sm:px-0 justify-start sm:justify-center-safe overflow-auto sm:py-8">
-						<div className="flex flex-col items-center sm:gap-8 gap-6 relative w-full max-w-[448px]">
+					<div className="flex flex-col w-full items-center gap-6 h-[calc(100vh-56px)] lg:h-screen p-6 sm:px-0 justify-start sm:justify-center-safe overflow-auto sm:py-8">
+						<div className="flex flex-col items-center sm:gap-8 gap-6 relative w-full max-w-[448px] ">
 							<div className="flex flex-col items-center sm:gap-4 gap-[14px] relative self-stretch w-full">
-								<p className="self-stretch text-text relative mt-[-1.00px] font-bold sm:text-4xl text-[26px] leading-[36px] text-center tracking-[0] sm:leading-[50.4px]">
+								<p className="self-stretch text-text relative mt-[-1.00px] font-bold sm:text-4xl text-[26px] leading-[36px] text-center tracking-[0] sm:leading-[50px]">
 									Sign in to Sourceforce AI
 								</p>
 
-								<p className="text-textSecondary relative w-[429px] mt-[2px] font-normal sm:text-base text-[14px] text-center tracking-[0] sm:leading-6 leading-[21px]">
+								<p className="text-textSecondary relative w-[429px] mt-[2px] sm:mt-0 font-normal sm:text-base text-[14px] text-center tracking-[0] sm:leading-6 leading-[21px]">
 									Please Enter Your Details to Sign In.
 								</p>
 							</div>
@@ -151,10 +151,10 @@ function Login() {
 									</div>
 								</div>
 
-								<div className="flex w-[315px] sm:w-full sm:px-11 items-center justify-center sm:gap-5 gap-[12px] relative">
+								<div className="flex w-[315px] sm:w-full h-[23px] sm:px-11 items-center justify-center sm:gap-5 gap-[12px] relative ">
 									<Separator className=" !w-full !mt-[-2px]" />
 
-									<div className="relative w-fit sm:mt-[-1.00px] font-medium text-text sm:text-lg text-[14px] text-center tracking-[0] leading-[23px]  sm:leading-[23.4px] whitespace-nowrap">
+									<div className="relative w-fit sm:mt-[-1.00px] font-medium text-text sm:text-lg text-[14px] text-center tracking-[0] leading-[23px] whitespace-nowrap">
 										or
 									</div>
 
@@ -189,13 +189,13 @@ function Login() {
 										</div>
 									</div>
 
-									<Button size="lg" type="submit" className="w-full !px-6 !py-[14px] h-12">
+									<Button size="lg" type="submit" className="w-full !px-6 !py-[14px] !h-12 sm:!h-14">
 										Continue
 									</Button>
 								</form>
 							</div>
 
-							<div className="inline-flex items-start sm:gap-2 gap-[6px] relative flex-[0_0_auto] ">
+							<div className="inline-flex items-center sm:gap-2 gap-[6px] relative flex-[0_0_auto] -mt-[3px] sm:mt-0">
 								<div className="relative w-fit font-medium text-textSecondary sm:text-base text-[14px] text-center tracking-[0] sm:leading-6 leading-[21px] whitespace-nowrap">
 									Don’t have an account?
 								</div>

@@ -38,7 +38,7 @@ const SelectBox: React.FC<{
 			onClick={() => {
 				onClick();
 			}}
-			className={`cursor-pointer  flex items-center justify-center sm:gap-3 gap-2 sm:px-8 px-[22px] py-3 sm:py-[13px] relative rounded-[50px] border border-solid ${selected ? "border-primary  bg-primary/10 text-primary" : "border-border bg-white text-text tracking-[0.1px]"} ${className}`}>
+			className={`cursor-pointer  flex items-center justify-center sm:gap-3 gap-2 sm:px-8 px-[23px] py-[11px] sm:py-[13px] relative rounded-[50px] border border-solid ${selected ? "border-primary  bg-primary/10 text-primary" : "border-border bg-white text-text"} ${className}`}>
 			{icon && <Icon className="sm:w-5 sm:h-5 w-4 h-4 text-primary" icon={icon} />}
 			<div className="sm:text-base text-sm leading-[22px] whitespace-nowrap">{label}</div>
 		</div>
@@ -266,7 +266,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 								)}>
 								<div className="flex flex-col items-start relative sm:px-0">
 									<div className="w-full px-6 sm:px-0">
-										<div className="flex items-center justify-between sm:p-[30px] pt-6 pb-[17px] relative self-stretch w-full flex-[0_0_auto] border-b border-border">
+										<div className="flex items-center justify-between sm:p-[30px] pb-4  relative self-stretch w-full flex-[0_0_auto] border-b border-border">
 											<div className="relative w-fit font-bold text-text sm:text-2xl text-lg text-center sm:leading-[34px] leading-[25px] whitespace-nowrap">
 												Supplier Search Filters
 											</div>
@@ -283,7 +283,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 									</div>
 
 									<SimpleBar className="px-6 sm:px-0 sm:h-[calc(100dvh-212px)] h-[calc(100dvh-237px)] w-full">
-										<div className="flex flex-col items-start gap-[30px] sm:p-[30px] py-6 relative self-stretch w-full">
+										<div className="flex flex-col items-start gap-4 sm:gap-[30px] sm:p-[30px] py-4 relative self-stretch w-full">
 											<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center sm:gap-6 gap-4 relative w-full flex-wrap">
 												<Input
 													icon="map-pin"
@@ -349,7 +349,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 												</div>
 											</div>
 
-											<div className="flex flex-col items-start sm:gap-4 gap-[14px] relative self-stretch w-full flex-[0_0_auto]">
+											<div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
 												<div className="relative font-medium text-text sm:text-xl text-base leading-[150%] whitespace-nowrap">
 													Shipping Time
 												</div>
@@ -392,7 +392,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 												</div>
 											</div>
 
-											<div className="flex flex-col items-start sm:gap-4 gap-[14px] relative self-stretch w-full flex-[0_0_auto]">
+											<div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
 												<div className="relative w-full font-medium text-text sm:text-xl text-base leading-[150%] whitespace-nowrap">
 													Certifications
 												</div>{" "}
@@ -445,7 +445,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 												</div>
 											</div>
 
-											<div className="flex flex-col items-start sm:gap-4 gap-[14px] relative self-stretch w-full flex-[0_0_auto]">
+											<div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
 												<div className="relative w-fit font-medium text-text sm:text-xl text-base leading-[150%] whitespace-nowrap">
 													Minimum Rating
 												</div>{" "}
@@ -459,7 +459,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 																setMinimumRating(rating);
 															}}
 															selected={minimumRating === rating}
-															className="sm:!min-w-[155.2px]"
+															className="sm:!min-w-[155.2px] sm:!px-[31px] sm:!py-[13px] !py-[9px] px-[23px]"
 														/>
 													))}
 												</div>

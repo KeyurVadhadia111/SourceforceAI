@@ -40,18 +40,18 @@ export default function Header() {
 	};
 
 	return (
-		<div className="sm:bg-transparent bg-text relative -ml-px">
-			<div className="flex w-full items-center justify-between sm:px-8 sm:py-6 py-3 px-6 relative">
+		<div className="md:bg-transparent bg-text relative -ml-px">
+			<div className="flex w-full items-center justify-between md:px-8 md:py-6 py-3 px-6 relative">
 				<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-					<img className="relative h-8 sm:hidden block" alt="Group" src="/assets/images/logo/logo-full.png" />
+					<img className="relative h-8 md:hidden block" alt="Group" src="/assets/images/logo/logo-full.png" />
 					{!isExpanded ? (
 						<>
 							<img
-								className="relative w-[189.66px] h-[21.2px] sm:block hidden"
+								className="relative w-[189.66px] h-[21.2px] md:block hidden"
 								alt="Union"
 								src="assets/images/logo/union-9.svg"
 							/>
-							<div className="relative w-6 h-6 sm:block hidden text-textSecondary">
+							<div className="relative w-6 h-6 md:block hidden text-textSecondary">
 								<Icon className=" w-6 h-6" icon="chevron-down" />
 							</div>
 						</>
@@ -59,7 +59,7 @@ export default function Header() {
 						""
 					)}
 				</div>
-				<div className="relative sm:hidden block ">
+				<div className="relative md:hidden block ">
 					{/* <Icon
 						onClick={() => {
 							setAppState({ isResponsiveMenu: true });
@@ -206,7 +206,7 @@ export default function Header() {
 						</Transition>
 					</Menu>
 				</div>
-				<div className="hidden sm:inline-flex items-center gap-4 relative flex-[0_0_auto]">
+				<div className="hidden md:inline-flex items-center gap-4 relative flex-[0_0_auto]">
 					<div className="inline-flex items-center p-1 relative flex-[0_0_auto] bg-tgc rounded-[100px]">
 						<div
 							onClick={() => {

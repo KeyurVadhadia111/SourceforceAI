@@ -147,8 +147,9 @@ function Register() {
 									<div
 										key={index}
 										onClick={() => setCurrentSlide(index)}
-										className={`relative w-[60px] h-[5px] bg-white rounded-[30px] transition-opacity duration-300 cursor-pointer ${index === currentSlide ? "opacity-100" : "opacity-20"
-											}`}
+										className={`relative w-[60px] h-[5px] bg-white rounded-[30px] transition-opacity duration-300 cursor-pointer ${
+											index === currentSlide ? "opacity-100" : "opacity-20"
+										}`}
 									/>
 								))}
 							</div>
@@ -157,108 +158,117 @@ function Register() {
 				</div>
 
 				{/* Start Right side */}
-				<div className="flex flex-col w-full items-center gap-6 h-screen  px-4 sm:px-0 justify-center-safe overflow-auto py-8">
-					<div className="flex flex-col items-center gap-8 relative w-full max-w-[448px]">
+				<div className="flex flex-col w-full items-center gap-6 h-[calc(100vh-56px)] lg:h-screen p-6 sm:px-0 sm:justify-center-safe justify-start sm:py-0">
+					<div
+						className={`flex flex-col items-center sm:gap-8 gap-6 relative w-full max-w-[448px] ${step === 1 && " mt-0 sm:-mt-[11px] sm:ml-[3px]"} ${
+							step === 2 && "mt-0 sm:-mt-4"
+						}`}>
 						{step === 3 ? (
-							<div className="text-center flex flex-col gap-8 w-full">
+							<div className="text-center flex flex-col sm:gap-8 gap-6 w-full ">
 								<img
 									src="assets/images/create-acc.svg"
 									alt=""
-									className="w-[279px] h-[177.09] self-center"
+									className="w-[250px] sm:w-[279px]  h-auto self-center"
 								/>
 								<div className="">
-									<div className="flex flex-col gap-4">
-										<h1 className="self-stretch text-text relative font-bold text-4xl text-center tracking-[0] leading-[50px]">
+									<div className="flex flex-col sm:gap-4 gap-[14px]">
+										<h1 className="self-stretch text-text relative font-bold sm:text-4xl text-[26px] text-center tracking-[0] sm:leading-[50px] leading-[36px] mt-[1px] sm:mt-0">
 											Account Created Successfully!
 										</h1>
 
-										<p className="text-gray-500">
+										<p className="text-gray-500 text-[14px] leading-[21px] mt-[1px] sm:mt-0 tracking-[0.5px] ">
 											Your account has been successfully verified and is now fully activated.
 										</p>
 									</div>
 								</div>
 
 								<Link to="/">
-									<Button size="lg" className="w-full">
+									<Button size="lg" className="w-full !h-12 sm:!h-14 !px-6 !py-[14px]">
 										Continue
 									</Button>
 								</Link>
 							</div>
 						) : (
 							<>
-								<div className="flex flex-col items-center gap-4 relative self-stretch w-full">
-									<h1 className="self-stretch text-text relative font-bold text-4xl text-center tracking-[0] leading-[50.4px]">
+								<div className="flex flex-col items-center sm:gap-4 gap-[14px] relative self-stretch w-full">
+									<h1 className="self-stretch text-text relative font-bold sm:text-4xl text-[26px] text-center tracking-[0] sm:leading-[50px] leading-9 mt-[14px] ">
 										{step === 1 && "Sign Up to Sourceforce AI"}
 										{step === 2 && "Verify Your Email"}
 									</h1>
 
 									<div className="flex flex-col items-center gap-2 relative self-stretch w-full">
-										<p className="text-textSecondary relative w-[429px] font-normal text-base text-center tracking-[0] leading-6">
+										<p className="text-textSecondary relative w-full sm:w-[429px] font-normal sm:text-base text-[14px] text-center tracking-[0] sm:leading-6 leading-[150%] mt-px sm:mt-0">
 											{step === 1 &&
 												"Create your free account to find trusted suppliers instantly with AI-powered precision."}
 											{step === 2 && "We've sent a 4-digit verification code to"}
 										</p>
 										{step === 2 && (
-											<p className="text-primary relative w-[429px] font-normal text-base text-center tracking-[0] leading-6">
+											<p className="text-primary relative w-[429px] font-normal sm:text-base text-[14px] text-center tracking-[0] sm:leading-6 leading-[21px]">
 												{getValues("email")}
 											</p>
 										)}
 									</div>
 								</div>
 
-								<div className="flex flex-col w-full px-6 items-center gap-6 relative flex-[0_0_auto]">
+								<div className="flex flex-col w-full sm:px-6 items-center gap-6 relative flex-[0_0_auto]">
 									{step === 1 && (
 										<>
-											<div className="inline-flex items-center gap-[30px] relative flex-[0_0_auto]">
-												<div className="flex w-[72px] h-[72px] items-center justify-center gap-3 p-4 relative bg-white rounded-[52px]">
+											<div className="inline-flex items-center sm:gap-[30px] gap-4 relative flex-[0_0_auto]">
+												<div className="flex sm:w-[72px] sm:h-[72px] w-[42px] h-[42px] p-[9.33px] items-center justify-center gap-3 sm:p-4 relative bg-white rounded-[52px]">
 													<Icon
 														icon={"google"}
-														className="h-[30px] w-[30px] cursor-pointer"
+														className="sm:h-[30px] sm:w-[30px] w-[17.5px] h-[17.5px] cursor-pointer"
 													/>
 												</div>
 
-												<div className="flex w-[72px] h-[72px] items-center justify-center gap-3 p-4 relative bg-white rounded-[52px]">
+												<div className="flex sm:w-[72px] sm:h-[72px] w-[42px] h-[42px] p-[9.33px] items-center justify-center gap-3 sm:p-4 relative bg-white rounded-[52px]">
 													<Icon
 														icon={"linkedin"}
-														className="h-[30px] w-[30px] cursor-pointer"
+														className="sm:h-[30px] sm:w-[30px] w-[17.5px] h-[17.5px] cursor-pointer"
 													/>
 												</div>
 
-												<div className="flex w-[72px] h-[72px] items-center justify-center gap-3 p-4 relative bg-white rounded-[52px]">
-													<Icon icon={"apple"} className="h-[30px] w-[30px] cursor-pointer" />
+												<div className="flex sm:w-[72px] sm:h-[72px] w-[42px] h-[42px] items-center justify-center gap-3 p-[9.33px] sm:p-4 relative bg-white rounded-[52px]">
+													<Icon
+														icon={"apple"}
+														className="sm:h-[30px] sm:w-[30px] w-[17.5px] h-[17.5px] cursor-pointer"
+													/>
 												</div>
 											</div>
 
-											<div className="flex w-full px-11 items-center justify-center gap-5 relative">
-												<Separator className="" />
+											<div className="flex w-[315px] sm:w-full sm:px-11 items-center justify-center sm:gap-5 gap-[12px] relative">
+												<Separator className=" !w-full !mt-[-2px] sm:mt-0" />
 
-												<div className="relative w-fit mt-[-1.00px] font-medium text-text text-lg text-center tracking-[0] leading-[23.4px] whitespace-nowrap">
+												<div className="relative w-fit sm:mt-[-1.00px] font-medium text-text sm:text-lg text-[14px] text-center tracking-[0] leading-[23px]  sm:leading-[23px] whitespace-nowrap">
 													or
 												</div>
 
-												<Separator className="" />
+												<Separator className="!w-full !mt-[-2px] sm:mt-0" />
 											</div>
 										</>
 									)}{" "}
 									<form
 										onSubmit={handleSubmit(onSubmit)}
 										className="flex flex-col w-full items-start gap-6 relative self-stretch">
-										<div className="flex flex-col w-full gap-4">
+										<div className="flex flex-col w-full sm:gap-4 gap-6">
 											{step === 1 && (
 												<>
 													<Input
+														className="w-full !gap-[8px]"
 														icon="user"
 														placeholder="Full Name"
 														{...register("fullName")}
 														error={errors?.fullName?.message?.toString()}
 													/>
 													<Input
+														className="w-full !gap-[8px]"
 														icon="envelope"
 														placeholder="Email"
 														{...register("email")}
 														error={errors?.email?.message?.toString()}
 													/>
 													<Input
+														className="w-full !gap-[8px]"
 														icon="lock-key"
 														type="password"
 														placeholder="Password"
@@ -278,6 +288,8 @@ function Register() {
 											{step === 2 && (
 												<div className="flex flex-col gap-2">
 													<OtpInput
+														className="!h-12 !w-12 sm:!w-[60px] sm:!h-[60px] "
+														containerClass=""
 														otpDigit={4}
 														onOtpChange={(otp: string) => {
 															setValue("otp", otp);
@@ -291,12 +303,13 @@ function Register() {
 													)}
 												</div>
 											)}
-
-											<Button size="lg" type="submit" className="w-full mt-2">
-												{step === 1 && "Sign Up"}
-												{step === 2 && "Verify Email"}
-											</Button>
 										</div>
+										<Button
+											size="lg"
+											type="submit"
+											className="w-full !px-6 !py-[14px] sm:h-12 !h-14">
+											Continue
+										</Button>
 									</form>
 								</div>
 								{step === 2 && (
@@ -312,13 +325,13 @@ function Register() {
 								)}
 
 								{step === 1 && (
-									<div className="flex items-center justify-center gap-2">
-										<span className="font-normal text-textSecondary text-base text-center leading-6">
+									<div className="flex items-center justify-center gap-2 mt-0.5 sm:mt-0">
+										<span className="font-normal text-textSecondary sm:text-base text-[14px] text-center sm:leading-6 leading-[21px] ">
 											Already have an account?
 										</span>
 										<Link
 											to="/login"
-											className="font-bold text-text text-base text-center leading-6">
+											className="font-bold text-text sm:text-base text-[14px] text-center sm:leading-6 leading-[21px]">
 											Sign In
 										</Link>
 									</div>

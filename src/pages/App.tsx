@@ -18,7 +18,7 @@ function App() {
 		location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forgot-password";
 
 	useEffect(() => {
-		const onResize = () => setAppState({ isMobile: window.innerWidth <= 425 });
+		const onResize = () => setAppState({ isMobile: window.innerWidth < 768 });
 		window.addEventListener("resize", onResize);
 		return () => window.removeEventListener("resize", onResize);
 	}, []);

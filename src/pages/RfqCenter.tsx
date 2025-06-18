@@ -2,7 +2,7 @@ import CreateRfqPopup from "components/common/CreateRfqPopup";
 import RfqSupplierCard from "components/common/RfqsSupplierCard";
 import { Supplier } from "components/common/SupplierCard";
 import { Button } from "components/utils/Button";
-import { suppliers } from "components/utils/consts";
+import { RfqCenterInbox, RfqCenterSent } from "components/utils/consts";
 import Icon from "components/utils/Icon";
 import { useAppState } from "components/utils/useAppState";
 import { cn } from "lib/utils";
@@ -13,7 +13,8 @@ const RfqCenter = () => {
 	const [{ isExpanded }, setAppState] = useAppState();
 	const [bookmarkedSuppliers, setBookmarkedSuppliers] = useState<Set<string>>(new Set());
 	const [loading, setLoading] = useState(true);
-	const [displaySuppliers, setDisplaySuppliers] = useState<Supplier[]>([]);
+	const [listInbox, setListInbox] = useState<Supplier[]>([]);
+	const [listSent, setListSent] = useState<Supplier[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedTab, setSelectedTab] = useState<"inbox" | "sent">("inbox");
 
@@ -24,7 +25,8 @@ const RfqCenter = () => {
 			try {
 				// Replace with actual API call
 				await new Promise(resolve => setTimeout(resolve, 1000));
-				setDisplaySuppliers(suppliers);
+				setListInbox(RfqCenterInbox);
+				setListSent(RfqCenterSent);
 			} catch (error) {
 				console.error("Error fetching suppliers:", error);
 			} finally {
@@ -59,20 +61,20 @@ const RfqCenter = () => {
 
 	return (
 		<div>
-			<SimpleBar className="sm:h-[calc(100dvh-105px)] h-[calc(100dvh-57px)]">
+			<SimpleBar className="sm:h-[calc(100dvh-105px)] h-[calc(100dvh-57px)] -ml-px">
 				<div className="flex flex-col sm:gap-6 gap-4 sm:p-6 p-6 relative">
 					<div className="flex flex-col sm:gap-4 gap-3">
 						<div className="relative w-fit  font-bold text-text sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
 							RFQs Center
 						</div>
-						<div className="flex items-center justify-between relative self-stretch w-full flex-wrap gap-3">
+						<div className="flex items-center sm:justify-between relative self-stretch w-full flex-wrap gap-3 ">
 							<div className="inline-flex items-center relative flex-[0_0_auto]">
 								<div
 									onClick={() => {
 										setSelectedTab("inbox");
 									}}
 									className={cn(
-										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-2 sm:pb-[14px] pb-[7px] relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px] box-border",
+										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[13.745px] sm:py-4 py-2 sm:pb-[14px] pb-[7px] relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px] box-border",
 										selectedTab === "inbox"
 											? "border-primary text-primary font-bold "
 											: "border-border text-textSecondary font-normal",
@@ -86,7 +88,7 @@ const RfqCenter = () => {
 										setSelectedTab("sent");
 									}}
 									className={cn(
-										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[15px] sm:py-4 py-2 sm:pb-[14px] pb-[7px] relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px]",
+										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[17.54px] sm:py-4 py-2 sm:pb-[14px] pb-[7px] relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px]",
 										selectedTab === "sent"
 											? "border-primary text-primary font-bold "
 											: "border-border text-textSecondary font-normal",
@@ -158,7 +160,7 @@ const RfqCenter = () => {
 									))}
 								</>
 							) : (
-								displaySuppliers.map(supplier => (
+								(selectedTab === "inbox" ? listInbox : listSent).map(supplier => (
 									<RfqSupplierCard
 										key={supplier.id}
 										supplier={supplier}

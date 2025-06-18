@@ -177,8 +177,8 @@ function ForgotPasswordPage() {
 					</div>
 
 					{/* Start Right side */}
-					<div className="flex flex-col w-full items-center gap-6 h-screen  px-4 sm:px-0 justify-center-safe overflow-auto py-8">
-						<div className="flex flex-col items-center sm:gap-8 gap-4 relative w-full max-w-[448px] ml-[1px] mt-[2px]">
+					<div className="flex flex-col w-full items-center gap-6 h-[calc(100vh-56px)] lg:h-screen px-6 sm:px-0 sm:justify-center-safe sm:overflow-auto sm:py-8 py-6">
+						<div className="flex flex-col items-center sm:gap-8 gap-6 relative w-full max-w-[448px] ml-[1px]">
 							{step === 4 ? (
 								<>
 									<img
@@ -202,14 +202,14 @@ function ForgotPasswordPage() {
 								</>
 							) : (
 								<>
-									<div className="flex flex-col items-center gap-4 relative self-stretch w-full">
-										<h1 className="self-stretch text-text relative font-bold text-4xl text-center tracking-[0] leading-[50px] ">
+									<div className="flex flex-col items-center gap-[14px] sm:gap-4 relative self-stretch w-full">
+										<h1 className="self-stretch text-text relative font-bold sm:text-4xl text-[26px] text-center tracking-[0] leading-9 sm:leading-[50px] ">
 											{step === 1 && "Forgot Password?"}
 											{step === 2 && "Verify Your Email"}
 											{step === 3 && "Reset Your Password"}
 										</h1>
 
-										<p className="text-textSecondary relative w-[429px] font-normal text-base text-center   leading-6">
+										<p className="text-textSecondary relative sm:w-[429px] w-full font-normal text-sm sm:text-base text-center leading-[21px]  sm:leading-6">
 											{step === 1 &&
 												"Enter your email address and we'll send you a link to reset your password."}
 											{step === 2 && (
@@ -228,8 +228,8 @@ function ForgotPasswordPage() {
 
 									<form
 										onSubmit={handleSubmit(onSubmit)}
-										className="flex flex-col w-full gap-6 relative self-stretch justify-center items-center ml-[2px]">
-										<div className="flex flex-col sm:w-[400px] gap-4 sm:mx-auto">
+										className="flex flex-col w-full gap-6 relative self-stretch justify-center items-center sm:ml-[2px]">
+										<div className="flex flex-col sm:w-[400px] w-full gap-4 sm:mx-auto">
 											{step === 1 && (
 												<Input
 													icon="envelope"
@@ -242,6 +242,8 @@ function ForgotPasswordPage() {
 											{step === 2 && (
 												<div className="flex flex-col gap-2">
 													<OtpInput
+														className="!w-[48px] !h-[48px] sm:!w-[60px] sm:!h-[60px]"
+														containerClass="!gap-4 sm:!gap-6"
 														onOtpChange={(otp: string) => {
 															setValue("otp", otp);
 															trigger("otp");
@@ -275,14 +277,17 @@ function ForgotPasswordPage() {
 											)}
 										</div>
 
-										<Button size="lg" type="submit" className="w-full sm:w-[400px] mx-auto">
+										<Button
+											size="lg"
+											type="submit"
+											className="w-full sm:w-[400px] mx-auto !px-6 !py-[13px] sm:!py-[15px]">
 											{step === 1 && "Continue"}
 											{step === 2 && "Continue"}
 											{step === 3 && "Reset Password"}
 										</Button>
 
 										{step === 2 && (
-											<div className="flex items-center justify-center sm:gap-3 gap-2 text-sm sm:text-base leading-[150%]">
+											<div className="flex items-center justify-center sm:gap-3 gap-2 text-sm sm:text-base leading-[150%] -mt-px sm:mt-0">
 												<span className="font-normal text-text dark:text-textDark text-center">
 													Didn't receive the code?
 												</span>
@@ -294,15 +299,15 @@ function ForgotPasswordPage() {
 										)}
 									</form>
 
-									<div className="flex items-center justify-center gap-2 ml-[2px]">
-										<span className="font-normal text-textSecondary text-base text-center leading-6">
+									<div className="flex items-center justify-center gap-1.5 sm:gap-2 sm:ml-[2px]">
+										<span className="font-normal text-textSecondary text-sm sm:text-base text-center leading-[21px] sm:leading-6">
 											{step === 1 && "Back to "}
 											{step === 2 && ""}
 											{step === 3 && "Back to "}
 										</span>
 										<Link
 											to="/login"
-											className="font-bold text-text text-base text-center leading-6">
+											className={`font-bold text-text text-sm sm:text-base text-center leading-[21px] sm:leading-6 ${step === 2 ? "mt-3 sm:mt-0 -ml-1" : ""}`}>
 											{step === 1 && "Sign in"}
 											{step === 2 && "Back"}
 											{step === 3 && "Sign in"}
