@@ -8,6 +8,7 @@ import { useAppState } from "components/utils/useAppState";
 import "simplebar-react/dist/simplebar.min.css";
 import Sidebar from "components/common/Sidebar";
 import { useEffect, useState } from "react";
+import AuthHeader from "components/layout/AuthHeader";
 
 function App() {
 	const [{ premiumStep }, setAppState] = useAppState();
@@ -17,7 +18,7 @@ function App() {
 		location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forgot-password";
 
 	useEffect(() => {
-		const onResize = () => setAppState({ isMobile: window.innerWidth <= 768 });
+		const onResize = () => setAppState({ isMobile: window.innerWidth <= 425 });
 		window.addEventListener("resize", onResize);
 		return () => window.removeEventListener("resize", onResize);
 	}, []);
@@ -38,7 +39,7 @@ function App() {
 						{!isAuthPage ? <Sidebar /> : ""}
 						{/* Main Content */}
 						<main className={`z-[1] relative w-full`}>
-							{!isAuthPage ? <Header /> : ""}
+							{!isAuthPage ? <Header /> : <AuthHeader />}
 
 							<Outlet />
 						</main>

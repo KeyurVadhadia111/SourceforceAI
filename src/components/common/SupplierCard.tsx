@@ -37,7 +37,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 	onSendRFQ,
 }) => {
 	return (
-		<div className="flex flex-col h-full items-start justify-center sm:gap-4 gap-3 sm:p-[15px] p-[11px] relative flex-1 grow bg-white rounded-[20px] border border-border">
+		<div className="flex flex-col h-full items-start justify-center sm:gap-4 gap-3 sm:p-[15px] p-[11px] relative flex-1 grow bg-white rounded-[20px] border border-border self-stretch">
 			<div className="flex flex-col items-start sm:gap-3 gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
 				<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
 					<div className="flex items-start justify-between relative flex-1 grow">
@@ -135,7 +135,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 				</div>
 			</div>
 
-			<div className="flex flex-wrap items-start sm:gap-[10px_10px] relative gap-2">
+			<div className="flex flex-wrap items-start sm:gap-[10px_10px] relative gap-2 h-full">
 				{supplier.tags.map((tag, index) => (
 					<div
 						key={index}

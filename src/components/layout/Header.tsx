@@ -40,7 +40,7 @@ export default function Header() {
 	};
 
 	return (
-		<div className="sm:bg-transparent bg-text relative">
+		<div className="sm:bg-transparent bg-text relative -ml-px">
 			<div className="flex w-full items-center justify-between sm:px-8 sm:py-6 py-3 px-6 relative">
 				<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
 					<img className="relative h-8 sm:hidden block" alt="Group" src="/assets/images/logo/logo-full.png" />

@@ -138,8 +138,8 @@ function ForgotPasswordPage() {
 			<div className="bg-fgc flex flex-row justify-center w-full">
 				<div className="flex items-center bg-fgc w-full overflow-hidden relative">
 					{/* Start Left side */}
-					<div className="hidden sm:flex flex-col w-full items-center justify-center px-0 py-8 h-screen gap-6 bg-primary">
-						<div className="flex flex-col items-center gap-6 relative w-full justify-center">
+					<div className="hidden lg:flex flex-col w-full items-center justify-center-safe  px-0 py-8 h-screen gap-6 bg-primary overflow-auto self-stretch">
+						<div className="flex flex-col items-center gap-6 relative w-full justify-center px-0 sm:px-5 xl:px-0">
 							<div className="relative">
 								<img
 									className="h-[60px] w-auto cursor-pointer"
@@ -177,16 +177,15 @@ function ForgotPasswordPage() {
 					</div>
 
 					{/* Start Right side */}
-					<div className="flex flex-col w-full items-center gap-6 h-screen justify-center px-4 sm:px-0">
-						<div className="flex flex-col items-center sm:gap-8 gap-4 relative w-full max-w-[448px]">
+					<div className="flex flex-col w-full items-center gap-6 h-screen  px-4 sm:px-0 justify-center-safe overflow-auto py-8">
+						<div className="flex flex-col items-center sm:gap-8 gap-4 relative w-full max-w-[448px] ml-[1px] mt-[2px]">
 							{step === 4 ? (
 								<>
-									<div className="w-[177px] h-[177px] bg-green-100 rounded-full mx-auto  flex items-center justify-center p-[26px]">
-										<Icon
-											icon="check"
-											className="w-full h-full text-white bg-primary rounded-full p-5 rotate-1"
-										/>
-									</div>
+									<img
+										src="assets/images/create-acc.svg"
+										alt=""
+										className="w-[279px] h-[177.09] self-center"
+									/>
 									<div className="text-center">
 										<h1 className="font-bold sm:text-5xl sm:leading-[72px] text-2xl mb-2.5">
 											<span className="text-text dark:text-textDark">Reset Success</span>
@@ -204,15 +203,15 @@ function ForgotPasswordPage() {
 							) : (
 								<>
 									<div className="flex flex-col items-center gap-4 relative self-stretch w-full">
-										<h1 className="self-stretch text-text relative font-bold text-4xl text-center tracking-[0] leading-[50px]">
+										<h1 className="self-stretch text-text relative font-bold text-4xl text-center tracking-[0] leading-[50px] ">
 											{step === 1 && "Forgot Password?"}
 											{step === 2 && "Verify Your Email"}
 											{step === 3 && "Reset Your Password"}
 										</h1>
 
-										<p className="text-textSecondary relative w-[429px] font-normal text-base text-center tracking-[0] leading-6">
+										<p className="text-textSecondary relative w-[429px] font-normal text-base text-center   leading-6">
 											{step === 1 &&
-												"Enter your email address and we'll send you instructions to reset your password."}
+												"Enter your email address and we'll send you a link to reset your password."}
 											{step === 2 && (
 												<div className="flex flex-col items-center gap-2">
 													<span>
@@ -229,7 +228,7 @@ function ForgotPasswordPage() {
 
 									<form
 										onSubmit={handleSubmit(onSubmit)}
-										className="flex flex-col w-full gap-6 relative self-stretch justify-center items-center">
+										className="flex flex-col w-full gap-6 relative self-stretch justify-center items-center ml-[2px]">
 										<div className="flex flex-col sm:w-[400px] gap-4 sm:mx-auto">
 											{step === 1 && (
 												<Input
@@ -295,14 +294,16 @@ function ForgotPasswordPage() {
 										)}
 									</form>
 
-									<div className="flex items-center justify-center gap-2">
+									<div className="flex items-center justify-center gap-2 ml-[2px]">
 										<span className="font-normal text-textSecondary text-base text-center leading-6">
+											{step === 1 && "Back to "}
 											{step === 2 && ""}
 											{step === 3 && "Back to "}
 										</span>
 										<Link
 											to="/login"
 											className="font-bold text-text text-base text-center leading-6">
+											{step === 1 && "Sign in"}
 											{step === 2 && "Back"}
 											{step === 3 && "Sign in"}
 										</Link>

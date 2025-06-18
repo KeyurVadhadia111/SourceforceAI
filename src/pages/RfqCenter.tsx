@@ -4,11 +4,13 @@ import { Supplier } from "components/common/SupplierCard";
 import { Button } from "components/utils/Button";
 import { suppliers } from "components/utils/consts";
 import Icon from "components/utils/Icon";
+import { useAppState } from "components/utils/useAppState";
 import { cn } from "lib/utils";
 import { useEffect, useState } from "react";
 import SimpleBar from "simplebar-react";
 
 const RfqCenter = () => {
+	const [{ isExpanded }, setAppState] = useAppState();
 	const [bookmarkedSuppliers, setBookmarkedSuppliers] = useState<Set<string>>(new Set());
 	const [loading, setLoading] = useState(true);
 	const [displaySuppliers, setDisplaySuppliers] = useState<Supplier[]>([]);
@@ -131,7 +133,7 @@ const RfqCenter = () => {
 					{/* Supplier Cards */}
 					<div className="w-full">
 						<div
-							className={`grid 3xl:grid-cols-4 2xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full`}>
+							className={`grid 3xl:grid-cols-4 2xl:grid-cols-3 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full ${isExpanded ? "md:grid-cols-1" : "md:grid-cols-2"}`}>
 							{loading ? (
 								// Loading skeleton
 								<>

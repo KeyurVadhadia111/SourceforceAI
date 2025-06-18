@@ -1,14 +1,17 @@
 import SupplierCard, { Supplier } from "components/common/SupplierCard";
 import { Button } from "components/utils/Button";
-import { suppliers } from "components/utils/consts";
+import { suppliersSearchFilter } from "components/utils/consts";
 import Icon from "components/utils/Icon";
+import { useAppState } from "components/utils/useAppState";
 import React, { useEffect, useState } from "react";
 import SimpleBar from "simplebar-react";
 
 const SavedManufacturers = () => {
+	const [{ isExpanded }, setAppState] = useAppState();
 	const [bookmarkedSuppliers, setBookmarkedSuppliers] = useState<Set<string>>(new Set());
 	const [loading, setLoading] = useState(true);
 	const [displaySuppliers, setDisplaySuppliers] = useState<Supplier[]>([]);
+
 
 	useEffect(() => {
 		// Simulating API call
@@ -17,7 +20,7 @@ const SavedManufacturers = () => {
 			try {
 				// Replace with actual API call
 				await new Promise(resolve => setTimeout(resolve, 1000));
-				setDisplaySuppliers(suppliers);
+				setDisplaySuppliers(suppliersSearchFilter);
 			} catch (error) {
 				console.error("Error fetching suppliers:", error);
 			} finally {
@@ -52,7 +55,7 @@ const SavedManufacturers = () => {
 
 	return (
 		<div>
-			<SimpleBar className="sm:h-[calc(100dvh-105px)] h-[calc(100dvh-57px)]">
+			<SimpleBar className="sm:h-[calc(100dvh-105px)] h-[calc(100dvh-57px)] -ml-px">
 				<div className="flex flex-col sm:gap-6 gap-4 p-6 relative">
 					<div className="flex items-center justify-between relative self-stretch w-full flex-wrap gap-4">
 						<p className="relative w-fit font-bold text-text sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
@@ -76,7 +79,7 @@ const SavedManufacturers = () => {
 
 					{/* Saved manufacturers */}
 					<div className="w-full">
-						<div className={`grid 3xl:grid-cols-4 2xl:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full`}>
+						<div className={`grid 3xl:grid-cols-4 2xl:grid-cols-3 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full ${isExpanded ? "md:grid-cols-1" : "md:grid-cols-2"}`}>
 							{loading ? (
 								// Loading skeleton
 								<>

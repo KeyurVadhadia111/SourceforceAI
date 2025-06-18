@@ -90,9 +90,9 @@ const NewsSourcingRequest = () => {
 	};
 
 	function useIsMobile() {
-		const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+		const [isMobile, setIsMobile] = useState(window.innerWidth <= 425);
 		useEffect(() => {
-			const onResize = () => setIsMobile(window.innerWidth <= 768);
+			const onResize = () => setIsMobile(window.innerWidth <= 425);
 			window.addEventListener("resize", onResize);
 			return () => window.removeEventListener("resize", onResize);
 		}, []);
@@ -117,31 +117,31 @@ const NewsSourcingRequest = () => {
 	return (
 		<div
 			className={cn(
-				"flex w-full py-6 sm:py-0",
+				"flex px-0 sm:px-5 w-full py-6 sm:py-0",
 				step === 1
-					? "flex-col justify-center items-center sm:h-[calc(100dvh-105px)] h-[calc(100dvh-61px)]"
-					: "md:flex-row flex-col",
+					? "flex-col justify-center items-center sm:h-[calc(100dvh-104px)] h-[calc(100dvh-61px)]"
+					: "lg:flex-row flex-col",
 			)}>
 			{/* Content */}
-			<div className={cn("w-full", step === 1 ? "max-w-[858px]" : "md:w-[445px] sm:border-r sm:border-border")}>
+			<div className={cn("w-full", step === 1 ? "max-w-[858px]" : "lg:w-[445px] sm:border-r sm:border-border")}>
 				{step === 1 ? (
 					<>
 						<div className="flex flex-col items-center sm:justify-center justify-start overflow-auto w-full px-6 sm:px-0 sm:gap-4 gap-[14px]">
-							<h1 className="sm:text-[40px] text-[32px] text-center text-text leading-[150%]">
+							<h1 className="sm:text-[40px] text-[32px] text-center text-text leading-[150%] font-light  tracking-[-0.1px] [font-family:'Outfit',Helvetica]">
 								Find High-Quality and{" "}
-								<div className="font-bold tracking-tight">Dependable Suppliers</div>
+								<div className="font-bold tracking-[-0.1px]">Dependable Suppliers</div>
 							</h1>
-							<p className="sm:text-base text-sm leading-[150%] text-center text-textSecondary max-w-2xl">
+							<p className="sm:text-base text-sm leading-[150%] text-center text-textSecondary max-w-2xl tracking-[0.21px]">
 								Discover top-rated, reliable suppliers instantly with our AI-powered sourcing tool.
 								Ensure quality and consistency for every product with smart supplier recommendations.
 							</p>
 						</div>
 						{/* Categories */}
-						<div className="flex flex-wrap justify-center gap-3 sm:mb-6 mb-4 sm:mt-12 mt-8">
+						<div className="flex flex-wrap justify-center gap-3 sm:gap-4 sm:mb-6 mb-4 sm:mt-12 mt-8">
 							{categories.map((category, index) => (
 								<div
 									key={index}
-									className="flex items-center border border-border rounded-full sm:px-[19px] px-[15px] sm:py-[9px] text-text font-normal cursor-pointer py-[5px]">
+									className="flex items-center border border-border rounded-full sm:px-[19px] px-[15px] sm:!py-[8.5px] text-text font-normal cursor-pointer py-[5px]">
 									<span className="text-text sm:text-sm text-xs sm:leading-[21px] leading-[18px] flex sm:gap-[10px] gap-1 items-center">
 										{category.title}
 										{category.icon && <Icon icon={category.icon} size={14} />}
@@ -156,7 +156,7 @@ const NewsSourcingRequest = () => {
 							<section className="flex flex-col w-full self-stretch items-center justify-start overflow-auto">
 								<SimpleBar
 									className={cn(
-										"flex flex-col overflow-auto justify-start gap-6 w-full p-6 py-0 sm:py-6",
+										"flex flex-col overflow-auto justify-start gap-6 w-full p-6 py-0 sm:py-6 -ml-px",
 										"sm:h-[calc(100dvh-274px)] h-[calc(100dvh-253px)]",
 									)}>
 									{/* User query */}
@@ -175,10 +175,11 @@ const NewsSourcingRequest = () => {
 									<div className="flex flex-col items-start sm:gap-4 gap-[14px]">
 										<div className="flex flex-col sm:gap-4 gap-3.5 items-start">
 											{/* AI icon */}
-											<Icon
+											{/* <Icon
 												className="relative sm:w-[33px] sm:h-6 h-[22px] w-[30.25px] text-primary"
 												icon="ai"
-											/>
+											/> */}
+											<img src="/assets/images/ai.svg" />
 											{/* AI response text */}
 											<p className="font-normal text-text w-full leading-[150%] ">
 												Here are top-rated suppliers for portable blenders from China. Filtered
@@ -261,17 +262,15 @@ const NewsSourcingRequest = () => {
 							<div
 								className={cn(
 									"flex flex-row-reverse justify-between items-center flex-wrap",
-									step == 1
-										? "sm:gap-4 gap-[9px] sm:!flex-row !flex-row-reverse"
-										: "sm:gap-1",
+									step == 1 ? "sm:gap-4 gap-[9px] sm:!flex-row !flex-row-reverse" : "sm:gap-1",
 								)}>
 								{/* Attach */}
 								<button
 									className={cn(
 										"flex items-center bg-white rounded-full",
 										step === 1
-											? "sm:px-4 px-2.5 py-2 sm:gap-2 gap-1"
-											: "sm:px-3 px-2.5 py-2 sm:gap-2 gap-1",
+											? "sm:px-4 px-2.5 py-2 sm:py-[10px] sm:gap-2 gap-1"
+											: "sm:px-3 px-2.5 py-2 sm:py-[10px] sm:gap-2 gap-1",
 									)}>
 									{/* Replace with your own Icon */}
 									<Icon
@@ -282,7 +281,7 @@ const NewsSourcingRequest = () => {
 												: "sm:h-[18px] sm:w-[18px] h-3 w-3",
 										)}
 									/>
-									<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px]">
+									<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px] tracking-[0.045px]">
 										Attach
 									</span>
 								</button>
@@ -296,8 +295,8 @@ const NewsSourcingRequest = () => {
 										className={cn(
 											"flex items-center bg-white rounded-full",
 											step === 1
-												? "sm:px-4 px-2.5 py-2 sm:gap-2 gap-1"
-												: "sm:px-3 px-2.5 py-2 sm:gap-2 gap-1",
+												? "sm:px-4 px-2.5 py-2 sm:py-[10px] sm:gap-2 gap-1"
+												: "sm:px-3 px-2.5 py-2 sm:py-[10px] sm:gap-2 gap-1",
 										)}>
 										<Icon
 											icon="magnifying-glass"
@@ -307,7 +306,7 @@ const NewsSourcingRequest = () => {
 													: "sm:h-[18px] sm:w-[18px] h-3 w-3",
 											)}
 										/>
-										<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px]">
+										<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px] tracking-[0.01px]">
 											Company Search
 										</span>
 									</button>
@@ -316,8 +315,8 @@ const NewsSourcingRequest = () => {
 										className={cn(
 											"flex items-center bg-white rounded-full",
 											step === 1
-												? "sm:px-4 px-2.5 py-2 sm:gap-2 gap-1"
-												: "sm:px-3 px-2.5 py-2 sm:gap-2 gap-1",
+												? "sm:px-4 px-2.5 py-2 sm:py-[10px] sm:gap-2 gap-1"
+												: "sm:px-3 px-2.5 py-2 sm:py-[10px] sm:gap-2 gap-1",
 										)}>
 										<Icon
 											icon="crown-fill"
@@ -327,15 +326,17 @@ const NewsSourcingRequest = () => {
 													: "sm:h-[18px] sm:w-[18px] h-3 w-3",
 											)}
 										/>
-										<span className="flex gap-1">
-											<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px]">
+										<span className="flex sm:gap-2 gap-1">
+											<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px] tracking-[0.295px]">
 												Pro
 											</span>
 											<Icon
 												icon="chevron-down"
 												className={cn(
 													"text-textSecondary",
-													step === 1 ? "sm:w-5 sm:h-5 w-[14px] h-[14px]" : "w-[14px] h-[14px]",
+													step === 1
+														? "sm:w-5 sm:h-5 w-[14px] h-[14px]"
+														: "w-[14px] h-[14px]",
 												)}
 											/>
 										</span>
@@ -359,7 +360,7 @@ const NewsSourcingRequest = () => {
 			{/* Summary Section */}
 			{(!isMobile || showSummary) && step === 2 && (
 				<SimpleBar
-					className={`flex transition-[width] duration-100 flex-col w-full md:border border-solid border-border ${isExpanded ? "md:w-[calc(100%-445px)]" : "md:w-[calc(100%-445px)]"} h-[calc(100dvh-105px)] overflow-auto sm:px-0 px-6`}>
+					className={`flex transition-[width] duration-100 flex-col w-full md:border border-solid border-border ${isExpanded ? "lg:w-[calc(100%-445px)]" : "lg:w-[calc(100%-445px)]"} h-[calc(100dvh-105px)] overflow-auto sm:px-0 px-6`}>
 					{/* Header */}
 					<div className="flex items-center flex-wrap justify-between sm:p-6 sm:pl-[23px] sm:mt-[-1px] pb-[14px] sm:gap-0 gap-4">
 						<div className="flex items-center gap-4 sm:gap-2 ">

@@ -87,7 +87,7 @@ const OtpInput: React.FC<OtpInputProps> = ({
 					onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyDown(e, index)}
 					onPaste={(e: React.ClipboardEvent<HTMLInputElement>) => handlePaste(e, index)}
 					placeholder="-"
-					className={`OTPInput ${className} w-[36px] sm:w-[60px] h-[36px] sm:h-[60px] rounded-full phone:w-10 placeholder:absolute placeholder:top-0 placeholder:left-1/2 placeholder:-translate-x-1/2 placeholder:translate-y-3/5 sm:placeholder:translate-y-6/6 focus:ring-0 text-center focus:outline-none appearance-none border-black/10 text-text dark:text-textDark font-medium focus:border-gray-400 bg-bgc dark:bg-bgcDark text-sm sm:text-base`}
+					className={`OTPInput ${className} w-[36px] sm:w-[60px] h-[36px] sm:h-[60px] rounded-full phone:w-10 focus:ring-0 text-center focus:outline-none appearance-none border-black/10 text-text dark:text-textDark font-medium focus:border-gray-400 bg-bgc dark:bg-bgcDark text-sm sm:text-base`}
 					style={{
 						WebkitAppearance: "none", // For Chrome, Edge, and Safari
 						MozAppearance: "textfield", // For Firefox

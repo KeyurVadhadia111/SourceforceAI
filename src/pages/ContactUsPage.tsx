@@ -73,7 +73,7 @@ const ContactUsPage = () => {
 									</div>
 								</div>
 
-								<div className="flex items-start sm:gap-6 gap-3 sm:px-[23px] sm:py-[29px] p-[15px] relative self-stretch w-full  sm:rounded-3xl rounded-2xl border border-border">
+								<div className="flex items-start sm:gap-6 gap-3 sm:px-[23px] sm:py-[29px] p-[15px] relative self-stretch w-full  sm:rounded-3xl rounded-2xl border border-border sm:mt-px">
 									<div className="relative sm:w-14 sm:h-14 w-9 h-9 bg-fgc rounded-[28px] flex justify-center items-center">
 										<Icon className="sm:w-[19px] sm:h-[19px] w-4 h-4" icon="envelope" />
 									</div>

@@ -92,7 +92,7 @@ const ProfileSettingPage = () => {
 				</label>
 			</div>
 
-			<div className="flex flex-col sm:flex-row items-start sm:gap-[30px] gap-3 relative flex-1 grow w-full">
+			<div className="flex flex-col xl:flex-row items-start sm:gap-[30px] gap-3 relative flex-1 grow w-full">
 				<div className="relative w-full">
 					<Input
 						icon="user"
@@ -138,7 +138,7 @@ const ProfileSettingPage = () => {
 					Connected Accounts
 				</div>
 
-				<div className="flex flex-col sm:flex-row items-start sm:gap-4 gap-3 relative self-stretch w-full flex-[0_0_auto]">
+				<div className="flex flex-col xl:flex-row items-start sm:gap-4 gap-3 relative self-stretch w-full flex-[0_0_auto]">
 					<div className="relative w-full">
 						<Input
 							icon="google"

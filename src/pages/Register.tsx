@@ -120,8 +120,8 @@ function Register() {
 		<div className="bg-fgc flex flex-row justify-center w-full">
 			<div className="flex items-center bg-fgc w-full overflow-hidden relative">
 				{/* Start Left side */}
-				<div className="hidden sm:flex flex-col w-full items-center justify-center px-0 py-8 h-screen gap-6 bg-primary">
-					<div className="flex flex-col items-center gap-6 relative w-full justify-center">
+				<div className="hidden lg:flex flex-col w-full items-center justify-center-safe  px-0 py-8 h-screen gap-6 bg-primary overflow-auto self-stretch">
+					<div className="flex flex-col items-center gap-6 relative w-full justify-center px-0 sm:px-5 xl:px-0">
 						<div className="relative">
 							<img
 								className="h-[60px] w-auto cursor-pointer"
@@ -147,9 +147,8 @@ function Register() {
 									<div
 										key={index}
 										onClick={() => setCurrentSlide(index)}
-										className={`relative w-[60px] h-[5px] bg-white rounded-[30px] transition-opacity duration-300 cursor-pointer ${
-											index === currentSlide ? "opacity-100" : "opacity-20"
-										}`}
+										className={`relative w-[60px] h-[5px] bg-white rounded-[30px] transition-opacity duration-300 cursor-pointer ${index === currentSlide ? "opacity-100" : "opacity-20"
+											}`}
 									/>
 								))}
 							</div>
@@ -158,7 +157,7 @@ function Register() {
 				</div>
 
 				{/* Start Right side */}
-				<div className="flex flex-col w-full items-center gap-6 h-screen justify-center px-4 sm:px-0">
+				<div className="flex flex-col w-full items-center gap-6 h-screen  px-4 sm:px-0 justify-center-safe overflow-auto py-8">
 					<div className="flex flex-col items-center gap-8 relative w-full max-w-[448px]">
 						{step === 3 ? (
 							<div className="text-center flex flex-col gap-8 w-full">

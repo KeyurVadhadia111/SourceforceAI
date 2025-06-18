@@ -30,7 +30,7 @@ interface SupplierCardProps {
 
 const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onViewProfile, onSendRFQ }) => {
 	return (
-		<div className="flex flex-col items-start justify-center sm:gap-4 gap-3 sm:p-[15px] p-[11px] relative flex-1 grow bg-white rounded-2xl sm:rounded-[20px] border border-border">
+		<div className="flex flex-col items-start justify-center sm:gap-4 gap-3 sm:p-[15px] p-[11px] relative flex-1 grow bg-white rounded-2xl sm:rounded-[20px] border border-border self-stretch">
 			<div className="flex flex-col items-start sm:gap-3 gap-[10px] relative self-stretch w-full flex-[0_0_auto]">
 				<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
 					<div className="flex items-start justify-between relative flex-1 grow">
@@ -154,11 +154,11 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 				</div>
 			</div>
 
-			<div className="flex flex-nowrap sm:flex-wrap items-start sm:gap-[10px_10px] relative gap-2 h-[26px] sm:h-[34px]">
+			<div className="flex flex-wrap items-start sm:gap-[10px_10px] relative gap-2 h-full">
 				{supplier.tags.map((tag, index) => (
 					<div
 						key={index}
-						className="inline-flex items-center gap-2.5 px-[13px] sm:px-[15px] sm:py-[7px] py-[4.5px] relative flex-[0_0_auto] rounded-[90px] border border-border h-full">
+						className="inline-flex items-center gap-2.5 px-[13px] sm:px-[15px] sm:py-[7px] py-[4.5px] relative flex-[0_0_auto] rounded-[90px] border border-border">
 						<div className="relative w-fit font-medium text-textSecondary sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
 							{tag.label}
 						</div>

@@ -31,8 +31,8 @@ const ProfileLayout: React.FC<{ children: any; title: string; desc: string }> = 
 		<SimpleBar className="sm:h-[calc(100dvh-104px)] h-[calc(100dvh-56px)]">
 			{" "}
 			<div className="flex flex-col items-start gap-6 sm:p-[23px] p-6 relative self-stretch w-full flex-[0_0_auto] sm:border border-border">
-				<div className="flex sm:flex-row flex-col items-start justify-between relative self-stretch w-full flex-[0_0_auto] sm:gap-8 gap-4">
-					<div className="flex flex-col sm:w-[242px] w-full items-start sm:gap-10 gap-6 relative">
+				<div className="flex lg:flex-row flex-col items-start justify-between relative self-stretch w-full flex-[0_0_auto] sm:gap-8 gap-4">
+					<div className="flex flex-col lg:w-[242px] w-full items-start sm:gap-10 gap-6 relative">
 						<div className="relative [font-family:'Satoshi',Helvetica] font-bold text-text sm:text-[32px] text-lg  sm:leading-[45px] leading-[25px] tracking-[0px]">
 							Settings
 						</div>
@@ -63,7 +63,7 @@ const ProfileLayout: React.FC<{ children: any; title: string; desc: string }> = 
 					</div>
 
 					{(!isProfileSettingTab || !isMobile) && (
-						<div className="flex flex-col sm:w-[calc(100%-274px)] w-full items-center sm:gap-[30px] gap-4 sm:p-[29px] p-[15px] relative bg-white sm:rounded-[20px] rounded-2xl border border-border">
+						<div className="flex flex-col lg:w-[calc(100%-274px)] w-full items-center sm:gap-[30px] gap-4 sm:p-[29px] p-[15px] relative bg-white sm:rounded-[20px] rounded-2xl border border-border">
 							<div className="flex flex-col items-start gap-2 relative self-stretch w-full">
 								<div className="relative  flex items-center gap-3">
 									<div className="sm:!hidden w-[18px] h-[18px] flex justify-center items-center">
@@ -90,8 +90,10 @@ const ProfileLayout: React.FC<{ children: any; title: string; desc: string }> = 
 							{children}
 						</div>
 					)}
-					{isMobile && location.pathname === "/help-support" && !isProfileSettingTab && (
-						<GetHelp className="!flex" />
+					{location.pathname === "/help-support" && !isProfileSettingTab && (
+						<div className="flex w-full sm:hidden">
+							<GetHelp />
+						</div>
 					)}
 				</div>
 			</div>
