@@ -81,12 +81,12 @@ export const GetHelp: React.FC<{ className?: string }> = ({ className }) => {
 				<div className="[font-family:'Satoshi',Helvetica] font-bold sm:text-2xl text-lg sm:leading-[100%] leading-[25px] tracking-[0]">
 					Get help
 				</div>
-				<div className="font-satoshi font-normal sm:text-base text-xs leading-[150%] tracking-[0] text-textSecondary sm:max-w-[380px] mx-auto">
+				<div className="font-normal sm:text-base text-xs leading-[150%] tracking-[0] text-textSecondary sm:max-w-[380px] mx-auto">
 					Our dedicated support team is here to assist you with any inquiries you may have.
 				</div>
 			</div>
-			<Button className="w-full !py-[14px]">
-				<div className="font-satoshi font-bold text-xs sm:text-base leading-[150%]">Get Help</div>
+			<Button className="w-full py-[14px] sm:!py-[15px]">
+				<div className="font-bold text-xs sm:text-base leading-[150%]">Get Help</div>
 			</Button>
 		</div>
 	);

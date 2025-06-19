@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { JSX, useEffect, useRef, useState } from "react";
 import Icon from "components/utils/Icon";
 import SideMenu from "components/common/SideMenu";
 import SupplierCard, { Supplier } from "components/common/SupplierCard";
@@ -60,6 +60,30 @@ const NewsSourcingRequest = () => {
 	const [showSummary, setShowSummary] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
+	// Update messages state to support files property for user messages
+	const [messages, setMessages] = useState<
+		Array<{
+			text?: string;
+			from: string;
+			files?: Array<{
+				name: string;
+				type: string;
+				url: string;
+				isImage: boolean;
+			}>;
+		}>
+	>([
+		{
+			text: "I need top suppliers for portable blenders from China with high response rates and good reviews.",
+			from: "user",
+		},
+		{
+			text: "Here are top-rated suppliers for portable blenders from China. Filtered by high response rates (>85%) and average rating above 4.0.",
+			from: "ai",
+		},
+	]);
+	const [inputValue, setInputValue] = useState("");
+	const simpleBarRef = useRef<any>(null);
 
 	useEffect(() => {
 		// Simulating API call
@@ -113,9 +137,46 @@ const NewsSourcingRequest = () => {
 
 	const isMobile = useIsMobile();
 
+	// Update handleSend to include files in user messages
 	const handleSend = () => {
+		if (!inputValue.trim() && attachedFiles.length === 0) return;
+		setMessages(prev => [
+			...prev,
+			{
+				text: inputValue,
+				from: "user",
+				files:
+					attachedFiles.length > 0
+						? attachedFiles.map(file => ({
+								name: file.name,
+								type: file.type,
+								url: URL.createObjectURL(file),
+								isImage: file.type.startsWith("image/"),
+							}))
+						: undefined,
+			},
+			{ text: "We are looking into your request, Thank you !", from: "ai" },
+		]);
+		setInputValue("");
+		setAttachedFiles([]);
 		setStep(2);
 	};
+
+	useEffect(() => {
+		if (simpleBarRef.current) {
+			// For SimpleBar, always scroll to the bottom of the scrollable area
+			const scrollEl = simpleBarRef.current.getScrollElement
+				? simpleBarRef.current.getScrollElement()
+				: simpleBarRef.current.el;
+			if (scrollEl) {
+				// Use setTimeout to ensure DOM is updated before scrolling
+				setTimeout(() => {
+					scrollEl.scrollTo({ top: scrollEl.scrollHeight, behavior: "smooth" });
+				}, 0);
+			}
+		}
+	}, [messages]);
+
 	return (
 		<div
 			className={cn(
@@ -157,75 +218,155 @@ const NewsSourcingRequest = () => {
 						{(!isMobile || !showSummary) && (
 							<section className="flex flex-col w-full self-stretch items-center justify-start overflow-auto">
 								<SimpleBar
+									ref={simpleBarRef}
 									className={cn(
 										"flex flex-col overflow-auto justify-start gap-6 w-full p-6 py-0 sm:py-6 -ml-px",
-										"sm:h-[calc(100dvh-274px)] h-[calc(100dvh-248px)]",
+										"sm:h-[calc(100dvh-278px)] h-[calc(100dvh-248px)]",
 									)}>
-									{/* User query */}
-									<div className="flex flex-col items-end gap-2.5 pl-[72px] pr-0 py-0 w-full sm:mb-6 mb-4">
-										<Card className="w-full bg-tgc rounded-[20px] sm:!p-5 !p-4 shadow-none border-none">
-											<div className="">
-												<p className="font-normal text-text sm:text-sm text-xs leading-[150%] ">
-													I need top suppliers for portable blenders from China with high
-													response rates and good reviews.
+									<div className="flex flex-col gap-6 w-full">
+										{/* Default User query */}
+										<div className="flex flex-col items-end gap-2.5 pl-[72px] pr-0 py-0 w-full sm:mb-6 mb-4">
+											<Card className="w-full bg-tgc rounded-[20px] sm:!p-5 !p-4 shadow-none border-none">
+												<div className="">
+													<p className="font-normal text-text sm:text-sm text-xs leading-[150%] ">
+														I need top suppliers for portable blenders from China with high
+														response rates and good reviews.
+													</p>
+												</div>
+											</Card>
+										</div>
+										{/* Default AI response section */}
+										<div className="flex flex-col items-start sm:gap-4 gap-[14px]">
+											<div className="flex flex-col sm:gap-4 gap-3.5 items-start">
+												<img
+													src="/assets/images/ai.svg"
+													className="sm:w-[33px] sm:h-[24px] w-[30.25px] h-[22px]"
+												/>
+												<p className="font-normal text-text w-full leading-[150%] ">
+													Here are top-rated suppliers for portable blenders from China.
+													Filtered by high response rates (&gt;85%) and average rating above
+													4.0.
 												</p>
 											</div>
-										</Card>
-									</div>
+											<Card className="w-full bg-tgc rounded-[20px] sm:!p-5 !p-4 shadow-none border-none">
+												<div className="flex flex-col sm:gap-4 gap-3">
+													<h3 className="font-bold text-text sm:text-sm text-xs leading-[150%] ">
+														B2B Platform Engagement Indicators
+													</h3>
 
-									{/* AI response section */}
-									<div className="flex flex-col items-start sm:gap-4 gap-[14px]">
-										<div className="flex flex-col sm:gap-4 gap-3.5 items-start">
-											{/* AI icon */}
-											{/* <Icon
-												className="relative sm:w-[33px] sm:h-6 h-[22px] w-[30.25px] text-primary"
-												icon="ai"
-											/> */}
-											<img
-												src="/assets/images/ai.svg"
-												className="sm:w-[33px] sm:h-[24px] w-[30.25px] h-[22px]"
-											/>
-											{/* AI response text */}
-											<p className="font-normal text-text w-full leading-[150%] ">
-												Here are top-rated suppliers for portable blenders from China. Filtered
-												by high response rates (&gt;85%) and average rating above 4.0.
-											</p>
-										</div>
+													<div className="flex flex-col sm:gap-3 gap-2.5">
+														{engagementPoints.map((point, index) => (
+															<p
+																key={index}
+																className="font-normal text-text sm:text-sm text-xs leading-[150%] ">
+																{point}
+															</p>
+														))}
 
-										{/* B2B Platform Engagement Indicators card */}
-										<Card className="w-full bg-tgc rounded-[20px] sm:!p-5 !p-4 shadow-none border-none">
-											<div className="flex flex-col sm:gap-4 gap-3">
-												<h3 className="font-bold text-text sm:text-sm text-xs leading-[150%] ">
-													B2B Platform Engagement Indicators
-												</h3>
-
-												<div className="flex flex-col sm:gap-3 gap-2.5">
-													{engagementPoints.map((point, index) => (
-														<p
-															key={index}
-															className="font-normal text-text sm:text-sm text-xs leading-[150%] ">
-															{point}
-														</p>
-													))}
-
-													<button
-														onClick={() => setShowSummary(true)}
-														className="text-left font-bold text-primary sm:text-sm text-xs leading-[150%] ">
-														Read More
-													</button>
+														<button
+															onClick={() => setShowSummary(true)}
+															className="text-left font-bold text-primary sm:text-sm text-xs leading-[150%] ">
+															Read More
+														</button>
+													</div>
 												</div>
+											</Card>
+
+											{/* Action buttons */}
+											<div className="flex items-center gap-3">
+												<Icon icon="like" className="sm:w-5 sm:h-5 h-4 w-4" />
+
+												<Icon icon="dislike" className="sm:w-5 sm:h-5 h-4 w-4" />
+
+												<Icon icon="share-network" className="sm:w-5 sm:h-5 h-4 w-4" />
+												<Icon icon="kebab" className="sm:w-5 sm:h-5 h-4 w-4" />
 											</div>
-										</Card>
-
-										{/* Action buttons */}
-										<div className="flex items-center gap-3">
-											<Icon icon="like" className="sm:w-5 sm:h-5 h-4 w-4" />
-
-											<Icon icon="dislike" className="sm:w-5 sm:h-5 h-4 w-4" />
-
-											<Icon icon="share-network" className="sm:w-5 sm:h-5 h-4 w-4" />
-											<Icon icon="kebab" className="sm:w-5 sm:h-5 h-4 w-4" />
 										</div>
+
+										{/* Render additional user/AI chat pairs with flex and gap */}
+										{messages.slice(2).reduce<JSX.Element[]>((acc, msg, idx, arr) => {
+											if (msg.from === "user") {
+												acc.push(
+													<div key={`qapair-${idx}`} className="flex flex-col gap-6 w-full">
+														<div className="flex flex-col items-end gap-2.5 pl-[72px] pr-0 py-0 w-full">
+															{/* Show images/files above the question text, like ChatGPT */}
+															{msg.files && msg.files.length > 0 && (
+																<div className="flex flex-wrap gap-2 mb-2 justify-end">
+																	{msg.files.map((file, i) =>
+																		file.isImage ? (
+																			<span
+																				key={file.url}
+																				className="relative inline-block">
+																				<img
+																					src={file.url}
+																					alt={file.name}
+																					className="w-full h-full object-cover rounded-lg"
+																				/>
+																			</span>
+																		) : (
+																			<span
+																				key={file.url}
+																				className="flex flex-col items-end">
+																				<span className="flex items-center px-3 py-2 bg-fgc rounded-lg text-xs w-48">
+																					<Icon
+																						icon="file"
+																						className="w-5 h-5 mr-2 text-primary"
+																					/>
+																					<span className="truncate flex-1">
+																						{file.name}
+																					</span>
+																				</span>
+																			</span>
+																		),
+																	)}
+																</div>
+															)}
+															{msg.text && (
+																<Card className="w-auto max-w-full bg-tgc rounded-[20px] sm:!p-5 !p-4 shadow-none border-none">
+																	<p
+																		lang="en"
+																		className="font-normal text-text sm:text-sm text-xs leading-[150%] break-words hyphens-auto">
+																		{msg.text}
+																	</p>
+																</Card>
+															)}
+														</div>
+														{arr[idx + 1] && arr[idx + 1].from === "ai" && (
+															<div className="flex flex-col items-start sm:gap-4 gap-[14px]">
+																<div className="flex flex-col sm:gap-4 gap-3.5 items-start">
+																	<img
+																		src="/assets/images/ai.svg"
+																		className="sm:w-[33px] sm:h-[24px] w-[30.25px] h-[22px]"
+																	/>
+																	<p className="font-normal text-text w-full leading-[150%] ">
+																		{arr[idx + 1].text}
+																	</p>
+																</div>
+																<div className="flex items-center gap-3">
+																	<Icon
+																		icon="like"
+																		className="sm:w-5 sm:h-5 h-4 w-4"
+																	/>
+																	<Icon
+																		icon="dislike"
+																		className="sm:w-5 sm:h-5 h-4 w-4"
+																	/>
+																	<Icon
+																		icon="share-network"
+																		className="sm:w-5 sm:h-5 h-4 w-4"
+																	/>
+																	<Icon
+																		icon="kebab"
+																		className="sm:w-5 sm:h-5 h-4 w-4"
+																	/>
+																</div>
+															</div>
+														)}
+													</div>,
+												);
+											}
+											return acc;
+										}, [])}
 									</div>
 								</SimpleBar>
 							</section>
@@ -327,6 +468,14 @@ const NewsSourcingRequest = () => {
 										step === 1 ? "sm:w-full w-[calc(100%-32px)]" : "w-[calc(100%-32px)]",
 									)}
 									rows={1}
+									value={inputValue}
+									onChange={e => setInputValue(e.target.value)}
+									onKeyDown={e => {
+										if (e.key === "Enter" && !e.shiftKey) {
+											e.preventDefault();
+											handleSend();
+										}
+									}}
 								/>
 
 								<button
@@ -426,9 +575,7 @@ const NewsSourcingRequest = () => {
 												icon="chevron-down"
 												className={cn(
 													"text-textSecondary",
-													step === 1
-														? "sm:w-5 sm:h-5 w-[14px] h-[14px]"
-														: "w-[14px] h-[14px]",
+													step === 1 ? "sm:w-5 sm:h-5 w-4 h-4" : "w-4 h-4",
 												)}
 											/>
 										</span>
