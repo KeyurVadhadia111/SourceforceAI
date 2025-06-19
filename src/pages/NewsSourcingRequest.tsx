@@ -9,6 +9,7 @@ import { Button } from "components/utils/Button";
 import { cn } from "lib/utils";
 import { Badge, Card } from "components/utils/Card";
 import { Separator } from "components/utils/Separator";
+import { Input } from "components/utils/Input";
 
 const categories = [
 	{ title: "LED Light Strips", icon: "" },
@@ -58,6 +59,7 @@ const NewsSourcingRequest = () => {
 	const [displaySuppliers, setDisplaySuppliers] = useState<Supplier[]>([]);
 	const [showSummary, setShowSummary] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
+	const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
 
 	useEffect(() => {
 		// Simulating API call
@@ -240,6 +242,82 @@ const NewsSourcingRequest = () => {
 								"bg-fgc rounded-xl flex flex-col w-full",
 								step === 1 ? "sm:p-6 p-4 sm:gap-12 gap-6" : "sm:p-4 p-4 gap-6",
 							)}>
+							{attachedFiles.length > 0 && (
+								<div className="flex items-center gap-1 mb-1 flex-wrap">
+									{attachedFiles.map((file, idx) => {
+										const isImage = file.type.startsWith("image/");
+										return (
+											<div
+												key={file.name + idx}
+												className={cn(
+													"relative flex items-center  bg-tgc",
+													isImage
+														? "rounded-full p-0 w-11 h-11 min-w-[44px] min-h-[44px] max-w-[44px] max-h-[44px] overflow-hidden justify-center"
+														: "rounded-full px-3 py-1 min-w-[180px] max-w-[260px] h-[44px] gap-1",
+												)}
+												style={{ marginRight: 4, marginBottom: 4 }}>
+												{isImage ? (
+													<>
+														<img
+															src={URL.createObjectURL(file)}
+															alt={file.name}
+															className="w-full h-full object-cover"
+															style={{ borderRadius: "9999px" }}
+															onLoad={e =>
+																URL.revokeObjectURL((e.target as HTMLImageElement).src)
+															}
+														/>
+														<button
+															type="button"
+															className="absolute top-0 right-0 z-10 flex items-center justify-center bg-white rounded-full shadow-sm w-5 h-5 m-0.5"
+															style={{ boxShadow: "0 1px 4px 0 rgba(0,0,0,0.10)" }}
+															onClick={() =>
+																setAttachedFiles(prev =>
+																	prev.filter((_, i) => i !== idx),
+																)
+															}
+															aria-label={`Remove ${file.name}`}>
+															<Icon
+																icon="x-mark"
+																className="w-3 h-3 text-textTurnery hover:text-textSecondary"
+															/>
+														</button>
+													</>
+												) : (
+													<>
+														<Icon icon="file" className="w-6 h-6 text-primary mr-2" />
+														<div className="flex flex-col min-w-0 ml-1">
+															<span className="text-text font-medium text-xs truncate max-w-[140px]">
+																{file.name}
+															</span>
+															<span className="text-textSecondary text-[10px] leading-tight truncate max-w-[140px]">
+																{file.type
+																	? file.type.split("/")[1]?.toUpperCase()
+																	: "File"}
+															</span>
+														</div>
+														<button
+															type="button"
+															className="absolute top-0 right-0 z-10 flex items-center justify-center bg-white rounded-full shadow-sm w-5 h-5 m-0.5"
+															style={{ boxShadow: "0 1px 4px 0 rgba(0,0,0,0.10)" }}
+															onClick={() =>
+																setAttachedFiles(prev =>
+																	prev.filter((_, i) => i !== idx),
+																)
+															}
+															aria-label={`Remove ${file.name}`}>
+															<Icon
+																icon="x-mark"
+																className="w-3 h-3 text-textTurnery hover:text-textSecondar"
+															/>
+														</button>
+													</>
+												)}
+											</div>
+										);
+									})}
+								</div>
+							)}
 							<div className="flex items-center w-full">
 								<textarea
 									id="message"
@@ -268,26 +346,37 @@ const NewsSourcingRequest = () => {
 									step == 1 ? "sm:gap-4 gap-[9px] sm:!flex-row !flex-row-reverse" : "sm:gap-1",
 								)}>
 								{/* Attach */}
-								<button
-									className={cn(
-										"flex items-center bg-white rounded-full",
-										step === 1
-											? "sm:px-4 px-2.5 py-2 sm:py-[10px] sm:gap-2 gap-1"
-											: "sm:px-3 px-2.5 py-2 sm:py-[10px] sm:gap-2 gap-1",
-									)}>
-									{/* Replace with your own Icon */}
-									<Icon
-										icon="paperclip"
-										className={cn(
-											step === 1
-												? "sm:h-[20px] sm:w-[20px] h-[14px] w-[14px]"
-												: "sm:h-[18px] sm:w-[18px] h-[14px] w-[14px]",
-										)}
+								<label className="cursor-pointer">
+									<Input
+										type="file"
+										className="hidden"
+										onChange={e => {
+											const files = e.target.files ? Array.from(e.target.files) : [];
+											if (files.length > 0) {
+												setAttachedFiles(prev => [...prev, ...files]);
+											}
+										}}
 									/>
-									<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px] tracking-[0.045px]">
-										Attach
-									</span>
-								</button>
+									<div
+										className={cn(
+											"flex items-center bg-white rounded-full",
+											step === 1
+												? "sm:px-4 px-2.5 py-2 sm:py-[10px] sm:gap-2 gap-1"
+												: "sm:px-3 px-2.5 py-2 sm:py-[10px] sm:gap-2 gap-1",
+										)}>
+										<Icon
+											icon="paperclip"
+											className={cn(
+												step === 1
+													? "sm:h-[20px] sm:w-[20px] h-[14px] w-[14px]"
+													: "sm:h-[18px] sm:w-[18px] h-[14px] w-[14px]",
+											)}
+										/>
+										<span className="text-textSecondary sm:text-sm text-xs  leading-[16px] sm:leading-[18px] tracking-[0.045px]">
+											Attach
+										</span>
+									</div>
+								</label>
 								<div
 									className={cn(
 										"flex flex-row",

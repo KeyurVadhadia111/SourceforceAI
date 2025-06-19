@@ -166,8 +166,9 @@ function ForgotPasswordPage() {
 										<div
 											key={index}
 											onClick={() => setCurrentSlide(index)}
-											className={`relative w-[60px] h-[5px] bg-white rounded-[30px] transition-opacity duration-300 cursor-pointer ${index === currentSlide ? "opacity-100" : "opacity-20"
-												}`}
+											className={`relative w-[60px] h-[5px] bg-white rounded-[30px] transition-opacity duration-300 cursor-pointer ${
+												index === currentSlide ? "opacity-100" : "opacity-20"
+											}`}
 										/>
 									))}
 								</div>
@@ -176,7 +177,7 @@ function ForgotPasswordPage() {
 					</div>
 
 					{/* Start Right side */}
-					<div className="flex flex-col w-full items-center gap-6 h-[calc(100vh-56px)] lg:h-screen px-6 sm:px-0 justify-center-safe sm:overflow-auto sm:py-8 py-6">
+					<div className="flex flex-col w-full items-center gap-6 h-[calc(100vh-56px)] lg:h-screen px-6 sm:px-0 justify-start lg:justify-center-safe sm:overflow-auto sm:py-8 py-6">
 						<div className="flex flex-col items-center sm:gap-8 gap-6 relative w-full max-w-[448px] ml-[1px]">
 							{step === 4 ? (
 								<>

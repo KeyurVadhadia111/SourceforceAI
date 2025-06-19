@@ -147,8 +147,9 @@ function Register() {
 									<div
 										key={index}
 										onClick={() => setCurrentSlide(index)}
-										className={`relative w-[60px] h-[5px] bg-white rounded-[30px] transition-opacity duration-300 cursor-pointer ${index === currentSlide ? "opacity-100" : "opacity-20"
-											}`}
+										className={`relative w-[60px] h-[5px] bg-white rounded-[30px] transition-opacity duration-300 cursor-pointer ${
+											index === currentSlide ? "opacity-100" : "opacity-20"
+										}`}
 									/>
 								))}
 							</div>
@@ -157,10 +158,11 @@ function Register() {
 				</div>
 
 				{/* Start Right side */}
-				<div className="flex flex-col w-full items-center gap-6 h-[calc(100vh-56px)] lg:h-screen p-6 sm:px-0 justify-center-safe justify-start sm:py-0">
+				<div className="flex flex-col w-full items-center gap-6 h-[calc(100vh-56px)] lg:h-screen p-6 sm:px-0 lg:justify-center-safe justify-start sm:py-0">
 					<div
-						className={`flex flex-col items-center sm:gap-8 gap-6 relative w-full max-w-[448px] ${step === 1 && " mt-0 sm:-mt-[11px] sm:ml-[3px]"} ${step === 2 && "mt-0 sm:-mt-4"
-							}`}>
+						className={`flex flex-col items-center sm:gap-8 gap-6 relative w-full max-w-[448px] ${step === 1 && " mt-0 sm:-mt-[11px] sm:ml-[3px]"} ${
+							step === 2 && "mt-0 sm:-mt-4"
+						}`}>
 						{step === 3 ? (
 							<div className="text-center flex flex-col sm:gap-8 gap-6 w-full ">
 								<img

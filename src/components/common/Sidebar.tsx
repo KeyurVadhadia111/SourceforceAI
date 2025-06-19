@@ -45,14 +45,14 @@ export const sidebarItems: MenuItemProps[] = [
 	{
 		title: "Compliance Check",
 		icon: "policy",
-		url: "/rfq-center",
+		url: "#",
 		active: false,
 		id: 6,
 	},
 	{
 		title: "Supplier Messages",
 		icon: "chat-circle-text",
-		url: "/terms-u38-conditions",
+		url: "/rfq-center",
 		active: false,
 		id: 7,
 	},
@@ -120,8 +120,9 @@ export default function Sidebar() {
 				className={`sidebar relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[104px]"} transition-all duration-300 ease-in-out md:block hidden bg-text`}>
 				<div
 					onClick={toggleSidebar}
-					className={`sidebar-btn absolute w-6 h-6 top-10 -right-3 bg-white rounded-[100px] lg:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${isExpanded ? "rotate-180" : ""
-						}`}>
+					className={`sidebar-btn absolute w-6 h-6 top-10 -right-3 bg-white rounded-[100px] lg:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${
+						isExpanded ? "rotate-180" : ""
+					}`}>
 					<div className="relative w-4 h-4 top-1 left-1 flex justify-center items-center">
 						<Icon className="w-4 h-4" icon="chevron-right" />
 					</div>
