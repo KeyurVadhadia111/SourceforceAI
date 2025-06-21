@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
 const ProfileSettingPage = () => {
-	const [{ userDetails, isProfileSettingTab = true, isMobile }, setAppState] = useAppState();
+	const [{ isDark, userDetails, isProfileSettingTab = true, isMobile }, setAppState] = useAppState();
 	const [selectedImage, setSelectedImage] = useState<string | null>(null);
 	const [disableUserDetails, setDisableUserDetails] = useState({
 		name: true,
@@ -76,11 +76,11 @@ const ProfileSettingPage = () => {
 				)}
 
 				<div className="flex flex-col w-[180px] items-start sm:gap-[2px] relative sm:py-[9px] py-[3px]">
-					<div className="text-text sm:text-2xl text-base leading-[150%] relative self-stretch [font-family:'Satoshi',Helvetica] font-medium tracking-[0]">
+					<div className="text-text dark:text-textDark sm:text-2xl text-base leading-[150%] relative self-stretch [font-family:'Satoshi',Helvetica] font-medium tracking-[0]">
 						{getValues("name")}
 					</div>
 
-					<div className="text-textSecondary sm:text-base text-xs leading-[150%] relative self-stretch [font-family:'Satoshi',Helvetica] font-medium tracking-[0] max-sm:truncate">
+					<div className="text-textSecondary dark:text-textSecondaryDark sm:text-base text-xs leading-[150%] relative self-stretch [font-family:'Satoshi',Helvetica] font-medium tracking-[0] max-sm:truncate">
 						{getValues("email")}
 					</div>
 				</div>
@@ -95,7 +95,7 @@ const ProfileSettingPage = () => {
 			<div className="flex flex-col xl:flex-row items-start sm:gap-[30px] gap-3 relative flex-1 grow w-full">
 				<div className="relative w-full">
 					<Input
-						icon="user"
+						icon={isDark ? "user-dark" : "user"}
 						variant="secondaryTransparentIcon"
 						disabled={disableUserDetails.name}
 						{...register("name")}
@@ -114,7 +114,7 @@ const ProfileSettingPage = () => {
 				</div>
 				<div className="relative w-full">
 					<Input
-						icon="envelope"
+						icon={isDark ? "envelope-dark" : "envelope"}
 						variant="secondaryTransparentIcon"
 						disabled={disableUserDetails.email}
 						{...register("email")}
@@ -134,7 +134,7 @@ const ProfileSettingPage = () => {
 			</div>
 
 			<div className="flex flex-col items-start sm:gap-4 gap-3 relative self-stretch w-full flex-[0_0_auto]">
-				<div className="text-textSecondary sm:text-base text-sm leading-[150%] relative self-stretch [font-family:'Satoshi',Helvetica] font-medium tracking-[0]">
+				<div className="text-textSecondary dark:text-textSecondaryDark sm:text-base text-sm leading-[150%] relative self-stretch [font-family:'Satoshi',Helvetica] font-medium tracking-[0]">
 					Connected Accounts
 				</div>
 
@@ -180,15 +180,15 @@ const ProfileSettingPage = () => {
 				</div>
 			</div>
 
-			<div className="relative self-stretch w-full h-px bg-border" />
+			<div className="relative self-stretch w-full h-px bg-border dark:border-borderDark" />
 
 			<div className="flex flex-col sm:flex-row items-center sm:gap-[30px] gap-5 relative self-stretch w-full flex-[0_0_auto]">
 				<div className="flex flex-col items-start sm:gap-2 gap-1.5 relative flex-1 grow">
-					<div className="relative w-fit [font-family:'Satoshi',Helvetica] font-bold text-text sm:text-2xl text-base tracking-[0] sm:leading-[34px] leading-[22px] whitespace-nowrap">
+					<div className="relative w-fit [font-family:'Satoshi',Helvetica] font-bold text-text dark:text-textDark sm:text-2xl text-base tracking-[0] sm:leading-[34px] leading-[22px] whitespace-nowrap">
 						Delete Account
 					</div>
 
-					<p className="relative self-stretch [font-family:'Satoshi',Helvetica] font-normal text-textSecondary sm:text-base text-xs tracking-[0] leading-[150%]">
+					<p className="relative self-stretch [font-family:'Satoshi',Helvetica] font-normal text-textSecondary dark:text-textSecondaryDark sm:text-base text-xs tracking-[0] leading-[150%]">
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry.
 					</p>
 				</div>

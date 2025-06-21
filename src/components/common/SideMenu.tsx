@@ -38,7 +38,7 @@ const SelectBox: React.FC<{
 			onClick={() => {
 				onClick();
 			}}
-			className={`cursor-pointer  flex items-center justify-center sm:gap-3 gap-2 sm:px-8 px-[23px] py-[11px] sm:py-[13px] relative rounded-[50px] border border-solid ${selected ? "border-primary  bg-primary/10 text-primary" : "border-border bg-white text-text"} ${className}`}>
+			className={`cursor-pointer  flex items-center justify-center sm:gap-3 gap-2 sm:px-8 px-[23px] py-[11px] sm:py-[13px] relative rounded-[50px] border border-solid ${selected ? "border-primary  bg-primary/10 text-primary" : "border-border dark:border-borderDark bg-white dark:bg-bgcDark text-text dark:text-textDark"} ${className}`}>
 			{icon && <Icon className="sm:w-5 sm:h-5 w-4 h-4 text-primary" icon={icon} />}
 			<div className="sm:text-base text-sm leading-[22px] whitespace-nowrap">{label}</div>
 		</div>
@@ -46,7 +46,7 @@ const SelectBox: React.FC<{
 };
 
 const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
-	const [{ user }, setAppState] = useAppState();
+	const [{ isDark, user }, setAppState] = useAppState();
 	const [supplierSearchQueries, setSupplierSearchQueries] = useState<any>([]);
 
 	// Initialize state with empty values
@@ -262,12 +262,12 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 								className={cn(
 									"relative",
 									`sm:w-[900px] w-full sm:mt-0 mt-[60px]`,
-									"text-left align-middle h-full bg-bgc transition-all transform dark:bg-fgcDark",
+									"text-left align-middle h-full bg-bgc transition-all transform dark:bg-bgcDark",
 								)}>
 								<div className="flex flex-col items-start relative sm:px-0">
 									<div className="w-full px-6 sm:px-0">
-										<div className="flex items-center justify-between sm:p-[30px] pb-4  relative self-stretch w-full flex-[0_0_auto] border-b border-border">
-											<div className="relative w-fit font-bold text-text sm:text-2xl text-lg text-center sm:leading-[34px] leading-[25px] whitespace-nowrap">
+										<div className="flex items-center justify-between sm:p-[30px] pb-4  relative self-stretch w-full flex-[0_0_auto] border-b border-border dark:border-borderDark">
+											<div className="relative w-fit font-bold text-text dark:text-textDark sm:text-2xl text-lg text-center sm:leading-[34px] leading-[25px] whitespace-nowrap">
 												Supplier Search Filters
 											</div>
 											<div className="inline-flex items-center justify-center sm:h-[30px] sm:w-[30px]  w-[20px] h-[20px]">
@@ -276,7 +276,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 														setIsOpen(false);
 													}}
 													icon="x-mark"
-													className="cursor-pointer sm:w-[26.88px] sm:h-[26.88px] w-[20px] h-[20px] border-1 rounded-full sm:p-1 p-0.5"
+													className="cursor-pointer sm:w-[26.88px] sm:h-[26.88px] w-[20px] h-[20px] border-1 rounded-full sm:p-1 p-0.5 dark:dark:text-textDark"
 												/>
 											</div>
 										</div>
@@ -286,7 +286,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 										<div className="flex flex-col items-start gap-4 sm:gap-[30px] sm:p-[30px] py-4 relative self-stretch w-full">
 											<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center sm:gap-6 gap-4 relative w-full flex-wrap">
 												<Input
-													icon="map-pin"
+													icon={isDark ? "map-pin-dark" : "map-pin"}
 													placeholder="Supplier Location"
 													variant="secondary"
 													// value={location}
@@ -295,7 +295,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 													}}
 												/>
 												<Select
-													icon="prohibit"
+													icon={isDark ? "prohibit-dark" :"prohibit"}
 													variant="secondary"
 													id="12"
 													value={excludeCountries}
@@ -310,7 +310,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 													))}
 												</Select>
 												<Select
-													icon="prohibit"
+													icon={isDark ? "magnifyingglass-dark" : "magnifying-glass"}
 													variant="secondary"
 													id="234"
 													value={supplierType}
@@ -327,7 +327,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 											</div>
 
 											<div className="flex flex-col items-start sm:gap-4 gap-[14px] relative self-stretch w-full flex-[0_0_auto]">
-												<div className="relative w-fit font-medium text-text sm:text-xl text-base leading-[150%] whitespace-nowrap">
+												<div className="relative w-fit font-medium text-text dark:text-textDark sm:text-xl text-base leading-[150%] whitespace-nowrap">
 													Verification Status
 												</div>
 
@@ -350,7 +350,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 											</div>
 
 											<div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
-												<div className="relative font-medium text-text sm:text-xl text-base leading-[150%] whitespace-nowrap">
+												<div className="relative font-medium text-text dark:text-textDark sm:text-xl text-base leading-[150%] whitespace-nowrap">
 													Shipping Time
 												</div>
 
@@ -373,7 +373,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 											</div>
 
 											<div className="flex flex-col items-start gap-4 relative w-full">
-												<div className="relative w-full font-medium text-text sm:text-xl text-base leading-[150%] whitespace-nowrap">
+												<div className="relative w-full font-medium text-text dark:text-textDark sm:text-xl text-base leading-[150%] whitespace-nowrap">
 													Payment Methods
 												</div>{" "}
 												<div className="flex flex-wrap sm:flex-nowrap items-center gap-4 sm:justify-between relative overflow-x-auto">
@@ -393,7 +393,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 											</div>
 
 											<div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
-												<div className="relative w-full font-medium text-text sm:text-xl text-base leading-[150%] whitespace-nowrap">
+												<div className="relative w-full font-medium text-text dark:text-textDark sm:text-xl text-base leading-[150%] whitespace-nowrap">
 													Certifications
 												</div>{" "}
 												<div className="flex items-center gap-4 sm:gap-0 sm:justify-between relative flex-wrap w-full">
@@ -413,13 +413,13 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 											</div>
 
 											<div className="flex items-center gap-x-12 gap-y-4 relative self-stretch w-full flex-wrap">
-												<div className="relative font-medium text-text sm:text-xl text-base leading-[150%] whitespace-nowrap">
+												<div className="relative font-medium text-text dark:text-textDark sm:text-xl text-base leading-[150%] whitespace-nowrap">
 													Price Range ($)
 												</div>
 
 												<div className="flex sm:gap-5 gap-4 relative">
 													<Input
-														icon="coins"
+														icon={isDark ? "coins-dark" : "coins"}
 														placeholder="Min Price"
 														type="number"
 														variant="secondary"
@@ -431,7 +431,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 														}}
 													/>
 													<Input
-														icon="coins"
+														icon={isDark ? "coins-dark" : "coins"}
 														placeholder="Max Price"
 														type="number"
 														variant="secondary"
@@ -446,7 +446,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 											</div>
 
 											<div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
-												<div className="relative w-fit font-medium text-text sm:text-xl text-base leading-[150%] whitespace-nowrap">
+												<div className="relative w-fit font-medium text-text dark:text-textDark sm:text-xl text-base leading-[150%] whitespace-nowrap">
 													Minimum Rating
 												</div>{" "}
 												<div className="flex items-center gap-4 relative flex-wrap w-full">
@@ -468,7 +468,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 									</SimpleBar>
 
 									<div className="w-full px-6 sm:px-0">
-										<div className="flex items-center justify-end gap-[223px] sm:p-[30px] py-6 relative self-stretch w-full flex-[0_0_auto] border-t border-border">
+										<div className="flex items-center justify-end gap-[223px] sm:p-[30px] py-6 relative self-stretch w-full flex-[0_0_auto] border-t border-border dark:border-borderDark">
 											<div className="inline-flex items-center sm:gap-4 gap-[14px] relative flex-[0_0_auto]">
 												<Button
 													onClick={() => {

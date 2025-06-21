@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function Login() {
-	const [{ userDetails }, setAppState] = useAppState();
+	const [{ isDark, userDetails }, setAppState] = useAppState();
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const navigate = useNavigate();
 	const slides = [
@@ -74,9 +74,9 @@ function Login() {
 	return (
 		<>
 			<div className="bg-fgc flex flex-row justify-center w-full">
-				<div className="flex items-center bg-fgc w-full overflow-hidden relative">
+				<div className="flex items-center bg-fgc dark:bg-bgcDark w-full overflow-hidden relative">
 					{/* Start Left side */}
-					<div className="hidden lg:flex flex-col w-full items-center justify-center-safe  px-0 py-8 h-screen gap-6 bg-primary overflow-auto self-stretch">
+					<div className="hidden lg:flex flex-col w-full items-center justify-center-safe  px-0 py-8 h-screen gap-6 bg-primary dark:bg-fgcDark overflow-auto self-stretch">
 						<div className="flex flex-col items-center gap-6 relative w-full justify-center px-0 sm:px-5 xl:px-0">
 							<div className="relative">
 								<img
@@ -118,35 +118,35 @@ function Login() {
 					<div className="flex flex-col w-full items-center gap-6 h-[calc(100vh-56px)] lg:h-screen p-6 sm:px-0 justify-start lg:justify-center-safe overflow-auto sm:py-8">
 						<div className="flex flex-col items-center sm:gap-8 gap-6 relative w-full max-w-[448px] ">
 							<div className="flex flex-col items-center sm:gap-4 gap-[14px] relative self-stretch w-full">
-								<p className="self-stretch text-text relative mt-[-1.00px] font-bold sm:text-4xl text-[26px] leading-[36px] text-center tracking-[0] sm:leading-[50px]">
+								<p className="self-stretch text-text dark:text-textDark relative mt-[-1.00px] font-bold sm:text-4xl text-[26px] leading-[36px] text-center tracking-[0] sm:leading-[50px]">
 									Sign in to Sourceforce AI
 								</p>
 
-								<p className="text-textSecondary relative w-[429px] mt-[2px] sm:mt-0 font-normal sm:text-base text-[14px] text-center tracking-[0] sm:leading-6 leading-[21px]">
+								<p className="text-textSecondary dark:text-textSecondaryDark relative w-[429px] mt-[2px] sm:mt-0 font-normal sm:text-base text-[14px] text-center tracking-[0] sm:leading-6 leading-[21px]">
 									Please Enter Your Details to Sign In.
 								</p>
 							</div>
 
 							<div className="flex flex-col w-full sm:px-6 items-center gap-6 relative flex-[0_0_auto]">
 								<div className="inline-flex items-center sm:gap-[30px] gap-4 relative flex-[0_0_auto]">
-									<div className="flex sm:w-[72px] w-[42px] sm:h-[72px] h-[42px] items-center justify-center gap-3 p-[9.33px] sm:p-4 relative bg-white rounded-[52px]">
+									<div className="flex sm:w-[72px] w-[42px] sm:h-[72px] h-[42px] items-center justify-center gap-3 p-[9.33px] sm:p-4 relative bg-white dark:bg-fgcDark rounded-[52px]">
 										<Icon
 											icon={"google"}
 											className="sm:h-[30px] sm:w-[30px] w-[17.5px] h-[17.5px] cursor-pointer"
 										/>
 									</div>
 
-									<div className="flex sm:w-[72px] w-[42px] sm:h-[72px] h-[42px] items-center justify-center gap-3 p-[9.33px] sm:p-4 relative bg-white rounded-[52px]">
+									<div className="flex sm:w-[72px] w-[42px] sm:h-[72px] h-[42px] items-center justify-center gap-3 p-[9.33px] sm:p-4 relative bg-white dark:bg-fgcDark rounded-[52px]">
 										<Icon
 											icon={"linkedin"}
 											className="sm:h-[30px] sm:w-[30px] w-[17.5px] h-[17.5px] cursor-pointer"
 										/>
 									</div>
 
-									<div className="flex sm:w-[72px] w-[42px] sm:h-[72px] h-[42px] items-center justify-center gap-3 p-[9.33px] sm:p-4 relative bg-white rounded-[52px]">
+									<div className="flex sm:w-[72px] w-[42px] sm:h-[72px] h-[42px] items-center justify-center gap-3 p-[9.33px] sm:p-4 relative bg-white dark:bg-fgcDark rounded-[52px]">
 										<Icon
 											icon={"apple"}
-											className="sm:h-[30px] sm:w-[30px] w-[17.5px] h-[17.5px] cursor-pointer"
+											className="sm:h-[30px] sm:w-[30px] w-[17.5px] h-[17.5px] cursor-pointer dark:text-textDark"
 										/>
 									</div>
 								</div>
@@ -154,7 +154,7 @@ function Login() {
 								<div className="flex w-[315px] sm:w-full h-[23px] sm:px-11 items-center justify-center sm:gap-5 gap-[12px] relative ">
 									<Separator className=" !w-full !mt-[-2px]" />
 
-									<div className="relative w-fit sm:mt-[-1.00px] font-medium text-text sm:text-lg text-[14px] text-center tracking-[0] leading-[23px] whitespace-nowrap">
+									<div className="relative w-fit sm:mt-[-1.00px] font-medium text-text dark:text-textDark sm:text-lg text-[14px] text-center tracking-[0] leading-[23px] whitespace-nowrap">
 										or
 									</div>
 
@@ -168,7 +168,7 @@ function Login() {
 										<div className="w-full">
 											<Input
 												className=""
-												icon="envelope"
+												icon={isDark ? "envelope-dark" : "envelope"}
 												placeholder="Email"
 												{...register("email")}
 												error={errors?.email?.message?.toString()}
@@ -176,7 +176,7 @@ function Login() {
 										</div>
 										<div className="w-full">
 											<Input
-												icon={"lock-key"}
+												icon={isDark ? "lock-key-dark" : "lock-key"}
 												type="password"
 												placeholder="Password"
 												{...register("password")}
@@ -184,7 +184,7 @@ function Login() {
 											/>
 										</div>
 
-										<div className="relative w-fit font-medium text-text sm:text-base text-[14px] text-right tracking-[0] sm:leading-6 leading-[21px] mt-[1px] whitespace-nowrap">
+										<div className="relative w-fit font-medium text-text dark:text-textDark sm:text-base text-[14px] text-right tracking-[0] sm:leading-6 leading-[21px] mt-[1px] whitespace-nowrap">
 											<Link to="/forgot-password">Forgot Password?</Link>
 										</div>
 									</div>
@@ -196,13 +196,13 @@ function Login() {
 							</div>
 
 							<div className="inline-flex items-center sm:gap-2 gap-[6px] relative flex-[0_0_auto] -mt-[3px] sm:mt-0">
-								<div className="relative w-fit font-medium text-textSecondary sm:text-base text-[14px] text-center tracking-[0] sm:leading-6 leading-[21px] whitespace-nowrap">
+								<div className="relative w-fit font-medium text-textSecondary dark:text-textSecondaryDark sm:text-base text-[14px] text-center tracking-[0] sm:leading-6 leading-[21px] whitespace-nowrap">
 									Don’t have an account?
 								</div>
 
 								<Link
 									to={"/register"}
-									className="relative w-fit sm:mt-[-1.00px] mt-[2px] font-bold text-text sm:text-base text-[14px] text-center tracking-[0] sm:leading-6 leading-[21px] whitespace-nowrap">
+									className="relative w-fit sm:mt-[-1.00px] mt-[2px] font-bold text-text dark:text-primary sm:text-base text-[14px] text-center tracking-[0] sm:leading-6 leading-[21px] whitespace-nowrap">
 									Sign Up
 								</Link>
 							</div>

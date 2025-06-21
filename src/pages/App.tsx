@@ -11,7 +11,7 @@ import { useEffect, useRef } from "react";
 import AuthHeader from "components/layout/AuthHeader";
 
 function App() {
-	const [{ premiumStep, isExpanded }, setAppState] = useAppState();
+	const [{ isDark, userDetails, premiumStep, isExpanded }, setAppState] = useAppState();
 	const isExpandedRef = useRef(isExpanded);
 
 	const location = useLocation();
@@ -33,6 +33,30 @@ function App() {
 		window.addEventListener("resize", onResize);
 		return () => window.removeEventListener("resize", onResize);
 	}, []);
+
+	useEffect(() => {
+			setAppState({ userDetails: JSON.parse(localStorage.getItem("auth") || "{}") });
+			// Check for dark mode preference
+			if (localStorage.theme === "dark") {
+				setThemeMode(true);
+				setAppState({ isDark: true });
+			}
+			if (window.matchMedia("(prefers-color-scheme: dark)").matches && localStorage?.theme === undefined) {
+				setThemeMode(true);
+				setAppState({ isDark: true });
+			}
+		}, []);
+	
+		const setThemeMode = (isDark: boolean) => {
+			if (isDark) {
+				document.documentElement.classList.add("dark");
+				localStorage.theme = "dark";
+			} else {
+				document.documentElement.classList.remove("dark");
+				localStorage.theme = "light";
+			}
+			setAppState({ isDark });
+		};
 
 	return (
 		<div className="bg-bgc dark:bg-bgcDark flex flex-row justify-center w-full">

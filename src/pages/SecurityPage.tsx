@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 
 const SecurityPage = () => {
-	const [{ userDetails }, setAppState] = useAppState();
+	const [{ isDark, userDetails }, setAppState] = useAppState();
 
 	const schema = yup.object({
 		oldPassword: yup.string().required("Old Password is required"),
@@ -45,7 +45,7 @@ const SecurityPage = () => {
 				className="w-full flex flex-col sm:gap-[30px] gap-4">
 				<div className="w-full flex flex-col sm:gap-6 gap-4">
 					<Input
-						icon={"lock-key"}
+						icon={isDark ? "lock-key-dark" : "lock-key"}
 						variant="secondaryTransparentIcon"
 						type="password"
 						placeholder="Enter Old password"
@@ -54,7 +54,7 @@ const SecurityPage = () => {
 						className="sm:!pl-[62px] !pl-[50px]"
 					/>
 					<Input
-						icon={"lock-key"}
+						icon={isDark ? "lock-key-dark" : "lock-key"}
 						variant="secondaryTransparentIcon"
 						type="password"
 						placeholder="Enter new password"
@@ -63,7 +63,7 @@ const SecurityPage = () => {
 						className="sm:!pl-[62px] !pl-[50px]"
 					/>
 					<Input
-						icon={"lock-key"}
+						icon={isDark ? "lock-key-dark" : "lock-key"}
 						variant="secondaryTransparentIcon"
 						type="password"
 						placeholder="Confirm new password"

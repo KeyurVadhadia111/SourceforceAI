@@ -42,7 +42,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 							variant === "default" && "bg-white dark:bg-fgcDark border-transparent",
 							variant === "secondary" && "bg-fgc dark:bg-fgcDark border-transparent",
 							variant === "transparentBorder" &&
-							"bg-transparent border border-border focus-visible:ring-primary",
+							"bg-transparent border border-border dark:border-borderDark focus-visible:ring-primary",
 							error
 								? "!border !border-red-500 focus-visible:!ring-red-500"
 								: "focus-visible:ring-neutral-300",
@@ -62,7 +62,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 							variant === "default" && "bg-fgc dark:bg-fgcDark  text-neutral-400",
 							variant === "secondary" && "bg-white dark:bg-fgcDark text-black",
 						)}>
-						<Icon icon={"chevron-down"} className="h-6 w-6 cursor-pointer" />
+						<Icon icon={"chevron-down"} className="h-6 w-6 cursor-pointer dark:text-textDark" />
 					</label>
 				</div>
 

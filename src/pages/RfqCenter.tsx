@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import SimpleBar from "simplebar-react";
 
 const RfqCenter = () => {
-	const [{ isExpanded }, setAppState] = useAppState();
+	const [{ isDark, isExpanded }, setAppState] = useAppState();
 	const [bookmarkedSuppliers, setBookmarkedSuppliers] = useState<Set<string>>(new Set());
 	const [loading, setLoading] = useState(true);
 	const [listInbox, setListInbox] = useState<Supplier[]>([]);
@@ -64,7 +64,7 @@ const RfqCenter = () => {
 			<SimpleBar className="sm:h-[calc(100dvh-105px)] h-[calc(100dvh-57px)] -ml-px">
 				<div className="flex flex-col sm:gap-6 gap-4 sm:p-6 p-6 relative">
 					<div className="flex flex-col sm:gap-4 gap-3">
-						<div className="relative w-fit  font-bold text-text sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
+						<div className="relative w-fit  font-bold text-text dark:text-textDark sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
 							RFQs Center
 						</div>
 						<div className="flex items-center sm:justify-between relative self-stretch w-full flex-wrap gap-3 ">
@@ -77,7 +77,7 @@ const RfqCenter = () => {
 										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[13.745px] sm:py-4 py-2 sm:pb-[14px] pb-[7px] relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px] box-border",
 										selectedTab === "inbox"
 											? "border-primary text-primary font-bold "
-											: "border-border text-textSecondary font-normal",
+											: "border-border text-textSecondary dark:text-textSecondaryDark font-normal",
 									)}>
 									<div className="relative w-fit  sm:text-base text-xs sm:leading-[1.4] leading-[150%]">
 										Inbox
@@ -91,7 +91,7 @@ const RfqCenter = () => {
 										"cursor-pointer inline-flex items-center justify-center gap-2 sm:px-8 px-[17.54px] sm:py-4 py-2 sm:pb-[14px] pb-[7px] relative flex-[0_0_auto] border-b sm:border-b-2 border-border sm:h-[54px] h-[34px]",
 										selectedTab === "sent"
 											? "border-primary text-primary font-bold "
-											: "border-border text-textSecondary font-normal",
+											: "border-border text-textSecondary dark:text-textSecondaryDark font-normal",
 									)}>
 									<div className="relative w-fit  sm:text-base text-xs sm:leading-[1.4] leading-[150%]">
 										Sent
@@ -102,16 +102,16 @@ const RfqCenter = () => {
 							<div className="inline-flex items-center justify-center sm:gap-3 gap-2 relative flex-[0_0_auto]">
 								<Button
 									variant="none"
-									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-[6px] sm:!p-2 relative bg-tgc rounded-[50px]">
-									<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon="checker-board" />
+									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-[6px] sm:!p-2 relative bg-tgc dark:bg-fgcDark rounded-[50px]">
+									<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon={isDark ? "checkerboard-dark" : "checker-board"} />
 								</Button>
 
 								<Button
 									variant="none"
-									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc rounded-[50px]">
+									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc dark:bg-fgcDark rounded-[50px]">
 									<Icon
 										className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]"
-										icon="square-half-bottom"
+										icon={isDark? "squarehalfbottom-dark" : "square-half-bottom"}
 									/>
 								</Button>
 

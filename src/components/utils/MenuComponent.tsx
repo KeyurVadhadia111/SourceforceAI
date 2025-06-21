@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useAppState } from "./useAppState";
 import Icon from "./Icon";
-import { cn } from ".";
+import { cn } from "lib/utils";
 import { MenuProps } from "./datatypes";
 
 const MenuComponent: React.FC<MenuProps> = ({ items, children, isProfile = false, className }) => {

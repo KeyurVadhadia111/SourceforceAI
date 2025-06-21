@@ -21,6 +21,7 @@ if (queryParamValue) {
 
 let container: HTMLDivElement;
 
+
 window.globalCustID = "";
 const routes = createRoutes({ someProp: "value" }); // Replace with actual arguments required by createRoutes
 document.addEventListener("DOMContentLoaded", function () {

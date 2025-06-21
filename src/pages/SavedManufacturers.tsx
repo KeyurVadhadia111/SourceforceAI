@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import SimpleBar from "simplebar-react";
 
 const SavedManufacturers = () => {
-	const [{ isExpanded }, setAppState] = useAppState();
+	const [{ isDark, isExpanded }, setAppState] = useAppState();
 	const [bookmarkedSuppliers, setBookmarkedSuppliers] = useState<Set<string>>(new Set());
 	const [loading, setLoading] = useState(true);
 	const [displaySuppliers, setDisplaySuppliers] = useState<Supplier[]>([]);
@@ -57,21 +57,21 @@ const SavedManufacturers = () => {
 			<SimpleBar className="sm:h-[calc(100dvh-105px)] h-[calc(100dvh-57px)] -ml-px">
 				<div className="flex flex-col sm:gap-6 gap-4 p-6 relative">
 					<div className="flex items-center justify-between relative self-stretch w-full flex-wrap gap-4">
-						<p className="relative w-fit font-bold text-text sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
+						<p className="relative w-fit font-bold text-text dark:text-textDark sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
 							Saved manufacturers (14 Results)
 						</p>
 
 						<div className="inline-flex items-start justify-center  gap-2 sm:gap-3 relative flex-[0_0_auto]">
 							<Button
 								variant="none"
-								className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc rounded-[50px]">
-								<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon="checker-board" />
+								className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc dark:bg-fgcDark rounded-[50px]">
+								<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon={isDark ? "checkerboard-dark" : "checker-board"} />
 							</Button>
 
 							<Button
 								variant="none"
-								className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc rounded-[50px]">
-								<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon="square-half-bottom" />
+								className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc dark:bg-fgcDark rounded-[50px]">
+								<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon={isDark? "squarehalfbottom-dark" : "square-half-bottom"} />
 							</Button>
 						</div>
 					</div>

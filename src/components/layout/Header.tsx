@@ -17,41 +17,53 @@ export default function Header() {
 		setAppState({ userDetails: JSON.parse(localStorage.getItem("auth") || "{}") });
 		// Check for dark mode preference
 		if (localStorage.theme === "dark") {
-			// setThemeMode(true);
+			setThemeMode(true);
 			setAppState({ isDark: true });
 		}
 		if (window.matchMedia("(prefers-color-scheme: dark)").matches && localStorage?.theme === undefined) {
-			// setThemeMode(true);
+			setThemeMode(true);
 			setAppState({ isDark: true });
 		}
 	}, []);
 
 	const setThemeMode = (isDark: boolean) => {
-		if (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-			// document.documentElement.classList.add("dark");
-			isDark = true;
-		}
 		if (isDark) {
-			document.documentElement.classList.remove("dark");
+			document.documentElement.classList.add("dark");
+			localStorage.theme = "dark";
 		} else {
 			document.documentElement.classList.remove("dark");
+			localStorage.theme = "light";
 		}
-		setAppState({ isDark: isDark });
+		setAppState({ isDark });
 	};
 
+
 	return (
-		<div className="md:bg-transparent bg-text relative -ml-px">
+		<div className="md:bg-transparent dark:md:bg-transparent bg-text dark:bg-fgcDark relative -ml-px">
 			<div className="flex w-full items-center justify-between md:px-8 md:py-6 py-3 px-6 relative">
 				<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
 					<img className="relative h-8 md:hidden block" alt="Group" src="/assets/images/logo/logo-full.png" />
 					{!isExpanded ? (
 						<>
-							<img
+							{/* <img
 								className="relative w-[189.66px] h-[21.2px] md:block hidden"
 								alt="Union"
 								src="assets/images/logo/union-9.svg"
-							/>
-							<div className="relative w-6 h-6 md:block hidden text-textSecondary">
+							/> */}
+							{isDark ? (
+								<img
+									className="relative w-[189.66px] h-[21.2px] md:block hidden"
+									src="assets/images/logo/union-dark.svg"
+									alt="Logo Dark"
+								/>
+							) : (
+								<img
+									className="relative w-[189.66px] h-[21.2px] md:block hidden"
+									src="assets/images/logo/union-9.svg"
+									alt="Logo Light"
+								/>
+							)}
+							<div className="relative w-6 h-6 md:block hidden text-textSecondary dark:text-textDark">
 								<Icon className=" w-6 h-6" icon="chevron-down" />
 							</div>
 						</>
@@ -102,7 +114,7 @@ export default function Header() {
 									"fixed min-w-[250px] w-[250px] m-px",
 									"right-0 top-0 z-10",
 									"rounded-none",
-									"border-border dark:border-border-dark dark:border bg-text",
+									"border-border dark:border-border-dark dark:border bg-text dark:bg-fgcDark",
 									"ring-1 ring-black ring-opacity-0",
 									"focus:outline-none min-h-screen",
 								)}>
@@ -181,12 +193,28 @@ export default function Header() {
 												</div>
 											</Link>
 											<div className="inline-flex items-center w-full gap-2 relative">
-												<div className="inline-flex items-center p-0.5 relative flex-[0_0_auto] bg-tgc rounded-[100px]">
-													<div className="flex w-6 h-6 items-center justify-center gap-2.5 px-[3px] py-0.5 relative bg-white rounded-[100px]">
+												<div className="inline-flex items-center p-0.5 relative flex-[0_0_auto] bg-tgc dark:bg-bgcDark rounded-[100px]">
+													<div onClick={() => {
+														setThemeMode(false);
+													}}
+														className={cn(
+															"flex w-6 h-6 items-center justify-center rounded-[100px]",
+															"bg-transparent",
+															!isDark && "bg-white"
+														)}
+													>
 														<Icon className="relative w-4 h-4" icon="cloud-sun" />
 													</div>
 
-													<div className="flex w-6 h-6 items-center justify-center gap-2.5 px-[3px] py-0.5 relative rounded-[100px] overflow-hidden">
+													<div onClick={() => {
+														setThemeMode(true);
+													}}
+														className={cn(
+															"flex w-6 h-6 items-center justify-center rounded-[100px]",
+															"bg-transparent",
+															isDark && "bg-white"
+														)}
+													>
 														<Icon className="relative w-4 h-4" icon="cloud-moon" />
 													</div>
 												</div>
@@ -207,7 +235,7 @@ export default function Header() {
 					</Menu>
 				</div>
 				<div className="hidden md:inline-flex items-center gap-4 relative flex-[0_0_auto]">
-					<div className="inline-flex items-center p-1 relative flex-[0_0_auto] bg-tgc rounded-[100px]">
+					<div className="inline-flex items-center p-1 relative flex-[0_0_auto] bg-tgc dark:bg-fgcDark rounded-[100px]">
 						<div
 							onClick={() => {
 								setThemeMode(false);

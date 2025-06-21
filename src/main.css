@@ -5,7 +5,7 @@
 
 @import "tailwindcss";
 
-@custom-variant dark (&   :where(.dark, .dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 /* @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); */
 
 html {
@@ -120,23 +120,25 @@ select {
 @theme {
 	--color-text            : #1e2d2a;
 	--color-textSecondary   : #5f726e;
+	--color-textSecondaryDark   : #B8B8B8;
 	--color-textTurnery     : #868686;
 	--color-primary         : #529e7e;
 	--color-primarySecondary: #fffbf3;
 	--color-textDark        : #ffffff;
 	--color-bgc             : #ffffff;
-	--color-bgcDark         : #272727;
+	--color-bgcDark         : #111111;
 	--color-fgc             : #f8f8f8;
-	--color-fgcDark         : #303030;
+	--color-fgcDark         : #272727;
+	--color-fgcDarkcircle         : #A3C9BA;
 	--color-tgc             : #eef1f0;
-	--color-tgcDark         : #303030;
+	--color-tgcDark         : #323232;
 	--color-error           : #f04349;
 	--color-warning         : #ffa500;
 	--color-success         : #00a157;
 	--color-yellow          : #f5b14c;
 	--color-bgcSecondary    : #28383c;
 	--color-border          : #ced6d3;
-	--color-borderDark      : #494949;
+	--color-borderDark      : #666666;
 	--color-teal            : #086b76;
 	--breakpoint-3xl        : 120rem;
 	--font-satoshi          : "Satoshi", Helvetica;

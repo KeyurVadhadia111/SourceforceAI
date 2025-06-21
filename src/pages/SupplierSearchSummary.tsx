@@ -88,21 +88,21 @@ const SupplierSearchSummary = () => {
 			<SimpleBar className="sm:h-[calc(100dvh-105px)] h-[calc(100dvh-57px)] -ml-px">
 				<div className="flex flex-col sm:gap-6 gap-4 p-6 relative">
 					<div className="flex items-center justify-between relative self-stretch w-full flex-wrap gap-3">
-						<p className="relative w-fit  font-bold text-text sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
+						<p className="relative w-fit  font-bold text-text dark:text-textDark sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
 							Supplier Search Summary (59 Results)
 						</p>
 
 						<div className="inline-flex items-start justify-center gap-2 sm:gap-3 relative flex-[0_0_auto]">
 							<Button
 								variant="none"
-								className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc rounded-[50px]">
-								<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon="checker-board" />
+								className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc dark:bg-fgcDark rounded-[50px]">
+								<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon={isDark ? "checkerboard-dark" : "checker-board"} />
 							</Button>
 
 							<Button
 								variant="none"
-								className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc rounded-[50px]">
-								<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon="square-half-bottom" />
+								className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc dark:bg-fgcDark rounded-[50px]">
+								<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon={isDark? "squarehalfbottom-dark" : "square-half-bottom"} />
 							</Button>
 
 							<Button
@@ -110,10 +110,10 @@ const SupplierSearchSummary = () => {
 								onClick={() => {
 									setIsOpen(true);
 								}}
-								className="inline-flex sm:h-10 h-[34px] items-center gap-2 sm:!px-4 !px-3 !py-2 sm:!py-2.5 relative flex-[0_0_auto] bg-tgc rounded-[90px]">
-								<Icon className="relative sm:w-5 sm:h-5 w-[16px] h-[16px]" icon="circles-three-plus" />
+								className="inline-flex sm:h-10 h-[34px] items-center gap-2 sm:!px-4 !px-3 !py-2 sm:!py-2.5 relative flex-[0_0_auto] bg-tgc dark:bg-fgcDark rounded-[90px]">
+								<Icon className="relative sm:w-5 sm:h-5 w-[16px] h-[16px]" icon={isDark ? "circles-three-plus-dark" : "circles-three-plus"} />
 
-								<div className="relative w-fit mt-[-1.50px] font-medium text-textSecondary text-sm tracking-[0] leading-[18px] sm:leading-[21px] whitespace-nowrap">
+								<div className="relative w-fit mt-[-1.50px] font-medium text-textSecondary dark:text-textDark text-sm tracking-[0] leading-[18px] sm:leading-[21px] whitespace-nowrap">
 									Filter
 								</div>
 							</Button>

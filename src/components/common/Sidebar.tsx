@@ -117,7 +117,7 @@ export default function Sidebar() {
 		<>
 			<div
 				ref={sidebarRef}
-				className={`sidebar relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[104px]"} transition-all duration-300 ease-in-out md:block hidden bg-text`}>
+				className={`sidebar relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[104px]"} transition-all duration-300 ease-in-out md:block hidden bg-text dark:bg-fgcDark`}>
 				<div
 					onClick={toggleSidebar}
 					className={`sidebar-btn absolute w-6 h-6 top-10 -right-3 bg-white rounded-[100px] lg:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${
@@ -127,7 +127,7 @@ export default function Sidebar() {
 						<Icon className="w-4 h-4" icon="chevron-right" />
 					</div>
 				</div>
-				<div className="inline-flex flex-col items-center justify-between p-6 relative flex-[0_0_auto] w-full h-screen">
+				<div className="inline-flex flex-col items-center justify-between p-6 relative flex-[0_0_auto] w-full h-screen overflow-auto">
 					<div className="inline-flex flex-col items-start gap-12 relative flex-[0_0_auto] w-full">
 						<img
 							className={`relative  h-14 ${isExpanded ? "w-full" : "w-14"}`}
@@ -156,7 +156,7 @@ export default function Sidebar() {
 						</div>
 					</div>
 
-					<div className="w-full flex items-center gap-2">
+					<div className=" w-full flex items-center gap-2">
 						<ProfileMenu />
 
 						{isExpanded && (

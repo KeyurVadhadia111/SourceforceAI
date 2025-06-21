@@ -135,10 +135,10 @@ function ForgotPasswordPage() {
 
 	return (
 		<>
-			<div className="bg-fgc flex flex-row justify-center w-full">
-				<div className="flex items-center bg-fgc w-full overflow-hidden relative">
+			<div className="bg-fgc  flex flex-row justify-center w-full">
+				<div className="flex items-center bg-fgc dark:bg-bgcDark w-full overflow-hidden relative">
 					{/* Start Left side */}
-					<div className="hidden lg:flex flex-col w-full items-center justify-center-safe  px-0 py-8 h-screen gap-6 bg-primary overflow-auto self-stretch">
+					<div className="hidden lg:flex flex-col w-full items-center justify-center-safe  px-0 py-8 h-screen gap-6 bg-primary dark:bg-fgcDark overflow-auto self-stretch">
 						<div className="flex flex-col items-center gap-6 relative w-full justify-center px-0 sm:px-5 xl:px-0">
 							<div className="relative">
 								<img
@@ -190,7 +190,7 @@ function ForgotPasswordPage() {
 										<h1 className="font-bold sm:text-5xl sm:leading-[72px] text-2xl mb-2.5">
 											<span className="text-text dark:text-textDark">Reset Success</span>
 										</h1>
-										<p className="font-normal text-textSecondary dark:text-textDark sm:text-base text-xs tracking-[0.80px] leading-6">
+										<p className="font-normal text-textSecondary dark:text-textSecondaryDark sm:text-base text-xs tracking-[0.80px] leading-6">
 											Your password has been reset
 										</p>
 										<Link to="/login" className="block w-full mt-6">
@@ -203,13 +203,13 @@ function ForgotPasswordPage() {
 							) : (
 								<>
 									<div className="flex flex-col items-center gap-[14px] sm:gap-4 relative self-stretch w-full">
-										<h1 className="self-stretch text-text relative font-bold sm:text-4xl text-[26px] text-center tracking-[0] leading-9 sm:leading-[50px] ">
+										<h1 className="self-stretch text-text dark:text-textDark relative font-bold sm:text-4xl text-[26px] text-center tracking-[0] leading-9 sm:leading-[50px] ">
 											{step === 1 && "Forgot Password?"}
 											{step === 2 && "Verify Your Email"}
 											{step === 3 && "Reset Your Password"}
 										</h1>
 
-										<p className="text-textSecondary relative sm:w-[429px] w-full font-normal text-sm sm:text-base text-center leading-[21px]  sm:leading-6">
+										<p className="text-textSecondary dark:text-textSecondaryDark relative sm:w-[429px] w-full font-normal text-sm sm:text-base text-center leading-[21px]  sm:leading-6">
 											{step === 1 &&
 												"Enter your email address and we'll send you a link to reset your password."}
 											{step === 2 && (
@@ -232,7 +232,7 @@ function ForgotPasswordPage() {
 										<div className="flex flex-col sm:w-[400px] w-full gap-4 sm:mx-auto">
 											{step === 1 && (
 												<Input
-													icon="envelope"
+													icon={isDark ? "envelope-dark" : "envelope"}
 													placeholder="Email"
 													{...register("email")}
 													error={errors?.email?.message?.toString()}
@@ -260,14 +260,14 @@ function ForgotPasswordPage() {
 											{step === 3 && (
 												<>
 													<Input
-														icon="lock-key"
+														icon={isDark ? "lock-key-dark" : "lock-key"}
 														type="password"
 														placeholder="New Password"
 														{...register("password")}
 														error={errors?.password?.message?.toString()}
 													/>
 													<Input
-														icon="lock-key"
+														icon={isDark ? "lock-key-dark" : "lock-key"}
 														type="password"
 														placeholder="Confirm New Password"
 														{...register("confirmPassword")}
@@ -300,14 +300,14 @@ function ForgotPasswordPage() {
 									</form>
 
 									<div className="flex items-center justify-center gap-1.5 sm:gap-2 sm:ml-[2px]">
-										<span className="font-normal text-textSecondary text-sm sm:text-base text-center leading-[21px] sm:leading-6">
+										<span className="font-normal text-textSecondary dark:text-textSecondaryDark text-sm sm:text-base text-center leading-[21px] sm:leading-6">
 											{step === 1 && "Back to "}
 											{step === 2 && ""}
 											{step === 3 && "Back to "}
 										</span>
 										<Link
 											to="/login"
-											className={`font-bold text-text text-sm sm:text-base text-center leading-[21px] sm:leading-6 ${step === 2 ? "mt-3 sm:mt-0 -ml-1" : ""}`}>
+											className={`font-bold text-text ${step === 1 || step === 3 && "dark:text-primary"} ${step === 2 && "dark:dark:text-textDark"} text-sm sm:text-base text-center leading-[21px] sm:leading-6 ${step === 2 ? "mt-3 sm:mt-0 -ml-1" : ""}`}>
 											{step === 1 && "Sign in"}
 											{step === 2 && "Back"}
 											{step === 3 && "Sign in"}

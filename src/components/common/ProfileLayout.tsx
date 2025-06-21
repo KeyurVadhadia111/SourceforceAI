@@ -30,10 +30,10 @@ const ProfileLayout: React.FC<{ children: any; title: string; desc: string }> = 
 	return (
 		<SimpleBar className="sm:h-[calc(100dvh-104px)] h-[calc(100dvh-56px)]">
 			{" "}
-			<div className="flex flex-col items-start gap-6 sm:p-[23px] p-6 relative self-stretch w-full flex-[0_0_auto] sm:border border-border">
+			<div className="flex flex-col items-start gap-6 sm:p-[23px] p-6 relative self-stretch w-full flex-[0_0_auto] sm:border border-border dark:border-borderDark">
 				<div className="flex lg:flex-row flex-col items-start justify-between relative self-stretch w-full flex-[0_0_auto] sm:gap-8 gap-4">
 					<div className="flex flex-col lg:w-[242px] w-full items-start sm:gap-10 gap-6 relative">
-						<div className="relative [font-family:'Satoshi',Helvetica] font-bold text-text sm:text-[32px] text-lg  sm:leading-[45px] leading-[25px] tracking-[0px]">
+						<div className="relative [font-family:'Satoshi',Helvetica] font-bold text-text dark:text-textDark sm:text-[32px] text-lg  sm:leading-[45px] leading-[25px] tracking-[0px]">
 							Settings
 						</div>
 						{/* {(isProfileSettingTab) && ( */}
@@ -50,7 +50,7 @@ const ProfileLayout: React.FC<{ children: any; title: string; desc: string }> = 
 											"flex items-center gap-2.5 sm:px-[30px] px-[20px] sm:py-3.5 py-[13.5px] relative self-stretch w-full rounded-[40px]",
 											location.pathname === tab.url
 												? "bg-primary text-white"
-												: "bg-fgc text-text",
+												: "bg-fgc dark:bg-fgcDark text-text dark:text-textDark",
 										)}>
 										<div className="relative w-fit [font-family:'Satoshi',Helvetica] font-medium sm:text-base text-sm tracking-[0] sm:!leading-[24px] !leading-[21px] whitespace-nowrap">
 											{tab.label}
@@ -63,7 +63,7 @@ const ProfileLayout: React.FC<{ children: any; title: string; desc: string }> = 
 					</div>
 
 					{/* {(!isProfileSettingTab) && ( */}
-					<div className={`flex flex-col lg:w-[calc(100%-274px)] w-full items-center sm:gap-[30px] gap-4 sm:p-[29px] p-[15px] relative bg-white sm:rounded-[20px] rounded-2xl border border-border ${isProfileSettingTab ? "hidden" : "flex"} lg:flex`}>
+					<div className={`flex flex-col lg:w-[calc(100%-274px)] w-full items-center sm:gap-[30px] gap-4 sm:p-[29px] p-[15px] relative bg-white dark:bg-bgcDark sm:rounded-[20px] rounded-2xl border border-border dark:border-borderDark ${isProfileSettingTab ? "hidden" : "flex"} lg:flex`}>
 						<div className="flex flex-col items-start gap-2 relative self-stretch w-full">
 							<div className="relative  flex items-center gap-3">
 								<div className="lg:!hidden w-[18px] h-[18px] flex justify-center items-center">
@@ -73,19 +73,20 @@ const ProfileLayout: React.FC<{ children: any; title: string; desc: string }> = 
 										}}
 										icon="chevron-left"
 										size={9}
+										className="dark:text-textDark"
 									/>
 								</div>
-								<div className="max-sm:w-[calc(100%-30px)] [font-family:'Satoshi',Helvetica] font-bold text-text sm:text-2xl text-lg sm:leading-[33px] leading-[25px] tracking-normal">
+								<div className="max-sm:w-[calc(100%-30px)] [font-family:'Satoshi',Helvetica] font-bold text-text dark:text-textDark sm:text-2xl text-lg sm:leading-[33px] leading-[25px] tracking-normal">
 									{title}
 								</div>
 							</div>
 
-							<div className="relative self-stretch [font-family:'Satoshi',Helvetica] font-normal text-textSecondary sm:text-base text-xs tracking-[0] leading-[150%]">
+							<div className="relative self-stretch [font-family:'Satoshi',Helvetica] font-normal text-textSecondary dark:text-textSecondaryDark sm:text-base text-xs tracking-[0] leading-[150%]">
 								{desc}
 							</div>
 						</div>
 
-						<div className="w-full h-px bg-border" />
+						<div className="w-full h-px dark:h-[0.5px] bg-border dark:border-borderDark" />
 
 						{children}
 					</div>

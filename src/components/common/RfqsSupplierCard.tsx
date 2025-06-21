@@ -1,6 +1,7 @@
 import React from "react";
 import Icon from "components/utils/Icon";
 import { Button } from "components/utils/Button";
+import { useAppState } from "components/utils/useAppState";
 
 interface Tag {
 	label: string;
@@ -29,8 +30,9 @@ interface SupplierCardProps {
 }
 
 const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onViewProfile, onSendRFQ }) => {
+		const [{ isDark }, setAppState] = useAppState();
 	return (
-		<div className="flex flex-col items-start justify-center sm:gap-4 gap-3 sm:p-[15px] p-[11px] relative flex-1 grow bg-white rounded-2xl sm:rounded-[20px] border border-border self-stretch">
+		<div className="flex flex-col items-start justify-center sm:gap-4 gap-3 sm:p-[15px] p-[11px] relative flex-1 grow bg-white dark:bg-fgcDark rounded-2xl sm:rounded-[20px] border border-border dark:border-borderDark self-stretch">
 			<div className="flex flex-col items-start sm:gap-3 gap-[10px] relative self-stretch w-full flex-[0_0_auto]">
 				<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
 					<div className="flex items-start justify-between relative flex-1 grow">
@@ -43,17 +45,17 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 
 							<div className="inline-flex items-start sm:gap-3 gap-2.5 relative flex-[0_0_auto]">
 								<div className="inline-flex flex-col items-start sm:gap-1 gap-0.5 relative flex-[0_0_auto]">
-									<div className="relative w-fit font-bold text-center leading-[150%] whitespace-nowrap truncate">
+									<div className="relative dark:text-textDark w-fit font-bold text-center leading-[150%] whitespace-nowrap truncate">
 										{supplier.name}
 									</div>
 
 									{isRfqSent ? (
-										<div className="sm:text-sm text-xs leading-[150%] text-textSecondary ">
+										<div className="sm:text-sm text-xs leading-[150%] text-textSecondary dark:text-textSecondaryDark">
 											To: PlastiCorp Industries
 										</div>
 									) : (
 										<div className="inline-flex items-center gap-2 sm:gap-2.5 relative">
-											<div className="relative w-fit text-textSecondary sm:text-sm tracking-[0] leading-[150%] whitespace-nowrap text-xs">
+											<div className="relative w-fit text-textSecondary dark:text-textSecondaryDark sm:text-sm tracking-[0] leading-[150%] whitespace-nowrap text-xs">
 												{supplier.country}
 											</div>
 
@@ -64,7 +66,7 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 													icon="star"
 													className="text-yellow sm:!w-4 sm:!h-4 !w-[14px] !h-[14px]"
 												/>
-												<div className="text-textSecondary relative w-fit sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
+												<div className="text-textSecondary dark:text-textSecondaryDark relative w-fit sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
 													{supplier.rating}
 												</div>
 											</div>
@@ -108,7 +110,7 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 			</div>
 
 			{!isRfqSent && (
-				<div className="sm:text-sm text-xs leading-[150%] font-medium">
+				<div className="dark:text-textDark sm:text-sm text-xs leading-[150%] font-medium">
 					Industrial LED Strips - Waterproof IP67
 				</div>
 			)}
@@ -117,8 +119,8 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 				<div className="inline-flex flex-col items-start justify-center sm:gap-3 gap-2.5 relative w-full">
 					<div className="inline-flex items-center relative w-full justify-between">
 						<div className="inline-flex justify-between items-center gap-2 sm:gap-2.5 relative flex-[0_0_auto]">
-							<Icon icon="cube" className="sm:w-5 sm:h-5 w-4 h-4 " />
-							<div className="relative w-fit  font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
+							<Icon icon={isDark ? "cube-dark" : "cube"} className="sm:w-5 sm:h-5 w-4 h-4 " />
+							<div className="dark:text-textDark relative w-fit  font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
 								{isRfqSent ? "Items" : "MOQ"}: {supplier.moq} pieces
 							</div>
 						</div>
@@ -129,15 +131,15 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 
 					{isRfqSent ? (
 						<div className="inline-flex items-center gap-2 sm:gap-2.5 relative flex-[0_0_auto]">
-							<Icon icon="coins" className="sm:w-5 sm:h-5 w-4 h-4 " />
-							<div className="relative w-fit  font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
+							<Icon icon={isDark ? "coins-dark" : "coins"} className="sm:w-5 sm:h-5 w-4 h-4 " />
+							<div className="dark:text-textDark relative w-fit  font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
 								Target: $0.15 per piece:
 							</div>
 						</div>
 					) : (
 						<div className="inline-flex items-center gap-2 sm:gap-2.5 relative">
-							<Icon icon="map-pin" className="sm:w-5 sm:h-5 w-4 h-4 " />
-							<div className="relative w-fit font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
+							<Icon icon={isDark ? "map-pin-dark" : "map-pin"} className="sm:w-5 sm:h-5 w-4 h-4 " />
+							<div className="dark:text-textDark relative w-fit font-medium sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
 								{supplier.location}
 							</div>
 						</div>
@@ -146,8 +148,8 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 			</div>
 
 			<div className="gap-1 flex flex-col">
-				<div className="text-textSecondary sm:text-xs text-[10px] leading-[150%] font-normal">Message:</div>
-				<div className="sm:text-xs text-[10px] leading-[150%] font-normal">
+				<div className="text-textSecondary dark:text-textSecondaryDark sm:text-xs text-[10px] leading-[150%] font-normal">Message:</div>
+				<div className="dark:text-textDark sm:text-xs text-[10px] leading-[150%] font-normal">
 					{isRfqSent
 						? "Food-grade material required, white color preferred"
 						: "High-quality LED strips with 5-year warranty. MOQ: 1000 pieces. Sample available."}
@@ -158,8 +160,8 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 				{supplier.tags.map((tag, index) => (
 					<div
 						key={index}
-						className="inline-flex items-center gap-2.5 px-[13px] sm:px-[15px] sm:py-[7px] py-[4.5px] relative flex-[0_0_auto] rounded-[90px] border border-border">
-						<div className="relative w-fit font-medium text-textSecondary sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
+						className="inline-flex items-center gap-2.5 px-[13px] sm:px-[15px] sm:py-[7px] py-[4.5px] relative flex-[0_0_auto] rounded-[90px] border border-border dark:border-borderDark">
+						<div className="relative w-fit font-medium text-textSecondary dark:text-textDark sm:text-xs text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
 							{tag.label}
 						</div>
 					</div>
@@ -173,7 +175,7 @@ const RfqSupplierCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent, onV
 					</div>
 				)}
 				<Button
-					className="sm:h-10 h-[34px] text-sm text-primary border-primary hover:bg-primary/10 flex-1"
+					className="sm:h-10 h-[34px] text-sm !text-primary border-primary hover:bg-primary/10 flex-1"
 					onClick={onViewProfile}
 					variant="outline">
 					View Profile

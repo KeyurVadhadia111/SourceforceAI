@@ -1,6 +1,7 @@
 import { cn } from "lib/utils";
 import * as React from "react";
 import Icon from "./Icon";
+import { useAppState } from "./useAppState";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	error?: string;
@@ -30,7 +31,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 		// const methods = useFormContext();
 		const inputType = type || "";
 		const [showPassword, setShowPassword] = React.useState(false);
-
+		const [{ isDark }, setAppState] = useAppState();
 		return (
 			<div className="relative w-full">
 				{label && (
@@ -44,10 +45,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 						<div
 							className={cn(
 								"absolute left-2 z-1 sm:w-11 sm:h-11 w-8 h-8 transform top-1/2 -translate-y-1/2 rounded-[22px] flex items-center justify-center",
-								variant === "default" && "bg-fgc dark:bg-fgcDark",
-								variant === "secondary" && "bg-white dark:bg-fgcDark",
-								variant === "secondaryTransparentIcon" && "bg-transparent",
-								disabled && "!bg-transparent",
+								variant === "default" && "bg-fgc dark:bg-fgcDarkcircle/20",
+								variant === "secondary" && "bg-white dark:bg-fgcDarkcircle/20 dark:text-textDark",
+								variant === "secondaryTransparentIcon" && "bg-transparent dark:bg-fgcDarkcircle/20",
+								disabled && "bg-transparent",
 							)}>
 							<Icon className="sm:w-5 sm:h-5 w-4 h-4" icon={icon} />
 						</div>
@@ -60,7 +61,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 							variant === "secondary" && "bg-fgc dark:bg-fgcDark border-transparent",
 							variant === "secondaryTransparentIcon" && "bg-fgc dark:bg-fgcDark border-transparent",
 							variant === "transparentBorder" &&
-								"bg-transparent border border-border focus-visible:ring-primary",
+							"bg-transparent border border-border dark:border-borderDark focus-visible:ring-primary",
 							error
 								? "!border !border-red-500 focus-visible:!ring-red-500"
 								: "focus-visible:ring-neutral-300",
@@ -82,7 +83,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 							)}
 							onClick={() => setShowPassword(!showPassword)}>
 							<Icon
-								icon={showPassword ? "eye" : "eye-slash"}
+								icon={
+									showPassword
+										? isDark
+											? "eye-dark"
+											: "eye"
+										: isDark
+											? "eye-slash-dark"
+											: "eye-slash"
+								}
 								className="sm:h-5 sm:w-5 h-4 w-4 cursor-pointer  text-neutral-400"
 							/>
 						</div>
@@ -91,8 +100,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 						<div
 							className={cn(
 								"absolute right-2 z-1 sm:w-11 sm:h-11 w-9 h-9 transform top-1/2 -translate-y-1/2 rounded-[22px] flex items-center justify-center",
-								variant === "default" && "bg-fgc dark:bg-fgcDark",
-								variant === "secondary" && "bg-white dark:bg-fgcDark",
+								variant === "default" && "bg-fgc dark:bg-fgcDarkcircle/20",
+								variant === "secondary" && "bg-white dark:bg-fgcDarkcircle/20",
 								variant === "secondaryTransparentIcon" && "bg-transparent",
 								disabled && "!bg-transparent",
 							)}>

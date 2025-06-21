@@ -63,18 +63,18 @@ const SubscriptionPage = () => {
 					return (
 						<div
 							key={"subscription_pan_" + ind}
-							className="overflow-hidden flex flex-col items-start sm:gap-6 gap-4 sm:px-[23px] px-[15px] sm:py-[29px] py-[19px] relative flex-1 bg-white rounded-2xl border border-border h-auto self-stretch">
+							className="overflow-hidden flex flex-col items-start sm:gap-6 gap-4 sm:px-[23px] px-[15px] sm:py-[29px] py-[19px] relative flex-1 bg-white dark:bg-bgcDark rounded-2xl border border-border dark:border-borderDark h-auto self-stretch">
 							<div className="flex flex-col items-start sm:gap-2 gap-1.5 relative self-stretch w-full flex-[0_0_auto]">
-								<div className="self-stretch [font-family:'Satoshi',Helvetica] font-medium sm:text-2xl text-base relative text-text tracking-[0] leading-[100%]">
+								<div className="self-stretch [font-family:'Satoshi',Helvetica] font-medium sm:text-2xl text-base relative text-text dark:text-textDark tracking-[0] leading-[100%]">
 									{plan.title}
 								</div>
 
-								<p className="relative self-stretch [font-family:'Satoshi',Helvetica] font-normal text-textSecondary sm:text-base text-xs tracking-[0] leading-[150%]">
+								<p className="relative self-stretch [font-family:'Satoshi',Helvetica] font-normal text-textSecondary dark:text-textSecondaryDark sm:text-base text-xs tracking-[0] leading-[150%]">
 									{plan.description}
 								</p>
 							</div>
 
-							<p className="relative self-stretch [font-family:'Rubik',Helvetica] font-normal text-text sm:text-[32px] text-[20px] tracking-[0] leading-[150%]">
+							<p className="relative self-stretch [font-family:'Rubik',Helvetica] font-normal text-text dark:text-textDark sm:text-[32px] text-[20px] tracking-[0] leading-[150%]">
 								<span className="font-bold">${plan.price}</span>
 
 								<span className="sm:text-xl text-base leading-[150%]">/{plan.frequency}</span>
@@ -86,9 +86,9 @@ const SubscriptionPage = () => {
 								</div>
 							</Button>
 
-							<div className="relative self-stretch w-full h-px bg-border" />
+							<div className="relative self-stretch w-full h-px bg-border dark:border-borderDark" />
 
-							<div className="relative self-stretch [font-family:'Satoshi',Helvetica] font-medium text-text sm:text-lg text-sm tracking-[0] leading-[100%]">
+							<div className="relative self-stretch [font-family:'Satoshi',Helvetica] font-medium text-text dark:text-textDark sm:text-lg text-sm tracking-[0] leading-[100%]">
 								Includes
 							</div>
 
@@ -102,7 +102,7 @@ const SubscriptionPage = () => {
 												<Icon icon="check" className="sm:w-3.5 sm:h-3.5 w-2 h-2 text-white" />
 											</div>
 
-											<div className="relative [font-family:'Satoshi',Helvetica] font-normal text-text sm:text-base text-xs tracking-[0] leading-[150%]">
+											<div className="relative [font-family:'Satoshi',Helvetica] font-normal text-text dark:text-textDark sm:text-base text-xs tracking-[0] leading-[150%]">
 												{item}
 											</div>
 										</div>

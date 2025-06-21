@@ -58,12 +58,12 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 								className={cn(
 									"relative",
 									`sm:w-3/4 w-full sm:mt-0 mt-[60px]`,
-									"text-left align-middle h-full bg-bgc transition-all transform dark:bg-fgcDark",
+									"text-left align-middle h-full bg-bgc dark:bg-bgcDark transition-all transform",
 								)}>
 								<div className="flex flex-col items-start relative sm:px-0">
 									<div className="w-full px-6 sm:px-0">
-										<div className="flex items-center justify-between sm:p-[30px] pt-6 pb-4 relative self-stretch w-full flex-[0_0_auto] border-b border-border">
-											<div className="relative w-fit font-bold text-text sm:text-2xl text-lg text-center leading-[140%] whitespace-nowrap">
+										<div className="flex items-center justify-between sm:p-[30px] pt-6 pb-4 relative self-stretch w-full flex-[0_0_auto] border-b border-border dark:border-borderDark">
+											<div className="relative w-fit font-bold text-text dark:text-textDark sm:text-2xl text-lg text-center leading-[140%] whitespace-nowrap">
 												Create New RFQ
 											</div>
 
@@ -72,7 +72,7 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 													setIsOpen(false);
 												}}
 												icon="x-mark"
-												className="cursor-pointer sm:w-[30px] sm:h-[30px] w-[20px] h-[20px] border-1 rounded-full sm:p-1 p-0.5"
+												className="dark:text-textDark cursor-pointer sm:w-[30px] sm:h-[30px] w-[20px] h-[20px] border-1 rounded-full sm:p-1 p-0.5"
 											/>
 										</div>
 									</div>
@@ -84,13 +84,13 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 												variant="transparentBorder"
 												placeholder="e.g., LED Strip Lights 5050 SMD"
 												label="Product Title"
-												className="placeholder:text-textSecondary placeholder:text-sm"
+												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm"
 												required
 											/>
 											<Select
 												variant="transparentBorder"
 												label="Supplier"
-												className="placeholder:text-textSecondary placeholder:text-sm">
+												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm">
 												<option value="">Select Supplier</option>
 												<option value="Supplier 1">Supplier 1</option>
 											</Select>
@@ -98,14 +98,14 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 											<Select
 												variant="transparentBorder"
 												label="Product Category"
-												className="placeholder:text-textSecondary placeholder:text-sm">
+												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm">
 												<option value="">Select Category</option>
 											</Select>
 
 											<Select
 												variant="transparentBorder"
 												label="Preferred Country of Origin"
-												className="placeholder:text-textSecondary placeholder:text-sm ">
+												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm ">
 												<option value="">Select Country</option>
 												{countryOptions.map(country => (
 													<option key={country.value} value={country.value}>
@@ -118,13 +118,13 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 												variant="transparentBorder"
 												placeholder="e.g., 5000"
 												label="Quantity Required"
-												className="placeholder:text-textSecondary placeholder:text-sm flex-1"
+												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm flex-1"
 												required
 											/>
 											<Select
 												variant="transparentBorder"
 												label="Unit of Measurement"
-												className="placeholder:text-textSecondary placeholder:text-sm w-40">
+												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm w-40">
 												<option value="">Select Unit</option>
 												<option value="pieces">Pieces</option>
 												<option value="sets">Sets</option>
@@ -134,14 +134,14 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 												variant="transparentBorder"
 												placeholder="e.g., $1.50 per piece"
 												label="Target Price (Optional)"
-												className="placeholder:text-textSecondary placeholder:text-sm flex-1"
+												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm flex-1"
 											/>
 
 											<Input
 												variant="transparentBorder"
 												placeholder="e.g., 8543.70.00"
 												label="HS Code (Optional)"
-												className="placeholder:text-textSecondary placeholder:text-sm w-40"
+												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm w-40"
 											/>
 											<Icon
 												icon="information-circle"
@@ -152,7 +152,7 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 													variant="transparentBorder"
 													placeholder="Enter your Shipping Address"
 													label="Shipping Address"
-													className="placeholder:text-textSecondary placeholder:text-sm"
+													className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm"
 												/>
 											</div>
 
@@ -161,7 +161,7 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 													placeholder="Any Specific Requirements, Quality Standards, or additional information..."
 													variant="transparentBorder"
 													label="Message/Note"
-													className="placeholder:text-textSecondary placeholder:text-sm"
+													className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm"
 												/>
 											</div>
 
@@ -189,12 +189,12 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 													) : (
 														<label
 															htmlFor="imageUpload"
-															className="border border-dashed border-border rounded-lg sm:py-4 py-3 px-5 flex flex-col items-center justify-center gap-3">
+															className="border border-dashed border-border dark:border-borderDark rounded-lg sm:py-4 py-3 px-5 flex flex-col items-center justify-center gap-3">
 															<Icon
 																icon="cloud-arrow-up"
-																className="sm:w-8 sm:h-8 w-6 h-6 text-textSecondary"
+																className="sm:w-8 sm:h-8 w-6 h-6 text-textSecondary dark:text-textSecondaryDark"
 															/>
-															<div className="text-center text-textSecondary">
+															<div className="text-center text-textSecondary dark:text-textSecondaryDark">
 																<p className="[font-family:'Satoshi-Regular',Helvetica] sm:text-base text-xs leading-[150%]">
 																	Drag & drop your image here or{" "}
 																	<span className="text-primary cursor-pointer">
@@ -202,7 +202,7 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 																	</span>
 																</p>
 															</div>
-															<div className="text-center text-textSecondary">
+															<div className="text-center text-textSecondary dark:text-textSecondaryDark">
 																<p className="sm:text-xs text-[10px] [font-family:'Satoshi',Helvetica] leading-[150%]">
 																	Support Files (PNG, JPG)
 																</p>
@@ -218,7 +218,7 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 									</SimpleBar>
 
 									<div className="w-full px-6 sm:px-0">
-										<div className="flex items-center justify-end gap-[223px] sm:p-[30px] py-6 relative self-stretch w-full flex-[0_0_auto] border-t border-border">
+										<div className="flex items-center justify-end gap-[223px] sm:p-[30px] py-6 relative self-stretch w-full flex-[0_0_auto] border-t border-border dark:border-borderDark">
 											<div className="inline-flex items-center sm:gap-4 gap-[14px] relative flex-[0_0_auto]">
 												<Button
 													variant="outline"
