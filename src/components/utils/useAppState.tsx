@@ -17,10 +17,10 @@ export const initialState: any = {
 		{ id: "country", label: "China" },
 		{ id: "shippingTime", label: "1--3 Days" },
 		{ id: "price", label: "$3 -- $12" },
-		{ id: "rating", label: "4+ Stars" },
 		{ id: "payment", label: "Credit/Debit" },
 		{ id: "certification", label: "ISO Certified" },
 	],
+	searchQuery: "",
 };
 
 let globalState: any = initialState;

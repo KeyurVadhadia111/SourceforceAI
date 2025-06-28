@@ -16,6 +16,7 @@ export const suppliers: Supplier[] = [
 		location: "Dongguan, Guangdong",
 		responseRate: 95,
 		tags: [{ label: "Kitchen Appliances" }, { label: "Portable" }, { label: "OEM Available" }],
+		status: "online"
 	},
 	{
 		id: "2",
@@ -30,6 +31,7 @@ export const suppliers: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "offline"
 	},
 	{
 		id: "3",
@@ -44,6 +46,7 @@ export const suppliers: Supplier[] = [
 		location: "Ningbo, Zhejiang",
 		responseRate: 90,
 		tags: [{ label: "Kitchen Appliances" }, { label: "OEM Available" }],
+		status: "online"
 	},
 	{
 		id: "4",
@@ -58,6 +61,7 @@ export const suppliers: Supplier[] = [
 		location: "Dongguan, Guangdong",
 		responseRate: 87,
 		tags: [{ label: "OEM Available" }],
+		status: "online"
 	},
 	{
 		id: "5",
@@ -72,6 +76,7 @@ export const suppliers: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "offline"
 	},
 	{
 		id: "6",
@@ -86,6 +91,7 @@ export const suppliers: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "online"
 	},
 	{
 		id: "7",
@@ -100,6 +106,112 @@ export const suppliers: Supplier[] = [
 		location: "Ningbo, Zhejiang",
 		responseRate: 90,
 		tags: [{ label: "Kitchen Appliances" }, { label: "OEM Available" }],
+		status: "offline"
+	},
+	{
+		id: "8",
+		name: "SmartHome Gadgets",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-14.svg",
+		country: "India",
+		rating: 4.7,
+		isBookmarked: false,
+		isVIP: true,
+		isVerified: true,
+		moq: 300,
+		location: "Bangalore, Karnataka",
+		responseRate: 92,
+		tags: [{ label: "Smart Devices" }, { label: "Home Automation" }],
+		status: "online",
+	},
+	{
+		id: "9",
+		name: "EcoLite Electronics",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-17.svg",
+		country: "Vietnam",
+		rating: 4.6,
+		isBookmarked: false,
+		isVIP: false,
+		isVerified: true,
+		moq: 200,
+		location: "Hanoi",
+		responseRate: 88,
+		tags: [{ label: "LED" }, { label: "Energy Saving" }],
+		status: "offline",
+	},
+	{
+		id: "10",
+		name: "Fusion Tech Industries",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-20.svg",
+		country: "Germany",
+		rating: 4.9,
+		isBookmarked: false,
+		isVIP: true,
+		isVerified: true,
+		moq: 1000,
+		location: "Berlin",
+		responseRate: 97,
+		tags: [{ label: "OEM Available" }, { label: "Electronics" }],
+		status: "online",
+	},
+	{
+		id: "11",
+		name: "Precision Tools Inc",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-13.svg",
+		country: "India",
+		rating: 4.5,
+		isBookmarked: false,
+		isVIP: false,
+		isVerified: false,
+		moq: 250,
+		location: "Ahmedabad, Gujarat",
+		responseRate: 85,
+		tags: [{ label: "Hand Tools" }, { label: "Durable" }],
+		status: "offline",
+	},
+	{
+		id: "12",
+		name: "Nova Kitchenware",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-12.svg",
+		country: "Vietnam",
+		rating: 4.6,
+		isBookmarked: false,
+		isVIP: false,
+		isVerified: true,
+		moq: 600,
+		location: "Da Nang",
+		responseRate: 91,
+		tags: [{ label: "Kitchen Appliances" }, { label: "Innovative" }],
+		status: "online",
+	},
+	{
+		id: "13",
+		name: "SmartTech Partners",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-11.svg",
+		country: "Germany",
+		rating: 4.9,
+		isBookmarked: false,
+		isVIP: true,
+		isVerified: true,
+		moq: 700,
+		location: "Munich",
+		responseRate: 96,
+		tags: [{ label: "Portable" }, { label: "Bluetooth" }, { label: "OEM Available" }],
+		status: "online",
+	},
+	{
+		id: "14",
+		name: "GreenWare Solutions",
+		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-10.svg",
+		country: "India",
+		rating: 4.4,
+		isBookmarked: false,
+		isVIP: false,
+		isVerified: false,
+		moq: 150,
+		location: "Chennai, Tamil Nadu",
+		responseRate: 83,
+		tags: [{ label: "Eco-Friendly" }, { label: "Reusable" }],
+		status: "offline",
 	},
 ];
 
@@ -117,6 +229,8 @@ export const suppliersSearchFilter: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "online",
+		lastSeen: "1 min ago"
 	},
 	{
 		id: "2",
@@ -131,6 +245,8 @@ export const suppliersSearchFilter: Supplier[] = [
 		location: "Dongguan, Guangdong",
 		responseRate: 95,
 		tags: [{ label: "Kitchen Appliances" }, { label: "Portable" }, { label: "OEM Available" }],
+		status: "online",
+		lastSeen: "Yesterday"
 	},
 	{
 		id: "3",
@@ -145,6 +261,8 @@ export const suppliersSearchFilter: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "offline",
+		lastSeen: "2 days ago"
 	},
 	{
 		id: "4",
@@ -159,6 +277,8 @@ export const suppliersSearchFilter: Supplier[] = [
 		location: "Dongguan, Guangdong",
 		responseRate: 87,
 		tags: [{ label: "OEM Available" }],
+		status: "online",
+		lastSeen: "1 week ago"
 	},
 	{
 		id: "5",
@@ -173,6 +293,8 @@ export const suppliersSearchFilter: Supplier[] = [
 		location: "Ningbo, Zhejiang",
 		responseRate: 90,
 		tags: [{ label: "Kitchen Appliances" }, { label: "OEM Available" }],
+		status: "offline",
+		lastSeen: "05/20/2025"
 	},
 	{
 		id: "6",
@@ -187,6 +309,8 @@ export const suppliersSearchFilter: Supplier[] = [
 		location: "Dongguan, Guangdong",
 		responseRate: 87,
 		tags: [{ label: "OEM Available" }],
+		status: "online",
+		lastSeen: "05/16/2025"
 	},
 	{
 		id: "7",
@@ -201,6 +325,8 @@ export const suppliersSearchFilter: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "online",
+		lastSeen: "05/14/2025"
 	},
 	{
 		id: "8",
@@ -215,6 +341,8 @@ export const suppliersSearchFilter: Supplier[] = [
 		location: "Dongguan, Guangdong",
 		responseRate: 95,
 		tags: [{ label: "Kitchen Appliances" }, { label: "Portable" }, { label: "OEM Available" }],
+		status: "offline",
+		lastSeen: "05/10/2025"
 	},
 	{
 		id: "9",
@@ -229,6 +357,8 @@ export const suppliersSearchFilter: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "offline",
+		lastSeen: "05/05/2025"
 	},
 	{
 		id: "10",
@@ -243,6 +373,8 @@ export const suppliersSearchFilter: Supplier[] = [
 		location: "Ningbo, Zhejiang",
 		responseRate: 90,
 		tags: [{ label: "Kitchen Appliances" }, { label: "OEM Available" }],
+		status: "online",
+		lastSeen: "05/01/2025"
 	},
 ];
 
@@ -260,6 +392,7 @@ export const RfqCenterInbox: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "online"
 	},
 	{
 		id: "2",
@@ -274,6 +407,7 @@ export const RfqCenterInbox: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 87,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "offline"
 	},
 	{
 		id: "3",
@@ -288,6 +422,7 @@ export const RfqCenterInbox: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 90,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "online"
 	},
 	{
 		id: "4",
@@ -302,6 +437,7 @@ export const RfqCenterInbox: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "online"
 	},
 	{
 		id: "5",
@@ -316,6 +452,7 @@ export const RfqCenterInbox: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 95,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "offline"
 	},
 	{
 		id: "6",
@@ -330,6 +467,7 @@ export const RfqCenterInbox: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 90,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "offline"
 	},
 	{
 		id: "7",
@@ -344,6 +482,7 @@ export const RfqCenterInbox: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "online"
 	},
 	{
 		id: "8",
@@ -358,6 +497,7 @@ export const RfqCenterInbox: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 87,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "offline"
 	},
 	{
 		id: "9",
@@ -372,6 +512,7 @@ export const RfqCenterInbox: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "online"
 	},
 	{
 		id: "10",
@@ -386,6 +527,7 @@ export const RfqCenterInbox: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 95,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "online"
 	},
 ];
 export const RfqCenterSent: Supplier[] = [
@@ -402,6 +544,7 @@ export const RfqCenterSent: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Plastic" }, { label: "Food-grade" }],
+		status: "online"
 	},
 	{
 		id: "2",
@@ -416,6 +559,7 @@ export const RfqCenterSent: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 87,
 		tags: [{ label: "Fasteners" }, { label: "Stainless" }, { label: "Hardware" }],
+		status: "online"
 	},
 	{
 		id: "3",
@@ -430,6 +574,7 @@ export const RfqCenterSent: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 90,
 		tags: [{ label: "Automotive" }, { label: "Rubber" }, { label: "Seals" }],
+		status: "online"
 	},
 	{
 		id: "4",
@@ -444,6 +589,7 @@ export const RfqCenterSent: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Plastic" }, { label: "Food-grade" }],
+		status: "offline"
 	},
 	{
 		id: "5",
@@ -458,6 +604,7 @@ export const RfqCenterSent: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 95,
 		tags: [{ label: "Plastic" }, { label: "Food-grade" }],
+		status: "offline"
 	},
 	{
 		id: "6",
@@ -472,6 +619,7 @@ export const RfqCenterSent: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 90,
 		tags: [{ label: "Plastic" }, { label: "Food-grade" }],
+		status: "online"
 	},
 	{
 		id: "7",
@@ -486,6 +634,7 @@ export const RfqCenterSent: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "offline"
 	},
 	{
 		id: "8",
@@ -500,6 +649,7 @@ export const RfqCenterSent: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 87,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "online"
 	},
 	{
 		id: "9",
@@ -514,6 +664,7 @@ export const RfqCenterSent: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 94,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "offline"
 	},
 	{
 		id: "10",
@@ -528,6 +679,7 @@ export const RfqCenterSent: Supplier[] = [
 		location: "Guangzhou, Guangdong",
 		responseRate: 95,
 		tags: [{ label: "Portable" }, { label: "OEM Available" }],
+		status: "online"
 	},
 ];
 

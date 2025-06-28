@@ -83,7 +83,7 @@ function App() {
 					{/* Footer Section */}
 
 					<ToastContainer
-						toastClassName={"!rounded-2xl"}
+						// toastClassName={"!rounded-2xl"}
 						icon={({ type }) => ToastIcons[type as keyof typeof ToastIcons]?.() || null}
 					/>
 				</div>

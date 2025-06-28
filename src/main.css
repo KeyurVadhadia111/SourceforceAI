@@ -25,6 +25,15 @@ select {
 	letter-spacing: -0.16px;
 } */
 
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+.no-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width    : none;
+}
+
 @layer base {
 
 	/* Set Rubik as default font */
@@ -142,6 +151,8 @@ select {
 	--color-teal            : #086b76;
 	--breakpoint-3xl        : 120rem;
 	--font-satoshi          : "Satoshi", Helvetica;
+	--color-green            : #41D597;
+	--color-red            : #FD0404;
 }
 
 button {

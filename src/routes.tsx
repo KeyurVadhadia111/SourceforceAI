@@ -8,6 +8,7 @@ import Register from "pages/Register";
 import ForgotPasswordPage from "pages/ForgotPasswordPage";
 import NewsSourcingRequest from "pages/NewsSourcingRequest";
 import SupplierSearchSummary from "pages/SupplierSearchSummary";
+import SupplierMessages from "pages/SupplierMessages";
 import SavedManufacturers from "pages/SavedManufacturers";
 import RfqCenter from "pages/RfqCenter";
 import TermsConditions from "pages/TermsConditions";
@@ -16,6 +17,7 @@ import ProfileSettingPage from "pages/ProfileSettingPage";
 import SecurityPage from "pages/SecurityPage";
 import SubscriptionPage from "pages/SubscriptionPage";
 import HelpAndSupportPage from "pages/HelpAndSupportPage";
+import SearchResultsPage from "pages/SearchResultPage";
 
 declare global {
 	interface Window {
@@ -121,6 +123,14 @@ const createRoutes: React.FC = () => {
 								}
 							/>
 							<Route
+								path="/supplier-messages"
+								element={
+									<ProtectedRoute>
+										<SupplierMessages />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
 								path="/rfq-center"
 								element={
 									<ProtectedRoute>
@@ -173,6 +183,14 @@ const createRoutes: React.FC = () => {
 								element={
 									<ProtectedRoute>
 										<HelpAndSupportPage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="search-results"
+								element={
+									<ProtectedRoute>
+										<SearchResultsPage />
 									</ProtectedRoute>
 								}
 							/>

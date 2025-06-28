@@ -1,5 +1,6 @@
 import CreateRfqPopup from "components/common/CreateRfqPopup";
 import RfqSupplierCard from "components/common/RfqsSupplierCard";
+import RfqsSupplierListCard from "components/common/RfqsSupplierListCard";
 import { Supplier } from "components/common/SupplierCard";
 import { Button } from "components/utils/Button";
 import { RfqCenterInbox, RfqCenterSent } from "components/utils/consts";
@@ -7,7 +8,24 @@ import Icon from "components/utils/Icon";
 import { useAppState } from "components/utils/useAppState";
 import { cn } from "lib/utils";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import SimpleBar from "simplebar-react";
+
+const dummySupplier = {
+	id: "dummy-1",
+	name: "Dummy Supplier",
+	image: "/dummy.jpg",
+	country: "India",
+	rating: 4.5,
+	isBookmarked: false,
+	isVIP: true,
+	isVerified: true,
+	moq: 1000,
+	location: "Mumbai",
+	responseRate: 95,
+	tags: [{ label: "LED" }, { label: "Electronics" }]
+};
+
 
 const RfqCenter = () => {
 	const [{ isDark, isExpanded }, setAppState] = useAppState();
@@ -16,15 +34,36 @@ const RfqCenter = () => {
 	const [listInbox, setListInbox] = useState<Supplier[]>([]);
 	const [listSent, setListSent] = useState<Supplier[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
-	const [selectedTab, setSelectedTab] = useState<"inbox" | "sent">("inbox");
+	const location = useLocation();
+	const initialTab = location.state?.defaultTab === "sent" ? "sent" : "inbox";
+	const [selectedTab, setSelectedTab] = useState<"inbox" | "sent">(initialTab);
+	const [selectedSupplier, setSelectedSupplier] = useState<any>({});
+	const [isEditMode, setIsEditMode] = useState(false);
+	const [layout, setLayout] = useState<"grid" | "list">("grid");
+	const state = location.state as {
+	defaultTab?: "inbox" | "sent";
+	filteredSuppliers?: Supplier[];
+};
+
+useEffect(() => {
+	if (state?.filteredSuppliers?.length) {
+	console.log("if")
+		setListInbox(state.filteredSuppliers);
+		setLoading(false);
+	} else {
+	console.log("else")
+		setLoading(true);
+		setListInbox(RfqCenterInbox);
+		setListSent(RfqCenterSent);
+		setLoading(false);
+	}
+}, []);
 
 	useEffect(() => {
 		// Simulating API call
 		const fetchSuppliers = async () => {
 			setLoading(true);
 			try {
-				// Replace with actual API call
-				await new Promise(resolve => setTimeout(resolve, 1000));
 				setListInbox(RfqCenterInbox);
 				setListSent(RfqCenterSent);
 			} catch (error) {
@@ -55,7 +94,9 @@ const RfqCenter = () => {
 	};
 
 	const handleSendRFQ = (supplierId: string) => {
-		// Implement RFQ functionality
+		setSelectedSupplier(dummySupplier);
+		setIsEditMode(true);
+		setIsOpen(true);
 		console.log("Send RFQ for supplier:", supplierId);
 	};
 
@@ -101,17 +142,25 @@ const RfqCenter = () => {
 
 							<div className="inline-flex items-center justify-center sm:gap-3 gap-2 relative flex-[0_0_auto]">
 								<Button
+									onClick={() => setLayout("grid")}
 									variant="none"
-									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-[6px] sm:!p-2 relative bg-tgc dark:bg-fgcDark rounded-[50px]">
+									className={cn(
+										"flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 sm:!p-2 !p-[6px] rounded-[50px]",
+										layout === "grid" ? "bg-primary dark:bg-primary" : "bg-tgc dark:bg-fgcDark"
+									)}>
 									<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon={isDark ? "checkerboard-dark" : "checker-board"} />
 								</Button>
 
 								<Button
+									onClick={() => setLayout("list")}
 									variant="none"
-									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc dark:bg-fgcDark rounded-[50px]">
+									className={cn(
+										"flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 sm:!p-2 !p-[6px] rounded-[50px]",
+										layout === "list" ? "bg-primary dark:bg-primary" : "bg-tgc dark:bg-fgcDark"
+									)}>
 									<Icon
 										className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]"
-										icon={isDark? "squarehalfbottom-dark" : "square-half-bottom"}
+										icon={isDark ? "squarehalfbottom-dark" : "square-half-bottom"}
 									/>
 								</Button>
 
@@ -124,7 +173,13 @@ const RfqCenter = () => {
 										<Icon icon="plus" className="h-full w-full" />
 									</div>
 
-									<div className="relative w-fit font-medium text-white sm:text-sm text-xs sm:leading-[21px]  leading-[150%] whitespace-nowrap">
+									<div
+										onClick={() => {
+											setSelectedSupplier({});
+											setIsEditMode(false);
+											setIsOpen(true);
+										}}
+										className="relative w-fit font-medium text-white sm:text-sm text-xs sm:leading-[21px]  leading-[150%] whitespace-nowrap">
 										Create RFQ
 									</div>
 								</Button>
@@ -135,7 +190,15 @@ const RfqCenter = () => {
 					{/* Supplier Cards */}
 					<div className="w-full">
 						<div
-							className={`grid 3xl:grid-cols-4 2xl:grid-cols-3 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full ${isExpanded ? "md:grid-cols-1" : "md:grid-cols-2"}`}>
+							// className={`grid 3xl:grid-cols-4 2xl:grid-cols-3 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full ${isExpanded ? "md:grid-cols-1" : "md:grid-cols-2"}`}
+							className={cn(
+								"grid items-start relative w-full",
+								layout === "list"
+									? "grid-cols-1 rounded-2xl sm:rounded-[20px] overflow-hidden"
+									: "grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 sm:gap-6 gap-4",
+								layout === "grid" && (isExpanded ? "md:grid-cols-1" : "md:grid-cols-2")
+							)}
+						>
 							{loading ? (
 								// Loading skeleton
 								<>
@@ -160,21 +223,38 @@ const RfqCenter = () => {
 									))}
 								</>
 							) : (
-								(selectedTab === "inbox" ? listInbox : listSent).map(supplier => (
-									<RfqSupplierCard
-										key={supplier.id}
-										supplier={supplier}
-										isRfqSent={selectedTab === "inbox" ? false : true}
-										onViewProfile={() => handleViewProfile(supplier.id)}
-										onSendRFQ={() => handleSendRFQ(supplier.id)}
-									/>
-								))
+								layout === "grid" ? (
+									(selectedTab === "inbox" ? listInbox : listSent).map(supplier => (
+										// <div
+										// 	key={supplier.id}
+										// 	data-highlight={supplier.name.toLowerCase()}
+										// >
+											<RfqSupplierCard
+												key={supplier.id}
+												supplier={supplier}
+												isRfqSent={selectedTab === "inbox" ? false : true}
+												onViewProfile={() => handleViewProfile(supplier.id)}
+												onSendRFQ={() => handleSendRFQ(supplier.id)}
+											/>
+										// </div>
+									))
+								) : (
+									(selectedTab === "inbox" ? listInbox : listSent).map(supplier => (
+										<RfqsSupplierListCard
+											key={supplier.id}
+											supplier={supplier}
+											isRfqSent={selectedTab === "inbox" ? false : true}
+											onViewProfile={() => handleViewProfile(supplier.id)}
+											onSendRFQ={() => handleSendRFQ(supplier.id)}
+										/>
+									))
+								)
 							)}
 						</div>
 					</div>
 				</div>
 			</SimpleBar>
-			{isOpen && <CreateRfqPopup isOpen={isOpen} setIsOpen={setIsOpen} />}
+			{isOpen && <CreateRfqPopup isOpen={isOpen} setIsOpen={setIsOpen} supplier={selectedSupplier} isEdit={isEditMode} />}
 		</div>
 	);
 };

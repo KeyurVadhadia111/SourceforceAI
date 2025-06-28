@@ -11,7 +11,7 @@ const SubscriptionPage = () => {
 			title: "Basic",
 			price: 29,
 			frequency: "month",
-			description: "Lorem Ipsum is simply dummy text of the",
+			description: "Designed for individuals or small teams to access core features and manage supplier interactions.",
 			features: [
 				"100 AI Chat Queries/month",
 				"Basic Support",
@@ -26,7 +26,7 @@ const SubscriptionPage = () => {
 			title: "Professional",
 			price: 99,
 			frequency: "month",
-			description: "Lorem Ipsum is simply dummy text of the",
+			description: "Perfect for growing businesses needing advanced features, analytics, and priority support.",
 			features: [
 				"500 AI Chat Queries/month",
 				"Priority Support",
@@ -42,7 +42,7 @@ const SubscriptionPage = () => {
 			title: "Enterprise",
 			price: 299,
 			frequency: "month",
-			description: "Lorem Ipsum is simply dummy text of the",
+			description: " Built for large organizations with unlimited access, team collaboration, and dedicated support.",
 			features: [
 				"2000 AI Chat Queries",
 				"Dedicated Support Team",

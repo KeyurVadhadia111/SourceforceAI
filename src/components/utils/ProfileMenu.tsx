@@ -2,6 +2,7 @@ import React from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { useAppState } from "./useAppState";
 import { Link } from "react-router-dom";
+import Icon from "./Icon";
 
 interface Props {}
 
@@ -40,7 +41,8 @@ const ProfileMenu: React.FC<Props> = () => {
 					<MenuItem>
 						<Link
 							to="/profile"
-							className={`block px-4 py-1.5 text-sm data-focus:bg-gray-100 data-focus:outline-hidden hover:bg-bgc dark:hover:bg-bgcDark font-medium ${location.pathname === "/profile" ? "text-primary" : "text-text dark:text-textDark"}`}>
+							className={`flex gap-2 items-center px-4 py-1.5 text-sm data-focus:bg-gray-100 data-focus:outline-hidden hover:bg-bgc dark:hover:bg-bgcDark font-medium ${location.pathname === "/profile" ? "text-primary" : "text-text dark:text-textDark"}`}>
+								<Icon icon={isDark ? "user-dark" : "user"} className={`w-[18px] h-[18px]`} />
 							Profile
 						</Link>
 					</MenuItem>
@@ -48,11 +50,12 @@ const ProfileMenu: React.FC<Props> = () => {
 					<MenuItem>
 						<Link
 							to="/login"
-							className="block px-4 py-1.5 text-sm text-text dark:text-textDark data-focus:bg-gray-100 data-focus:outline-hidden hover:bg-bgc dark:hover:bg-bgcDark font-medium"
+							className="flex gap-2 items-center px-4 py-1.5 text-sm text-text dark:text-textDark data-focus:bg-gray-100 data-focus:outline-hidden hover:bg-bgc dark:hover:bg-bgcDark font-medium"
 							onClick={() => {
 								localStorage.removeItem("auth");
 								setAppState({ userDetails: {} });
 							}}>
+								<Icon icon={isDark ? "logout" : "logout-light"} className={`w-[18px] h-[18px]`} />
 							Logout
 						</Link>
 					</MenuItem>

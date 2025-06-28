@@ -1,4 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import DeletePopup from "components/common/DeletePopup";
 import ProfileLayout from "components/common/ProfileLayout";
 import Icon from "components/utils/Icon";
 import { Input } from "components/utils/Input";
@@ -16,6 +17,8 @@ const ProfileSettingPage = () => {
 		googleEmail: true,
 		appleEmail: true,
 	});
+	const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+	const [deleteItemType, setDeleteItemType] = useState("User");
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
@@ -189,16 +192,28 @@ const ProfileSettingPage = () => {
 					</div>
 
 					<p className="relative self-stretch [font-family:'Satoshi',Helvetica] font-normal text-textSecondary dark:text-textSecondaryDark sm:text-base text-xs tracking-[0] leading-[150%]">
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+						Deleting your account will permanently erase your all data. This action cannot be undone.
 					</p>
 				</div>
 
-				<div className="max-sm:w-full inline-flex items-center justify-center gap-2.5 px-8 sm:py-4 py-[15px] relative flex-[0_0_auto] bg-[#db2222] rounded-[40px]">
+				<div onClick={() => {
+					setDeleteItemType("User");
+					setIsDeleteOpen(true);
+				}} className="max-sm:w-full cursor-pointer inline-flex items-center justify-center gap-2.5 px-8 sm:py-4 py-[15px] relative flex-[0_0_auto] bg-[#db2222] rounded-[40px]">
 					<div className="relative w-fit [font-family:'Satoshi',Helvetica] font-medium text-white sm:text-base text-xs tracking-[0] leading-[150%] whitespace-nowrap">
 						Delete Account
 					</div>
 				</div>
 			</div>
+			<DeletePopup
+				isOpen={isDeleteOpen}
+				setIsOpen={setIsDeleteOpen}
+				name={{ name: "This User" }}
+				onDelete={() => {
+					console.log("Pretend delete");
+				}}
+				itemType={deleteItemType}
+			/>
 		</ProfileLayout>
 	);
 };

@@ -65,9 +65,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 							error
 								? "!border !border-red-500 focus-visible:!ring-red-500"
 								: "focus-visible:ring-neutral-300",
+							inputType === "number" &&
+							  "appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0 [-moz-appearance:textfield]",
 							className,
 							icon && "sm:pl-[61px] pl-[44px]",
 						)}
+						style={inputType === "number" ? { MozAppearance: 'textfield' } : {}}
 						disabled={disabled}
 						ref={ref}
 						{...props}

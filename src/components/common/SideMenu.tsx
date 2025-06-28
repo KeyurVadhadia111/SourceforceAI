@@ -70,7 +70,6 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 				{ id: "country", label: "China" },
 				{ id: "shippingTime", label: "1-3 Days" },
 				{ id: "price", label: "$3 - $12" },
-				{ id: "rating", label: "4+ Stars" },
 				{ id: "payment", label: "Credit/Debit" },
 				{ id: "certification", label: "ISO Certified" },
 				{ id: "verificationStatus", label: "Verified" },
@@ -297,6 +296,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 												<Select
 													icon={isDark ? "prohibit-dark" :"prohibit"}
 													variant="secondary"
+													className="no-scrollbar"
 													id="12"
 													value={excludeCountries}
 													onChange={e => {
@@ -445,7 +445,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 												</div>
 											</div>
 
-											<div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
+											{/* <div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
 												<div className="relative w-fit font-medium text-text dark:text-textDark sm:text-xl text-base leading-[150%] whitespace-nowrap">
 													Minimum Rating
 												</div>{" "}
@@ -463,7 +463,7 @@ const SideMenu: React.FC<RequestType> = ({ isOpen, setIsOpen, openFrom }) => {
 														/>
 													))}
 												</div>
-											</div>
+											</div> */}
 										</div>
 									</SimpleBar>
 

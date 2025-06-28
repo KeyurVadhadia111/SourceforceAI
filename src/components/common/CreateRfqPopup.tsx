@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { cn } from "lib/utils";
 import Icon from "components/utils/Icon";
@@ -11,9 +11,54 @@ import SimpleBar from "simplebar-react";
 type RequestType = {
 	isOpen: boolean;
 	setIsOpen: (fl: boolean) => void;
+	isEdit?: boolean;
+	supplier?: any;
 };
 
-const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
+
+const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen, supplier, isEdit = false }) => {
+
+	const [productTitle, setProductTitle] = useState("");
+	const [selectedSupplier, setSelectedSupplier] = useState("");
+	const [category, setCategory] = useState("");
+	const [country, setCountry] = useState("");
+	const [quantity, setQuantity] = useState("");
+	const [unit, setUnit] = useState("");
+	const [targetPrice, setTargetPrice] = useState("");
+	const [hsCode, setHsCode] = useState("");
+	const [shippingAddress, setShippingAddress] = useState("");
+	const [message, setMessage] = useState("");
+
+	useEffect(() => {
+		if (isEdit && supplier) {
+			setProductTitle("LED Strip Lights 5050 SMD");
+			setSelectedSupplier(supplier.name || "Dummy Supplier");
+			setCategory("Electronics");
+			setCountry("IN");
+			setQuantity("1000");
+			setUnit("pieces");
+			setTargetPrice("$1.50");
+			setHsCode("8543.70.00");
+			setShippingAddress("123, Dummy Street, Mumbai");
+			setMessage("Please ensure quality and timely delivery.");
+			setSelectedImage(null);
+		} else {
+			// Clear fields when not in edit mode (i.e., Create RFQ)
+			setProductTitle("");
+			setSelectedSupplier("");
+			setCategory("");
+			setCountry("");
+			setQuantity("");
+			setUnit("");
+			setTargetPrice("");
+			setHsCode("");
+			setShippingAddress("");
+			setMessage("");
+			setSelectedImage(null);
+		}
+	}, [isEdit, supplier]);
+
+
 	const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +109,7 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 									<div className="w-full px-6 sm:px-0">
 										<div className="flex items-center justify-between sm:p-[30px] pt-6 pb-4 relative self-stretch w-full flex-[0_0_auto] border-b border-border dark:border-borderDark">
 											<div className="relative w-fit font-bold text-text dark:text-textDark sm:text-2xl text-lg text-center leading-[140%] whitespace-nowrap">
-												Create New RFQ
+												{isEdit ? "Edit RFQ" : "Create New RFQ"}
 											</div>
 
 											<Icon
@@ -85,27 +130,40 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 												placeholder="e.g., LED Strip Lights 5050 SMD"
 												label="Product Title"
 												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm"
+												value={productTitle}
+												onChange={(e) => setProductTitle(e.target.value)}
 												required
 											/>
 											<Select
 												variant="transparentBorder"
 												label="Supplier"
-												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm">
+												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm"
+												value={selectedSupplier}
+												onChange={(e: any) => setSelectedSupplier(e.target.value)}
+											>
 												<option value="">Select Supplier</option>
-												<option value="Supplier 1">Supplier 1</option>
+												<option value="Dummy Supplier">Dummy Supplier</option>
 											</Select>
 
 											<Select
 												variant="transparentBorder"
 												label="Product Category"
-												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm">
+												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm"
+												value={category}
+												onChange={(e: any) => setCategory(e.target.value)}
+											>
 												<option value="">Select Category</option>
+												<option value="Electronics">Electronics</option>
+												<option value="Lighting">Lighting</option>
 											</Select>
 
 											<Select
 												variant="transparentBorder"
 												label="Preferred Country of Origin"
-												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm ">
+												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm "
+												value={country}
+												onChange={(e: any) => setCountry(e.target.value)}
+											>
 												<option value="">Select Country</option>
 												{countryOptions.map(country => (
 													<option key={country.value} value={country.value}>
@@ -119,12 +177,17 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 												placeholder="e.g., 5000"
 												label="Quantity Required"
 												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm flex-1"
+												value={quantity}
+												onChange={(e: any) => setQuantity(e.target.value)}
 												required
 											/>
 											<Select
 												variant="transparentBorder"
 												label="Unit of Measurement"
-												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm w-40">
+												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm w-40"
+												value={unit}
+												onChange={(e: any) => setUnit(e.target.value)}
+											>
 												<option value="">Select Unit</option>
 												<option value="pieces">Pieces</option>
 												<option value="sets">Sets</option>
@@ -135,6 +198,8 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 												placeholder="e.g., $1.50 per piece"
 												label="Target Price (Optional)"
 												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm flex-1"
+												value={targetPrice}
+												onChange={(e: any) => setTargetPrice(e.target.value)}
 											/>
 
 											<Input
@@ -142,6 +207,8 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 												placeholder="e.g., 8543.70.00"
 												label="HS Code (Optional)"
 												className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm w-40"
+												value={hsCode}
+												onChange={(e: any) => setHsCode(e.target.value)}
 											/>
 											<Icon
 												icon="information-circle"
@@ -153,6 +220,8 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 													placeholder="Enter your Shipping Address"
 													label="Shipping Address"
 													className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm"
+													value={shippingAddress}
+													onChange={(e: any) => setShippingAddress(e.target.value)}
 												/>
 											</div>
 
@@ -162,6 +231,8 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 													variant="transparentBorder"
 													label="Message/Note"
 													className="placeholder:text-textSecondary dark:placeholder:text-textSecondaryDark dark:bg-fgcDark placeholder:text-sm"
+													value={message}
+													onChange={(e: any) => setMessage(e.target.value)}
 												/>
 											</div>
 
@@ -221,6 +292,9 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 										<div className="flex items-center justify-end gap-[223px] sm:p-[30px] py-6 relative self-stretch w-full flex-[0_0_auto] border-t border-border dark:border-borderDark">
 											<div className="inline-flex items-center sm:gap-4 gap-[14px] relative flex-[0_0_auto]">
 												<Button
+													onClick={() => {
+														setIsOpen(false);
+													}}
 													variant="outline"
 													className="!border-primary sm:gap-2.5 gap-2 px-8 py-4">
 													<div className="relative [font-family:'Satoshi-Medium',Helvetica] font-medium text-primary sm:text-base text-sm leading-[150%] whitespace-nowrap">
@@ -234,7 +308,7 @@ const CreateRfqPopup: React.FC<RequestType> = ({ isOpen, setIsOpen }) => {
 													}}
 													className="sm:gap-2.5 gap-2 px-8 py-4">
 													<div className="relative w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-white sm:text-base text-sm tracking-[0] leading-[150%] whitespace-nowrap">
-														Create RFQ
+														{isEdit ? "Save RFQ" : "Create RFQ"}
 													</div>
 												</Button>
 											</div>

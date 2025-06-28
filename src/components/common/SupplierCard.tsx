@@ -4,6 +4,7 @@ import { Button } from "components/utils/Button";
 import { useAppState } from "components/utils/useAppState";
 
 interface Tag {
+	id?: string;
 	label: string;
 }
 
@@ -20,6 +21,8 @@ export interface Supplier {
 	location: string;
 	responseRate: number;
 	tags: Tag[];
+	status: string;
+	lastSeen?: string;
 }
 
 interface SupplierCardProps {
@@ -42,44 +45,41 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 		<div className="flex flex-col h-full items-start justify-center sm:gap-4 gap-3 sm:p-[15px] p-[11px] relative flex-1 grow bg-white dark:bg-fgcDark rounded-[20px] border border-border dark:border-borderDark self-stretch">
 			<div className="flex flex-col items-start sm:gap-3 gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
 				<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
-					<div className="flex items-start justify-between relative flex-1 grow">
-						<div className="inline-flex items-center gap-2 sm:gap-3 relative flex-[0_0_auto]">
-							<img
-								className="relative sm:w-[42px] sm:h-[42px] w-[32px] h-[32px]"
-								alt={`${supplier.name} logo`}
-								src={supplier.image}
-							/>
+					<div className="flex items-start justify-between gap-3 w-full">
+						{/* Left: Image + Supplier Details */}
+						<div className="flex items-start gap-3 flex-1 min-w-0">
+							<div className="relative">
+								<img
+									className="sm:w-[42px] sm:h-[42px] w-[32px] h-[32px] flex-shrink-0"
+									alt={`${supplier.name} logo`}
+									src={supplier.image}
+								/>
+								<div className={`w-2 h-2 rounded-full absolute bottom-1 right-0 ${supplier.status === "online" ? "bg-green" : ""}`}></div>
+							</div>
+							{/* Text container */}
+							<div className="flex flex-col gap-1 flex-1 min-w-0">
+								{/* Supplier Name (wraps to next line if needed) */}
+								<div className="font-bold text-start leading-[150%] text-text dark:text-textDark break-words whitespace-normal">
+									{supplier.name}
+								</div>
 
-							<div className="inline-flex items-start sm:gap-3 sgap-2.5 relative flex-[0_0_auto]">
-								<div className="inline-flex flex-col items-start gap-0.5 sm:gap-1 relative flex-[0_0_auto]">
-									<div className="relative w-fit dark:text-textDark font-bold text-center tracking-[0] leading-[150%] whitespace-nowrap truncate">
-										{supplier.name}
-									</div>
-
-									<div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-										<div className="relative w-fit text-textSecondary dark:text-textSecondaryDark sm:text-sm tracking-[0] leading-[150%] whitespace-nowrap text-xs">
-											{supplier.country}
-										</div>
-
-										<div className="relative sm:!w-1.5 sm:!h-1.5 !h-1 !w-1 bg-border rounded-[3px]" />
-
-										<div className="flex items-center gap-1 relative flex-[0_0_auto]">
-											<Icon
-												icon="star"
-												className="text-yellow sm:!w-4 sm:!h-4 !w-[14px] !h-[14px] "
-											/>
-											<div className="text-textSecondary dark:text-textSecondaryDark relative w-fit sm:text-sm text-[10px] tracking-[0] leading-[150%] whitespace-nowrap">
-												{supplier.rating}
-											</div>
-										</div>
-									</div>
+								{/* Country + Rating */}
+								<div className="flex items-center gap-2.5 text-xs sm:text-sm text-textSecondary dark:text-textSecondaryDark flex-wrap">
+									{/* <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-border rounded-[3px]" /> */}
+									<span>{supplier.country}</span>
+									{/* <div className="flex items-center gap-1">
+										<Icon icon="star" className="text-yellow w-[14px] h-[14px] sm:w-4 sm:h-4" />
+										<span>{supplier.rating}</span>
+									</div> */}
 								</div>
 							</div>
 						</div>
 
+						{/* Right: Bookmark icon */}
 						<button
 							onClick={() => onBookmarkToggle(supplier.id)}
-							className="relative sm:w-6 sm:h-6 w-5 h-5 hover:opacity-80 transition-opacity">
+							className="sm:w-6 sm:h-6 w-5 h-5 hover:opacity-80 transition-opacity flex-shrink-0"
+						>
 							<Icon
 								icon={
 									isBookmarked
@@ -89,12 +89,12 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 											: "bookmark"
 								}
 								size={24}
-								className={
-									isBookmarked ? "text-primary w-5 h-5" : "text-border sm:!w-6 sm:!h-6 !w-5 !h-5"
-								}
+								className={`${isBookmarked ? "text-primary" : "text-border"
+									} sm:w-6 sm:h-6 w-5 h-5`}
 							/>
 						</button>
 					</div>
+
 				</div>
 
 				<div className="flex sm:h-[26px] h-[22px] items-center gap-2.5 relative self-stretch w-full">
@@ -129,7 +129,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 								MOQ: {supplier.moq} pieces
 							</div>
 						</div>
-						<div className="relative w-fit dark:text-textDark font-medium text-primary sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
+						<div className="relative w-fit font-medium text-primary sm:text-xs tracking-[0] leading-[150%] text-[10px] whitespace-nowrap">
 							{supplier.responseRate}% response
 						</div>
 					</div>
@@ -155,14 +155,14 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 				))}
 			</div>
 
-			<div className="flex items-center sm:gap-4 gap-3 relative self-stretch w-full">
+			<div className="flex items-center flex-row-reverse sm:gap-4 gap-3 relative self-stretch w-full">
 				<Button
-					className="sm:h-10 h-[34px] grow sm:text-sm text-xs !text-primary border-primary hover:bg-primary/10 w-full !font-medium"
+					className="!hidden sm:h-10 h-[34px] grow sm:text-sm text-xs !text-primary border-primary hover:bg-primary/10 w-full !font-medium"
 					onClick={onViewProfile}
 					variant="outline">
 					View Profile
 				</Button>
-				<Button className="sm:h-10 h-[34px] grow sm:text-sm text-xs w-full !font-medium" onClick={onSendRFQ}>
+				<Button className="sm:h-10 h-[34px] sm:text-sm text-xs w-1/2 !font-medium" onClick={onSendRFQ}>
 					Send RFQ
 				</Button>
 			</div>

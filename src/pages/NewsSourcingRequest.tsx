@@ -11,6 +11,12 @@ import { Badge, Card } from "components/utils/Card";
 import { Separator } from "components/utils/Separator";
 import { Input } from "components/utils/Input";
 import { Menu } from "@headlessui/react";
+import FilterTag from "components/common/FilterTag";
+import RfqSupplierListCard from "components/common/SupplierListCard";
+import { useLocation, useNavigate } from "react-router-dom";
+import { prepareDataForExport, exportAsCSV, exportAsExcel, exportAsPDF } from "components/utils/ExportData";
+import { toast } from "components/utils/toast";
+import SentRfqPopup from "components/common/SentRfqPopup";
 
 const categories = [
 	{ title: "LED Light Strips", icon: "" },
@@ -20,25 +26,81 @@ const categories = [
 	{ title: "More", icon: "menu" },
 ];
 
-const options = ["Pro", "Standard", "Enterprise"];
+const options = ["Basic", "Professional", "Enterprise"];
 const exportOptions = ['PDF', 'CSV', 'Excel'];
-const createOptions = ['New Report', 'New Template'];
+const createOptions = ['New RFQ'];
+
+
+interface FilterTag {
+	id: string;
+	label: string;
+}
+
+const initialFilterTags: FilterTag[] = [
+	{ id: "country", label: "China" },
+	{ id: "delivery", label: "1–3 Days" },
+	{ id: "price", label: "$3 – $12" },
+	{ id: "payment", label: "Credit/Debit" },
+	{ id: "certification", label: "ISO Certified" },
+];
 
 
 const NewsSourcingRequest = () => {
 	const [step, setStep] = useState(1);
-	const [{ isDark, isExpanded }, setAppState] = useAppState();
-	const [selected, setSelected] = useState("Pro");
+	const [{ isDark, isExpanded, supplierSearchQueries, searchQuery }, setAppState] = useAppState();
+	const [selected, setSelected] = useState("Basic");
 	const [dropUp, setDropUp] = useState(false);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [alignRight, setAlignRight] = useState(false);
+	const [reactions, setReactions] = useState<{ [index: number]: "like" | "dislike" | null }>({});
+	const [layout, setLayout] = useState<"grid" | "list">("grid");
+	const [filterTags, setFilterTags] = useState<FilterTag[]>(supplierSearchQueries);
+	const location = useLocation();
+	const navigate = useNavigate();
+	const [isSentPopupOpen, setIsSentPopupOpen] = useState(false);
+	const [selectedSupplierId, setSelectedSupplierId] = useState<string | null>(null);
+	const handleReaction = (index: number, type: "like" | "dislike") => {
+		setReactions((prev) => ({
+			...prev,
+			[index]: prev[index] === type ? null : type,
+		}));
+	};
+
+
+	useEffect(() => {
+		setFilterTags(supplierSearchQueries);
+
+		return () => {
+			true;
+		};
+	}, [supplierSearchQueries]);
+
 
 	const handleOpen = () => {
 		const rect = buttonRef.current?.getBoundingClientRect();
 		if (rect) {
 			const spaceBelow = window.innerHeight - rect.bottom;
-			const dropdownHeight = options.length * 40;
+			const dropdownHeight = options.length * 360;
+			setDropUp(spaceBelow < dropdownHeight);
+
+			const dropdownWidth = 160;
+			const spaceRight = window.innerWidth - rect.left;
+			const spaceLeft = rect.right;
+
+			if (spaceRight < dropdownWidth && spaceLeft >= dropdownWidth) {
+				setAlignRight(true);
+			} else {
+				setAlignRight(false);
+			}
+		}
+	};
+
+	const handlePopoverOpen = () => {
+		const rect = buttonRef.current?.getBoundingClientRect();
+		if (rect) {
+			const spaceBelow = window.innerHeight - rect.bottom;
+			const dropdownHeight = createOptions.length * 40;
 			setDropUp(spaceBelow < dropdownHeight);
 
 			const dropdownWidth = 160;
@@ -54,22 +116,22 @@ const NewsSourcingRequest = () => {
 	};
 
 
-	const engagementPoints = [
-		"Identify the common characteristics and features of leading B2B platforms that facilitate high engagement and positive feedback.",
-		"Research best practices for optimizing company profiles and listings on B2B platforms to attract attention and encourage interaction.",
-		"Investigate the primary factors that contribute to high response rates from potential clients or partners on B2B platforms, including...",
-	];
+	// const engagementPoints = [
+	// 	"Identify the common characteristics and features of leading B2B platforms that facilitate high engagement and positive feedback.",
+	// 	"Research best practices for optimizing company profiles and listings on B2B platforms to attract attention and encourage interaction.",
+	// 	"Investigate the primary factors that contribute to high response rates from potential clients or partners on B2B platforms, including...",
+	// ];
 	const statistics = [
 		{
 			icon: "supplier",
-			value: "14",
+			value: suppliers.length.toString(),
 			label: "Suppliers Found",
 		},
-		{
-			icon: "rating",
-			value: "4.3",
-			label: "Avg Rating",
-		},
+		// {
+		// 	icon: "rating",
+		// 	value: "4.3",
+		// 	label: "Avg Rating",
+		// },
 		{
 			icon: "review",
 			value: "89%",
@@ -83,7 +145,7 @@ const NewsSourcingRequest = () => {
 	];
 
 	// Data for filter tags
-	const filterTags = ["Kitchen Appliances", "Portable", "OEM Available"];
+	// const filterTags = ["Kitchen Appliances", "Portable", "OEM Available"];
 
 	const [bookmarkedSuppliers, setBookmarkedSuppliers] = useState<Set<string>>(new Set());
 	const [loading, setLoading] = useState(true);
@@ -91,6 +153,10 @@ const NewsSourcingRequest = () => {
 	const [showSummary, setShowSummary] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
+	// const state = location.state as {
+	// 	defaultTab?: "inbox" | "sent";
+	// 	filteredSuppliers?: Supplier[];
+	// };
 	// Update messages state to support files property for user messages
 	const [messages, setMessages] = useState<
 		Array<{
@@ -104,17 +170,40 @@ const NewsSourcingRequest = () => {
 			}>;
 		}>
 	>([
-		{
-			text: "I need top suppliers for portable blenders from China with high response rates and good reviews.",
-			from: "user",
-		},
-		{
-			text: "Here are top-rated suppliers for portable blenders from China. Filtered by high response rates (>85%) and average rating above 4.0.",
-			from: "ai",
-		},
+		// {
+		// 	text: "Here are top-rated suppliers for portable blenders from China. Filtered by high response rates (>85%) and average rating above 4.0.",
+		// 	from: "ai",
+		// },
 	]);
 	const [inputValue, setInputValue] = useState("");
 	const simpleBarRef = useRef<any>(null);
+
+	// useEffect(() => {
+	// 	if (state?.filteredSuppliers?.length) {
+	// 		setDisplaySuppliers(state.filteredSuppliers);
+	// 		setLoading(false);
+	// 	} else {
+	// 		setLoading(true);
+	// 		setDisplaySuppliers(suppliers);
+	// 		setLoading(false);
+	// 	}
+	// }, []);
+
+	// useEffect(() => {
+	// 	// Simulating API call
+	// 	const fetchSuppliers = async () => {
+	// 		setLoading(true);
+	// 		try {
+	// 			setDisplaySuppliers(suppliers);
+	// 		} catch (error) {
+	// 			console.error("Error fetching suppliers:", error);
+	// 		} finally {
+	// 			setLoading(false);
+	// 		}
+	// 	};
+
+	// 	fetchSuppliers();
+	// }, []);
 
 	useEffect(() => {
 		// Simulating API call
@@ -148,6 +237,7 @@ const NewsSourcingRequest = () => {
 
 	function useIsMobile() {
 		const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
+		console.log("isMobile", isMobile)
 		useEffect(() => {
 			const onResize = () => setIsMobile(window.innerWidth <= 1024);
 			window.addEventListener("resize", onResize);
@@ -161,42 +251,91 @@ const NewsSourcingRequest = () => {
 		console.log("View profile for supplier:", supplierId);
 	};
 
+	// const handleSendRFQ = (supplierId: string) => {
+	// 	navigate("/rfq-center", { state: { defaultTab: "sent" } });
+	// 	console.log("Send RFQ for supplier:", supplierId);
+	// 	toast.success("Send RFQ successful!");
+
+	// };
+
 	const handleSendRFQ = (supplierId: string) => {
-		// Implement RFQ functionality
-		console.log("Send RFQ for supplier:", supplierId);
+		setIsSentPopupOpen(true);
+		setSelectedSupplierId(supplierId);
+	};
+
+	const confirmSendRFQ = () => {
+		if (!selectedSupplierId) return;
+
+		navigate("/rfq-center", { state: { defaultTab: "sent" } });
+		toast.success("RFQ Sent successfully!!");
+		setSelectedSupplierId(null);
+	};
+
+	const handleRemoveFilter = (tagId: string) => {
+		setFilterTags(prevTags => prevTags.filter(tag => tag.id !== tagId));
+		setAppState({ supplierSearchQueries: supplierSearchQueries.filter((tag: any) => tag.id !== tagId) });
 	};
 
 	const isMobile = useIsMobile();
+	const [hasSentMessage, setHasSentMessage] = useState(false);
 
 	// Update handleSend to include files in user messages
 	const handleSend = () => {
 		if (!inputValue.trim() && attachedFiles.length === 0) return;
+		const trimmedInput = inputValue.trim().toLowerCase();
+		let shouldShowSummary = false;
+
+		let aiResponse = "We are looking into your request, Thank you !";
+
+		if (trimmedInput === "hello") {
+			aiResponse = "Hello there! What information are you looking for today?";
+		} else if (trimmedInput.includes("how are you")) {
+			aiResponse =
+				"I'm doing well, thank you for asking! I'm ready to help you find the trade data you need. What are you looking for?";
+		} else if (trimmedInput.includes("list of supplier")) {
+			shouldShowSummary = true;
+			aiResponse =
+				"Here are top-rated suppliers for portable blenders from China, filtered by high response rates (above 85%) and average ratings over 4.0.";
+		}
+
+		const userMessage = {
+			text: inputValue,
+			from: "user",
+			files:
+				attachedFiles.length > 0
+					? attachedFiles.map(file => ({
+						name: file.name,
+						type: file.type,
+						url: URL.createObjectURL(file),
+						isImage: file.type.startsWith("image/"),
+					}))
+					: undefined,
+		};
+
+		const aiMessage = {
+			text: aiResponse,
+			from: "ai",
+		};
+
 		setIsLoading(true);
 		setTimeout(() => {
-			setMessages(prev => [
-				...prev,
-				{
-					text: inputValue,
-					from: "user",
-					files:
-						attachedFiles.length > 0
-							? attachedFiles.map(file => ({
-								name: file.name,
-								type: file.type,
-								url: URL.createObjectURL(file),
-								isImage: file.type.startsWith("image/"),
-							}))
-							: undefined,
-				},
-				{ text: "We are looking into your request, Thank you !", from: "ai" },
-			]);
-			setIsLoading(false);
-			setStep(2);
+			setMessages(prev => [...prev, userMessage, aiMessage]);
 
+			// Now set summary only after message is displayed
+			if (shouldShowSummary) {
+				setShowSummary(true);
+				setStep(2);
+			}
+
+			setIsLoading(false);
+			setHasSentMessage(true);
 		}, 1500);
+
 		setInputValue("");
 		setAttachedFiles([]);
 	};
+
+
 
 	useEffect(() => {
 		if (simpleBarRef.current) {
@@ -216,14 +355,14 @@ const NewsSourcingRequest = () => {
 	return (
 		<div
 			className={cn(
-				"flex px-0 sm:px-5 w-full py-6 sm:py-0",
+				"flex px-0 min-[1025px]:lg:px-5 w-full py-6 sm:py-0",
 				step === 1
-					? "flex-col justify-center items-center sm:h-[calc(100dvh-104px)] h-[calc(100dvh-56px)] overflow-auto"
-					: "lg:flex-row flex-col",
+					? `${showSummary && isMobile ? "lg:flex-row" : "flex-col"} justify-center px-5 lg:px-0 items-center sm:h-[calc(100dvh-104px)] h-[calc(100dvh-56px)] overflow-auto`
+					: "min-[1025px]:lg:flex-row flex-col",
 			)}>
 			{/* Content */}
-			<div className={cn("w-full", step === 1 ? "max-w-[858px]" : "lg:w-[445px] sm:border-r sm:border-border sm:dark:border-borderDark")}>
-				{step === 1 ? (
+			<div className={cn("w-full", step === 1 ? "max-w-[858px]" : "xl:w-[445px] sm:border-r sm:border-border sm:dark:border-borderDark")}>
+				{step === 1 && !hasSentMessage ? (
 					<>
 						{isLoading ? (
 							<div className="w-full flex items-center justify-center gap-2 h-full">
@@ -281,23 +420,12 @@ const NewsSourcingRequest = () => {
 									ref={simpleBarRef}
 									className={cn(
 										"flex flex-col overflow-auto justify-start gap-6 w-full p-6 py-0 sm:py-6 -ml-px",
-										"sm:h-[calc(100dvh-278px)] h-[calc(100dvh-248px)]",
+										"sm:h-[calc(100dvh-320px)] h-[calc(100dvh-248px)]",
 									)}>
 									<div className="flex flex-col gap-6 w-full">
-										{/* Default User query */}
-										<div className="flex flex-col items-end gap-2.5 pl-[72px] pr-0 py-0 w-full sm:mb-6 mb-4">
-											<Card className="w-full bg-tgc dark:bg-fgcDark rounded-[20px] sm:!p-5 !p-4 shadow-none border-none">
-												<div className="">
-													<p className="font-normal text-text dark:text-textDark sm:text-sm text-xs leading-[150%] ">
-														I need top suppliers for portable blenders from China with high
-														response rates and good reviews.
-													</p>
-												</div>
-											</Card>
-										</div>
 										{/* Default AI response section */}
 										<div className="flex flex-col items-start sm:gap-4 gap-[14px]">
-											<div className="flex flex-col sm:gap-4 gap-3.5 items-start">
+											{/* <div className="flex flex-col sm:gap-4 gap-3.5 items-start">
 												<img
 													src="/assets/images/ai.svg"
 													className="sm:w-[33px] sm:h-[24px] w-[30.25px] h-[22px]"
@@ -307,8 +435,8 @@ const NewsSourcingRequest = () => {
 													Filtered by high response rates (&gt;85%) and average rating above
 													4.0.
 												</p>
-											</div>
-											<Card className="w-full bg-tgc dark:bg-fgcDark rounded-[20px] sm:!p-5 !p-4 shadow-none border-none">
+											</div> */}
+											{/* <Card className="w-full bg-tgc dark:bg-fgcDark rounded-[20px] sm:!p-5 !p-4 shadow-none border-none">
 												<div className="flex flex-col sm:gap-4 gap-3">
 													<h3 className="font-bold text-text dark:text-textDark sm:text-sm text-xs leading-[150%] ">
 														B2B Platform Engagement Indicators
@@ -324,27 +452,124 @@ const NewsSourcingRequest = () => {
 														))}
 
 														<button
-															onClick={() => setShowSummary(true)}
+															onClick={() => {
+																setStep(2)
+																setShowSummary(true)
+															}}
 															className="text-left font-bold text-primary sm:text-sm text-xs leading-[150%] ">
 															Read More
 														</button>
 													</div>
 												</div>
-											</Card>
+											</Card> */}
 
 											{/* Action buttons */}
-											<div className="flex items-center gap-3">
-												<Icon icon={isDark ? "like-dark" : "like"} className="sm:w-5 sm:h-5 h-4 w-4" />
+											{/* <div className="flex items-center gap-3">
+												<Icon
+													onClick={() => handleReaction(10000, "like")}
+													icon={
+														isDark
+															? reactions[10000] === "like"
+																? "like-dark-fill"
+																: "like-dark"
+															: reactions[10000] === "like"
+																? "like-fill"
+																: "like"
+													}
+													className="sm:w-5 sm:h-5 h-4 w-4 cursor-pointer"
+												/>
+												<Icon
+													onClick={() => handleReaction(11000, "dislike")}
+													icon={
+														isDark
+															? reactions[11000] === "dislike"
+																? "dislike-dark-fill"
+																: "dislike-dark"
+															: reactions[11000] === "dislike"
+																? "dislike-fill"
+																: "dislike"
+													}
+													className="sm:w-5 sm:h-5 h-4 w-4 cursor-pointer"
+												/>
 
-												<Icon icon={isDark ? "dislike-dark" : "dislike"} className="sm:w-5 sm:h-5 h-4 w-4" />
+												<Menu as="div" className="relative inline-block text-left">
+													<Menu.Button className="focus:outline-none"
+														ref={buttonRef}
+														onClick={handleOpen}
+													>
+														<Icon
+															icon={isDark ? "sharenetwork-dark" : "share-network"}
+															className="sm:w-5 sm:h-5 h-4 w-4"
+														/>
+													</Menu.Button>
 
-												<Icon icon={isDark ? "sharenetwork-dark" : "share-network"} className="sm:w-5 sm:h-5 h-4 w-4" />
-												<Icon icon={isDark ? "kebab-dark" : "kebab"} className="sm:w-5 sm:h-5 h-4 w-4" />
-											</div>
+													<Menu.Items
+														className={cn(
+															"absolute z-10 w-40 rounded-md bg-white dark:bg-fgcDark shadow-lg focus:outline-none",
+															dropUp ? "bottom-full mb-2" : "top-full mt-2"
+														)}
+													>
+														<div className="py-1">
+															{[
+																{ label: 'Whatsapp' },
+																{ label: 'Email' },
+																{ label: 'Linkedin' },
+															].map(({ label }) => (
+																<Menu.Item key={label}>
+																	{({ active }) => (
+																		<button
+																			className={cn(
+																				"block w-full text-left text-textSecondary dark:text-textSecondaryDark px-4 py-2 text-sm",
+																				active ? "bg-tgc/70 dark:bg-bgcDark/30" : ""
+																			)}
+																		>
+																			{label}
+																		</button>
+																	)}
+																</Menu.Item>
+															))}
+														</div>
+													</Menu.Items>
+												</Menu>
+
+												<Menu as="div" className="relative inline-block text-left">
+													<Menu.Button className="focus:outline-none">
+														<Icon
+															icon={isDark ? "kebab-dark" : "kebab"}
+															className="sm:w-5 sm:h-5 h-4 w-4"
+														/>
+													</Menu.Button>
+
+													<Menu.Items className={cn(
+														"absolute z-10 w-40 rounded-md bg-white dark:bg-fgcDark shadow-lg focus:outline-none",
+														dropUp ? "bottom-full mb-2" : "top-full mt-2"
+													)}>
+														<div className="py-1">
+															{[
+																{ label: 'Report Messages' },
+																{ label: 'Mark as unread' },
+															].map(({ label }) => (
+																<Menu.Item key={label}>
+																	{({ active }) => (
+																		<button
+																			className={cn(
+																				"block w-full text-left text-textSecondary dark:text-textSecondaryDark px-4 py-2 text-sm",
+																				active ? "bg-tgc/70 dark:bg-bgcDark/30" : ""
+																			)}
+																		>
+																			{label}
+																		</button>
+																	)}
+																</Menu.Item>
+															))}
+														</div>
+													</Menu.Items>
+												</Menu>
+											</div> */}
 										</div>
 
 										{/* Render additional user/AI chat pairs with flex and gap */}
-										{messages.slice(2).reduce<JSX.Element[]>((acc, msg, idx, arr) => {
+										{messages.reduce<JSX.Element[]>((acc, msg, idx, arr) => {
 											if (msg.from === "user") {
 												acc.push(
 													<div key={`qapair-${idx}`} className="flex flex-col gap-6 w-full">
@@ -404,12 +629,30 @@ const NewsSourcingRequest = () => {
 																</div>
 																<div className="flex items-center gap-3">
 																	<Icon
-																		icon={isDark ? "like-dark" : "like"}
-																		className="sm:w-5 sm:h-5 h-4 w-4"
+																		onClick={() => handleReaction(idx + 1, "like")}
+																		icon={
+																			isDark
+																				? reactions[idx + 1] === "like"
+																					? "like-dark-fill"
+																					: "like-dark"
+																				: reactions[idx + 1] === "like"
+																					? "like-fill"
+																					: "like"
+																		}
+																		className="sm:w-5 sm:h-5 h-4 w-4 cursor-pointer"
 																	/>
 																	<Icon
-																		icon={isDark ? "dislike-dark" : "dislike"}
-																		className="sm:w-5 sm:h-5 h-4 w-4"
+																		onClick={() => handleReaction(idx + 1, "dislike")}
+																		icon={
+																			isDark
+																				? reactions[idx + 1] === "dislike"
+																					? "dislike-dark-fill"
+																					: "dislike-dark"
+																				: reactions[idx + 1] === "dislike"
+																					? "dislike-fill"
+																					: "dislike"
+																		}
+																		className="sm:w-5 sm:h-5 h-4 w-4 cursor-pointer"
 																	/>
 																	<Menu as="div" className="relative inline-block text-left">
 																		<Menu.Button className="focus:outline-none"
@@ -424,20 +667,23 @@ const NewsSourcingRequest = () => {
 
 																		<Menu.Items
 																			className={cn(
-																				"absolute z-10 w-40 rounded-md bg-white dark:bg-fgcDark shadow-lg focus:outline-none",
-																				dropUp ? "bottom-full mb-2" : "top-full mt-2",
-																				alignRight ? "right-0" : "left-0"
+																				"absolute z-10 w-30 rounded-md bg-white dark:bg-fgcDark shadow-lg focus:outline-none",
+																				dropUp ? "bottom-full left-0 mb-2" : "top-full right-0 mt-2",
+																				alignRight ? "left-0" : "right-0"
 																			)}
 																		>
 																			<div className="py-1">
 																				{[
-																					{ label: 'Copy Link' },
-																					{ label: 'Share via Email' },
-																					{ label: 'Download as PDF' },
-																				].map(({ label }) => (
+																					{ label: 'Whatsapp', url: "https://web.whatsapp.com/" },
+																					{ label: 'Email', url: "https://accounts.google.com/" },
+																					{ label: 'Linkedin', url: "https://www.linkedin.com/" },
+																				].map(({ label, url }) => (
 																					<Menu.Item key={label}>
 																						{({ active }) => (
 																							<button
+																								onClick={() => {
+																									if (url) window.open(url, "_blank");
+																								}}
 																								className={cn(
 																									"block w-full text-left text-textSecondary dark:text-textSecondaryDark px-4 py-2 text-sm",
 																									active ? "bg-tgc/70 dark:bg-bgcDark/30" : ""
@@ -453,7 +699,10 @@ const NewsSourcingRequest = () => {
 																	</Menu>
 
 																	<Menu as="div" className="relative inline-block text-left">
-																		<Menu.Button className="focus:outline-none">
+																		<Menu.Button
+																			ref={buttonRef}
+																			onClick={handleOpen}
+																			className="focus:outline-none">
 																			<Icon
 																				icon={isDark ? "kebab-dark" : "kebab"}
 																				className="sm:w-5 sm:h-5 h-4 w-4"
@@ -462,14 +711,13 @@ const NewsSourcingRequest = () => {
 
 																		<Menu.Items className={cn(
 																			"absolute z-10 w-40 rounded-md bg-white dark:bg-fgcDark shadow-lg focus:outline-none",
-																			dropUp ? "bottom-full mb-2" : "top-full mt-2",
-																			alignRight ? "right-0" : "left-0"
+																			dropUp ? "bottom-full left-0 mb-2" : "top-full right-0 mt-2",
+																			alignRight ? "left-0" : "right-0"
 																		)}>
 																			<div className="py-1">
 																				{[
-																					{ label: 'Edit' },
-																					{ label: 'Delete' },
-																					{ label: 'Report' },
+																					{ label: 'Report Messages' },
+																					{ label: 'Mark as unread' },
 																				].map(({ label }) => (
 																					<Menu.Item key={label}>
 																						{({ active }) => (
@@ -508,7 +756,6 @@ const NewsSourcingRequest = () => {
 						)}
 					</>
 				)}
-
 				{/* Message Input Section */}
 				{(!isMobile || !showSummary) && (
 					<div className={step === 2 ? "sm:p-6 p-6 pb-0 w-full" : "px-6 sm:px-0 sm:pb-0 pb-[37px]"}>
@@ -628,7 +875,7 @@ const NewsSourcingRequest = () => {
 							<div
 								className={cn(
 									"flex flex-row-reverse justify-between items-center flex-wrap",
-									step == 1 ? "sm:gap-4 gap-[9px] sm:!flex-row !flex-row-reverse" : "sm:gap-1",
+									step == 1 ? "sm:gap-4 gap-[9px] sm:!flex-row !flex-row-reverse" : "sm:!flex-row !flex-row-reverse sm:gap-1",
 								)}>
 								{/* Attach */}
 								<label className="cursor-pointer">
@@ -723,7 +970,7 @@ const NewsSourcingRequest = () => {
 
 										<Menu.Items
 											className={cn(
-												"absolute z-10 w-40 origin-top-right rounded-md bg-gray-300 dark:bg-fgcDark shadow-lg focus:outline-none",
+												"absolute z-10 w-40 origin-top-right rounded-md bg-white dark:bg-fgcDark shadow-lg focus:outline-none",
 												dropUp ? "bottom-full mb-2" : "top-full mt-2"
 											)}
 										>
@@ -747,6 +994,7 @@ const NewsSourcingRequest = () => {
 											</div>
 										</Menu.Items>
 									</Menu>
+
 									{/* <button
 										className={cn(
 											"flex items-center bg-white dark:bg-fgcDark rounded-full",
@@ -792,18 +1040,19 @@ const NewsSourcingRequest = () => {
 				)}
 			</div>
 			{/* Summary Section */}
-			{(!isMobile || showSummary) && step === 2 && (
+			{step === 2 && (!isMobile || showSummary) && (
 				<SimpleBar
-					className={`flex transition-[width] duration-100 flex-col w-full md:border border-solid border-border dark:border-borderDark ${isExpanded ? "lg:w-[calc(100%-445px)]" : "lg:w-[calc(100%-445px)]"} h-[calc(100dvh-105px)] overflow-auto sm:px-0 px-6`}>
+					className={`flex transition-[width] duration-100 flex-col w-full md:border border-solid border-border dark:border-borderDark ${isExpanded ? "xl:w-[calc(100%-445px)]" : "xl:w-[calc(100%-445px)]"} h-[calc(100dvh-105px)] overflow-auto sm:px-0 px-6`}>
 					{/* Header */}
 					<div className="flex items-center flex-wrap justify-between sm:p-6 sm:pl-[23px] sm:mt-[-1px] pb-4 sm:gap-0 gap-4">
 						<div className="flex items-center gap-4 sm:gap-2 ">
-							<div className="lg:hidden block h-6 w-6 p-0.5">
+							<div className="block h-6 w-6 p-0.5">
 								<Icon
 									icon="arrow-up"
-									className="-rotate-90 h-full w-full text-textDark align-baseline"
+									className="-rotate-90 h-full w-full text-text dark:text-textDark align-baseline cursor-pointer"
 									onClick={() => {
 										setShowSummary(false);
+										setStep(1)
 									}}
 								/>
 							</div>
@@ -813,20 +1062,10 @@ const NewsSourcingRequest = () => {
 						</div>
 
 						<div className="flex items-center gap-3 flex-wrap sm:pl-0 pl-10">
-							{/* <button className="inline-flex items-center justify-center sm:gap-2.5 gap-2 whitespace-nowrap bg-tgc dark:bg-fgcDark px-4 sm:py-[10px] py-2 sm:px-[24px] text-textSecondary dark:text-textDark !rounded-full !border-none sm:text-sm text-xs leading-[150%] sm:leading-[100%] font-medium">
-								<span className="self-center">Export</span>
-								<Icon icon="chevron-down" className="text-textSecondary dark:text-textDark sm:w-5 sm:h-5 w-4 h-4" />
-							</button>
-
-							<button className="inline-flex items-center justify-center sm:gap-2.5 gap-2 whitespace-nowrap bg-tgc dark:bg-fgcDark sm:px-[24px] px-4 sm:py-[10px] py-2 text-textSecondary dark:text-textDark !rounded-full !border-none sm:text-sm text-xs leading-[150%] sm:leading-[100%]">
-								<span className="self-center">Create</span>
-
-								<Icon icon="chevron-down" className="text-textSecondary dark:text-textDark sm:w-5 sm:h-5 w-4 h-4" />
-							</button> */}
 							<Menu as="div" className="relative inline-block text-left">
 								<Menu.Button
 									ref={buttonRef}
-									onClick={handleOpen}
+									onClick={handlePopoverOpen}
 									className={cn(
 										"flex items-center gap-2 bg-white dark:bg-fgcDark rounded-full px-3 py-2",
 										"text-sm text-textSecondary dark:text-textDark"
@@ -854,6 +1093,12 @@ const NewsSourcingRequest = () => {
 															"block w-full text-left px-4 py-2 text-sm text-textSecondary dark:text-textSecondaryDark",
 															active ? "bg-tgc/70 dark:bg-bgcDark/30" : ""
 														)}
+														onClick={() => {
+															const data = prepareDataForExport(suppliers); // Use your actual `suppliers` array
+															if (option === "CSV") exportAsCSV(data);
+															else if (option === "Excel") exportAsExcel(data);
+															else if (option === "PDF") exportAsPDF(data);
+														}}
 													>
 														{option}
 													</button>
@@ -868,7 +1113,7 @@ const NewsSourcingRequest = () => {
 							<Menu as="div" className="relative inline-block text-left">
 								<Menu.Button
 									ref={buttonRef}
-									onClick={handleOpen}
+									onClick={handlePopoverOpen}
 									className={cn(
 										"flex items-center gap-2 bg-white dark:bg-fgcDark rounded-full px-3 py-2",
 										"text-sm text-textSecondary dark:text-textDark"
@@ -942,13 +1187,8 @@ const NewsSourcingRequest = () => {
 							Best Match Summary
 						</div>
 						<div className="flex flex-wrap sm:gap-2.5 gap-2">
-							{filterTags.map((tag, index) => (
-								<Badge
-									key={index}
-									variant="outline"
-									className="sm:!px-6 sm:!py-2.5 !px-4 !py-1.5 sm:h-10 h-[30px] !rounded-full text-textSecondary dark:text-textDark sm:text-sm text-xs leading-[150%] !font-medium border-border dark:border-borderDark">
-									{tag}
-								</Badge>
+							{filterTags.map(tag => (
+								<FilterTag key={tag.id} id={tag.id} label={tag.label} onRemove={handleRemoveFilter} />
 							))}
 						</div>
 					</div>
@@ -957,19 +1197,27 @@ const NewsSourcingRequest = () => {
 					<div className="flex flex-col gap-4 sm:gap-6 sm:p-6 sm:pb-[23px] sm:pl-[23px] sm:pr-[23px] py-4 relative">
 						<div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
 							<p className="font-bold text-text dark:text-textDark sm:text-xl tracking-[0] text-base leading-[150%] whitespace-nowrap">
-								Results (32)
+								Results ({suppliers.length})
 							</p>
 
 							<div className="inline-flex items-start justify-center gap-2 sm:gap-3 relative flex-[0_0_auto]">
 								<Button
+									onClick={() => setLayout("grid")}
 									variant="none"
-									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 sm:!p-2 !p-[6px] relative bg-tgc dark:bg-fgcDark rounded-[50px]">
+									className={cn(
+										"flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 sm:!p-2 !p-[6px] rounded-[50px]",
+										layout === "grid" ? "bg-primary dark:bg-primary" : "bg-tgc dark:bg-fgcDark"
+									)}>
 									<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon={isDark ? "checkerboard-dark" : "checker-board"} />
 								</Button>
 
 								<Button
+									onClick={() => setLayout("list")}
 									variant="none"
-									className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 sm:!p-2 !p-[6px] relative bg-tgc dark:bg-fgcDark rounded-[50px]">
+									className={cn(
+										"flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 sm:!p-2 !p-[6px] rounded-[50px]",
+										layout === "list" ? "bg-primary dark:bg-primary" : "bg-tgc dark:bg-fgcDark"
+									)}>
 									<Icon
 										className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]"
 										icon={isDark ? "squarehalfbottom-dark" : "square-half-bottom"}
@@ -994,7 +1242,12 @@ const NewsSourcingRequest = () => {
 						{/* Supplier Cards */}
 						<div className="w-full">
 							<div
-								className={`grid 3xl:grid-cols-3 md:grid-cols-1 ${isExpanded ? " 2xl:grid-cols-2" : "2xl:grid-cols-2"} xl:grid-cols-2  lg:grid-cols-1 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 relative gap-4 w-full`}>
+								className={cn(
+									"grid items-start sm:gap-6 gap-4 w-full",
+									layout === "grid"
+										? "grid-cols-1 sm:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-3"
+										: "grid-cols-1"
+								)}>
 								{loading ? (
 									// Loading skeleton
 									<>
@@ -1019,16 +1272,29 @@ const NewsSourcingRequest = () => {
 										))}
 									</>
 								) : (
-									displaySuppliers.map(supplier => (
-										<SupplierCard
-											key={supplier.id}
-											supplier={supplier}
-											isBookmarked={bookmarkedSuppliers.has(supplier.id)}
-											onBookmarkToggle={toggleBookmark}
-											onViewProfile={() => handleViewProfile(supplier.id)}
-											onSendRFQ={() => handleSendRFQ(supplier.id)}
-										/>
-									))
+									layout === "grid" ? (
+										displaySuppliers.map(supplier => (
+											<SupplierCard
+												key={supplier.id}
+												supplier={supplier}
+												isBookmarked={bookmarkedSuppliers.has(supplier.id)}
+												onBookmarkToggle={toggleBookmark}
+												onViewProfile={() => handleViewProfile(supplier.id)}
+												onSendRFQ={() => handleSendRFQ(supplier.id)}
+											/>
+										))
+									) : (
+										displaySuppliers.map(supplier => (
+											<RfqSupplierListCard
+												key={supplier.id}
+												supplier={supplier}
+												isBookmarked={bookmarkedSuppliers.has(supplier.id)}
+												onBookmarkToggle={toggleBookmark}
+												onViewProfile={() => handleViewProfile(supplier.id)}
+												onSendRFQ={() => handleSendRFQ(supplier.id)}
+											/>
+										))
+									)
 								)}
 							</div>
 						</div>
@@ -1036,6 +1302,15 @@ const NewsSourcingRequest = () => {
 				</SimpleBar>
 			)}
 			{isOpen && <SideMenu isOpen={isOpen} setIsOpen={setIsOpen} />}
+			{isSentPopupOpen && (
+				<SentRfqPopup
+					isOpen={isSentPopupOpen}
+					setIsOpen={setIsSentPopupOpen}
+					onConfirm={confirmSendRFQ}
+					name={null}
+					itemType="RFQ"
+				/>
+			)}
 		</div>
 	);
 };

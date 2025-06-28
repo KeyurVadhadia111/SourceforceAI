@@ -7,6 +7,9 @@ import { useAppState } from "components/utils/useAppState";
 import { useEffect, useState } from "react";
 import SimpleBar from "simplebar-react";
 import FilterTag from "components/common/FilterTag";
+import { useNavigate } from "react-router-dom";
+import { cn } from "lib/utils";
+import RfqSupplierListCard from "components/common/SupplierListCard";
 
 interface FilterTag {
 	id: string;
@@ -17,7 +20,6 @@ const initialFilterTags: FilterTag[] = [
 	{ id: "country", label: "China" },
 	{ id: "delivery", label: "1–3 Days" },
 	{ id: "price", label: "$3 – $12" },
-	{ id: "rating", label: "4+ Stars" },
 	{ id: "payment", label: "Credit/Debit" },
 	{ id: "certification", label: "ISO Certified" },
 ];
@@ -29,6 +31,8 @@ const SupplierSearchSummary = () => {
 	const [loading, setLoading] = useState(true);
 	const [displaySuppliers, setDisplaySuppliers] = useState<Supplier[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
+	const navigate = useNavigate();
+	const [layout, setLayout] = useState<"grid" | "list">("grid");
 
 	useEffect(() => {
 		// Simulating API call
@@ -74,7 +78,7 @@ const SupplierSearchSummary = () => {
 	};
 
 	const handleSendRFQ = (supplierId: string) => {
-		// Implement RFQ functionality
+		navigate("/rfq-center", { state: { defaultTab: "sent" } });
 		console.log("Send RFQ for supplier:", supplierId);
 	};
 
@@ -94,15 +98,23 @@ const SupplierSearchSummary = () => {
 
 						<div className="inline-flex items-start justify-center gap-2 sm:gap-3 relative flex-[0_0_auto]">
 							<Button
+								onClick={() => setLayout("grid")}
 								variant="none"
-								className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc dark:bg-fgcDark rounded-[50px]">
+								className={cn(
+									"flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 sm:!p-2 !p-[6px] rounded-[50px]",
+									layout === "grid" ? "bg-primary dark:bg-primary" : "bg-tgc dark:bg-fgcDark"
+								)}>
 								<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon={isDark ? "checkerboard-dark" : "checker-board"} />
 							</Button>
 
 							<Button
+								onClick={() => setLayout("list")}
 								variant="none"
-								className="flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 !p-2 relative bg-tgc dark:bg-fgcDark rounded-[50px]">
-								<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon={isDark? "squarehalfbottom-dark" : "square-half-bottom"} />
+								className={cn(
+									"flex sm:w-10 sm:h-10 w-[34px] h-[34px] items-center justify-center gap-2.5 sm:!p-2 !p-[6px] rounded-[50px]",
+									layout === "list" ? "bg-primary dark:bg-primary" : "bg-tgc dark:bg-fgcDark"
+								)}>
+								<Icon className="relative sm:w-5 sm:h-5 w-[17px] h-[17px]" icon={isDark ? "squarehalfbottom-dark" : "square-half-bottom"} />
 							</Button>
 
 							<Button
@@ -129,7 +141,15 @@ const SupplierSearchSummary = () => {
 					{/* Supplier Cards */}
 					<div className="w-full">
 						<div
-							className={`grid 3xl:grid-cols-4 xl:grid-cols-3  lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full ${isExpanded ? "2xl:grid-cols-3 md:grid-cols-1" : "2xl:grid-cols-3 md:grid-cols-2"}`}>
+							// className={`grid 3xl:grid-cols-4 xl:grid-cols-3  lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 items-start sm:gap-6 gap-4 relative w-full ${isExpanded ? "2xl:grid-cols-3 md:grid-cols-1" : "2xl:grid-cols-3 md:grid-cols-2"}`}>
+							className={cn(
+								"grid items-start relative w-full",
+								layout === "list"
+									? "grid-cols-1 rounded-2xl sm:rounded-[20px] overflow-hidden"
+									: "grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 sm:gap-6 gap-4",
+								layout === "grid" && (isExpanded ? "md:grid-cols-1" : "md:grid-cols-2")
+							)}
+						>
 							{loading ? (
 								// Loading skeleton
 								<>
@@ -154,16 +174,29 @@ const SupplierSearchSummary = () => {
 									))}
 								</>
 							) : (
-								displaySuppliers.map(supplier => (
-									<SupplierCard
-										key={supplier.id}
-										supplier={supplier}
-										isBookmarked={bookmarkedSuppliers.has(supplier.id)}
-										onBookmarkToggle={toggleBookmark}
-										onViewProfile={() => handleViewProfile(supplier.id)}
-										onSendRFQ={() => handleSendRFQ(supplier.id)}
-									/>
-								))
+								layout === "grid" ? (
+									displaySuppliers.map(supplier => (
+										<SupplierCard
+											key={supplier.id}
+											supplier={supplier}
+											isBookmarked={bookmarkedSuppliers.has(supplier.id)}
+											onBookmarkToggle={toggleBookmark}
+											onViewProfile={() => handleViewProfile(supplier.id)}
+											onSendRFQ={() => handleSendRFQ(supplier.id)}
+										/>
+									))
+								) : (
+									displaySuppliers.map(supplier => (
+										<RfqSupplierListCard
+											key={supplier.id}
+											supplier={supplier}
+											isBookmarked={bookmarkedSuppliers.has(supplier.id)}
+											onBookmarkToggle={toggleBookmark}
+											onViewProfile={() => handleViewProfile(supplier.id)}
+											onSendRFQ={() => handleSendRFQ(supplier.id)}
+										/>
+									))
+								)
 							)}
 						</div>
 					</div>
