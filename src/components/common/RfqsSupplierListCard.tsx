@@ -3,6 +3,7 @@ import Icon from "components/utils/Icon";
 import { Button } from "components/utils/Button";
 import { useAppState } from "components/utils/useAppState";
 import DeletePopup from "./DeletePopup";
+import { useNavigate } from "react-router-dom";
 
 interface Tag {
 	label: string;
@@ -35,6 +36,8 @@ const RfqSupplierListCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent,
 	const [{ isDark }, setAppState] = useAppState();
 	const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 	const [deleteItemType, setDeleteItemType] = useState("RFQ");
+	const navigate = useNavigate();
+
 	return (
 		<>
 			<div className={`flex flex-col items-start justify-center lg:gap-4 gap-3 lg:p-4 p-[11px] w-full relative flex-1 grow ${Number(supplier.id) % 2 ? "bg-[#F9F9F9] dark:bg-fgcDark" : "bg-white dark:bg-bgcDark border-l border-r border-border dark:border-borderDark"} self-stretch`}>
@@ -152,8 +155,17 @@ const RfqSupplierListCard: React.FC<SupplierCardProps> = ({ supplier, isRfqSent,
 								Edit
 							</Button>
 						) : (
-							<Button className="lg:h-10 h-[34px] w-full lg:!w-[100px] text-sm" onClick={onSendRFQ}>
-								Reply
+							<Button className="lg:h-10 h-[34px] w-full lg:!w-[100px] text-sm"
+								onClick={() => {
+									localStorage.setItem('selectedSupplier', JSON.stringify(supplier));
+									navigate("/supplier-messages", {
+										state: {
+											filteredSuppliers: [supplier],
+										},
+									})
+								}}
+							>
+								View
 							</Button>
 						)}
 					</div>

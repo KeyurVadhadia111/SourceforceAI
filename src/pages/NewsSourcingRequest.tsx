@@ -17,6 +17,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { prepareDataForExport, exportAsCSV, exportAsExcel, exportAsPDF } from "components/utils/ExportData";
 import { toast } from "components/utils/toast";
 import SentRfqPopup from "components/common/SentRfqPopup";
+import ChatHistorySidebar from "components/ChatHistorySidebar";
 
 const categories = [
 	{ title: "LED Light Strips", icon: "" },
@@ -153,6 +154,16 @@ const NewsSourcingRequest = () => {
 	const [showSummary, setShowSummary] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
+	const [showHistory, setShowHistory] = useState(false);
+	const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+	const autoResizeTextarea = () => {
+		if (textareaRef.current) {
+			textareaRef.current.style.height = 'auto';
+			textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+		}
+	};
+
 	// const state = location.state as {
 	// 	defaultTab?: "inbox" | "sent";
 	// 	filteredSuppliers?: Supplier[];
@@ -333,6 +344,9 @@ const NewsSourcingRequest = () => {
 
 		setInputValue("");
 		setAttachedFiles([]);
+		if (textareaRef.current) {
+			textareaRef.current.style.height = "auto";
+		}
 	};
 
 
@@ -352,16 +366,63 @@ const NewsSourcingRequest = () => {
 		}
 	}, [messages]);
 
+	const handleSelectHistory = (selectedText: string) => {
+		if (isMobile) {
+			setShowSummary(false);
+		}
+		setShowHistory(false);
+		setIsLoading(true);
+
+		const updatedUserMsg = {
+			text: selectedText,
+			from: "user",
+		};
+
+		const updatedAiMsg = {
+			text: "This is the updated AI reply for the selected history item.",
+			from: "ai",
+		};
+
+		setTimeout(() => {
+			setMessages(prev => {
+				const newMessages = [...prev];
+
+				// Remove last two messages (user + ai)
+				if (newMessages.length >= 2) {
+					newMessages.splice(newMessages.length - 2, 2, updatedUserMsg, updatedAiMsg);
+				} else {
+					newMessages.push(updatedUserMsg, updatedAiMsg);
+				}
+
+				return newMessages;
+			});
+
+			setHasSentMessage(true);
+			setIsLoading(false);
+		}, 500);
+	};
+
+	useEffect(() => {
+		autoResizeTextarea();
+	}, []);
+
 	return (
 		<div
 			className={cn(
-				"flex px-0 min-[1025px]:lg:px-5 w-full py-6 sm:py-0",
+				// min-[1025px]:lg:px-5
+				"relative flex px-0 w-full py-6 sm:py-0",
 				step === 1
 					? `${showSummary && isMobile ? "lg:flex-row" : "flex-col"} justify-center px-5 lg:px-0 items-center sm:h-[calc(100dvh-104px)] h-[calc(100dvh-56px)] overflow-auto`
 					: "min-[1025px]:lg:flex-row flex-col",
 			)}>
+			<div className={`absolute z-[10] cursor-pointer ${step === 1 ? "top-4 right-4" : "top-7 right-2"}`}
+				onClick={() => setShowHistory(true)}
+			>
+				<Icon icon={`${isDark ? "history-open-dark" : "history-open"}`} className="w-6 h-6" />
+			</div>
+			<ChatHistorySidebar isOpen={showHistory} onClose={() => setShowHistory(false)} onSelectHistory={handleSelectHistory} />
 			{/* Content */}
-			<div className={cn("w-full", step === 1 ? "max-w-[858px]" : "xl:w-[445px] sm:border-r sm:border-border sm:dark:border-borderDark")}>
+			<div className={cn("relative w-full", step === 1 ? "max-w-[858px]" : "xl:w-[445px] sm:border-r sm:border-border sm:dark:border-borderDark")}>
 				{step === 1 && !hasSentMessage ? (
 					<>
 						{isLoading ? (
@@ -419,8 +480,9 @@ const NewsSourcingRequest = () => {
 								<SimpleBar
 									ref={simpleBarRef}
 									className={cn(
-										"flex flex-col overflow-auto justify-start gap-6 w-full p-6 py-0 sm:py-6 -ml-px",
-										"sm:h-[calc(100dvh-320px)] h-[calc(100dvh-248px)]",
+										"flex flex-col overflow-auto justify-start gap-6 w-full  -ml-px",
+										"sm:h-[calc(100dvh-250px)] h-[calc(100dvh-248px)]",
+										isLoading ? "sm:py-10 sm:px-6 pb-10 px-6" : "sm:py-10 sm:px-6 pb-10 px-6"
 									)}>
 									<div className="flex flex-col gap-6 w-full">
 										{/* Default AI response section */}
@@ -744,26 +806,26 @@ const NewsSourcingRequest = () => {
 											return acc;
 										}, [])}
 									</div>
-								</SimpleBar>
-								{isLoading && (
-									<div className="flex items-center justify-center gap-2 mt-3 w-1/2">
-										<div className="flex items-center gap-2">
-											<div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+									{isLoading && (
+										<div className="flex items-center justify-center gap-2 w-full">
+											<div className="flex items-center gap-2">
+												<div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+											</div>
 										</div>
-									</div>
-								)}
+									)}
+								</SimpleBar>
 							</section>
 						)}
 					</>
 				)}
 				{/* Message Input Section */}
 				{(!isMobile || !showSummary) && (
-					<div className={step === 2 ? "sm:p-6 p-6 pb-0 w-full" : "px-6 sm:px-0 sm:pb-0 pb-[37px]"}>
+					<div className={step === 2 ? "sm:absolute sticky bottom-0 sm:p-6 p-6 pb-0 w-full" : "sticky bottom-0 w-full sm:px-0 sm:pb-0"}>
 						<label
 							htmlFor="message"
 							className={cn(
 								"bg-fgc dark:bg-tgcDark rounded-xl flex flex-col w-full",
-								step === 1 ? "sm:p-6 p-4 sm:gap-12 gap-6" : "sm:p-4 p-4 gap-6",
+								step === 1 ? "sm:p-6 p-4 px-0 sm:gap-6 gap-6" : "sm:p-4 p-4 gap-6",
 							)}>
 							{attachedFiles.length > 0 && (
 								<div className="flex items-center gap-1 mb-1 flex-wrap">
@@ -842,17 +904,21 @@ const NewsSourcingRequest = () => {
 								</div>
 							)}
 
-							<div className="flex items-center w-full">
+							<div className="flex items-center w-full sm:px-0 px-4">
 								<textarea
 									id="message"
+									ref={textareaRef}
 									placeholder="Message..."
 									className={cn(
-										"border-none border-border dark:border-borderDark text-text dark:text-textDark focus:outline-none focus:ring-0 focus:ring-primary resize-none leading-[150%]",
+										"border-none border-border dark:border-borderDark text-text dark:text-textDark focus:outline-none focus:ring-0 focus:ring-primary resize-none leading-[150%] max-h-[90px] overflow-y-auto",
 										step === 1 ? "sm:w-full w-[calc(100%-32px)]" : "w-[calc(100%-32px)]",
 									)}
 									rows={1}
 									value={inputValue}
-									onChange={e => setInputValue(e.target.value)}
+									onChange={e => {
+										setInputValue(e.target.value)
+										autoResizeTextarea();
+									}}
 									onKeyDown={e => {
 										if (e.key === "Enter" && !e.shiftKey) {
 											e.preventDefault();
@@ -875,7 +941,7 @@ const NewsSourcingRequest = () => {
 							<div
 								className={cn(
 									"flex flex-row-reverse justify-between items-center flex-wrap",
-									step == 1 ? "sm:gap-4 gap-[9px] sm:!flex-row !flex-row-reverse" : "sm:!flex-row !flex-row-reverse sm:gap-1",
+									step == 1 ? "sm:gap-4 gap-[9px] !flex-row sm:px-0 px-2" : "!flex-row sm:gap-1",
 								)}>
 								{/* Attach */}
 								<label className="cursor-pointer">
@@ -904,9 +970,9 @@ const NewsSourcingRequest = () => {
 													: "sm:h-[18px] sm:w-[18px] h-[14px] w-[14px]",
 											)}
 										/>
-										<span className="text-textSecondary dark:text-textDark sm:text-sm text-xs  leading-[16px] sm:leading-[18px] tracking-[0.045px]">
+										{/* <span className="text-textSecondary dark:text-textDark sm:text-sm text-xs  leading-[16px] sm:leading-[18px] tracking-[0.045px]">
 											Attach
-										</span>
+										</span> */}
 									</div>
 								</label>
 								<div
@@ -1044,7 +1110,7 @@ const NewsSourcingRequest = () => {
 				<SimpleBar
 					className={`flex transition-[width] duration-100 flex-col w-full md:border border-solid border-border dark:border-borderDark ${isExpanded ? "xl:w-[calc(100%-445px)]" : "xl:w-[calc(100%-445px)]"} h-[calc(100dvh-105px)] overflow-auto sm:px-0 px-6`}>
 					{/* Header */}
-					<div className="flex items-center flex-wrap justify-between sm:p-6 sm:pl-[23px] sm:mt-[-1px] pb-4 sm:gap-0 gap-4">
+					<div className="flex items-center flex-wrap justify-between sm:p-6 sm:pr-10 sm:pl-[23px] sm:mt-[-1px] pb-4 sm:gap-0 gap-4">
 						<div className="flex items-center gap-4 sm:gap-2 ">
 							<div className="block h-6 w-6 p-0.5">
 								<Icon
@@ -1311,6 +1377,7 @@ const NewsSourcingRequest = () => {
 					itemType="RFQ"
 				/>
 			)}
+
 		</div>
 	);
 };

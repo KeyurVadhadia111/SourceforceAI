@@ -9,7 +9,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 	required?: boolean;
 	icon?: string;
 	postIcon?: string;
-	variant?: "default" | "secondary" | "transparentBorder" | "secondaryTransparentIcon";
+	variant?: "default" | "secondary" | "transparentBorder" | "secondaryTransparentIcon" | "search";
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -60,6 +60,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 							variant === "default" && "bg-white dark:bg-fgcDark border-transparent",
 							variant === "secondary" && "bg-fgc dark:bg-fgcDark border-transparent",
 							variant === "secondaryTransparentIcon" && "bg-fgc dark:bg-fgcDark border-transparent",
+							variant === "search" && "bg-fgc",
 							variant === "transparentBorder" &&
 							"bg-transparent border border-border dark:border-borderDark focus-visible:ring-primary",
 							error

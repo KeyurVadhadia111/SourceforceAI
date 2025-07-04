@@ -192,7 +192,7 @@ export default function Header() {
 							<Menu.Items
 								className={cn(
 									"fixed min-w-[250px] w-[250px] m-px",
-									"right-0 top-0 z-10",
+									"right-0 top-0 z-20",
 									"rounded-none",
 									"border-border dark:border-border-dark dark:border bg-text dark:bg-fgcDark",
 									"ring-1 ring-black ring-opacity-0",
