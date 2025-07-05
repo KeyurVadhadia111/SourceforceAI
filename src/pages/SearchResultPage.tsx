@@ -177,7 +177,7 @@ export default function SearchResultsPage() {
 
 
 	return (
-		<div className="p-6 sm:h-[calc(100dvh-104px)] h-[calc(100dvh-56px)]">
+		<div className="p-6 sm:h-[calc(100dvh-72px)] h-[calc(100dvh-56px)]">
 			<h2 className="sm:text-2xl text-lg font-semibold mb-4 text-text dark:text-textDark">
 				Search results for <span className="">"{searchQuery}"</span>
 			</h2>

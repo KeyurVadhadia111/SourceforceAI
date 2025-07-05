@@ -410,19 +410,19 @@ const NewsSourcingRequest = () => {
 		<div
 			className={cn(
 				// min-[1025px]:lg:px-5
-				"relative flex px-0 w-full py-6 sm:py-0",
+				"relative flex px-0 w-full py-4 sm:py-0",
 				step === 1
-					? `${showSummary && isMobile ? "lg:flex-row" : "flex-col"} justify-center px-5 lg:px-0 items-center sm:h-[calc(100dvh-104px)] h-[calc(100dvh-56px)] overflow-auto`
+					? `${showSummary && isMobile ? "lg:flex-row" : "flex-col"} justify-center px-5 lg:px-0 items-center sm:h-[calc(100dvh-72px)] h-[calc(100dvh-56px)] overflow-auto`
 					: "min-[1025px]:lg:flex-row flex-col",
 			)}>
-			<div className={`absolute z-[10] cursor-pointer ${step === 1 ? "top-4 right-4" : "top-7 right-2"}`}
+			<div className={`absolute z-[10] cursor-pointer ${step === 1 ? "top-4 right-4" : "top-5 right-2"}`}
 				onClick={() => setShowHistory(true)}
 			>
 				<Icon icon={`${isDark ? "history-open-dark" : "history-open"}`} className="w-6 h-6" />
 			</div>
 			<ChatHistorySidebar isOpen={showHistory} onClose={() => setShowHistory(false)} onSelectHistory={handleSelectHistory} />
 			{/* Content */}
-			<div className={cn("relative w-full", step === 1 ? "max-w-[858px]" : "xl:w-[445px] sm:border-r sm:border-border sm:dark:border-borderDark")}>
+			<div className={cn("relative w-full", step === 1 ? "max-w-[858px]" : "xl:w-[420px] sm:border-r sm:border-border sm:dark:border-borderDark")}>
 				{step === 1 && !hasSentMessage ? (
 					<>
 						{isLoading ? (
@@ -433,8 +433,8 @@ const NewsSourcingRequest = () => {
 							</div>
 						) : (
 							<>
-								<div className="flex flex-col items-center sm:justify-center justify-start overflow-auto w-full px-6 sm:px-0 sm:gap-4 gap-[14px]">
-									<h1 className="sm:text-[40px] text-[32px] text-center text-text dark:text-textDark leading-[150%] font-light  tracking-[-0.1px] [font-family:'Outfit',Helvetica]">
+								<div className="flex flex-col items-center sm:justify-center justify-start overflow-auto w-full px-6 sm:px-0 sm:gap-3 gap-[14px]">
+									<h1 className="sm:text-[36px] text-[32px] text-center text-text dark:text-textDark leading-[150%] font-light  tracking-[-0.1px] [font-family:'Outfit',Helvetica]">
 										Find High-Quality and{" "}
 										<div className="font-bold tracking-[-0.1px]">Dependable Suppliers</div>
 									</h1>
@@ -444,7 +444,7 @@ const NewsSourcingRequest = () => {
 									</p>
 								</div>
 								{/* Categories */}
-								<div className="flex flex-wrap justify-center gap-3 sm:gap-4 sm:mb-6 mb-4 sm:mt-12 mt-8 sm:px-0 px-6">
+								<div className="flex flex-wrap justify-center gap-3 sm:gap-4 sm:mb-5 mb-4 sm:mt-6 mt-8 sm:px-0 px-6">
 									{categories.map((category, index) => (
 										<div
 											key={index}
@@ -1108,9 +1108,9 @@ const NewsSourcingRequest = () => {
 			{/* Summary Section */}
 			{step === 2 && (!isMobile || showSummary) && (
 				<SimpleBar
-					className={`flex transition-[width] duration-100 flex-col w-full md:border border-solid border-border dark:border-borderDark ${isExpanded ? "xl:w-[calc(100%-445px)]" : "xl:w-[calc(100%-445px)]"} h-[calc(100dvh-105px)] overflow-auto sm:px-0 px-6`}>
+					className={`flex transition-[width] duration-100 flex-col w-full md:border border-solid border-border dark:border-borderDark ${isExpanded ? "xl:w-[calc(100%-420px)]" : "xl:w-[calc(100%-420px)]"} h-[calc(100dvh-72px)] overflow-auto sm:px-0 px-6`}>
 					{/* Header */}
-					<div className="flex items-center flex-wrap justify-between sm:p-6 sm:pr-10 sm:pl-[23px] sm:mt-[-1px] pb-4 sm:gap-0 gap-4">
+					<div className="flex items-center flex-wrap justify-between sm:p-6 sm:py-4 sm:pr-8 sm:pl-4 sm:mt-[-1px] pb-4 sm:gap-0 gap-4">
 						<div className="flex items-center gap-4 sm:gap-2 ">
 							<div className="block h-6 w-6 p-0.5">
 								<Icon
@@ -1220,9 +1220,9 @@ const NewsSourcingRequest = () => {
 					<Separator className="-mt-px" />
 
 					{/* Statistics */}
-					<div className="flex items-start flex-wrap sm:gap-6 gap-4 sm:pt-[24px] sm:pb-[15px] pb-[14px] sm:px-6 sm:pl-[23px] pt-4">
+					<div className="flex items-start flex-wrap sm:gap-6 gap-4 sm:pt-4 sm:pb-4 pb-[14px] sm:px-4 pt-4">
 						{statistics.map((stat, index) => (
-							<div key={index} className="flex items-start gap-4 sm:gap-6 flex-1">
+							<div key={index} className="flex items-start gap-4 sm:gap-4 flex-1">
 								<div className="flex sm:w-10 sm:h-10 w-[32px] h-[32px] items-center justify-center p-2 bg-fgc dark:bg-fgcDark rounded-full">
 									{isDark ?
 										<img
@@ -1234,7 +1234,7 @@ const NewsSourcingRequest = () => {
 										<Icon icon={stat.icon} className="sm:w-5 sm:h-5 w-4 h-4" />
 									}
 								</div>
-								<div className="flex flex-col sm:gap-2 gap-1.5">
+								<div className="flex flex-col">
 									<div className="font-bold text-text dark:text-textDark sm:text-xl text-base leading-[21px] sm:leading-[26px]">
 										{stat.value}
 									</div>
@@ -1248,7 +1248,7 @@ const NewsSourcingRequest = () => {
 					<Separator className="" />
 
 					{/* Filter Tags */}
-					<div className="flex items-center flex-wrap sm:gap-6 sm:pt-4 pt-[14px] sm:pb-[23px] sm:px-6 pb-[15px] sm:pl-[23px] gap-4 border-b border-border dark:border-borderDark">
+					<div className="flex items-center flex-wrap sm:gap-4 sm:pt-4 pt-[14px] sm:pb-4 sm:px-4 pb-[15px] gap-4 border-b border-border dark:border-borderDark">
 						<div className="font-medium text-text dark:text-textDark sm:text-sm text-xs leading-[150%]">
 							Best Match Summary
 						</div>
@@ -1260,7 +1260,7 @@ const NewsSourcingRequest = () => {
 					</div>
 
 					{/* Results */}
-					<div className="flex flex-col gap-4 sm:gap-6 sm:p-6 sm:pb-[23px] sm:pl-[23px] sm:pr-[23px] py-4 relative">
+					<div className="flex flex-col gap-4 sm:gap-4 sm:p-6 sm:py-4 sm:pl-4 sm:pr-4 py-4 relative">
 						<div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
 							<p className="font-bold text-text dark:text-textDark sm:text-xl tracking-[0] text-base leading-[150%] whitespace-nowrap">
 								Results ({suppliers.length})
@@ -1309,7 +1309,7 @@ const NewsSourcingRequest = () => {
 						<div className="w-full">
 							<div
 								className={cn(
-									"grid items-start sm:gap-6 gap-4 w-full",
+									"grid items-start sm:gap-4 gap-4 w-full",
 									layout === "grid"
 										? "grid-cols-1 sm:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-3"
 										: "grid-cols-1"

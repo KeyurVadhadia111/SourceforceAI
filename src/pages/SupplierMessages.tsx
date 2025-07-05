@@ -271,8 +271,8 @@ const SupplierMessages = () => {
 
     return (
         <div>
-            <SimpleBar className="sm:h-[calc(100dvh-105px)] h-[calc(100dvh-57px)] -ml-px">
-                <div className={`${selectedSupplier ? "hidden sm:block" : "flex"} flex-col gap-4 p-6 pt-3 relative`}>
+            <SimpleBar className="sm:h-[calc(100dvh-72px)] h-[calc(100dvh-57px)] -ml-px">
+                <div className={`${selectedSupplier ? "hidden sm:block" : "flex"} flex-col gap-4 p-6 px-4 pt-3 relative`}>
                     <div className="flex items-center justify-between relative self-stretch w-full flex-wrap gap-y-2 sm:gap-y-0 mb-2 sm:mb-4">
                         <p className="relative w-fit  font-bold text-text dark:text-textDark sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
                             Messages
@@ -310,10 +310,10 @@ const SupplierMessages = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex h-[calc(100dvh-58px)] sm:h-[calc(100dvh-108px)] px-6 gap-4">
+                <div className="flex h-[calc(100dvh-58px)] sm:h-[calc(100dvh-108px)] px-4 gap-4">
                     {/* Left: Supplier List */}
                     <SimpleBar className={cn(
-                        "w-full min-[1025px]:lg:w-[436px] flex-shrink-0 no-scrollbar border border-border dark:border-borderDark rounded-lg h-full",
+                        "w-full min-[1025px]:lg:w-[400px] flex-shrink-0 no-scrollbar border border-border dark:border-borderDark rounded-lg h-full",
                         selectedSupplier ? "hidden lg:block" : "block"
                     )}>
                         {displaySuppliers.map((item, index) => {
@@ -324,7 +324,7 @@ const SupplierMessages = () => {
                                 <div
                                     key={item.id}
                                     className={cn(
-                                        "flex justify-between gap-3 w-full p-6 cursor-pointer rounded-lg transition-colors",
+                                        "flex justify-between gap-3 w-full p-4 cursor-pointer rounded-lg transition-colors",
                                         isSelected ? "bg-tgc dark:bg-fgcDark" : ""
                                     )}
                                     onClick={() => handleSelectSupplier(item)}
@@ -417,7 +417,7 @@ const SupplierMessages = () => {
                                     ref={simpleBarRef}
                                     className={cn(
                                         "relative flex flex-col overflow-auto justify-start gap-6 w-full p-6 py-0 sm:py-6 -ml-px",
-                                        "sm:h-[calc(100dvh-400px)] h-[calc(100dvh-260px)]",
+                                        "sm:h-[calc(100dvh-346px)] h-[calc(100dvh-260px)]",
                                     )}>
                                     <div className="flex flex-col gap-6 w-full mb-2">
                                         {/* Default User query */}
@@ -768,7 +768,7 @@ const SupplierMessages = () => {
                                 </SimpleBar>
                             </section>
                         )}
-                        <div className="p-6">
+                        <div className="p-6 pt-2">
                             <div className="sticky bottom-0 bg-white dark:bg-fgcDark rounded-2xl sm:p-5 p-2 border border-border dark:border-borderDark flex flex-col gap-5 items-center w-full">
                                 {isLoading && (
                                     <div className="flex items-start justify-start gap-2 w-full">

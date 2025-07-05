@@ -102,13 +102,13 @@ useEffect(() => {
 
 	return (
 		<div>
-			<SimpleBar className="sm:h-[calc(100dvh-105px)] h-[calc(100dvh-57px)] -ml-px">
-				<div className="flex flex-col sm:gap-6 gap-4 sm:p-6 p-6 relative">
+			<SimpleBar className="sm:h-[calc(100dvh-72px)] h-[calc(100dvh-57px)] -ml-px">
+				<div className="flex flex-col sm:gap-5 gap-4 sm:p-4 p-6 relative">
 					<div className="flex flex-col sm:gap-4 gap-3">
-						<div className="relative w-fit  font-bold text-text dark:text-textDark sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
+						<div className="relative w-fit font-bold text-text dark:text-textDark sm:text-2xl tracking-[0] text-lg leading-[150%] whitespace-nowrap">
 							RFQs Center
 						</div>
-						<div className="flex items-center sm:justify-between relative self-stretch w-full flex-wrap gap-3 ">
+						<div className="flex items-center justify-between relative self-stretch w-full flex-wrap gap-3 ">
 							<div className="inline-flex items-center relative flex-[0_0_auto]">
 								<div
 									onClick={() => {
@@ -195,7 +195,7 @@ useEffect(() => {
 								"grid items-start relative w-full",
 								layout === "list"
 									? "grid-cols-1 rounded-2xl sm:rounded-[20px] overflow-hidden"
-									: "grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 sm:gap-6 gap-4",
+									: "grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 sm:gap-4 gap-4",
 								layout === "grid" && (isExpanded ? "md:grid-cols-1" : "md:grid-cols-2")
 							)}
 						>

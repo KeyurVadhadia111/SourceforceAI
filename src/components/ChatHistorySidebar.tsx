@@ -41,7 +41,7 @@ const ChatHistorySidebar: React.FC<Props> = ({ isOpen, onClose, onSelectHistory 
 
     return (
         <div
-            className={`fixed top-14 md:top-[104px] right-0 h-full w-[330px] bg-white dark:bg-bgcDark shadow-lg border-l border-border dark:border-borderDark z-50 transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"
+            className={`fixed top-14 md:top-[72px] right-0 h-full w-[330px] bg-white dark:bg-bgcDark shadow-lg border-l border-border dark:border-borderDark z-50 transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"
                 }`}
         >
             {/* Top Bar with Close and Search */}

@@ -88,7 +88,7 @@ export default function Header() {
 
 	return (
 		<div className="md:bg-transparent dark:md:bg-transparent bg-text dark:bg-fgcDark relative -ml-px">
-			<div className={`flex w-full items-center ${isMobileSearchOpen ? "sm:justify-between justify-center" : "justify-between"} md:px-8 md:py-6 py-3 px-6 relative`}>
+			<div className={`flex w-full items-center ${isMobileSearchOpen ? "sm:justify-between justify-center" : "justify-between"} md:px-8 md:py-3 py-3 px-6 relative`}>
 				{isExpanded && (
 					<div className="hidden sm:block"></div>
 				)}
@@ -109,7 +109,7 @@ export default function Header() {
 								/>
 							) : (
 								<img
-									className="relative w-[189.66px] h-[21.2px] md:block hidden"
+									className="relative w-[189.66px] h-[18px] md:block hidden"
 									src="assets/images/logo/union-9.svg"
 									alt="Logo Light"
 								/>
@@ -321,7 +321,7 @@ export default function Header() {
 								className="absolute left-2 z-1 sm:w-11 sm:h-11 w-8 h-8 transform top-1/2 -translate-y-1/2 rounded-[22px] flex items-center justify-center">
 								<Icon className="sm:w-4 sm:h-4 w-4 h-4 text-text dark:text-textDark" icon="search" />
 							</div>
-							<input type="text" placeholder="Search here...." className="h-10 gap-2.5 px-10 sm:px-10 sm:pl-12 sm:w-auto w-full py-[15px] sm:py-[26px] flex items-center relative self-stretch bg-white dark:bg-fgcDark text-text dark:text-textDark border border-border dark:border-borderDark rounded-4xl focus-visible:outline-none"
+							<input type="text" placeholder="Search here...." className="h-10 gap-2.5 px-10 sm:px-10 sm:pl-12 sm:w-auto w-full py-[15px] sm:py-[23px] flex items-center relative self-stretch bg-white dark:bg-fgcDark text-text dark:text-textDark border border-border dark:border-borderDark rounded-4xl focus-visible:outline-none"
 								value={query}
 								onChange={(e) => setQuery(e.target.value)}
 								onKeyDown={(e) => {
@@ -338,7 +338,7 @@ export default function Header() {
 								setThemeMode(false);
 							}}
 							className={cn(
-								"cursor-pointer flex w-12 h-12 items-center justify-center gap-2.5 px-[3px] py-0.5 relative rounded-[100px]",
+								"cursor-pointer flex w-10 h-10 items-center justify-center gap-2.5 px-[3px] py-0.5 relative rounded-[100px]",
 								!isDark && "bg-white",
 							)}>
 							<Icon className="relative w-6 h-6 text-primary" icon="cloud-sun" />
@@ -349,7 +349,7 @@ export default function Header() {
 								setThemeMode(true);
 							}}
 							className={cn(
-								"cursor-pointer flex w-12 h-12 items-center justify-center gap-2.5 px-[3px] py-0.5 relative rounded-[100px]",
+								"cursor-pointer flex w-10 h-10 items-center justify-center gap-2.5 px-[3px] py-0.5 relative rounded-[100px]",
 								isDark && "bg-white",
 							)}>
 							<Icon className="relative w-6 h-6" icon="cloud-moon" />
@@ -367,10 +367,10 @@ export default function Header() {
 						<Menu.Button
 							ref={buttonRef}
 							onClick={handleOpen}
-							className="inline-flex items-center justify-center gap-3 px-[31px] py-4 relative text-white flex-[0_0_auto] bg-primary rounded-[40px] focus:outline-none"
+							className="inline-flex items-center justify-center gap-3 px-[31px] py-3 relative text-white flex-[0_0_auto] bg-primary rounded-[40px] focus:outline-none"
 						>
-							<Icon className="relative w-6 h-6" icon="export" />
-							<div className="relative w-fit tracking-[0.079px] font-bold text-base leading-6 whitespace-nowrap">
+							<Icon className="relative w-5 h-5" icon="export" />
+							<div className="relative w-fit tracking-[0.079px] font-bold text-sm leading-6 whitespace-nowrap">
 								Share
 							</div>
 						</Menu.Button>

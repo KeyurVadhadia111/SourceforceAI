@@ -4,7 +4,7 @@ import MenuComponent from "components/utils/MenuComponent";
 import ProfileMenu from "components/utils/ProfileMenu";
 import { useAppState } from "components/utils/useAppState";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation  } from "react-router-dom";
 
 export const sidebarItems: MenuItemProps[] = [
 	{
@@ -68,6 +68,7 @@ export const sidebarItems: MenuItemProps[] = [
 export default function Sidebar() {
 	const [{ isDark, isExpanded }, setAppState] = useAppState();
 	const sidebarRef = useRef<HTMLDivElement>(null);
+const location = useLocation();
 
 	const handleClickOutside = (event: MouseEvent) => {
 		if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
@@ -124,20 +125,20 @@ export default function Sidebar() {
 		<>
 			<div
 				ref={sidebarRef}
-				className={`sidebar relative ${isExpanded ? "min-w-[270px] w-[270px]" : "w-[104px]"} transition-all duration-300 ease-in-out md:block hidden bg-text dark:bg-fgcDark`}>
+				className={`sidebar relative ${isExpanded ? "min-w-[260px] w-[260px]" : "w-[98px]"} transition-all duration-300 ease-in-out md:block hidden bg-text dark:bg-fgcDark`}>
 				<div
 					onClick={toggleSidebar}
-					className={`sidebar-btn absolute w-6 h-6 top-10 -right-3 bg-white rounded-[100px] lg:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${
+					className={`sidebar-btn absolute w-6 h-6 top-6 -right-3 bg-white rounded-[100px] lg:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${
 						isExpanded ? "rotate-180" : ""
 					}`}>
 					<div className="relative w-4 h-4 top-1 left-1 flex justify-center items-center">
 						<Icon className="w-4 h-4" icon="chevron-right" />
 					</div>
 				</div>
-				<div className="inline-flex flex-col items-center justify-between p-6 relative flex-[0_0_auto] w-full h-screen overflow-auto">
-					<div className="inline-flex flex-col items-start gap-12 relative flex-[0_0_auto] w-full">
+				<div className="inline-flex flex-col items-center justify-between px-3.5 py-4 relative flex-[0_0_auto] w-full h-screen overflow-auto">
+					<div className="inline-flex flex-col items-center gap-12 relative flex-[0_0_auto] w-full">
 						<img
-							className={`relative  h-14 ${isExpanded ? "w-full" : "w-14"}`}
+							className={`relative  h-11 ${isExpanded ? "w-full" : "w-11"}`}
 							alt="Group"
 							src={`/assets/images/logo/${isExpanded ? "logo-primary-full.svg" : "logo-primary.svg"}`}
 						/>
@@ -151,7 +152,7 @@ export default function Sidebar() {
 										to={item.url || ""}
 										className={`relative h-14 flex items-center justify-center transition-all duration-300 rounded-xl`}>
 										{item.url === location.pathname && (
-											<div className="absolute w-[3px] h-[59px] top-[0] -left-6 bg-primary rounded-full"></div>
+											<div className={`absolute w-[3px] h-[59px] top-[0] ${isExpanded ? "-left-[13px]" : "-left-[18px]"} bg-primary rounded-full`}></div>
 										)}
 										<div className="w-14 h-14 flex items-center justify-center">
 											<Icon icon={item.icon || ""} className={`w-8 h-8`} />
@@ -163,7 +164,7 @@ export default function Sidebar() {
 						</div>
 					</div>
 
-					<div className=" w-full flex items-center gap-2">
+					<div className={`w-full flex items-center ${isExpanded ? "justify-start" : "justify-center"} gap-2`}>
 						<ProfileMenu />
 
 						{isExpanded && (

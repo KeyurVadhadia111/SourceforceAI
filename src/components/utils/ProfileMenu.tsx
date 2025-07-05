@@ -16,7 +16,7 @@ const ProfileMenu: React.FC<Props> = () => {
 					<span className="absolute -inset-1" />
 					<span className="sr-only">Open user menu</span>
 					<img
-						className="relative w-14 h-14"
+						className="relative w-12 h-12"
 						alt="Photo by evan wise"
 						src="/assets/images/photo-by-evan-wise.png"
 					/>

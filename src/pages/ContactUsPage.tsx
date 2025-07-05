@@ -7,7 +7,7 @@ const ContactUsPage = () => {
 		const [{ isDark }, setAppState] = useAppState();
 	return (
 		<div>
-			<SimpleBar className="sm:h-[calc(100dvh-104px)] h-[calc(100dvh-56px)] w-full">
+			<SimpleBar className="sm:h-[calc(100dvh-72px)] h-[calc(100dvh-56px)] w-full">
 				<div className="flex flex-col items-start justify-center sm:gap-6 gap-4 p-6 relative w-full sm:-mt-px sm:-mb-px sm:border-t sm:border-b border-border dark:border-borderDark">
 					<div className="relative w-fit [font-family:'Satoshi',Helvetica] font-bold text-text dark:text-textDark sm:text-2xl text-lg tracking-[0] leading-[150%] whitespace-nowrap">
 						Contact Us

@@ -28,7 +28,7 @@ const ProfileLayout: React.FC<{ children: any; title: string; desc: string }> = 
 		},
 	];
 	return (
-		<SimpleBar className="sm:h-[calc(100dvh-104px)] h-[calc(100dvh-56px)]">
+		<SimpleBar className="sm:h-[calc(100dvh-72px)] h-[calc(100dvh-56px)]">
 			{" "}
 			<div className="flex flex-col items-start gap-6 sm:p-[23px] p-6 relative self-stretch w-full flex-[0_0_auto] sm:border border-border dark:border-borderDark">
 				<div className="flex lg:flex-row flex-col items-start justify-between relative self-stretch w-full flex-[0_0_auto] sm:gap-8 gap-4">

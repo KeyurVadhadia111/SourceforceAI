@@ -42,7 +42,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 }) => {
 	const [{ isDark }, setAppState] = useAppState();
 	return (
-		<div className="flex flex-col h-full items-start justify-center sm:gap-4 gap-3 sm:p-[15px] p-[11px] relative flex-1 grow bg-white dark:bg-fgcDark rounded-[20px] border border-border dark:border-borderDark self-stretch">
+		<div className="flex flex-col h-full items-start justify-center sm:gap-4 gap-3 sm:px-3 sm:p-[15px] p-[11px] relative flex-1 grow bg-white dark:bg-fgcDark rounded-[20px] border border-border dark:border-borderDark self-stretch">
 			<div className="flex flex-col items-start sm:gap-3 gap-2.5 relative self-stretch w-full flex-[0_0_auto]">
 				<div className="flex items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
 					<div className="flex items-start justify-between gap-3 w-full">
