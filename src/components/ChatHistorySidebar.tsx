@@ -41,7 +41,7 @@ const ChatHistorySidebar: React.FC<Props> = ({ isOpen, onClose, onSelectHistory 
 
     return (
         <div
-            className={`fixed top-14 md:top-[72px] right-0 h-full w-[330px] bg-white dark:bg-bgcDark shadow-lg border-l border-border dark:border-borderDark z-50 transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"
+            className={`fixed top-14 md:top-[72px] right-0 h-full w-[330px] bg-white dark:bg-bgcDark shadow-lg border-l border-border dark:border-borderDark z-10 transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"
                 }`}
         >
             {/* Top Bar with Close and Search */}
@@ -67,7 +67,7 @@ const ChatHistorySidebar: React.FC<Props> = ({ isOpen, onClose, onSelectHistory 
 
 
             {/* Chat History */}
-            <div className="px-5 py-2 overflow-y-auto h-[calc(100vh-133px)] md:h-[calc(100vh-173px)] space-y-4">
+            <div className="px-5 py-2 overflow-y-auto h-[calc(100vh-133px)] md:h-[calc(100vh-148px)] space-y-4">
                 {filteredData.length === 0 ? (
                     <p className="text-sm text-textSecondary">No history found.</p>
                 ) : (

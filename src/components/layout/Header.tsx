@@ -377,7 +377,7 @@ export default function Header() {
 
 						<Menu.Items
 							className={cn(
-								'absolute z-10 w-30 rounded-md bg-white dark:bg-fgcDark shadow-lg focus:outline-none',
+								'absolute z-20 w-30 rounded-md bg-white dark:bg-fgcDark shadow-lg focus:outline-none',
 								dropUp ? 'bottom-full left-0 mb-2' : 'top-full right-0 mt-2',
 								alignRight ? 'left-0' : 'right-0'
 							)}

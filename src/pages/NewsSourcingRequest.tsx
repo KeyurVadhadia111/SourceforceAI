@@ -415,7 +415,7 @@ const NewsSourcingRequest = () => {
 					? `${showSummary && isMobile ? "lg:flex-row" : "flex-col"} justify-center px-5 lg:px-0 items-center sm:h-[calc(100dvh-72px)] h-[calc(100dvh-56px)] overflow-auto`
 					: "min-[1025px]:lg:flex-row flex-col",
 			)}>
-			<div className={`absolute z-[10] cursor-pointer ${step === 1 ? "top-4 right-4" : "top-5 right-2"}`}
+			<div className={`absolute z-10 cursor-pointer ${step === 1 ? "top-4 right-4" : "top-5 right-2"}`}
 				onClick={() => setShowHistory(true)}
 			>
 				<Icon icon={`${isDark ? "history-open-dark" : "history-open"}`} className="w-6 h-6" />
