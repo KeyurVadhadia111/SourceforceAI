@@ -18,6 +18,9 @@ function App() {
 	const isAuthPage =
 		location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forgot-password";
 
+	const isMinimalPage =
+		isAuthPage || location.pathname === "/supplier-profile";
+
 	// Keep ref in sync with state
 	useEffect(() => {
 		isExpandedRef.current = isExpanded;
@@ -35,28 +38,28 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-			setAppState({ userDetails: JSON.parse(localStorage.getItem("auth") || "{}") });
-			// Check for dark mode preference
-			if (localStorage.theme === "dark") {
-				setThemeMode(true);
-				setAppState({ isDark: true });
-			}
-			if (window.matchMedia("(prefers-color-scheme: dark)").matches && localStorage?.theme === undefined) {
-				setThemeMode(true);
-				setAppState({ isDark: true });
-			}
-		}, []);
-	
-		const setThemeMode = (isDark: boolean) => {
-			if (isDark) {
-				document.documentElement.classList.add("dark");
-				localStorage.theme = "dark";
-			} else {
-				document.documentElement.classList.remove("dark");
-				localStorage.theme = "light";
-			}
-			setAppState({ isDark });
-		};
+		setAppState({ userDetails: JSON.parse(localStorage.getItem("auth") || "{}") });
+		// Check for dark mode preference
+		if (localStorage.theme === "dark") {
+			setThemeMode(true);
+			setAppState({ isDark: true });
+		}
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches && localStorage?.theme === undefined) {
+			setThemeMode(true);
+			setAppState({ isDark: true });
+		}
+	}, []);
+
+	const setThemeMode = (isDark: boolean) => {
+		if (isDark) {
+			document.documentElement.classList.add("dark");
+			localStorage.theme = "dark";
+		} else {
+			document.documentElement.classList.remove("dark");
+			localStorage.theme = "light";
+		}
+		setAppState({ isDark });
+	};
 
 	return (
 		<div className="bg-bgc dark:bg-bgcDark flex flex-row justify-center w-full">
@@ -71,10 +74,10 @@ function App() {
 
 					{/* Header Navigation */}
 					<div className="flex w-full sm:text-base text-sm ">
-						{!isAuthPage ? <Sidebar /> : ""}
+						{!isMinimalPage ? <Sidebar /> : ""}
 						{/* Main Content */}
 						<main className={`z-[1] relative w-full`}>
-							{!isAuthPage ? <Header /> : <AuthHeader />}
+							{!isMinimalPage ? <Header /> : <AuthHeader />}
 
 							<Outlet />
 						</main>

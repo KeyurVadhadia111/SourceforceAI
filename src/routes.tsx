@@ -18,6 +18,7 @@ import SecurityPage from "pages/SecurityPage";
 import SubscriptionPage from "pages/SubscriptionPage";
 import HelpAndSupportPage from "pages/HelpAndSupportPage";
 import SearchResultsPage from "pages/SearchResultPage";
+import { SupplierProfile } from "pages/SupplierProfile";
 
 declare global {
 	interface Window {
@@ -191,6 +192,14 @@ const createRoutes: React.FC = () => {
 								element={
 									<ProtectedRoute>
 										<SearchResultsPage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/supplier-profile"
+								element={
+									<ProtectedRoute>
+										<SupplierProfile />
 									</ProtectedRoute>
 								}
 							/>

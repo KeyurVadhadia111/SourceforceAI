@@ -157,7 +157,7 @@ const SupplierCard: React.FC<SupplierCardProps> = ({
 
 			<div className="flex items-center flex-row-reverse sm:gap-4 gap-3 relative self-stretch w-full">
 				<Button
-					className="!hidden sm:h-10 h-[34px] grow sm:text-sm text-xs !text-primary border-primary hover:bg-primary/10 w-full !font-medium"
+					className="sm:h-10 h-[34px] grow sm:text-sm text-xs !text-primary border-primary hover:bg-primary/10 w-full !font-medium"
 					onClick={onViewProfile}
 					variant="outline">
 					View Profile

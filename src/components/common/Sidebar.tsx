@@ -4,7 +4,7 @@ import MenuComponent from "components/utils/MenuComponent";
 import ProfileMenu from "components/utils/ProfileMenu";
 import { useAppState } from "components/utils/useAppState";
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation  } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const sidebarItems: MenuItemProps[] = [
 	{
@@ -61,14 +61,14 @@ export const sidebarItems: MenuItemProps[] = [
 		icon: "factory",
 		url: "/rfq-center",
 		active: false,
-		id: 7,
+		id: 8,
 	},
 ];
 
 export default function Sidebar() {
 	const [{ isDark, isExpanded }, setAppState] = useAppState();
 	const sidebarRef = useRef<HTMLDivElement>(null);
-const location = useLocation();
+	const location = useLocation();
 
 	const handleClickOutside = (event: MouseEvent) => {
 		if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
@@ -128,9 +128,8 @@ const location = useLocation();
 				className={`sidebar relative ${isExpanded ? "min-w-[260px] w-[260px]" : "w-[98px]"} transition-all duration-300 ease-in-out md:block hidden bg-text dark:bg-fgcDark`}>
 				<div
 					onClick={toggleSidebar}
-					className={`sidebar-btn absolute w-6 h-6 top-6 -right-3 bg-white rounded-[100px] lg:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${
-						isExpanded ? "rotate-180" : ""
-					}`}>
+					className={`sidebar-btn absolute w-6 h-6 top-6 -right-3 bg-white rounded-[100px] lg:block hidden z-10 cursor-pointer hover:bg-gray-50 transition-colors ${isExpanded ? "rotate-180" : ""
+						}`}>
 					<div className="relative w-4 h-4 top-1 left-1 flex justify-center items-center">
 						<Icon className="w-4 h-4" icon="chevron-right" />
 					</div>
