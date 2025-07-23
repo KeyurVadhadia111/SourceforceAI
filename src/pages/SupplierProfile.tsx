@@ -110,12 +110,12 @@ export const SupplierProfile: React.FC = () => {
           <KeyTradePartners />
           <YearlyImportActivity />
           <TopImportedProducts />
-          {/* <GlobalTradeRelationships />
+          <GlobalTradeRelationships />
           <CountryWiseImport />
           <ShipmentVolumeSummary />
           <LatestShipments />
           <AlternateAddresses />
-          <CompanyTags /> */}
+          <CompanyTags />
         </div>
         <div className="relative self-stretch w-full h-px bg-[#eeeeee]" />
         <div className="flex items-center justify-end gap-[223px] p-[30px] relative self-stretch w-full flex-[0_0_auto]">

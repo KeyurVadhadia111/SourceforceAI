@@ -19,28 +19,7 @@ export const CountryWiseImport: React.FC = () => {
           </div>
 
           <div className="relative w-[954px] h-[534.32px] bg-neutral-100 overflow-hidden">
-            <div className="relative w-[1294px] h-[629px] top-[-97px] left-[15px]">
-              <div className="absolute w-[1294px] h-[629px] top-0 left-0">
-                {/* World map visualization */}
-                <p className="absolute top-[579px] left-[683px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[19.3px] leading-[28.9px] whitespace-nowrap text-[#1e2d2a] tracking-[0]">
-                  570 sea shipments in total
-                </p>
-              </div>
-
-              <div className="inline-flex items-center gap-[4.82px] absolute top-[601px] left-[27px]">
-                <div className="relative w-[17.59px] h-[17.59px] bg-white rounded-[8.79px]" />
-
-                <div className="inline-flex flex-col items-start gap-[4.82px] relative flex-[0_0_auto]">
-                  <div className="relative w-fit mt-[-0.80px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[5.7px] leading-[8.5px] whitespace-nowrap text-[#1e2d2a] tracking-[0]">
-                    219 shipments
-                  </div>
-
-                  <div className="relative w-fit [font-family:'Satoshi-Bold',Helvetica] font-bold text-[5.7px] leading-[8.5px] whitespace-nowrap text-[#1e2d2a] tracking-[0]">
-                    1 shipments
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
