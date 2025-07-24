@@ -32,42 +32,42 @@ export const CompanySnapshot: React.FC<CompanySnapshotProps> = ({ data }) => {
       key: data.employees,
     },
     {
-      icon: "employees",
+      icon: "phoneNumber",
       title: "Phone Number:",
       key: data.phone,
     },
     {
-      icon: "established",
+      icon: "location-1",
       title: "Location:",
       key: data.location,
     },
     {
-      icon: "employees",
+      icon: "established",
       title: "Total Sea Shipments",
       key: data.totalSeaShipments,
     },
     {
-      icon: "established",
+      icon: "employees",
       title: "Avg. TEU per Shipment",
       key: data.avgTeuPerShipment,
     },
     {
-      icon: "employees",
+      icon: "avgTeuPerMonth",
       title: "Avg. TEU per Month",
       key: data.avgTeuPerMonth,
     },
     {
-      icon: "established",
+      icon: "location-1",
       title: "Est. Shipping Spend",
       key: data.estShippingSpend,
     },
     {
-      icon: "employees",
+      icon: "ship",
       title: "Most Recent Shipment",
       key: data.mostRecentShipment + " (Database Updated: " + data.dbUpdated + ")",
     },
     {
-      icon: "established",
+      icon: "ship",
       title: "Location matches found:",
       key: data.locationMatches,
     },
@@ -88,7 +88,7 @@ export const CompanySnapshot: React.FC<CompanySnapshotProps> = ({ data }) => {
               <div key={index} className="flex flex-col items-start justify-center gap-2 relative flex-1 grow">
                 <div className="inline-flex items-start md:items-center gap-3 relative flex-[0_0_auto]">
                   <div className="relative w-4 h-4 sm:w-5 sm:h-5">
-                    <Icon icon={item.icon} className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <Icon icon={item.icon} className="w-4 h-4 sm:w-5 sm:h-5 text-text dark:text-textDark" />
                   </div>
                   <div className="flex flex-col items-start justify-center gap-1 relative w-full">
                     <div className="whitespace-nowrap text-sm text-[#1e2d2a] font-normal [font-family:'Satoshi-Regular',Helvetica]">

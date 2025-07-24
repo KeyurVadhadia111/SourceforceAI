@@ -14,6 +14,7 @@ import { AlternateAddresses } from "components/profile/AlternateAddresses";
 import { CompanyTags } from "components/profile/CompanyTags";
 import { Button } from "components/utils/Button";
 import Icon from "components/utils/Icon";
+import { HtsMapping } from "components/profile/HtsMapping";
 
 const companyData: CompanySnapshotData = {
   established: "2012",
@@ -84,7 +85,7 @@ export const SupplierProfile: React.FC = () => {
 
   return (
     <div className="flex flex-col md:flex-row md:h-[calc(100vh-110px)] w-full">
-      <div className="flex flex-col items-start w-full md:w-[calc(100%-424px)] md:h-[calc(100vh-0px)] md:overflow-y-auto">
+      <div className="flex flex-col items-start w-full lg:min-[1025px]:w-[calc(100%-424px)] lg:min-[1025px]:h-[calc(100vh-0px)] md:overflow-y-auto">
         <CompanyHeader />
         {/* <div className="relative self-stretch w-full h-px bg-[#eeeeee]" /> */}
         <div className="flex flex-col items-start gap-4 md:gap-[30px] md:pl-6 md:pr-0 md:py-[30px] p-4 relative self-stretch w-full flex-[0_0_auto]">
@@ -110,12 +111,13 @@ export const SupplierProfile: React.FC = () => {
           <KeyTradePartners />
           <YearlyImportActivity />
           <TopImportedProducts />
+          <HtsMapping />
           <GlobalTradeRelationships />
           <CountryWiseImport />
-          <ShipmentVolumeSummary />
+          {/* <ShipmentVolumeSummary />
           <LatestShipments />
           <AlternateAddresses />
-          <CompanyTags />
+          <CompanyTags /> */}
         </div>
         <div className="relative self-stretch w-full h-px bg-[#eeeeee]" />
         <div className="flex items-center justify-end gap-[223px] p-[30px] relative self-stretch w-full flex-[0_0_auto]">
