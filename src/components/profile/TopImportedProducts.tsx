@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TabContent from "./ProductsByHsCodeSection/TabContent";
+import { SunburstChart } from "components/common/SunburstChart";
 
 const weight = [
   {
@@ -284,7 +285,7 @@ export const TopImportedProducts: React.FC = () => {
 
           {/* Tabs */}
           <div className="flex flex-col items-center justify-center gap-4 w-full">
-            <div className="flex items-center w-full overflow-x-auto">
+            <div className="flex items-center w-full overflow-x-auto no-scrollbar">
               {tabs.map(({ key, label }) => (
                 <div
                   key={key}
@@ -312,129 +313,7 @@ export const TopImportedProducts: React.FC = () => {
                     {type === "common" && data ? (
                       <TabContent categories={data} />
                     ) : (
-                      // Render hierarchy layout as before
-                      <div className="relative w-[745px] h-[554px]">
-                        <div className="absolute w-[625px] h-[554px] top-0 left-[120px]">
-                          <img
-                            className="absolute w-[102px] h-[139px] top-[265px] left-[351px]"
-                            alt="Vector"
-                            src="#"
-                          />
-
-                          <img
-                            className="absolute w-[97px] h-[191px] top-[265px] left-[84px]"
-                            alt="Vector"
-                            src="#"
-                          />
-
-                          <img
-                            className="absolute w-[203px] h-[124px] top-[173px] left-0"
-                            alt="Vector"
-                            src="#"
-                          />
-
-                          <img
-                            className="absolute w-[203px] h-[124px] top-[151px] left-[341px]"
-                            alt="Vector"
-                            src="#"
-                          />
-
-                          <img
-                            className="absolute w-[89px] h-[205px] top-[273px] left-[259px]"
-                            alt="Vector"
-                            src="#"
-                          />
-
-                          <img
-                            className="absolute w-[89px] h-[138px] top-[79px] left-[159px]"
-                            alt="Vector"
-                            src="#"
-                          />
-
-                          <img
-                            className="absolute w-[89px] h-[139px] top-[78px] left-[304px]"
-                            alt="Vector"
-                            src="#"
-                          />
-
-                          <div className="inline-flex items-center justify-center gap-2.5 p-3 absolute top-[204px] left-[181px] bg-[#529e7e] rounded-lg">
-                            <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-base text-center tracking-[0] leading-6">
-                              Product Breakdown <br />
-                              (HS Code)
-                            </div>
-                          </div>
-
-                          <div className="flex flex-col w-[120px] items-center justify-center gap-0.5 p-2 absolute top-0 left-[102px] bg-[#313ba9] rounded-xl">
-                            <div className="relative self-stretch mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                              85
-                            </div>
-
-                            <div className="self-stretch [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-center relative text-sm tracking-[0] leading-[21px]">
-                              Electric motors/Appliances
-                            </div>
-                          </div>
-
-                          <div className="flex flex-col w-[120px] items-center justify-center gap-0.5 p-2 absolute top-0 left-[333px] bg-[#31a1a9] rounded-xl">
-                            <div className="relative self-stretch mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                              82
-                            </div>
-
-                            <div className="relative self-stretch [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                              Metal tools/cutlery
-                            </div>
-                          </div>
-
-                          <div className="flex flex-col w-[120px] items-center justify-center gap-0.5 p-2 absolute top-[110px] left-[505px] bg-[#a95531] rounded-xl">
-                            <div className="relative self-stretch mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                              29
-                            </div>
-
-                            <div className="relative self-stretch [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                              Organic chemicals
-                            </div>
-                          </div>
-
-                          <div className="flex flex-col w-[120px] items-center justify-center gap-0.5 p-2 absolute top-[349px] left-[453px] bg-[#a9a531] rounded-xl">
-                            <div className="relative self-stretch mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                              90
-                            </div>
-
-                            <div className="relative self-stretch [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                              Cameras/Precision instruments
-                            </div>
-                          </div>
-
-                          <div className="flex flex-col w-[120px] items-center justify-center gap-0.5 p-2 absolute top-[473px] left-72 bg-[#73a931] rounded-xl">
-                            <div className="relative self-stretch mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                              90
-                            </div>
-
-                            <div className="relative self-stretch [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                              Electric motors/Appliances
-                            </div>
-                          </div>
-
-                          <div className="flex flex-col w-[120px] items-center justify-center gap-0.5 p-2 absolute top-[432px] left-[7px] bg-[#a93181] rounded-xl">
-                            <div className="relative self-stretch mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                              38
-                            </div>
-
-                            <div className="relative self-stretch [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                              Misc. chemicals
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col w-[120px] items-center justify-center gap-0.5 p-2 absolute top-[145px] left-0 bg-[#7531a9] rounded-xl">
-                          <div className="relative self-stretch mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                            90
-                          </div>
-
-                          <div className="relative self-stretch [font-family:'Satoshi-Medium',Helvetica] font-medium text-white text-sm text-center tracking-[0] leading-[21px]">
-                            Cameras/Precision instruments
-                          </div>
-                        </div>
-                      </div>
+                      <SunburstChart width={745} height={500} />
                     )}
                   </div>
                 )

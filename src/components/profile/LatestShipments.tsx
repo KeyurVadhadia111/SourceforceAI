@@ -1,13 +1,90 @@
-import React from "react";
+import Icon from "components/utils/Icon";
+import MultiSelectDropdown from "components/utils/MultiSelectDropdown";
+import React, { useState } from "react";
+
+const LatestShipmentsData = [
+  {
+    id: 1,
+    date: "07/15/2025",
+    billofLading: "MOLU1234567890H HLCUN1234567890",
+    suppliers: "Foxconn Electronics Inc.",
+    weight: "12,800 kg",
+    noofContainers: 4,
+    description: "Consumer Electronics",
+    estFreightCost: "China → US West Coast"
+  },
+  {
+    id: 2,
+    date: "07/12/2025",
+    billofLading: "OOLU9876543210H MAEU9988776655",
+    suppliers: "Samsung Heavy Industries",
+    weight: "23,000 kg",
+    noofContainers: 6,
+    description: "Industrial Machinery",
+    estFreightCost: "Korea → US East Coast"
+  },
+  {
+    id: 3,
+    date: "07/09/2025",
+    billofLading: "EMCU1122334455H NYK1230987654",
+    suppliers: "LG Chem Ltd.",
+    weight: "7,500 kg",
+    noofContainers: 2,
+    description: "Battery Components",
+    estFreightCost: "Vietnam → US Gulf"
+  },
+  {
+    id: 4,
+    date: "07/07/2025",
+    billofLading: "CMAU5566778899H COSCO8877665544",
+    suppliers: "BYD Auto Co Ltd",
+    weight: "19,300 kg",
+    noofContainers: 5,
+    description: "Electric Vehicle Parts",
+    estFreightCost: "China → US Pacific"
+  },
+  {
+    id: 5,
+    date: "07/02/2025",
+    billofLading: "ONEU2233445566H HMMU6655443322",
+    suppliers: "Tata Steel Ltd",
+    weight: "25,000 kg",
+    noofContainers: 8,
+    description: "Steel Coils",
+    estFreightCost: "India → US Atlantic"
+  },
+  {
+    id: 6,
+    date: "06/28/2025",
+    billofLading: "HLCU7788990011H MSCU9988776655",
+    suppliers: "Nidec Corporation",
+    weight: "14,650 kg",
+    noofContainers: 3,
+    description: "Motor Assemblies",
+    estFreightCost: "Japan → US Gulf"
+  },
+];
+
 
 export const LatestShipments: React.FC = () => {
+
+  const allCountries = ["United States", "China", "Malaysia", "Thailand"]; // Example list of all possible countries
+  const [selectedCountries, setSelectedCountries] = useState<string[]>(["United States", "China"]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredTradePartners = LatestShipmentsData.filter(partner => {
+    const matchesSearch = searchQuery === "" || partner.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCountry = selectedCountries.length === 0 || selectedCountries.some(country => partner.description.includes(country));
+    return matchesSearch && matchesCountry;
+  });
+
   return (
-    <div className="flex flex-col items-start justify-center gap-4 p-4 relative self-stretch w-full flex-[0_0_auto] rounded-2xl border border-solid border-[#e0e0e0]">
+    <div className="flex flex-col items-start justify-center gap-4 p-3 sm:p-4 relative self-stretch w-full flex-[0_0_auto] rounded-2xl border border-solid border-[#e0e0e0]">
       <div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
-        <div className="flex flex-col items-start gap-4 relative flex-1 grow">
+        <div className="flex flex-col items-start gap-4 relative flex-1 grow w-full">
           <div className="flex items-center gap-1 relative self-stretch w-full flex-[0_0_auto]">
-            <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-              <p className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-xl tracking-[0] leading-[30px] whitespace-nowrap">
+            <div className="flex flex-wrap items-center gap-1 relative">
+              <p className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base sm:text-xl tracking-[0] leading-[30px]">
                 Latest Sea Freight Shipment Records
               </p>
 
@@ -17,169 +94,59 @@ export const LatestShipments: React.FC = () => {
               </div>
             </div>
           </div>
-
-          <div className="flex flex-col items-start gap-4 px-4 py-6 relative self-stretch w-full flex-[0_0_auto] bg-white rounded-2xl">
-            <div className="flex items-start gap-4 pt-0 pb-4 px-0 self-stretch w-full border-b [border-bottom-style:solid] relative flex-[0_0_auto] border-[#eeeeee]">
-              <div className="flex w-[100px] items-start gap-2 relative self-stretch">
-                <div className="inline-flex flex-col items-start gap-2 relative flex-[0_0_auto]">
-                  <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-base text-center leading-6 tracking-[0] whitespace-nowrap">
-                    Date
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex w-[120px] items-start gap-2 relative self-stretch">
-                <div className="inline-flex flex-col gap-1 flex-[0_0_auto] items-start relative">
-                  <div className="w-fit [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-base text-center leading-6 whitespace-nowrap relative mt-[-1.00px] tracking-[0]">
-                    Bill of Lading
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex w-[190px] items-start gap-2 relative self-stretch">
-                <div className="flex flex-col gap-1 flex-1 grow items-start relative">
-                  <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
-                    Suppliers
-                  </div>
-
-                  <div className="inline-flex items-center justify-center gap-2.5 px-3 py-2 bg-white rounded-[50px] border border-solid relative flex-[0_0_auto] border-[#eeeeee]">
-                    <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-xs text-center tracking-[0] leading-[18px] whitespace-nowrap">
-                      United States, China
-                    </div>
-
-                    <div className="relative w-4 h-4 rotate-90">
-                      <div className="relative w-1 h-[7px] top-1 left-1.5">
-                        <img
-                          className="absolute w-[7px] h-1 top-px -left-px"
-                          alt="Vector stroke"
-                          src="#"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex w-20 items-start self-stretch gap-2 relative">
-                <div className="inline-flex flex-col gap-1 flex-[0_0_auto] items-start relative">
-                  <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
-                    Weight
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex w-[100px] items-start gap-2 relative self-stretch">
-                <div className="inline-flex flex-col gap-1 flex-[0_0_auto] items-start relative">
-                  <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-base tracking-[0] leading-6">
-                    No. of <br />
-                    Containers
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex w-[154px] items-start gap-2 relative self-stretch">
-                <div className="flex flex-col gap-1 flex-1 grow items-start relative">
-                  <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-base text-center tracking-[0] leading-6 whitespace-nowrap">
-                    Description
-                  </div>
-
-                  <div className="flex px-4 py-2 self-stretch w-full rounded-[50px] border border-solid border-[#eeeeee] items-center gap-2.5 relative flex-[0_0_auto] bg-white">
-                    <img
-                      className="relative w-3 h-3"
-                      alt="Group"
-                      src="#"
+          <div className="w-full overflow-x-auto">
+            <table className="w-full border-collapse text-left min-w-[900px]">
+              <thead>
+                <tr className="border-b border-[#eeeeee]">
+                  <th className="w-[116px] text-[#529e7e] text-base text-start font-medium pr-2">Date</th>
+                  <th className="w-[136px] text-[#529e7e] text-base text-start font-medium pr-2">Bill of Lading</th>
+                  <th className="w-[206px] pr-2">
+                    <span className="text-[#529e7e] text-base text-start font-medium">Suppliers</span>
+                    <MultiSelectDropdown
+                      options={allCountries}
+                      selectedOptions={selectedCountries}
+                      onChange={setSelectedCountries}
+                      placeholder="Select Countries"
                     />
-
-                    <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-                      Search Product
+                  </th>
+                  <th className="w-[96px] text-[#529e7e] text-base text-start font-medium pr-2">Weight</th>
+                  <th className="w-[116px] text-[#529e7e] text-base text-start font-medium pr-2">No. of<br />Containers</th>
+                  <th className="w-[170px] pr-2">
+                    <span className="text-[#529e7e] text-base text-start font-medium ">Description</span>
+                    <div className="flex px-4 py-1.5 w-full rounded-[100px] border border-solid border-[#eeeeee] items-center gap-2.5 bg-white">
+                      <Icon icon="search" className="w-4 h-4 text-textSecondary" />
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Search Description"
+                        className="w-full [font-family:'Satoshi-Regular',Helvetica] text-xs text-[#1e2d2a] bg-transparent border-none outline-none leading-[18px]"
+                      />
                     </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2 relative flex-1 self-stretch grow">
-                <div className="flex flex-col gap-1 flex-1 grow items-start relative">
-                  <div className="relative self-stretch mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#529e7e] text-base tracking-[0] leading-6">
-                    Est. Freight Cost
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Shipment row */}
-            <div className="flex h-[66px] gap-4 self-stretch w-full items-center relative">
-              <div className="flex w-[100px] items-center gap-2 pl-0 pr-4 py-0 relative self-stretch">
-                <div className="inline-flex flex-col gap-1 flex-[0_0_auto] items-start relative">
-                  <div className="text-[#1e2d2a] text-center relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-base tracking-[0] leading-6 whitespace-nowrap">
-                    11/30/2024
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex w-[120px] items-center gap-2 pl-0 pr-4 py-0 relative self-stretch">
-                <div className="inline-flex flex-col gap-2 flex-[0_0_auto] mr-[-6.00px] items-start relative">
-                  <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-                    BANQ1061815683H
-                  </div>
-
-                  <div className="relative w-fit [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-                    CMDUTHD1259241
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex w-[190px] items-center gap-2 pl-0 pr-4 py-0 relative self-stretch">
-                <div className="flex flex-col items-start gap-2 relative flex-1 grow">
-                  <div className="relative self-stretch mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-xs tracking-[0] leading-[18px]">
-                    Actmax Sdn Bhd
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex w-20 items-center gap-2 pl-0 pr-4 py-0 relative self-stretch">
-                <div className="inline-flex flex-col items-start gap-2 relative flex-[0_0_auto]">
-                  <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-                    17,000 kg
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex w-[100px] items-center gap-2 pl-0 pr-4 py-0 relative self-stretch">
-                <div className="inline-flex flex-col items-start gap-2 relative flex-[0_0_auto]">
-                  <div className="mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-xs leading-[18px] whitespace-nowrap relative w-fit tracking-[0]">
-                    5
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex w-[154px] items-center gap-2 pl-0 pr-4 py-0 relative self-stretch">
-                <div className="inline-flex flex-col items-start gap-2 relative flex-[0_0_auto]">
-                  <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-                    Mechanical Stc
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 pl-0 pr-4 py-0 relative flex-1 self-stretch grow">
-                <div className="flex flex-col w-[82px] gap-2 mr-[-16.00px] items-start relative">
-                  <div className="self-stretch [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-xs leading-[18px] relative mt-[-1.00px] tracking-[0]">
-                    Asia&nbsp;&nbsp;US Transatlantic
-                  </div>
-
-                  <div className="relative self-stretch [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#3f7dcf] text-xs tracking-[0] leading-[18px]">
-                    No Data
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <img
-              className="relative self-stretch w-full h-px object-cover"
-              alt="Line"
-              src="#"
-            />
-
-            {/* Additional shipment rows would go here */}
+                  </th>
+                  <th className="w-[98px] text-[#529e7e] text-base font-medium pr-2">Est. Freight Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                {LatestShipmentsData.map((item) => (
+                  <tr key={item.id} className="h-[66px] border-b border-[#eeeeee]">
+                    <td className="text-[#1e2d2a] text-sm sm:text-base text-start font-medium pr-2">{item.date}</td>
+                    <td className="text-[#1e2d2a] text-xs font-bold pr-2">
+                      <div>{item.billofLading.split(" ")[0]}</div>
+                      <div>{item.billofLading.split(" ")[1]}</div>
+                    </td>
+                    <td className="text-[#1e2d2a] text-xs font-bold pr-2">{item.suppliers}</td>
+                    <td className="text-[#1e2d2a] text-xs font-normal pr-2">{item.weight}</td>
+                    <td className="text-[#1e2d2a] text-xs font-normal pr-2">{item.noofContainers}</td>
+                    <td className="text-[#1e2d2a] text-xs font-normal pr-2">{item.description}</td>
+                    <td className="text-[#1e2d2a] text-xs font-bold pr-2">
+                      <div>{item.estFreightCost}</div>
+                      <div className="text-[#3f7dcf] font-medium">No Data</div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
