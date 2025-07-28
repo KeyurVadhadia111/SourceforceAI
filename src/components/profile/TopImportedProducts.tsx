@@ -239,7 +239,7 @@ const teuCategories = [
 
 
 export const TopImportedProducts: React.FC = () => {
-  const [activeTab, setActiveTab] = useState("weight");
+  const [activeTab, setActiveTab] = useState("hierarchy");
 
   const tabs = [
     {
@@ -309,11 +309,13 @@ export const TopImportedProducts: React.FC = () => {
             <div className="relative w-full h-[554px]">
               {tabs.map(({ key, type, data }) =>
                 activeTab === key && (
-                  <div key={key} className="flex justify-center w-full h-[554px]">
+                  <div key={key} className="flex justify-start w-full h-[554px] overflow-x-auto">
                     {type === "common" && data ? (
                       <TabContent categories={data} />
                     ) : (
-                      <SunburstChart width={745} height={500} />
+                      <div className="w-full">
+                        <SunburstChart height={500} />
+                      </div>
                     )}
                   </div>
                 )

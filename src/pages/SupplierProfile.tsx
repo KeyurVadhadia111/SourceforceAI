@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { CompanyHeader } from "components/profile/CompanyHeader";
 import { AIConfidenceScore } from "components/profile/AIConfidenceScore";
 import { CompanySnapshot, CompanySnapshotData } from "components/profile/CompanySnapshot";
-import { ShipmentTimeline } from "components/profile/ShipmentTimeline";
+import ShipmentTimeline from "components/profile/ShipmentTimeline";
 import { KeyTradePartners } from "components/profile/KeyTradePartners";
 import { YearlyImportActivity } from "components/profile/YearlyImportActivity";
 import { TopImportedProducts } from "components/profile/TopImportedProducts";
@@ -35,9 +35,8 @@ export const SupplierProfile: React.FC = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [visibleSection, setVisibleSection] = useState<number | null>(null);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const handleMouseEnter = () => setSidebarVisible(true);
-  const handleMouseLeave = () => setSidebarVisible(false);
+  const [isTablet, setIsTablet] = useState(false);
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -63,12 +62,57 @@ export const SupplierProfile: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setIsTablet(width >= 768 && width < 1025);
+      if (width >= 1025) {
+        setSidebarVisible(true);
+      } else if (width < 768) {
+        setSidebarVisible(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+
   const scrollToSection = (index: number) => {
     const section = sectionRefs.current[index];
     if (section) {
       section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
+
+  const handleMouseEnter = () => {
+    if (isTablet) setSidebarVisible(true);
+  };
+  const handleMouseLeave = () => {
+    if (isTablet) setSidebarVisible(false);
+  };
+
+  useEffect(() => {
+    if (!isTablet || !sidebarVisible) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as Node)
+      ) {
+        setSidebarVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isTablet, sidebarVisible]);
+
+
 
 
   const sectionBar = [
@@ -124,10 +168,10 @@ export const SupplierProfile: React.FC = () => {
 
   return (
     <div className="flex flex-col md:flex-row md:h-[calc(100vh-110px)] w-full">
-      <div className="flex flex-col items-start w-full lg:min-[1025px]:w-[calc(100%-40px)] lg:min-[1025px]:h-[calc(100vh-0px)] md:overflow-y-auto">
+      <div className="flex flex-col items-start w-full lg:min-[1025px]:w-[calc(100%-424px)] lg:min-[1025px]:h-[calc(100vh-0px)] md:overflow-y-auto">
         <CompanyHeader />
         {/* <div className="relative self-stretch w-full h-px bg-[#eeeeee]" /> */}
-        <div className="flex flex-col items-start gap-4 md:gap-[30px] md:pl-6 md:pr-0 md:py-[30px] p-4 relative self-stretch w-full flex-[0_0_auto]">
+        <div className="flex flex-col items-start gap-4 md:gap-[30px] md:pl-6 md:min-[768px]:pr-0 md:py-[30px] p-4 relative self-stretch w-full flex-[0_0_auto]">
           <div className="w-full" ref={(el: any) => (sectionRefs.current[-1] = el)}><AIConfidenceScore /></div>
           <div className="w-full" ref={(el: any) => (sectionRefs.current[0] = el)}><CompanySnapshot data={companyData} /></div>
           <div className="w-full flex justify-center sm:justify-start gap-4 relative">
@@ -181,35 +225,40 @@ export const SupplierProfile: React.FC = () => {
         </div>
       </div>
 
-      {!sidebarVisible && (
+      {isTablet && (
         <div
-          className="fixed top-1/2 right-0 transform -translate-y-1/2 z-50 flex-col gap-2 pr-1  hidden lg:flex"
+          className="fixed top-1/2 right-0 transform -translate-y-1/2 z-50 flex-col gap-2 pr-1 flex"
           onMouseEnter={handleMouseEnter}
         >
           {sectionBar.map((item, index) => (
             <div
               key={item.id}
-              onClick={() => scrollToSection(index)}
-              className={`w-3 h-3 sm:w-4 sm:h-4 cursor-pointer rounded-full transition-all shadow-md ${visibleSection === item.id ? "bg-primary" : "bg-gray-400"}`}
+              className={`w-3 h-3 sm:w-4 sm:h-4 cursor-pointer rounded-full transition-all shadow-md ${visibleSection === item.id ? "bg-primary" : "bg-gray-400"
+                }`}
               title={item.title}
             />
           ))}
         </div>
       )}
 
-      {/* Sidebar */}
+
+
+
+
+
       <div
+        ref={sidebarRef}
         onMouseLeave={handleMouseLeave}
-        className={`hidden lg:block fixed top-0 right-0 h-full w-[424px] bg-white p-6 overflow-y-auto transition-transform duration-500 z-40 ${sidebarVisible ? "translate-x-0" : "translate-x-full"}`}
+        className={`hidden md:block fixed top-0 right-0 h-full w-[424px] bg-white p-6 overflow-y-auto transition-transform duration-500 z-40
+    ${sidebarVisible ? "translate-x-0" : "translate-x-full"}
+  `}
       >
-        <div className="mt-[110px] flex flex-col gap-4">
+        <div className="mt-[105px] flex flex-col gap-4">
           {sectionBar.map((item, index) => (
             <div
               key={item.id}
               onClick={() => scrollToSection(index)}
-              className={`rounded-2xl p-4 border border-border text-text dark:text-textDark cursor-pointer transition ${visibleSection === item.id
-                ? "bg-[#529e7e] text-white"
-                : ""
+              className={`rounded-2xl p-4 border border-border text-text dark:text-textDark cursor-pointer transition ${visibleSection === item.id ? "bg-[#529e7e] text-white" : ""
                 }`}
             >
               {item.title}
@@ -217,6 +266,7 @@ export const SupplierProfile: React.FC = () => {
           ))}
         </div>
       </div>
-    </div>
+
+    </div >
   );
 };

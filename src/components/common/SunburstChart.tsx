@@ -3,12 +3,14 @@ import * as d3 from 'd3';
 import { hsCodeData } from '../data/hsCodeData';
 
 interface SunburstChartProps {
-  width: number;
   height: number;
 }
 
-export const SunburstChart: React.FC<SunburstChartProps> = ({ width, height }) => {
+export const SunburstChart: React.FC<SunburstChartProps> = ({ height }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const [width, setWidth] = useState(765);
+
   const [tooltip, setTooltip] = useState<{
     visible: boolean;
     x: number;
@@ -30,6 +32,21 @@ export const SunburstChart: React.FC<SunburstChartProps> = ({ width, height }) =
     weight: 0,
     teu: 0
   });
+
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      if (entries[0]) {
+        const newWidth = entries[0].contentRect.width;
+        setWidth(newWidth);
+      }
+    });
+
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const chartWidth = Math.min(width, 765);
+
 
   // Helper function to get HS code descriptions
   const getHSCodeDescription = (code: string): string => {
@@ -56,14 +73,14 @@ export const SunburstChart: React.FC<SunburstChartProps> = ({ width, height }) =
     // Clear previous visualization
     d3.select(svgRef.current).selectAll('*').remove();
 
-    const radius = Math.min(width, height) / 2;
+    const radius = Math.min(chartWidth, height) / 2;
 
     // Create SVG
     const svg = d3.select(svgRef.current)
-      .attr('width', width)
+      .attr('width', chartWidth)
       .attr('height', height)
       .append('g')
-      .attr('transform', `translate(${width / 2},${height / 2})`);
+      .attr('transform', `translate(${chartWidth / 2},${height / 2})`);
 
     // Create partition layout
     const partition = d3.partition<any>()
@@ -116,15 +133,15 @@ export const SunburstChart: React.FC<SunburstChartProps> = ({ width, height }) =
           .style('stroke-width', 2);
 
         // Show tooltip
-        const percentage = ((d.value! / root.value!) * 100).toFixed(1);
-        const name = d.data.name || 'Root';
+        const parentValue = d.parent?.value || d.value;
+        const localPercentage = ((d.value! / parentValue) * 100).toFixed(1);
         const code = d.data.code || '';
 
         setTooltip({
           visible: true,
           x: event.pageX,
           y: event.pageY,
-          content: `${name} (${code}): ${percentage}%`,
+          content: `${name} (${code}): ${localPercentage}%`,
           color: getColor(d),
           description: code ? getHSCodeDescription(code) : 'All HS Codes',
           shipments: d.data.shipments ?? 0,
@@ -169,7 +186,11 @@ export const SunburstChart: React.FC<SunburstChartProps> = ({ width, height }) =
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'middle')
       .attr('fill', '#fff')
-      .attr('font-size', (d: any) => Math.min(10 + (d.y1 - d.y0) / 10, 14))
+      .attr('font-size', (d: any) => {
+        const maxFontSize = chartWidth < 500 ? 12 : 14;
+        return Math.min(10 + (d.y1 - d.y0) / 10, maxFontSize);
+      })
+
       .attr('font-weight', 'bold')
       .text((d: any) => {
         if ((d.x1 - d.x0) < 0.2) return '';
@@ -188,7 +209,7 @@ export const SunburstChart: React.FC<SunburstChartProps> = ({ width, height }) =
       .attr('dominant-baseline', 'middle')
       .attr('y', -8)
       .attr('fill', '#fff')
-      .attr('font-size', '14px')
+      .attr('font-size', chartWidth < 500 ? '10px' : '14px')
       .attr('font-weight', 'bold')
       .text('HS Code');
 
@@ -197,7 +218,7 @@ export const SunburstChart: React.FC<SunburstChartProps> = ({ width, height }) =
       .attr('dominant-baseline', 'middle')
       .attr('y', 8)
       .attr('fill', '#fff')
-      .attr('font-size', '14px')
+      .attr('font-size', chartWidth < 500 ? '10px' : '14px')
       .attr('font-weight', 'bold')
       .text('Breakdown');
 
@@ -241,12 +262,12 @@ export const SunburstChart: React.FC<SunburstChartProps> = ({ width, height }) =
 
     pulseAnimation();
 
-  }, [width, height]);
+  }, [chartWidth, height]);
 
 
 
   return (
-    <div className="flex justify-center relative w-full overflow-x-auto">
+    <div ref={containerRef} className="flex justify-center relative w-full overflow-x-auto">
       <svg ref={svgRef} width={width} height={height}></svg>
       {tooltip.visible && (
         <div
