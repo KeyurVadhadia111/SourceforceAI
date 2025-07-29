@@ -471,13 +471,17 @@ Ports: ${countryData[countryName].ports}`}
 
                         {/* Connecting lines between ports */}
                         {filteredConnections.map((conn, idx) => {
-                            const from = getPortCoords(conn.from);
-                            const to = getPortCoords(conn.to);
+                            const fromArray = getPortCoords(conn.from);
+                            const toArray = getPortCoords(conn.to);
+
+                            // Validate that both have exactly 2 coordinates
+                            if (!fromArray || !toArray || fromArray.length < 2 || toArray.length < 2) return null;
+
+                            const from: [number, number] = [fromArray[0], fromArray[1]];
+                            const to: [number, number] = [toArray[0], toArray[1]];
 
                             const fromPort = MAJOR_PORTS.find(p => p.id === conn.from);
                             const lineColor = fromPort ? getRegionLineColor(fromPort.country) : "#cccccc";
-
-                            if (!from || !to) return null;
 
                             return (
                                 <Line
@@ -486,12 +490,14 @@ Ports: ${countryData[countryName].ports}`}
                                     to={to}
                                     stroke={lineColor}
                                     strokeWidth={1}
-                                    opacity={0.9}
-                                    curve={false}
-                                    style={{ pointerEvents: 'none' }}
+                                    style={{
+                                        pointerEvents: 'none',
+                                        strokeOpacity: 0.9,
+                                    }}
                                 />
                             );
                         })}
+
 
 
                         {/* Port markers */}
