@@ -3,7 +3,7 @@ import Modal from "components/layout/modal";
 import React from "react";
 
 interface Type {
-    name: string
+	name: string
 }
 
 type DeletePopupProps = {
@@ -44,7 +44,7 @@ const SentRfqPopup: React.FC<DeletePopupProps> = ({ isOpen, setIsOpen, onConfirm
 							setIsOpen(false);
 						}}
 					>
-						Send RFQ {itemType}
+						Send {itemType}
 					</Button>
 				</div>
 			</div>

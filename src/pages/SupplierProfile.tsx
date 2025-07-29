@@ -15,6 +15,10 @@ import { CompanyTags } from "components/profile/CompanyTags";
 import { Button } from "components/utils/Button";
 import Icon from "components/utils/Icon";
 import { HtsMapping } from "components/profile/HtsMapping";
+import { useLocation } from "react-router-dom";
+import SentRfqPopup from "components/common/SentRfqPopup";
+import { useNavigate } from "react-router-dom";
+import { toast } from "components/utils/toast";
 
 const companyData: CompanySnapshotData = {
   established: "2012",
@@ -31,12 +35,20 @@ const companyData: CompanySnapshotData = {
 };
 
 export const SupplierProfile: React.FC = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const supplierId = searchParams.get("supplierId");
+
+  useEffect(() => {
+    console.log("Loaded supplier ID from query:", supplierId);
+  }, [supplierId]);
 
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [visibleSection, setVisibleSection] = useState<number | null>(null);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [isTablet, setIsTablet] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -166,10 +178,30 @@ export const SupplierProfile: React.FC = () => {
     }
   ]
 
+  const [isSentPopupOpen, setIsSentPopupOpen] = useState(false);
+  const [selectedSupplierId, setSelectedSupplierId] = useState<string | null>(null);
+
+
+  const handleSendRFQ = (supplierId: any) => {
+    setIsSentPopupOpen(true);
+    setSelectedSupplierId(supplierId);
+  };
+
+  const confirmSendRFQ = () => {
+    if (!selectedSupplierId) return;
+
+    navigate("/rfq-center", { state: { defaultTab: "sent" } });
+    toast.success("RFQ Sent successfully!!");
+    setSelectedSupplierId(null);
+  };
+
+
   return (
     <div className="flex flex-col md:flex-row md:h-[calc(100vh-110px)] w-full">
       <div className="flex flex-col items-start w-full lg:min-[1025px]:w-[calc(100%-424px)] lg:min-[1025px]:h-[calc(100vh-0px)] md:overflow-y-auto">
-        <CompanyHeader />
+        <CompanyHeader id={supplierId}
+          onSendRFQ={() => handleSendRFQ(supplierId)}
+        />
         {/* <div className="relative self-stretch w-full h-px bg-[#eeeeee]" /> */}
         <div className="flex flex-col items-start gap-4 md:gap-[30px] md:pl-6 md:min-[768px]:pr-0 md:py-[30px] p-4 relative self-stretch w-full flex-[0_0_auto]">
           <div className="w-full" ref={(el: any) => (sectionRefs.current[-1] = el)}><AIConfidenceScore /></div>
@@ -215,9 +247,13 @@ export const SupplierProfile: React.FC = () => {
         </div>
         <div className="relative self-stretch w-full h-px bg-[#eeeeee]" />
         <div className="flex items-center justify-end gap-[223px] p-[30px] relative self-stretch w-full flex-[0_0_auto]">
-          <div className="inline-flex items-center gap-4 relative flex-[0_0_auto]">
+          <div className="inline-flex items-center gap-4 relative flex-[0_0_auto] cursor-pointer"
+            onClick={() => handleSendRFQ(supplierId)}
+          >
             <div className="inline-flex items-center justify-center gap-2.5 px-6 py-2 sm:px-9 sm:py-3.5 relative flex-[0_0_auto] bg-[#529e7e] rounded-[50px] overflow-hidden">
-              <div className="relative w-fit mt-[-1.50px] [font-family:'Satoshi',Helvetica] font-medium text-white text-xs sm:text-base tracking-[0] leading-[22px] whitespace-nowrap">
+              <div className="relative w-fit mt-[-1.50px] [font-family:'Satoshi',Helvetica] font-medium text-white text-xs sm:text-base tracking-[0] leading-[22px] whitespace-nowrap"
+
+              >
                 Send RFQ
               </div>
             </div>
@@ -241,11 +277,6 @@ export const SupplierProfile: React.FC = () => {
         </div>
       )}
 
-
-
-
-
-
       <div
         ref={sidebarRef}
         onMouseLeave={handleMouseLeave}
@@ -266,6 +297,15 @@ export const SupplierProfile: React.FC = () => {
           ))}
         </div>
       </div>
+      {isSentPopupOpen && (
+        <SentRfqPopup
+          isOpen={isSentPopupOpen}
+          setIsOpen={setIsSentPopupOpen}
+          onConfirm={confirmSendRFQ}
+          name={null}
+          itemType="RFQ"
+        />
+      )}
 
     </div >
   );

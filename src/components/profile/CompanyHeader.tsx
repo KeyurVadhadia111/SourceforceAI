@@ -3,8 +3,15 @@ import { Button } from "components/utils/Button";
 import { useNavigate } from "react-router-dom";
 import Icon from "components/utils/Icon";
 
-export const CompanyHeader: React.FC = () => {
+interface CompanyHeaderProps {
+  id: string | null;
+  onSendRFQ?: () => void;
+
+}
+
+export const CompanyHeader: React.FC<CompanyHeaderProps> = ({ id, onSendRFQ }) => {
   const navigate = useNavigate();
+  console.log("Supplier ID in header:", id);
 
   return (
     <div className="flex items-start justify-between px-4 py-6 sm:p-6 relative self-stretch w-full flex-[0_0_auto] border-b border-border">
@@ -45,7 +52,7 @@ export const CompanyHeader: React.FC = () => {
       </div>
 
       {/* <div className="inline-flex items-center justify-center gap-2.5 px-9 py-3.5 relative flex-[0_0_auto] bg-[#529e7e] rounded-[50px] overflow-hidden"> */}
-      <Button className="sm:text-base text-sm !px-6 !py-1.5 sm:!px-9 sm:!py-3 !font-medium">
+      <Button className="sm:text-base text-sm !px-6 !py-1.5 sm:!px-9 sm:!py-3 !font-medium" onClick={onSendRFQ}>
         Send RFQ
       </Button>
       {/* </div> */}
