@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import { hsCodeData } from '../data/hsCodeData';
+import { useAppState } from 'components/utils/useAppState';
 
 interface SunburstChartProps {
   height: number;
@@ -46,7 +47,8 @@ export const SunburstChart: React.FC<SunburstChartProps> = ({ height }) => {
   }, []);
 
   const chartWidth = Math.min(width, 765);
-
+  const computedHeight = chartWidth >= 768 ? 500 : 400;
+  const [{ isMobile }, setAppState] = useAppState();
 
   // Helper function to get HS code descriptions
   const getHSCodeDescription = (code: string): string => {
@@ -73,14 +75,14 @@ export const SunburstChart: React.FC<SunburstChartProps> = ({ height }) => {
     // Clear previous visualization
     d3.select(svgRef.current).selectAll('*').remove();
 
-    const radius = Math.min(chartWidth, height) / 2;
+    const radius = Math.min(chartWidth, isMobile ? computedHeight : height) / 2;
 
     // Create SVG
     const svg = d3.select(svgRef.current)
       .attr('width', chartWidth)
-      .attr('height', height)
+      .attr('height', isMobile ? computedHeight : height)
       .append('g')
-      .attr('transform', `translate(${chartWidth / 2},${height / 2})`);
+      .attr('transform', `translate(${chartWidth / 2},${isMobile ? computedHeight / 2 : height / 2})`);
 
     // Create partition layout
     const partition = d3.partition<any>()
@@ -268,7 +270,7 @@ export const SunburstChart: React.FC<SunburstChartProps> = ({ height }) => {
 
   return (
     <div ref={containerRef} className="flex justify-center relative w-full overflow-x-auto">
-      <svg ref={svgRef} width={width} height={height}></svg>
+      <svg ref={svgRef} width={width} height={computedHeight}></svg>
       {tooltip.visible && (
         <div
           className="fixed z-50 bg-white p-4 rounded-lg shadow-lg border-2 pointer-events-none"

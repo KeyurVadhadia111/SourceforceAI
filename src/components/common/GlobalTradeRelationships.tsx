@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import svgPaths from '../utils/svg-cj7iyr8ys3';
+import { useAppState } from 'components/utils/useAppState';
 
 // TypeScript interfaces for the data structure
 interface Company {
@@ -170,6 +171,8 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
     className = ""
 }) => {
     const [activeView, setActiveView] = useState<'graph' | 'list'>('graph');
+    const [{ isMobile }, setAppState] = useAppState();
+
     const [hoveredSupplier, setHoveredSupplier] = useState<string | null>(null);
     const [hoveredSubSupplier, setHoveredSubSupplier] = useState<string | null>(null);
     const [tooltip, setTooltip] = useState<{
@@ -232,10 +235,10 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
     };
 
     const renderConnectionLines = () => (
-        <div className="absolute h-[809.5px] left-[535px] top-[34px] w-[107px]">
+        <div className="absolute h-[809.5px] left-[465px] sm:left-[535px] top-[34px] w-[107px]">
             <div className="absolute bottom-[-0.357%] left-0 right-0 top-[-0.357%]">
                 <svg
-                    className="block size-full"
+                    className="block "
                     fill="none"
                     preserveAspectRatio="none"
                     viewBox="0 0 107 816"
@@ -260,12 +263,12 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
                                 svgPaths.pd438f80, svgPaths.p3bc05400, svgPaths.p32cb13b0,
                                 svgPaths.pd031700, svgPaths.p28ad9880,
                                 svgPaths.p2b5869c0, svgPaths.p1c7b1900, svgPaths.p19860e00,
-                                svgPaths.p36836100
+                                svgPaths.p36836100,
                             ];
 
                             return (
                                 <g key={supplier.id}>
-                                    {supplierPaths.slice(index * 3, index * 3 + 3).map((path, pathIndex) => (
+                                    {supplierPaths.slice(index * 3.6, index * 3.5 + 4).map((path, pathIndex) => (
                                         <path
                                             key={pathIndex}
                                             d={path}
@@ -327,10 +330,10 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
             const opacity = supplier ? getConnectionOpacity(supplier.id) : (hoveredSupplier ? 0.3 : 1);
 
             return (
-                <div key={index} className="absolute h-0 left-48 w-9" style={{ top: `${top}px` }}>
+                <div key={index} className="absolute h-0 left-[128px] sm:left-48 w-9" style={{ top: `${top}px` }}>
                     <div className="absolute bottom-[-2.887px] left-0 right-0 top-[-2.887px]">
                         <svg
-                            className="block size-full"
+                            className="block "
                             fill="none"
                             preserveAspectRatio="none"
                             viewBox="0 0 36 6"
@@ -349,7 +352,7 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
 
     const renderMainCompany = () => (
         <div
-            className="absolute box-border content-stretch flex flex-row gap-2.5 items-center justify-center left-[26px] p-[24px] rounded-lg translate-y-[-50%] transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
+            className="absolute box-border content-stretch flex flex-row gap-2.5 items-center justify-center sm:left-[26px] p-1.5 sm:p-6 rounded-lg translate-y-[-50%] transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
             style={{
                 top: "calc(50% + 12.5px)",
                 backgroundColor: data.mainCompany.color,
@@ -357,7 +360,7 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
             }}
         >
             <div className="text-[24px] text-white text-center text-nowrap">
-                <p className="block leading-[1.5] whitespace-pre">{data.mainCompany.name}</p>
+                <p className="block sm:leading-[1.5]">{data.mainCompany.name}</p>
             </div>
         </div>
     );
@@ -367,10 +370,10 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
             {data.suppliers.map((supplier) => (
                 <div
                     key={supplier.id}
-                    className="absolute box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-6 py-2 rounded-xl w-[300px] cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg hover:z-10"
+                    className="absolute box-border content-stretch flex flex-row gap-2.5 items-center justify-center sm:px-6 py-2 rounded-xl w-[300px] cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg hover:z-10"
                     style={{
                         top: `${supplier.position.top}px`,
-                        left: `${supplier.position.left}px`,
+                        left: `${isMobile ? supplier.position.left / 1.42 : supplier.position.left}px`,
                         backgroundColor: supplier.color,
                         opacity: getSupplierOpacity(supplier.id),
                         transform: hoveredSupplier === supplier.id ? 'scale(1.05)' : 'scale(1)',
@@ -386,32 +389,51 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
             ))}
         </>
     );
-
+    const removeGap = data.suppliers.map((item => {
+        item.subSuppliers.map((name => name.id))
+    }))
+    console.log("data.suppliers.", removeGap)
     const renderSubSuppliers = () => (
-        <div className="absolute box-border content-stretch flex flex-col gap-5 items-start justify-start left-[612px] p-0 top-[21px] w-[300px]">
-            {data.suppliers.map((supplier, supplierIndex) => (
-                <div key={supplier.id} className="box-border content-stretch flex flex-col gap-2 items-start justify-start p-0 relative shrink-0 w-full">
-                    {supplier.subSuppliers.map((subSupplier) => (
-                        <div
-                            key={subSupplier.id}
-                            className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-6 py-1 relative rounded-xl shrink-0 w-[300px] cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-md hover:z-10"
-                            style={{
-                                backgroundColor: `${supplier.color}${Math.floor(subSupplier.opacity * 255).toString(16).padStart(2, '0')}`,
-                                opacity: getSubSupplierOpacity(subSupplier.id, supplier.id),
-                                transform: hoveredSubSupplier === subSupplier.id ? 'scale(1.05)' : 'scale(1)',
-                                zIndex: hoveredSubSupplier === subSupplier.id ? 10 : 1
-                            }}
-                            onMouseEnter={() => handleSubSupplierMouseEnter(subSupplier.id, supplier.id)}
-                            onMouseLeave={handleSubSupplierMouseLeave}
-                        >
-                            <div className="text-[12px] text-[#1e2d2a] text-center text-nowrap">
-                                <p className="block leading-[1.5] whitespace-pre">{subSupplier.name}</p>
+        <div className="absolute box-border content-stretch flex flex-col items-start justify-start left-[533px] sm:left-[612px] p-0 top-[21px] w-[300px]">
+            {data.suppliers
+                .filter((supplier) => supplier.subSuppliers.length > 0)
+                .map((supplier, index, filteredSuppliers) => (
+                    <div
+                        key={supplier.id}
+                        className={`box-border content-stretch flex flex-col gap-2 items-start justify-start p-0 relative shrink-0 w-full ${index !== filteredSuppliers.length - 1 ? 'mb-5' : ''
+                            }`}
+                    >
+                        {supplier.subSuppliers.map((subSupplier) => (
+                            <div
+                                key={subSupplier.id}
+                                className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-6 py-1 relative rounded-xl shrink-0 w-[300px] cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-md hover:z-10"
+                                style={{
+                                    backgroundColor: `${supplier.color}${Math.floor(
+                                        subSupplier.opacity * 255
+                                    )
+                                        .toString(16)
+                                        .padStart(2, "0")}`,
+                                    opacity: getSubSupplierOpacity(subSupplier.id, supplier.id),
+                                    transform:
+                                        hoveredSubSupplier === subSupplier.id ? "scale(1.05)" : "scale(1)",
+                                    zIndex: hoveredSubSupplier === subSupplier.id ? 10 : 1,
+                                }}
+                                onMouseEnter={() =>
+                                    handleSubSupplierMouseEnter(subSupplier.id, supplier.id)
+                                }
+                                onMouseLeave={handleSubSupplierMouseLeave}
+                            >
+                                <div className="text-[12px] text-[#1e2d2a] text-center text-nowrap">
+                                    <p className="block leading-[1.5] whitespace-pre">
+                                        {subSupplier.name}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
-            ))}
+                        ))}
+                    </div>
+                ))}
         </div>
+
     );
 
     const renderGraphView = () => (
@@ -422,12 +444,12 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
             {renderHorizontalConnectors()}
 
             {/* Main vertical line */}
-            <div className="absolute flex h-[746px] items-center justify-center left-[193px] top-[101px] w-[0px]">
+            <div className="absolute flex h-[746px] items-center justify-center left-[128px] sm:left-[193px] top-[101px] w-[0px]">
                 <div className="flex-none rotate-[270deg]">
                     <div className="h-0 relative w-[746px]">
                         <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
                             <svg
-                                className="block size-full"
+                                className="block "
                                 fill="none"
                                 preserveAspectRatio="none"
                                 viewBox="0 0 746 1"
@@ -444,10 +466,10 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
             </div>
 
             {/* Central horizontal line */}
-            <div className="absolute h-0 left-[154px] top-[454px] w-[38px]">
+            <div className="absolute h-0 left-[89px] sm:left-[154px] top-[454px] w-[38px]">
                 <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
                     <svg
-                        className="block size-full"
+                        className="block "
                         fill="none"
                         preserveAspectRatio="none"
                         viewBox="0 0 38 1"
@@ -473,8 +495,8 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
     );
 
     return (
-        <div className={`relative rounded-2xl size-full ${className}`}>
-            <div className="flex flex-col justify-center relative size-full">
+        <div className={`relative rounded-2xl  ${className}`}>
+            <div className="flex flex-col justify-center relative ">
                 <div className="basis-0 box-border content-stretch flex flex-col gap-4 grow items-start justify-start min-h-px min-w-px p-0 relative shrink-0">
 
                     {/* Content Area */}

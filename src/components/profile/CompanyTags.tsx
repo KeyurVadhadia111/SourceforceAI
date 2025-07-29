@@ -65,7 +65,7 @@ export const CompanyTags: React.FC = () => {
         {companyTags.map(({ tag, count }, index) => (
           <div
             key={index}
-            className="inline-flex gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 flex-[0_0_auto] bg-white rounded items-center relative"
+            className="inline-flex gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 flex-[0_0_auto] bg-white rounded items-center relative cursor-pointer hover:bg-black/15"
           >
             <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi',Helvetica] font-medium text-[#1e2d2a] text-sm sm:text-base tracking-[0] leading-6 whitespace-nowrap">
               {tag}

@@ -430,101 +430,84 @@ TEU: ${formatNumber(point.teu)} containers`;
   };
 
   const renderFilters = () => (
-    <div className="flex flex-wrap gap-4 items-center mb-4">
-      <div className="flex items-center gap-2">
+    <div className="flex flex-wrap gap-4 items-start sm:items-center mb-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
         <label className="text-sm font-medium text-gray-700">From:</label>
-        <Select
-          value={filters.fromMonth.toString()}
-          variant="transparentBorder"
-          className='!w-24 !py-2.5 !h-auto'
-          onChange={(e) => handleFilterChange('fromMonth', parseInt(e.target.value))}
+        <select
+          value={filters.fromMonth}
+          onChange={(e: any) => setFilters(prev => ({ ...prev, fromMonth: parseInt(e.target.value) }))}
+          className="px-3 py-1 border border-gray-300 rounded-md text-sm"
         >
-          {monthNames.map((month, index) => (
-            <option key={index} value={(index + 1).toString()}>
-              {month}
-            </option>
+          {monthNames.map(month => (
+            <option key={month} value={month}>{month}</option>
           ))}
-        </Select>
+        </select>
 
-        <Select
-          value={filters.fromYear.toString()}
+        <select
+          value={filters.fromYear}
           onChange={(e) => handleFilterChange('fromYear', parseInt(e.target.value))}
-          className='!w-24 !py-2.5 !h-auto'
-          variant="transparentBorder"
+          className="px-3 py-1 border border-gray-300 rounded-md text-sm"
         >
-          {availableYears.map((year) => (
-            <option key={year} value={year.toString()}>
-              {year}
-            </option>
+          {availableYears.map(year => (
+            <option key={year} value={year}>{year}</option>
           ))}
-        </Select>
+        </select>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
         <label className="text-sm font-medium text-gray-700">To:</label>
-        <Select
-          value={filters.toMonth.toString()}
+        <select
+          value={filters.toMonth}
           onChange={(e) => handleFilterChange('toMonth', parseInt(e.target.value))}
-          className='!w-24 !py-2.5 !h-auto'
-          variant="transparentBorder"
+          className="px-3 py-1 border border-gray-300 rounded-md text-sm"
         >
-          {monthNames.map((month, index) => (
-            <option key={index} value={(index + 1).toString()}>
-              {month}
-            </option>
+          {monthNames.map(month => (
+            <option key={month} value={month}>{month}</option>
           ))}
-        </Select>
-
-        <Select
-          value={filters.toYear.toString()}
+        </select>
+        <select
+          value={filters.toYear}
           onChange={(e) => handleFilterChange('toYear', parseInt(e.target.value))}
-          className='!w-24 !py-2.5 !h-auto'
-          variant="transparentBorder"
+          className="px-3 py-1 border border-gray-300 rounded-md text-sm"
         >
-          {availableYears.map((year) => (
-            <option key={year} value={year.toString()}>
-              {year}
-            </option>
+          {availableYears.map(year => (
+            <option key={year} value={year}>{year}</option>
           ))}
-        </Select>
+        </select>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
         <label className="text-sm font-medium text-gray-700">Country:</label>
-        <Select
+        <select
+          value={filters.country}
+          onChange={(e) => handleFilterChange('country', e.target.value as FilterState['country'])}
+          className="px-3 py-1 border border-gray-300 rounded-md text-sm"
+        >
+          {countries.map(country => (
+            <option key={country} value={country}>{country}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
+        <label className="text-sm font-medium text-gray-700">Period:</label>
+        <select
           value={filters.period}
           onChange={(e) => handleFilterChange('period', e.target.value as FilterState['period'])}
-          className='!w-44 !py-2.5 !h-auto'
-          variant="transparentBorder"
+          className="px-3 py-1 border border-gray-300 rounded-md text-sm"
         >
           <option value="Monthly">Monthly Trend</option>
           <option value="By Months">Month Breakdown</option>
           <option value="MoM">Monthly Delta</option>
           <option value="QoQ">Quarterly Change</option>
           <option value="Annually">Year-on-Year</option>
-        </Select>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <label className="text-sm font-medium text-gray-700">Period:</label>
-        <Select
-          value={filters.period}
-          onChange={(e) => handleFilterChange('period', e.target.value as FilterState['period'])}
-          className='!w-36 !py-2.5 !h-auto'
-          variant="transparentBorder"
-        >
-          <option value="Monthly">Monthly</option>
-          <option value="By Months">By Months</option>
-          <option value="MoM">MoM</option>
-          <option value="QoQ">QoQ</option>
-          <option value="Annually">Annually</option>
-        </Select>
+        </select>
       </div>
     </div>
   );
 
   const renderBarChart = () => {
-    const chartWidth = 600;
+    const chartWidth = 850;
     const chartHeight = 280;
     const padding = { top: 20, right: 20, bottom: 40, left: 50 };
 
@@ -576,7 +559,7 @@ TEU: ${formatNumber(point.teu)} containers`;
       };
 
       return (
-        <div className="relative w-full h-[320px]">
+        <div className="relative w-full sm:h-[320px]">
           <svg width="100%" height="100%" viewBox={`0 0 ${chartWidth} ${chartHeight}`}>
             {/* Grid lines */}
             {yAxisLabels.map((_, index) => (
@@ -1029,10 +1012,10 @@ TEU: ${formatNumber(point.teu)} containers`;
   };
 
   return (
-    <div className={`relative rounded-2xl size-full ${className}`}>
+    <div className={`relative rounded-2xl ${className}`}>
       <div className="absolute border border-[#e0e0e0] border-solid inset-0 pointer-events-none rounded-2xl" />
-      <div className="flex flex-col justify-center relative size-full">
-        <div className="box-border content-stretch flex flex-col gap-4 items-start justify-center p-[16px] relative size-full">
+      <div className="flex flex-col justify-center relative">
+        <div className="box-border content-stretch flex flex-col gap-4 items-start justify-center p-[16px] relative">
 
           {/* Header */}
           <div className="flex items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
@@ -1046,7 +1029,7 @@ TEU: ${formatNumber(point.teu)} containers`;
 
           {/* Info section */}
           <div className="box-border content-stretch flex flex-wrap gap-1 items-start justify-between p-0 relative shrink-0 w-full">
-            <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-start p-0 relative shrink-0">
+            <div className="box-border content-stretch flex flex-wrap gap-2.5 items-center justify-start p-0 relative">
               <Icon icon={isDark ? "cube-dark" : "cube"} className="sm:w-5 sm:h-5 w-4 h-4 " />
 
               <div className="font-['Satoshi:Medium',_sans-serif] leading-[0] not-italic relative shrink-0 text-[#1e2d2a] text-[12px] text-left">
@@ -1066,8 +1049,8 @@ TEU: ${formatNumber(point.teu)} containers`;
           </div>
 
           {/* Chart */}
-          <div className="bg-[#ffffff] h-[400px] relative rounded-3xl shrink-0 w-full">
-            <div className="relative size-full">
+          <div className="bg-[#ffffff] sm:h-[400px] relative rounded-3xl shrink-0 w-full">
+            <div className="relative">
               <div className="box-border content-stretch flex flex-col gap-3 h-full items-start justify-start p-[16px] relative w-full">
                 {renderBarChart()}
 

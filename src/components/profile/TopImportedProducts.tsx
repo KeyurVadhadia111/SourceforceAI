@@ -306,10 +306,10 @@ export const TopImportedProducts: React.FC = () => {
             </div>
 
             {/* Content Area */}
-            <div className="relative w-full h-[554px]">
+            <div className="relative w-full sm:h-auto">
               {tabs.map(({ key, type, data }) =>
                 activeTab === key && (
-                  <div key={key} className="flex justify-start w-full h-[554px] overflow-x-auto">
+                  <div key={key} className="flex justify-start w-full h-full overflow-x-auto">
                     {type === "common" && data ? (
                       <TabContent categories={data} />
                     ) : (

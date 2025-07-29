@@ -220,11 +220,7 @@ const googleTradeData = {
       color: "#52a932",
       position: { top: 484, left: 235 },
       subSuppliers: [
-        { id: "inditex", name: "Inditex S A", opacity: 0.1 },
-        { id: "reiss", name: "Reiss", opacity: 0.16 },
-        { id: "tempe", name: "Tempe S A", opacity: 0.22 },
-        { id: "provimi", name: "Provimi North America", opacity: 0.28 },
-        { id: "nikole", name: "Nikole S A", opacity: 0.28 }
+
       ]
     },
     {
@@ -233,9 +229,11 @@ const googleTradeData = {
       color: "#9532a9",
       position: { top: 582, left: 235 },
       subSuppliers: [
-        { id: "fii-usa", name: "Fii Usa", opacity: 0.1 },
-        { id: "qch-2", name: "Qch", opacity: 0.16 },
-        { id: "iec-tech", name: "Iec Technologies S De R L De C V", opacity: 0.22 }
+        { id: "inditex", name: "Inditex S A", opacity: 0.1 },
+        { id: "reiss", name: "Reiss", opacity: 0.16 },
+        { id: "tempe", name: "Tempe S A", opacity: 0.22 },
+        { id: "provimi", name: "Provimi North America", opacity: 0.28 },
+        { id: "nikole", name: "Nikole S A", opacity: 0.28 }
       ]
     },
     {
@@ -244,7 +242,9 @@ const googleTradeData = {
       color: "#a97732",
       position: { top: 742, left: 235 },
       subSuppliers: [
-        { id: "invue-security", name: "Invue Security Products", opacity: 0.1 }
+        { id: "fii-usa", name: "Fii Usa", opacity: 0.1 },
+        { id: "qch-2", name: "Qch", opacity: 0.16 },
+        { id: "iec-tech", name: "Iec Technologies S De R L De C V", opacity: 0.22 }
       ]
     },
     {
@@ -252,7 +252,9 @@ const googleTradeData = {
       name: "Invue Security Products Hk",
       color: "#a95532",
       position: { top: 822, left: 235 },
-      subSuppliers: []
+      subSuppliers: [
+        { id: "invue-security", name: "Invue Security Products", opacity: 0.1 }
+      ]
     }
   ],
   totalOtherCompanies: 23

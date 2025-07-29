@@ -1,5 +1,4 @@
 import React from "react";
-import WorldMap from "./WordMap";
 
 export const CountryWiseImport: React.FC = () => {
   return (
@@ -19,8 +18,7 @@ export const CountryWiseImport: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative w-full h-full sm:h-[562px] overflow-hidden">
-            <WorldMap />
+          <div className="relative w-full h-[170px] sm:h-[534.32px]  bg-[url('assets/images/VolumeDistribution.png')] bg-contain bg-center overflow-hidden">
             <div className="relative w-full top-[140px] sm:top-[-97px] left-[55%] sm:left-[15px]">
               <div className="absolute w-full top-0 left-0">
                 {/* World map visualization */}
