@@ -94,13 +94,14 @@ const REGION_COUNTRIES: Record<string, string[]> = {
     "Africa": ["Nigeria", "South Africa", "Egypt", "Kenya"],
 };
 
+const portCountryToRegion: Record<string, string> = {};
+MAJOR_PORTS.forEach(port => {
+    portCountryToRegion[port.country] = port.region;
+});
+
 const getRegionColor = (country: string) => {
-    for (const [region, countries] of Object.entries(REGION_COUNTRIES)) {
-        if (countries.includes(country)) {
-            return REGION_COLORS[region];
-        }
-    }
-    return "#e5e7eb"; // default fill
+    const region = portCountryToRegion[country];
+    return REGION_COLORS[region] || "#e5e7eb";
 };
 
 const REGION_BORDER_COLORS: Record<string, string> = {
@@ -111,13 +112,22 @@ const REGION_BORDER_COLORS: Record<string, string> = {
     "Africa": "#fca5a5",            // red-300
 };
 
-const getRegionStrokeColor = (country: string): string => {
-    for (const [region, countries] of Object.entries(REGION_COUNTRIES)) {
-        if (countries.includes(country)) {
-            return REGION_BORDER_COLORS[region];
-        }
-    }
-    return "#ffffff";
+const getRegionStrokeColor = (country: string) => {
+    const region = portCountryToRegion[country];
+    return REGION_BORDER_COLORS[region] || "#ffffff";
+};
+
+const REGION_LINE_COLORS: Record<string, string> = {
+    "Asia Pacific": "#f59e0b", // amber-500
+    "North America": "#06b6d4", // cyan-500
+    "South America": "#22c55e", // green-500
+    "Europe": "#6366f1", // indigo-500
+    "Africa": "#ef4444", // red-500
+};
+
+const getRegionLineColor = (country: string) => {
+    const region = portCountryToRegion[country];
+    return REGION_LINE_COLORS[region] || "#999999"; // default gray if no match
 };
 
 
@@ -463,20 +473,26 @@ Ports: ${countryData[countryName].ports}`}
                         {filteredConnections.map((conn, idx) => {
                             const from = getPortCoords(conn.from);
                             const to = getPortCoords(conn.to);
+
+                            const fromPort = MAJOR_PORTS.find(p => p.id === conn.from);
+                            const lineColor = fromPort ? getRegionLineColor(fromPort.country) : "#cccccc";
+
                             if (!from || !to) return null;
+
                             return (
                                 <Line
                                     key={`line-${idx}`}
                                     from={from}
                                     to={to}
-                                    stroke="#DB3333"
-                                    strokeWidth={0.5}
-                                    opacity={0.7}
+                                    stroke={lineColor}
+                                    strokeWidth={1}
+                                    opacity={0.9}
                                     curve={false}
                                     style={{ pointerEvents: 'none' }}
                                 />
                             );
                         })}
+
 
                         {/* Port markers */}
                         {filteredPorts.map((port) => {
