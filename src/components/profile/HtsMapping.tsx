@@ -80,16 +80,16 @@ export const HtsMapping: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-start justify-center gap-4 p-3 sm:p-4 relative self-stretch w-full flex-[0_0_auto] rounded-2xl border border-solid border-[#e0e0e0]">
+    <div className="flex flex-col items-start justify-center gap-4 p-3 sm:p-4 relative self-stretch w-full flex-[0_0_auto] rounded-2xl border border-solid border-[#e0e0e0] dark:border-borderDark">
       <div className="flex items-center justify-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
         <div className="flex flex-col items-start gap-2 sm:gap-4 relative flex-1 grow w-full">
           <div className="flex items-center gap-1 relative self-stretch w-full flex-[0_0_auto]">
             <div className="flex flex-wrap items-center gap-1 relative">
-              <p className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base sm:text-xl tracking-[0] leading-[30px]">
+              <p className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-text dark:text-textDark text-base sm:text-xl tracking-[0] leading-[30px]">
                 HTS Mapping from Product Descriptions
               </p>
 
-              <div className="relative w-fit [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-sm tracking-[0] leading-[21px]">
+              <div className="relative w-fit [font-family:'Satoshi-Regular',Helvetica] font-normal text-text dark:text-textDark text-sm tracking-[0] leading-[21px]">
                 {" "}
                 (Top 10)
               </div>
@@ -107,9 +107,9 @@ export const HtsMapping: React.FC = () => {
               </thead>
               <tbody>
                 {HtsData.map((row) => (
-                  <tr key={row.id} className="bg-white shadow-sm rounded-lg">
-                    <td className="px-2 sm:px-3 py-1 sm:py-2 text-sm sm:text-base font-medium [font-family:'Satoshi',Helvetica] text-[#1e2d2a]">{row.htsCode}</td>
-                    <td className="px-2 sm:px-3 py-1 sm:py-2 text-sm text-gray-600 max-w-xs">
+                  <tr key={row.id} className="bg-fgc dark:bg-fgcDark shadow-sm rounded-lg">
+                    <td className="px-2 sm:px-3 py-1 sm:py-2 text-sm sm:text-base font-medium [font-family:'Satoshi',Helvetica] text-text dark:text-textDark">{row.htsCode}</td>
+                    <td className="px-2 sm:px-3 py-1 sm:py-2 text-sm text-text dark:text-textDark max-w-xs">
                       <p
                         className={`[font-family:'Satoshi',Helvetica] ${expandedDesc[row.id] ? "" : "line-clamp-1"
                           }`}
@@ -125,8 +125,8 @@ export const HtsMapping: React.FC = () => {
                         </button>
                       )}
                     </td>
-                    <td className="px-2 sm:px-3 py-1 sm:py-2 text-sm sm:text-base font-medium [font-family:'Satoshi',Helvetica] text-gray-600">{row.bolNumber}</td>
-                    <td className="px-2 sm:px-3 py-1 sm:py-2 text-sm text-gray-600 max-w-md">
+                    <td className="px-2 sm:px-3 py-1 sm:py-2 text-sm sm:text-base font-medium [font-family:'Satoshi',Helvetica] text-text dark:text-textDark">{row.bolNumber}</td>
+                    <td className="px-2 sm:px-3 py-1 sm:py-2 text-sm text-text dark:text-textDark max-w-md">
                       <p
                         className={`[font-family:'Satoshi',Helvetica] ${expandedRows[row.id] ? "" : "line-clamp-3"
                           }`}

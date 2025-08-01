@@ -49,10 +49,10 @@ export const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({
   return (
     <div className="relative" ref={dropdownRef}>
       <div
-        className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] bg-white rounded-[100px] border border-solid border-[#eeeeee] cursor-pointer"
+        className="inline-flex items-center justify-center gap-2.5 px-3 py-2 relative flex-[0_0_auto] bg-fgc dark:bg-fgcDark rounded-[100px] border border-solid border-[#eeeeee] dark:border-borderDark cursor-pointer"
         onClick={handleToggle}
       >
-        <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-[8px] sm:text-xs text-center tracking-[0] leading-[18px] whitespace-nowrap">
+        <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-text dark:text-textDark text-[8px] sm:text-xs text-center tracking-[0] leading-[18px] whitespace-nowrap">
           {selectedOptions.length > 0 ? selectedOptions.join(", ") : placeholder}
         </div>
         <Icon icon="chevron-down" className="w-3 h-3 sm:w-5 sm:h-5 text-text dark:text-textDark" />
@@ -60,7 +60,7 @@ export const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({
       </div>
 
       {isOpen && (
-        <div className="absolute z-10 mt-1 w-full bg-white border border-solid border-[#eeeeee] rounded-md shadow-lg max-h-60 overflow-auto">
+        <div className="absolute z-10 mt-1 w-full bg-white border border-solid border-[#eeeeee] dark:border-borderDark rounded-md shadow-lg max-h-60 overflow-auto">
           <div className="p-2">
             <input
               type="text"

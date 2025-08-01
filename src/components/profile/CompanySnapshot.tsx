@@ -78,7 +78,7 @@ export const CompanySnapshot: React.FC<CompanySnapshotProps> = ({ data }) => {
       <div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
         <div className="flex flex-col items-start gap-4 relative flex-1 grow">
           <div className="flex items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
-            <div className="w-fit [font-family:'Satoshi-Bold',Helvetica] font-bold text-base md:text-xl leading-[30px] whitespace-nowrap relative mt-[-1.00px] text-[#1e2d2a] tracking-[0]">
+            <div className="w-fit [font-family:'Satoshi-Bold',Helvetica] font-bold text-base md:text-xl leading-[30px] whitespace-nowrap relative mt-[-1.00px] text-text dark:text-textDark tracking-[0]">
               Company Snapshot
             </div>
           </div>
@@ -91,10 +91,10 @@ export const CompanySnapshot: React.FC<CompanySnapshotProps> = ({ data }) => {
                     <Icon icon={item.icon} className="w-4 h-4 sm:w-5 sm:h-5 text-text dark:text-textDark" />
                   </div>
                   <div className="flex flex-col items-start justify-center gap-1 relative w-full">
-                    <div className="whitespace-nowrap text-sm text-[#1e2d2a] font-normal [font-family:'Satoshi-Regular',Helvetica]">
+                    <div className="whitespace-nowrap text-sm text-text dark:text-textDark font-normal [font-family:'Satoshi-Regular',Helvetica]">
                       {item.title}
                     </div>
-                    <div className="[font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-base md:text-lg leading-[30px] tracking-[0] break-words w-full">
+                    <div className="[font-family:'Satoshi-Medium',Helvetica] font-medium text-text dark:text-textDark text-base md:text-lg leading-[30px] tracking-[0] break-words w-full">
                       {item.key}
                     </div>
                   </div>

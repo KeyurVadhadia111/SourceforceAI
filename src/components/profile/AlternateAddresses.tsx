@@ -119,11 +119,11 @@ export const AlternateAddresses: React.FC = () => {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
 
   return (
-    <div className="justify-center gap-4 p-4 border border-solid border-[#e0e0e0] flex flex-col items-start relative self-stretch w-full flex-[0_0_auto] rounded-2xl">
+    <div className="justify-center gap-4 p-4 border border-solid border-border dark:border-borderDark flex flex-col items-start relative self-stretch w-full flex-[0_0_auto] rounded-2xl">
       <div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
         <div className="flex flex-col items-start gap-4 relative flex-1 grow w-full">
           <div className="flex items-center gap-1 relative self-stretch w-full flex-[0_0_auto]">
-            <p className="relative w-fit mt-[-1.00px] [font-family:'Satoshi',Helvetica] font-bold text-[#1e2d2a] text-base sm:text-xl tracking-[0] leading-[30px]">
+            <p className="relative w-fit mt-[-1.00px] [font-family:'Satoshi',Helvetica] font-bold text-text dark:text-textDark text-base sm:text-xl tracking-[0] leading-[30px]">
               Alternate Company Addresses &amp; Contact Metadata
             </p>
           </div>
@@ -136,21 +136,21 @@ export const AlternateAddresses: React.FC = () => {
                   <div
                     key={tab.label}
                     onClick={() => setSelectedTabIndex(index)}
-                    className={`inline-flex cursor-pointer items-center justify-center gap-1 pt-2.5 pb-[11px] px-4 relative flex-[0_0_auto] border-b-2 [border-bottom-style:solid] ${isSelected ? "border-[#529e7e]" : "border-border dark:border-border"
+                    className={`inline-flex cursor-pointer items-center justify-center gap-1 pt-2.5 pb-[11px] px-4 relative flex-[0_0_auto] border-b-2 [border-bottom-style:solid] ${isSelected ? "border-primary" : "border-border dark:border-border"
                       }`}
                   >
                     <div
-                      className={`relative w-fit [font-family:'Satoshi',Helvetica] font-normal ${isSelected ? "text-[#529e7e]" : "text-[#5f726e]"
+                      className={`relative w-fit [font-family:'Satoshi',Helvetica] font-normal ${isSelected ? "text-primary" : "text-textSecondary dark:text-textSecondaryDark"
                         } text-sm sm:text-base text-center tracking-[0] leading-6 whitespace-nowrap`}
                     >
                       {tab.label}
                     </div>
 
                     <div
-                      className={`inline-flex items-start justify-center px-1 py-0.5 relative flex-[0_0_auto] rounded ${isSelected ? "bg-[#529e7e]" : "bg-[#5f726e]"
+                      className={`inline-flex items-start justify-center px-1 py-0.5 relative flex-[0_0_auto] rounded ${isSelected ? "bg-primary" : "bg-textSecondary dark:bg-textSecondaryDark"
                         }`}
                     >
-                      <div className="mt-[-1.00px] [font-family:'Satoshi',Helvetica] font-bold text-white text-base text-center leading-6 whitespace-nowrap relative w-fit tracking-[0]">
+                      <div className="mt-[-1.00px] [font-family:'Satoshi',Helvetica] font-bold text-textDark dark:text-text text-base text-center leading-6 whitespace-nowrap relative w-fit tracking-[0]">
                         {tab.count}
                       </div>
                     </div>
@@ -162,12 +162,12 @@ export const AlternateAddresses: React.FC = () => {
             {/* You can now conditionally render based on selectedTabIndex */}
             <div className="flex items-center justify-around gap-1 relative self-stretch w-full flex-[0_0_auto]">
               <p className="relative flex-1 mt-[-1.00px] [font-family:'Satoshi',Helvetica] font-normal text-transparent text-sm sm:text-base tracking-[0] leading-6">
-                <span className="text-[#1e2d2a]">The most recent contact info is: </span>
-                <span className="[font-family:'Satoshi',Helvetica] font-bold text-[#1e2d2a]">XXXXXXX333</span>
-                <span className="text-[#1e2d2a]"> found on </span>
-                <span className="[font-family:'Satoshi',Helvetica] font-bold text-[#1e2d2a]">13/09/2020</span>
-                <span className="text-[#1e2d2a]"> in the BOL </span>
-                <span className="[font-family:'Satoshi',Helvetica] font-medium text-[#529e7e] underline">
+                <span className="text-text dark:text-textDark">The most recent contact info is: </span>
+                <span className="[font-family:'Satoshi',Helvetica] font-bold text-text dark:text-textDark">XXXXXXX333</span>
+                <span className="text-text dark:text-textDark"> found on </span>
+                <span className="[font-family:'Satoshi',Helvetica] font-bold text-text dark:text-textDark">13/09/2020</span>
+                <span className="text-text dark:text-textDark"> in the BOL </span>
+                <span className="[font-family:'Satoshi',Helvetica] font-medium text-primary underline">
                   EXDO6711148867
                 </span>
               </p>
@@ -175,23 +175,23 @@ export const AlternateAddresses: React.FC = () => {
 
             {/* Tab content display can vary below depending on selectedTabIndex */}
             <div className="flex flex-col items-start gap-2 px-0 sm:py-2 relative self-stretch w-full flex-[0_0_auto]">
-              <div className="flex flex-col items-start gap-4 p-3 sm:px-4 sm:py-6 relative self-stretch w-full flex-[0_0_auto] bg-white rounded-2xl">
+              <div className="flex flex-col items-start gap-4 p-3 sm:px-4 sm:py-6 relative self-stretch w-full flex-[0_0_auto] bg-fgc dark:bg-fgcDark rounded-2xl">
                 {tabs[selectedTabIndex].label === "Captured contact info" && (
                   <div className="w-full overflow-x-auto">
                     <table className="w-full border-collapse text-left min-w-[500px]">
                       <thead>
-                        <tr className="border-b border-[#eeeeee]">
-                          <th className="w-[300px] text-[#529e7e] text-sm sm:text-base text-start font-medium pr-2">Other similar addresses that company is using</th>
-                          <th className="w-[100px] text-[#529e7e] text-sm sm:text-base text-start font-medium pr-2">Phone</th>
-                          <th className="w-[96px] text-[#529e7e] text-sm sm:text-base text-start font-medium pr-2">Date Captured</th>
+                        <tr className="border-b border-[#eeeeee] dark:border-borderDark">
+                          <th className="w-[300px] text-primary text-sm sm:text-base text-start font-medium pr-2">Other similar addresses that company is using</th>
+                          <th className="w-[100px] text-primary text-sm sm:text-base text-start font-medium pr-2">Phone</th>
+                          <th className="w-[96px] text-primary text-sm sm:text-base text-start font-medium pr-2">Date Captured</th>
                         </tr>
                       </thead>
                       <tbody>
                         {capturedContactInfo.map((item) => (
-                          <tr key={item.id} className="h-[66px] border-b border-[#eeeeee]">
-                            <td className="text-[#1e2d2a] text-sm sm:text-base text-start font-medium pr-2">{item.similarAddresses}</td>
-                            <td className="text-[#1e2d2a] text-xs font-normal pr-2">{item.phone}</td>
-                            <td className="text-[#1e2d2a] text-sm sm:text-base font-normal pr-2">{item.dateCaptured}</td>
+                          <tr key={item.id} className="h-[66px] border-b border-[#eeeeee] dark:border-borderDark">
+                            <td className="text-text dark:text-textDark text-sm sm:text-base text-start font-medium pr-2">{item.similarAddresses}</td>
+                            <td className="text-text dark:text-textDark text-xs font-normal pr-2">{item.phone}</td>
+                            <td className="text-text dark:text-textDark text-sm sm:text-base font-normal pr-2">{item.dateCaptured}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -202,18 +202,18 @@ export const AlternateAddresses: React.FC = () => {
                   <div className="w-full overflow-x-auto">
                     <table className="w-full border-collapse text-left min-w-[500px]">
                       <thead>
-                        <tr className="border-b border-[#eeeeee]">
-                          <th className="w-[300px] text-[#529e7e] text-sm sm:text-base text-start font-medium pr-2">Other similar addresses that company is using</th>
-                          <th className="w-[100px] text-[#529e7e] text-sm sm:text-base text-start font-medium pr-2">Total Shipments</th>
-                          <th className="w-[96px] text-[#529e7e] text-sm sm:text-base text-start font-medium pr-2">Companies using the same address</th>
+                        <tr className="border-b border-[#eeeeee] dark:border-borderDark">
+                          <th className="w-[300px] text-primary text-sm sm:text-base text-start font-medium pr-2">Other similar addresses that company is using</th>
+                          <th className="w-[100px] text-primary text-sm sm:text-base text-start font-medium pr-2">Total Shipments</th>
+                          <th className="w-[96px] text-primary text-sm sm:text-base text-start font-medium pr-2">Companies using the same address</th>
                         </tr>
                       </thead>
                       <tbody>
                         {otherAddresses.map((item) => (
-                          <tr key={item.id} className="h-[66px] border-b border-[#eeeeee]">
-                            <td className="text-[#1e2d2a] text-sm sm:text-base text-start font-medium pr-2">{item.similarAddresses}</td>
-                            <td className="text-[#1e2d2a] text-xs font-normal pr-2">{item.totalShipments}</td>
-                            <td className="text-[#1e2d2a] text-sm sm:text-base font-normal pr-2">{item.companiesUsing}</td>
+                          <tr key={item.id} className="h-[66px] border-b border-[#eeeeee] dark:border-borderDark">
+                            <td className="text-text dark:text-textDark text-sm sm:text-base text-start font-medium pr-2">{item.similarAddresses}</td>
+                            <td className="text-text dark:text-textDark text-xs font-normal pr-2">{item.totalShipments}</td>
+                            <td className="text-text dark:text-textDark text-sm sm:text-base font-normal pr-2">{item.companiesUsing}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -224,7 +224,7 @@ export const AlternateAddresses: React.FC = () => {
                   <div className="flex justify-around w-full">
                     {otherNames.map((item) => (
                       <ul key={item.id} className="list-disc list-inside">
-                        <li className="text-[#1e2d2a] text-sm sm:text-base text-start font-medium pr-2">{item.name}</li>
+                        <li className="text-text dark:text-textDark text-sm sm:text-base text-start font-medium pr-2">{item.name}</li>
                       </ul>
                     ))}
                   </div>
@@ -238,16 +238,16 @@ export const AlternateAddresses: React.FC = () => {
                   <div className="w-full overflow-x-auto">
                     <table className="w-full border-collapse text-left min-w-full sm:min-w-[500px]">
                       <thead>
-                        <tr className="border-b border-[#eeeeee]">
-                          <th className="w-full sm:w-[300px] text-[#529e7e] text-sm sm:text-base text-start font-medium pr-2">Trademark URL</th>
-                          <th className="w-full sm:w-[100px] text-[#529e7e] text-sm sm:text-base text-start font-medium pr-2">Trademarks count</th>
+                        <tr className="border-b border-[#eeeeee] dark:border-borderDark">
+                          <th className="w-full sm:w-[300px] text-primary text-sm sm:text-base text-start font-medium pr-2">Trademark URL</th>
+                          <th className="w-full sm:w-[100px] text-primary text-sm sm:text-base text-start font-medium pr-2">Trademarks count</th>
                         </tr>
                       </thead>
                       <tbody>
                         {trademarks.map((item) => (
-                          <tr key={item.id} className="h-[66px] border-b border-[#eeeeee]">
-                            <td className="text-[#1e2d2a] text-sm sm:text-base text-start font-medium pr-2">{item.trademarkName}</td>
-                            <td className="text-[#1e2d2a] text-xs font-normal pr-2">{item.count}</td>
+                          <tr key={item.id} className="h-[66px] border-b border-[#eeeeee] dark:border-borderDark">
+                            <td className="text-text dark:text-textDark text-sm sm:text-base text-start font-medium pr-2">{item.trademarkName}</td>
+                            <td className="text-text dark:text-textDark text-xs font-normal pr-2">{item.count}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -258,7 +258,7 @@ export const AlternateAddresses: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-1 relative self-stretch w-full flex-[0_0_auto]">
-              <div className="cursor-pointer bg-[#529e7e] inline-flex h-[42px] items-center justify-center gap-3 px-6 py-3.5 relative flex-[0_0_auto] rounded-[50px] overflow-hidden"
+              <div className="cursor-pointer bg-primary inline-flex h-[42px] items-center justify-center gap-3 px-6 py-3.5 relative flex-[0_0_auto] rounded-[50px] overflow-hidden"
                 onClick={() => {
                   const selectedTab = tabs[selectedTabIndex].label as TabLabel;
                   const { data, headers, fields } = exportMap[selectedTab];
@@ -266,8 +266,8 @@ export const AlternateAddresses: React.FC = () => {
                   exportGenericCSV(csvData, selectedTab);
                 }}
               >
-                <Icon icon="download" className="w-3.5 h-3.5 text-white" />
-                <div className="relative w-fit mt-[-5.50px] mb-[-2.50px] [font-family:'Satoshi',Helvetica] font-medium text-white text-base tracking-[0] leading-[22px] whitespace-nowrap"
+                <Icon icon="download" className="w-3.5 h-3.5 text-textDark dark:text-text" />
+                <div className="relative w-fit mt-[-5.50px] mb-[-2.50px] [font-family:'Satoshi',Helvetica] font-medium text-textDark dark:text-text text-base tracking-[0] leading-[22px] whitespace-nowrap"
                 >
                   CSV
                 </div>

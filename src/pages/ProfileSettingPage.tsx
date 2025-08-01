@@ -73,7 +73,7 @@ const ProfileSettingPage = () => {
 						<img
 							className="relative sm:w-20 sm:h-20 w-12 h-12 object-cover"
 							alt="Ellipse"
-							src="https://c.animaapp.com/wtIZUsNi/img/ellipse-10830@2x.png"
+							src="assets/images/ellipse.png"
 						/>
 					</label>
 				)}

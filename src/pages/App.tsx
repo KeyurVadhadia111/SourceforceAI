@@ -76,7 +76,7 @@ function App() {
 					<div className="flex w-full sm:text-base text-sm ">
 						{!isMinimalPage ? <Sidebar /> : ""}
 						{/* Main Content */}
-						<main className={`z-[1] relative w-full`}>
+						<main className={`z-[1] relative w-full h-screen`}>
 							{!isMinimalPage ? <Header /> : <AuthHeader />}
 
 							<Outlet />

@@ -230,27 +230,27 @@ export const KeyTradePartners: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-start justify-center gap-4 p-3 sm:p-4 relative w-full rounded-2xl border border-solid border-[#e0e0e0]">
+    <div className="flex flex-col items-start justify-center gap-4 p-3 sm:p-4 relative w-full rounded-2xl border border-solid border-[#e0e0e0] dark:border-borderDark">
       <div className="flex items-center gap-4 relative w-full">
         <div className="flex flex-col items-start gap-4 relative flex-1 grow w-full">
           <div className="flex items-start gap-1 relative w-full">
             <div className="inline-flex items-center gap-1 relative">
-              <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base sm:text-xl tracking-[0] leading-[30px] ">
+              <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-text dark:text-textDark text-base sm:text-xl tracking-[0] leading-[30px] ">
                 Key Trade Partners
               </div>
-              <div className="relative w-fit [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-xs sm:text-sm tracking-[0] leading-[21px] ">
+              <div className="relative w-fit [font-family:'Satoshi-Regular',Helvetica] font-normal text-text dark:text-textDark text-xs sm:text-sm tracking-[0] leading-[21px] ">
                 ({filteredTradePartners.length} Supplier Found)
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col items-start gap-4 px-3 py-3 sm:px-4 sm:py-6 relative w-full bg-white rounded-2xl overflow-x-auto">
+          <div className="flex flex-col items-start gap-4 px-3 py-3 sm:px-4 sm:py-6 relative w-full bg-fgc dark:bg-fgcDark rounded-2xl overflow-x-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr className="border-b border-[#eeeeee]">
                   <th className="w-[218px] text-left align-top">
                     <div className="w-[218px] inline-flex flex-col items-start gap-2">
-                      <div className="[font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-sm sm:text-base leading-6">
+                      <div className="[font-family:'Satoshi-Bold',Helvetica] font-bold text-text dark:text-textDark text-sm sm:text-base leading-6">
                         Suppliers
                       </div>
                       <MultiSelectDropdown
@@ -264,11 +264,11 @@ export const KeyTradePartners: React.FC = () => {
 
                   <th className="w-[218px] text-left align-top">
                     <div className="w-[218px] inline-flex flex-col items-start gap-1">
-                      <div className="[font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-sm sm:text-base leading-6">
+                      <div className="[font-family:'Satoshi-Bold',Helvetica] font-bold text-text dark:text-textDark text-sm sm:text-base leading-6">
                         Shipment Activity
                       </div>
-                      <div className="inline-flex justify-center px-0 py-2 rounded-lg items-center gap-2.5 bg-white">
-                        <div className="text-[8px] sm:text-xs leading-[18px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a]">
+                      <div className="inline-flex justify-center px-0 py-2 rounded-lg items-center gap-2.5 bg-fgc dark:bg-fgcDark">
+                        <div className="text-[8px] sm:text-xs leading-[18px] [font-family:'Satoshi-Medium',Helvetica] font-medium text-text dark:text-textDark">
                           24/06/2024 - 20/06/2025
                         </div>
                         <Icon icon="chevron-down" className="w-3 h-3 sm:w-4 sm:h-4 text-text dark:text-textDark" />
@@ -278,7 +278,7 @@ export const KeyTradePartners: React.FC = () => {
 
                   <th className="w-[260px] text-left align-top">
                     <div className="w-[260px] inline-flex flex-col items-start gap-1">
-                      <div className="[font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-sm sm:text-base leading-6">
+                      <div className="[font-family:'Satoshi-Bold',Helvetica] font-bold text-text dark:text-textDark text-sm sm:text-base leading-6">
                         {currentView === 'shipments' && "Total Shipments"}
                         {currentView === 'weight' && "Total Weight in KG"}
                         {currentView === 'teu' && "Total TEUs Shipped"}
@@ -301,17 +301,17 @@ export const KeyTradePartners: React.FC = () => {
 
                   <th className="w-[218px] text-left align-top">
                     <div className="flex flex-col gap-1 items-start">
-                      <div className="[font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-sm sm:text-base leading-6">
+                      <div className="[font-family:'Satoshi-Bold',Helvetica] font-bold text-text dark:text-textDark text-sm sm:text-base leading-6">
                         Product Descriptions
                       </div>
-                      <div className="flex px-4 py-2 w-full rounded-[100px] border border-solid border-[#eeeeee] items-center gap-2.5 bg-white">
+                      <div className="flex px-4 py-2 w-full rounded-[100px] border border-solid border-[#eeeeee] items-center gap-2.5 bg-fgc dark:bg-fgcDark">
                         <Icon icon="search" className="w-4 h-4 text-textSecondary" />
                         <input
                           type="text"
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
                           placeholder="Search Description"
-                          className="w-full [font-family:'Satoshi-Regular',Helvetica] text-xs text-[#1e2d2a] bg-transparent border-none outline-none leading-[18px]"
+                          className="w-full [font-family:'Satoshi-Regular',Helvetica] text-xs text-text dark:text-textDark bg-transparent border-none outline-none leading-[18px]"
                         />
                       </div>
                     </div>
@@ -325,10 +325,10 @@ export const KeyTradePartners: React.FC = () => {
                     <tr className="h-[51px] sm:h-[66px] border-b border-border dark:border-borderDark">
                       <td className="w-[218px] pr-4">
                         <div className="inline-flex flex-col gap-1 items-start relative">
-                          <div className="[font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-sm sm:text-base tracking-[0] leading-6">
+                          <div className="[font-family:'Satoshi-Medium',Helvetica] font-medium text-text dark:text-textDark text-sm sm:text-base tracking-[0] leading-6">
                             {partner.supplier}
                           </div>
-                          <div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-[10px] sm:text-xs leading-[18px] tracking-[0]">
+                          <div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-text dark:text-textDark text-[10px] sm:text-xs leading-[18px] tracking-[0]">
                             {partner.location}
                           </div>
                         </div>
@@ -346,12 +346,12 @@ export const KeyTradePartners: React.FC = () => {
                       </td>
 
                       <td className="w-[180px] pr-4">
-                        <div className="w-[180px] inline-flex flex-col gap-2 px-0 py-2 bg-white rounded-lg">
+                        <div className="w-[180px] inline-flex flex-col gap-2 px-0 py-2 bg-fgc dark:bg-fgcDark rounded-lg">
                           <div className="inline-flex items-center gap-3">
                             {partner.productDescriptions.slice(0, 2).map((product, pIndex) => (
                               <div key={`product-${index}-${pIndex}`} className="inline-flex gap-1.5 items-center">
                                 <div className={`w-2 h-2 rounded`} style={{ backgroundColor: product.color }} />
-                                <div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-sm leading-[21px]">
+                                <div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-text dark:text-textDark text-sm leading-[21px]">
                                   {product.name}
                                 </div>
                               </div>
@@ -361,7 +361,7 @@ export const KeyTradePartners: React.FC = () => {
                             {partner.productDescriptions.slice(2, 4).map((product, pIndex) => (
                               <div key={`product-${index}-${pIndex + 2}`} className="inline-flex gap-1.5 items-center">
                                 <div className={`w-2 h-2 rounded`} style={{ backgroundColor: product.color }} />
-                                <div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-sm leading-[21px]">
+                                <div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-text dark:text-textDark text-sm leading-[21px]">
                                   {product.name}
                                 </div>
                               </div>
@@ -369,12 +369,12 @@ export const KeyTradePartners: React.FC = () => {
                           </div>
                         </div>
                         <div className="inline-flex flex-col gap-1 items-start">
-                          <div className="[font-family:'Satoshi-Medium',Helvetica] font-medium text-[#1e2d2a] text-sm sm:text-base text-left tracking-[0] leading-6">
+                          <div className="[font-family:'Satoshi-Medium',Helvetica] font-medium text-text dark:text-textDark text-sm sm:text-base text-left tracking-[0] leading-6">
                             {currentView === 'shipments' && partner.totalShipments}
                             {currentView === 'weight' && `${partner.totalWeight.toLocaleString()}`}
                             {currentView === 'teu' && `${partner.totalTEU.toFixed(1)}`}
                           </div>
-                          <div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-xs text-left leading-[18px] tracking-[0]">
+                          <div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-text dark:text-textDark text-xs text-left leading-[18px] tracking-[0]">
                             {currentView === 'shipments' && "shipments"}
                             {currentView === 'weight' && "kg"}
                             {currentView === 'teu' && "TEU"}
@@ -384,10 +384,10 @@ export const KeyTradePartners: React.FC = () => {
 
                       <td className="w-full flex-1 grow">
                         <div className="flex flex-col items-start gap-2 flex-1 grow">
-                          <div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-xs tracking-[0] leading-[18px]">
+                          <div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-text dark:text-textDark text-xs tracking-[0] leading-[18px]">
                             {partner.description}
                           </div>
-                          <div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-xs tracking-[0] leading-[18px]">
+                          <div className="[font-family:'Satoshi-Regular',Helvetica] font-normal text-text dark:text-textDark text-xs tracking-[0] leading-[18px]">
                             HS Codes: ({partner.hsCode})
                           </div>
                         </div>

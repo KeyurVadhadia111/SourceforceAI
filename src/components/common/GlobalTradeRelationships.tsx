@@ -136,27 +136,27 @@ const Tooltip: React.FC<TooltipProps> = ({ supplier, position, visible }) => {
 
     return (
         <div
-            className="absolute z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-4 max-w-xs transition-opacity duration-200"
+            className="absolute z-50 bg-fgc dark:bg-fgcDark border border-border dark:border-borderDark rounded-lg shadow-lg p-4 max-w-xs transition-opacity duration-200"
             style={{
                 left: `${position.x}px`,
                 top: `${position.y}px`,
                 transform: 'translate(-50%, -100%)',
             }}
         >
-            <div className="text-sm font-semibold text-gray-900 mb-2">{supplier.name}</div>
-            <div className="text-xs text-gray-600 mb-2">
+            <div className="text-sm font-semibold text-text dark:text-textDark mb-2">{supplier.name}</div>
+            <div className="text-xs text-text dark:text-textDark mb-2">
                 Sub-suppliers: {supplier.subSuppliers.length}
             </div>
             {supplier.subSuppliers.length > 0 && (
                 <div className="space-y-1">
-                    <div className="text-xs font-medium text-gray-700">Top Sub-suppliers:</div>
+                    <div className="text-xs font-medium text-text dark:text-textDark">Top Sub-suppliers:</div>
                     {supplier.subSuppliers.slice(0, 3).map((subSupplier) => (
-                        <div key={subSupplier.id} className="text-xs text-gray-600">
+                        <div key={subSupplier.id} className="text-xs text-textSecondary dark:text-textSecondaryDark">
                             • {subSupplier.name}
                         </div>
                     ))}
                     {supplier.subSuppliers.length > 3 && (
-                        <div className="text-xs text-gray-500">
+                        <div className="text-xs text-text dark:text-textDark">
                             +{supplier.subSuppliers.length - 3} more
                         </div>
                     )}
@@ -359,7 +359,7 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
                 opacity: hoveredSupplier ? 0.7 : 1
             }}
         >
-            <div className="text-[24px] text-white text-center text-nowrap">
+            <div className="text-[24px] text-textDark dark:text-text text-center text-nowrap">
                 <p className="block sm:leading-[1.5]">{data.mainCompany.name}</p>
             </div>
         </div>
@@ -382,7 +382,7 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
                     onMouseEnter={(e) => handleSupplierMouseEnter(supplier, e)}
                     onMouseLeave={handleSupplierMouseLeave}
                 >
-                    <div className="text-[16px] text-white text-center text-nowrap">
+                    <div className="text-[16px] text-textDark text-center text-nowrap">
                         <p className="block leading-[1.5] whitespace-pre">{supplier.name}</p>
                     </div>
                 </div>
@@ -423,7 +423,7 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
                                 }
                                 onMouseLeave={handleSubSupplierMouseLeave}
                             >
-                                <div className="text-[12px] text-[#1e2d2a] text-center text-nowrap">
+                                <div className="text-[12px] text-text dark:text-textDark text-center text-nowrap">
                                     <p className="block leading-[1.5] whitespace-pre">
                                         {subSupplier.name}
                                     </p>
@@ -437,19 +437,19 @@ const GlobalTradeRelationshipsGraph: React.FC<GlobalTradeRelationshipsProps> = (
     );
 
     const renderGraphView = () => (
-        <div className="h-[883px] overflow-clip relative shrink-0 w-[954px]">
+        <div className="h-[883px] relative shrink-0 w-[954px] overflow-auto">
             {renderMainCompany()}
             {renderSuppliers()}
             {renderSubSuppliers()}
             {renderHorizontalConnectors()}
 
             {/* Main vertical line */}
-            <div className="absolute flex h-[746px] items-center justify-center left-[128px] sm:left-[193px] top-[101px] w-[0px]">
+            <div className="absolute flex h-[746px] items-center justify-center left-[128px] sm:left-[193px] top-[101px] w-[0px] ">
                 <div className="flex-none rotate-[270deg]">
                     <div className="h-0 relative w-[746px]">
-                        <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
+                        <div className="absolute bottom-0 left-0 right-0 top-[-1px] ">
                             <svg
-                                className="block "
+                                className="block"
                                 fill="none"
                                 preserveAspectRatio="none"
                                 viewBox="0 0 746 1"

@@ -269,15 +269,15 @@ export const TopImportedProducts: React.FC = () => {
 
 
   return (
-    <div className="flex flex-col items-start justify-center gap-4 p-3 sm:p-4 relative self-stretch w-full flex-[0_0_auto] rounded-2xl border border-solid border-[#e0e0e0]">
+    <div className="flex flex-col items-start justify-center gap-4 p-3 sm:p-4 relative self-stretch w-full flex-[0_0_auto] rounded-2xl border border-solid border-[#e0e0e0] dark:border-borderDark">
       <div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
         <div className="flex flex-col items-start gap-4 relative flex-1 grow w-full">
           <div className="flex items-center gap-1 relative self-stretch w-full flex-[0_0_auto]">
             <div className="flex flex-wrap items-center gap-1 relative">
-              <p className="relative w-fit mt-[-1.00px] font-bold text-[#1e2d2a] text-base sm:text-xl leading-[30px]">
+              <p className="relative w-fit mt-[-1.00px] font-bold text-text dark:text-textDark text-base sm:text-xl leading-[30px]">
                 Top Imported Products by HS Code
               </p>
-              <div className="relative w-fit text-[10px] sm:text-sm text-[#1e2d2a] leading-[21px]">
+              <div className="relative w-fit text-[10px] sm:text-sm text-text dark:text-textDark leading-[21px]">
                 &nbsp;(Top 10)
               </div>
             </div>
@@ -290,13 +290,13 @@ export const TopImportedProducts: React.FC = () => {
                 <div
                   key={key}
                   onClick={() => setActiveTab(key)}
-                  className={`inline-flex cursor-pointer items-center justify-center gap-2 p-3 sm:px-8 sm:py-4 border-b-2 whitespace-nowrap ${activeTab === key ? "border-[#529e7e]" : " border-[#ced6d3]"
+                  className={`inline-flex cursor-pointer items-center justify-center gap-2 p-3 sm:px-8 sm:py-4 border-b-2 whitespace-nowrap ${activeTab === key ? "border-primary dark:border-primarySecondary" : " border-border dark:border-borderDark"
                     }`}
                 >
                   <div
                     className={`relative w-fit mt-[-1px] text-sm sm:text-base leading-normal ${activeTab === key
-                      ? "font-bold text-[#529e7e]"
-                      : "font-normal text-[#5f726e]"
+                      ? "font-bold text-primary"
+                      : "font-normal text-textSecondary dark:text-textSecondaryDark"
                       }`}
                   >
                     {label}

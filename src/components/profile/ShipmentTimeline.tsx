@@ -432,11 +432,11 @@ TEU: ${formatNumber(point.teu)} containers`;
   const renderFilters = () => (
     <div className="flex flex-wrap gap-4 items-start sm:items-center mb-4">
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-        <label className="text-sm font-medium text-gray-700">From:</label>
+        <label className="text-sm font-medium text-text dark:text-textDark">From:</label>
         <select
           value={filters.fromMonth}
           onChange={(e: any) => setFilters(prev => ({ ...prev, fromMonth: parseInt(e.target.value) }))}
-          className="px-3 py-1 border border-gray-300 rounded-md text-sm"
+          className="px-3 py-1 border border-gray-300 rounded-md text-sm text-text dark:text-textDark bg-fgc dark:bg-fgcDark"
         >
           {monthNames.map(month => (
             <option key={month} value={month}>{month}</option>
@@ -446,7 +446,7 @@ TEU: ${formatNumber(point.teu)} containers`;
         <select
           value={filters.fromYear}
           onChange={(e) => handleFilterChange('fromYear', parseInt(e.target.value))}
-          className="px-3 py-1 border border-gray-300 rounded-md text-sm"
+          className="px-3 py-1 border border-gray-300 rounded-md text-sm text-text dark:text-textDark bg-fgc dark:bg-fgcDark"
         >
           {availableYears.map(year => (
             <option key={year} value={year}>{year}</option>
@@ -455,11 +455,11 @@ TEU: ${formatNumber(point.teu)} containers`;
       </div>
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-        <label className="text-sm font-medium text-gray-700">To:</label>
+        <label className="text-sm font-medium text-text dark:text-textDark">To:</label>
         <select
           value={filters.toMonth}
           onChange={(e) => handleFilterChange('toMonth', parseInt(e.target.value))}
-          className="px-3 py-1 border border-gray-300 rounded-md text-sm"
+          className="px-3 py-1 border border-gray-300 rounded-md text-sm text-text dark:text-textDark bg-fgc dark:bg-fgcDark"
         >
           {monthNames.map(month => (
             <option key={month} value={month}>{month}</option>
@@ -468,7 +468,7 @@ TEU: ${formatNumber(point.teu)} containers`;
         <select
           value={filters.toYear}
           onChange={(e) => handleFilterChange('toYear', parseInt(e.target.value))}
-          className="px-3 py-1 border border-gray-300 rounded-md text-sm"
+          className="px-3 py-1 border border-gray-300 rounded-md text-sm text-text dark:text-textDark bg-fgc dark:bg-fgcDark"
         >
           {availableYears.map(year => (
             <option key={year} value={year}>{year}</option>
@@ -477,11 +477,11 @@ TEU: ${formatNumber(point.teu)} containers`;
       </div>
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-        <label className="text-sm font-medium text-gray-700">Country:</label>
+        <label className="text-sm font-medium text-text dark:text-textDark">Country:</label>
         <select
           value={filters.country}
           onChange={(e) => handleFilterChange('country', e.target.value as FilterState['country'])}
-          className="px-3 py-1 border border-gray-300 rounded-md text-sm"
+          className="px-3 py-1 border border-gray-300 rounded-md text-sm text-text dark:text-textDark bg-fgc dark:bg-fgcDark"
         >
           {countries.map(country => (
             <option key={country} value={country}>{country}</option>
@@ -490,11 +490,11 @@ TEU: ${formatNumber(point.teu)} containers`;
       </div>
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-        <label className="text-sm font-medium text-gray-700">Period:</label>
+        <label className="text-sm font-medium text-text dark:text-textDark">Period:</label>
         <select
           value={filters.period}
           onChange={(e) => handleFilterChange('period', e.target.value as FilterState['period'])}
-          className="px-3 py-1 border border-gray-300 rounded-md text-sm"
+          className="px-3 py-1 border border-gray-300 rounded-md text-sm text-text dark:text-textDark bg-fgc dark:bg-fgcDark"
         >
           <option value="Monthly">Monthly Trend</option>
           <option value="By Months">Month Breakdown</option>
@@ -520,7 +520,7 @@ TEU: ${formatNumber(point.teu)} containers`;
     const validData = chartData.filter(point => isFinite(point.value));
 
     if (validData.length === 0) {
-      return <div className="flex items-center justify-center h-[320px] text-gray-500">No data available</div>;
+      return <div className="flex items-center justify-center h-[320px] text-text dark:text-textDark">No data available</div>;
     }
 
     if (filters.period === 'Monthly') {
@@ -541,7 +541,7 @@ TEU: ${formatNumber(point.teu)} containers`;
       });
 
       if (sortedYears.length === 0) {
-        return <div className="flex items-center justify-center h-[320px] text-gray-500">No data available</div>;
+        return <div className="flex items-center justify-center h-[320px] text-text dark:text-textDark">No data available</div>;
       }
 
       const totalBars = sortedYears.length * 12;
@@ -656,7 +656,7 @@ TEU: ${formatNumber(point.teu)} containers`;
       });
 
       if (sortedYears.length === 0) {
-        return <div className="flex items-center justify-center h-[320px] text-gray-500">No data available</div>;
+        return <div className="flex items-center justify-center h-[320px] text-text dark:text-textDark">No data available</div>;
       }
 
       const availableWidth = chartWidth - padding.left - padding.right;
@@ -1013,13 +1013,13 @@ TEU: ${formatNumber(point.teu)} containers`;
 
   return (
     <div className={`relative rounded-2xl ${className}`}>
-      <div className="absolute border border-[#e0e0e0] border-solid inset-0 pointer-events-none rounded-2xl" />
+      <div className="absolute border border-[#e0e0e0] dark:border-borderDark border-solid inset-0 pointer-events-none rounded-2xl" />
       <div className="flex flex-col justify-center relative">
         <div className="box-border content-stretch flex flex-col gap-4 items-start justify-center p-[16px] relative">
 
           {/* Header */}
           <div className="flex items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
-            <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base sm:text-xl tracking-[0] leading-[30px]">
+            <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-text dark:text-textDark text-base sm:text-xl tracking-[0] leading-[30px]">
               Shipment Timeline: Sea Freight Volume Over Years
             </div>
           </div>
@@ -1032,16 +1032,16 @@ TEU: ${formatNumber(point.teu)} containers`;
             <div className="box-border content-stretch flex flex-wrap gap-2.5 items-center justify-start p-0 relative">
               <Icon icon={isDark ? "cube-dark" : "cube"} className="sm:w-5 sm:h-5 w-4 h-4 " />
 
-              <div className="font-['Satoshi:Medium',_sans-serif] leading-[0] not-italic relative shrink-0 text-[#1e2d2a] text-[12px] text-left">
+              <div className="font-['Satoshi:Medium',_sans-serif] leading-[0] not-italic relative shrink-0 text-text dark:text-textDark text-[12px] text-left">
                 <p className="block leading-[1.5] whitespace-pre">{getDateRangeText()}</p>
               </div>
-              <div className="font-['Satoshi:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[#666] text-[12px] text-left">
+              <div className="font-['Satoshi:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-text dark:text-textDark text-[12px] text-left">
                 <p className="block leading-[1.5] whitespace-pre">Total: {getTotalVolume()} units</p>
               </div>
             </div>
 
-            <div className="bg-[#ffffff] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative rounded-[322px] shrink-0">
-              <div className="absolute border border-[#529e7e] border-solid inset-0 pointer-events-none rounded-[322px]" />
+            <div className="bg-fgc dark:bg-fgcDark box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative rounded-[322px] shrink-0">
+              <div className="absolute border border-primary dark:border-borderDark border-solid inset-0 pointer-events-none rounded-[322px]" />
               <div className="font-['Satoshi:Medium',_sans-serif] leading-[0] not-italic relative shrink-0 text-[#529e7e] text-[12px] text-left text-nowrap">
                 <p className="block leading-[1.5] whitespace-pre">{filters.period} View</p>
               </div>
@@ -1049,7 +1049,7 @@ TEU: ${formatNumber(point.teu)} containers`;
           </div>
 
           {/* Chart */}
-          <div className="bg-[#ffffff] sm:h-[400px] relative rounded-3xl shrink-0 w-full">
+          <div className="bg-fgc dark:bg-fgcDark sm:h-[400px] relative rounded-3xl shrink-0 w-full">
             <div className="relative">
               <div className="box-border content-stretch flex flex-col gap-3 h-full items-start justify-start p-[16px] relative w-full">
                 {renderBarChart()}
@@ -1060,12 +1060,12 @@ TEU: ${formatNumber(point.teu)} containers`;
                   <div className="flex items-center gap-2">
                     <div className="relative shrink-0 size-4">
                       <div className="absolute left-2 size-px top-2">
-                        <div className="absolute bg-[#529e7e] left-[-4px] size-2 top-[-4px]">
-                          <div className="absolute border border-[#ffffff] border-solid inset-0 pointer-events-none" />
+                        <div className="absolute bg-primary dark:bg-primarySecondary left-[-4px] size-2 top-[-4px]">
+                          <div className="absolute border bg-fgc dark:bg-fgcDark border-solid inset-0 pointer-events-none" />
                         </div>
                       </div>
                     </div>
-                    <div className="font-['Satoshi:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[12px] text-[rgba(0,0,0,0.7)] text-left text-nowrap">
+                    <div className="font-['Satoshi:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[12px] text-text dark:text-textDark text-left text-nowrap">
                       <p className="block leading-[normal] whitespace-pre">
                         {filters.country === 'All Countries' ? 'All Countries' : filters.country} - {filters.fromYear === filters.toYear ? filters.fromYear : `${filters.fromYear}-${filters.toYear}`}
                       </p>

@@ -30,11 +30,11 @@ export const YearlyImportActivity: React.FC = () => {
   const dataToRender = activeTab === "year" ? yearlyData : monthlyData;
 
   return (
-    <div className="flex flex-col items-start justify-center gap-4 p-3 sm:p-4 relative self-stretch w-full flex-[0_0_auto] rounded-2xl border border-solid border-[#e0e0e0]">
+    <div className="flex flex-col items-start justify-center gap-4 p-3 sm:p-4 relative self-stretch w-full flex-[0_0_auto] rounded-2xl border border-solid border-[#e0e0e0] dark:border-borderDark">
       <div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
         <div className="flex flex-col items-start gap-4 relative flex-1 grow">
           <div className="flex items-start gap-1 relative self-stretch w-full flex-[0_0_auto]">
-            <p className="relative w-full mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base sm:text-xl tracking-[0] leading-[30px]">
+            <p className="relative w-full mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-text dark:text-textDark text-base sm:text-xl tracking-[0] leading-[30px]">
               Yearly Import Activity &amp; Shipment Cadence
             </p>
           </div>
@@ -43,13 +43,13 @@ export const YearlyImportActivity: React.FC = () => {
             <div className="flex items-center gap-1 relative self-stretch w-full flex-[0_0_auto]">
               <div className="inline-flex items-center relative flex-[0_0_auto] ">
                 <div
-                  className={`inline-flex items-center justify-center gap-2 p-3 sm:px-8 sm:py-4 relative flex-[0_0_auto] border-b-2 [border-bottom-style:solid] ${activeTab === "year" ? "border-[#529e7e]" : "border-[#ced6d3]"
+                  className={`inline-flex items-center justify-center gap-2 p-3 sm:px-8 sm:py-4 relative flex-[0_0_auto] border-b-2 [border-bottom-style:solid] ${activeTab === "year" ? "border-primary dark:border-primarySecondary" : "border-border dark:border-borderDark"
                     }`}
                   onClick={() => setActiveTab("year")}
                   style={{ cursor: "pointer" }}
                 >
                   <div
-                    className={`relative w-fit mt-[-2.00px] [font-family:'Satoshi-Bold',Helvetica] text-sm sm:text-base tracking-[0] leading-[normal] ${activeTab === "year" ? "text-[#529e7e] font-bold" : "text-[#5f726e] font-normal"
+                    className={`relative w-fit mt-[-2.00px] [font-family:'Satoshi-Bold',Helvetica] text-sm sm:text-base tracking-[0] leading-[normal] ${activeTab === "year" ? "text-primary font-bold" : "text-textSecondary dark:text-textSecondaryDark font-normal"
                       }`}
                   >
                     Year
@@ -57,13 +57,13 @@ export const YearlyImportActivity: React.FC = () => {
                 </div>
 
                 <div
-                  className={`inline-flex items-center justify-center gap-2 p-3 sm:px-8 sm:py-4 relative flex-[0_0_auto] border-b-2 [border-bottom-style:solid] ${activeTab === "month" ? "border-[#529e7e]" : "border-[#ced6d3]"
+                  className={`inline-flex items-center justify-center gap-2 p-3 sm:px-8 sm:py-4 relative flex-[0_0_auto] border-b-2 [border-bottom-style:solid] ${activeTab === "month" ? "border-primary dark:border-primarySecondary" : "border-border dark:border-borderDark"
                     }`}
                   onClick={() => setActiveTab("month")}
                   style={{ cursor: "pointer" }}
                 >
                   <div
-                    className={`relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] text-sm sm:text-base tracking-[0] leading-[normal] ${activeTab === "month" ? "text-[#529e7e] font-bold" : "text-[#5f726e] font-normal"
+                    className={`relative w-fit mt-[-1.00px] [font-family:'Satoshi-Regular',Helvetica] text-sm sm:text-base tracking-[0] leading-[normal] ${activeTab === "month" ? "text-primary font-bold" : "text-textSecondary dark:text-textSecondaryDark font-normal"
                       }`}
                   >
                     Month

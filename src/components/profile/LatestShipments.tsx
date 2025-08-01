@@ -79,16 +79,16 @@ export const LatestShipments: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col items-start justify-center gap-4 p-3 sm:p-4 relative self-stretch w-full flex-[0_0_auto] rounded-2xl border border-solid border-[#e0e0e0]">
+    <div className="flex flex-col items-start justify-center gap-4 p-3 sm:p-4 relative self-stretch w-full flex-[0_0_auto] rounded-2xl border border-solid border-border dark:border-borderDark">
       <div className="flex items-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
         <div className="flex flex-col items-start gap-4 relative flex-1 grow w-full">
           <div className="flex items-center gap-1 relative self-stretch w-full flex-[0_0_auto]">
             <div className="flex flex-wrap items-center gap-1 relative">
-              <p className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-[#1e2d2a] text-base sm:text-xl tracking-[0] leading-[30px]">
+              <p className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-text dark:text-textDark text-base sm:text-xl tracking-[0] leading-[30px]">
                 Latest Sea Freight Shipment Records
               </p>
 
-              <div className="relative w-fit [font-family:'Satoshi-Regular',Helvetica] font-normal text-[#1e2d2a] text-sm tracking-[0] leading-[21px] whitespace-nowrap">
+              <div className="relative w-fit [font-family:'Satoshi-Regular',Helvetica] font-normal text-text dark:text-textDark text-sm tracking-[0] leading-[21px] whitespace-nowrap">
                 {" "}
                 (Top 10)
               </div>
@@ -97,11 +97,11 @@ export const LatestShipments: React.FC = () => {
           <div className="w-full overflow-x-auto">
             <table className="w-full border-collapse text-left min-w-[900px]">
               <thead>
-                <tr className="border-b border-[#eeeeee]">
-                  <th className="w-[116px] text-[#529e7e] text-base text-start font-medium pr-2">Date</th>
-                  <th className="w-[136px] text-[#529e7e] text-base text-start font-medium pr-2">Bill of Lading</th>
+                <tr className="border-b border-[#eeeeee] dark:border-borderDark">
+                  <th className="w-[116px] text-primary text-base text-start font-medium pr-2">Date</th>
+                  <th className="w-[136px] text-primary text-base text-start font-medium pr-2">Bill of Lading</th>
                   <th className="w-[206px] pr-2">
-                    <span className="text-[#529e7e] text-base text-start font-medium">Suppliers</span>
+                    <span className="text-primary text-base text-start font-medium">Suppliers</span>
                     <MultiSelectDropdown
                       options={allCountries}
                       selectedOptions={selectedCountries}
@@ -109,37 +109,37 @@ export const LatestShipments: React.FC = () => {
                       placeholder="Select Countries"
                     />
                   </th>
-                  <th className="w-[96px] text-[#529e7e] text-base text-start font-medium pr-2">Weight</th>
-                  <th className="w-[116px] text-[#529e7e] text-base text-start font-medium pr-2">No. of<br />Containers</th>
+                  <th className="w-[96px] text-primary text-base text-start font-medium pr-2">Weight</th>
+                  <th className="w-[116px] text-primary text-base text-start font-medium pr-2">No. of<br />Containers</th>
                   <th className="w-[170px] pr-2">
-                    <span className="text-[#529e7e] text-base text-start font-medium ">Description</span>
-                    <div className="flex px-4 py-1.5 w-full rounded-[100px] border border-solid border-[#eeeeee] items-center gap-2.5 bg-white">
+                    <span className="text-primary text-base text-start font-medium ">Description</span>
+                    <div className="flex px-4 py-1.5 w-full rounded-[100px] border border-solid border-[#eeeeee] dark:border-borderDark items-center gap-2.5 bg-fgc dark:bg-fgcDark">
                       <Icon icon="search" className="w-4 h-4 text-textSecondary" />
                       <input
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search Description"
-                        className="w-full [font-family:'Satoshi-Regular',Helvetica] text-xs text-[#1e2d2a] bg-transparent border-none outline-none leading-[18px]"
+                        className="w-full [font-family:'Satoshi-Regular',Helvetica] text-xs text-text dark:text-textDark bg-transparent border-none outline-none leading-[18px]"
                       />
                     </div>
                   </th>
-                  <th className="w-[98px] text-[#529e7e] text-base font-medium pr-2">Est. Freight Cost</th>
+                  <th className="w-[98px] text-primary text-base font-medium pr-2">Est. Freight Cost</th>
                 </tr>
               </thead>
               <tbody>
                 {LatestShipmentsData.map((item) => (
-                  <tr key={item.id} className="h-[66px] border-b border-[#eeeeee]">
-                    <td className="text-[#1e2d2a] text-sm sm:text-base text-start font-medium pr-2">{item.date}</td>
-                    <td className="text-[#1e2d2a] text-xs font-bold pr-2">
+                  <tr key={item.id} className="h-[66px] border-b border-[#eeeeee] dark:border-borderDark">
+                    <td className="text-text dark:text-textDark text-sm sm:text-base text-start font-medium pr-2">{item.date}</td>
+                    <td className="text-text dark:text-textDark text-xs font-bold pr-2">
                       <div>{item.billofLading.split(" ")[0]}</div>
                       <div>{item.billofLading.split(" ")[1]}</div>
                     </td>
-                    <td className="text-[#1e2d2a] text-xs font-bold pr-2">{item.suppliers}</td>
-                    <td className="text-[#1e2d2a] text-xs font-normal pr-2">{item.weight}</td>
-                    <td className="text-[#1e2d2a] text-xs font-normal pr-2">{item.noofContainers}</td>
-                    <td className="text-[#1e2d2a] text-xs font-normal pr-2">{item.description}</td>
-                    <td className="text-[#1e2d2a] text-xs font-bold pr-2">
+                    <td className="text-text dark:text-textDark text-xs font-bold pr-2">{item.suppliers}</td>
+                    <td className="text-text dark:text-textDark text-xs font-normal pr-2">{item.weight}</td>
+                    <td className="text-text dark:text-textDark text-xs font-normal pr-2">{item.noofContainers}</td>
+                    <td className="text-text dark:text-textDark text-xs font-normal pr-2">{item.description}</td>
+                    <td className="text-text dark:text-textDark text-xs font-bold pr-2">
                       <div>{item.estFreightCost}</div>
                       <div className="text-[#3f7dcf] font-medium">No Data</div>
                     </td>

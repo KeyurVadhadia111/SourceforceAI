@@ -339,11 +339,11 @@ Country TEU: ${formatNumber(data.teu)} containers`;
     const renderFilters = () => (
         <div className="flex flex-wrap gap-4 items-center mb-4">
             <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700">From Year:</label>
+                <label className="text-sm font-medium text-text dark:text-textDark">From Year:</label>
                 <select
                     value={filters.fromYear}
                     onChange={(e) => setFilters(prev => ({ ...prev, fromYear: parseInt(e.target.value) }))}
-                    className="px-3 py-1 border border-gray-300 rounded-md text-sm"
+                    className="px-3 py-1 border border-border dark:border-borderDark bg-fgc dark:bg-fgcDark dark:text-textDark rounded-md text-sm"
                 >
                     {availableYears.map(year => (
                         <option key={year} value={year}>{year}</option>
@@ -352,11 +352,11 @@ Country TEU: ${formatNumber(data.teu)} containers`;
             </div>
 
             <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700">To Year:</label>
+                <label className="text-sm font-medium text-text dark:text-textDark">To Year:</label>
                 <select
                     value={filters.toYear}
                     onChange={(e) => setFilters(prev => ({ ...prev, toYear: parseInt(e.target.value) }))}
-                    className="px-3 py-1 border border-gray-300 rounded-md text-sm"
+                    className="px-3 py-1 border border-border dark:border-borderDark bg-fgc dark:bg-fgcDark dark:text-textDark rounded-md text-sm"
                 >
                     {availableYears.map(year => (
                         <option key={year} value={year}>{year}</option>
@@ -365,11 +365,11 @@ Country TEU: ${formatNumber(data.teu)} containers`;
             </div>
 
             <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700">Country:</label>
+                <label className="text-sm font-medium text-text dark:text-textDark">Country:</label>
                 <select
                     value={filters.country}
                     onChange={(e) => setFilters(prev => ({ ...prev, country: e.target.value }))}
-                    className="px-3 py-1 border border-gray-300 rounded-md text-sm"
+                    className="px-3 py-1 border border-border dark:border-borderDark bg-fgc dark:bg-fgcDark dark:text-textDark rounded-md text-sm"
                 >
                     {availableCountries.map(country => (
                         <option key={country} value={country}>{country}</option>
@@ -378,11 +378,11 @@ Country TEU: ${formatNumber(data.teu)} containers`;
             </div>
 
             <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700">Region:</label>
+                <label className="text-sm font-medium text-text dark:text-textDark">Region:</label>
                 <select
                     value={filters.region}
                     onChange={(e) => setFilters(prev => ({ ...prev, region: e.target.value }))}
-                    className="px-3 py-1 border border-gray-300 rounded-md text-sm"
+                    className="px-3 py-1 border border-border dark:border-borderDark bg-fgc dark:bg-fgcDark dark:text-textDark rounded-md text-sm"
                 >
                     {availableRegions.map(region => (
                         <option key={region} value={region}>{region}</option>
@@ -391,11 +391,11 @@ Country TEU: ${formatNumber(data.teu)} containers`;
             </div>
 
             <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700">Port Type:</label>
+                <label className="text-sm font-medium text-text dark:text-textDark">Port Type:</label>
                 <select
                     value={filters.portType}
                     onChange={(e) => setFilters(prev => ({ ...prev, portType: e.target.value as 'all' | 'hubs' | 'regional' }))}
-                    className="px-3 py-1 border border-gray-300 rounded-md text-sm"
+                    className="px-3 py-1 border bg-fgc dark:bg-fgcDark border-border dark:border-borderDark dark:text-textDark rounded-md text-sm"
                 >
                     <option value="all">All Ports</option>
                     <option value="hubs">Major Hubs</option>
@@ -426,7 +426,6 @@ Country TEU: ${formatNumber(data.teu)} containers`;
                                     const countryName = geo.properties.name;
                                     const isHovered = hoveredCountry === countryName;
                                     const hasData = countryData[countryName];
-                                    console.log("Country:", countryName, "Fill:", getRegionColor(countryName), "Stroke:", getRegionStrokeColor(countryName));
 
                                     return (
                                         <Geography
@@ -458,9 +457,9 @@ Country TEU: ${formatNumber(data.teu)} containers`;
                                             {hasData && (
                                                 <title>
                                                     {`${countryName}
-Volume: ${formatNumber(countryData[countryName].volume)} units
-TEU: ${formatNumber(countryData[countryName].teu)} containers
-Ports: ${countryData[countryName].ports}`}
+                                                    Volume: ${formatNumber(countryData[countryName].volume)} units
+                                                    TEU: ${formatNumber(countryData[countryName].teu)} containers
+                                                    Ports: ${countryData[countryName].ports}`}
                                                 </title>
                                             )}
                                         </Geography>
@@ -554,9 +553,9 @@ Ports: ${countryData[countryName].ports}`}
                 </ComposableMap>
 
                 {/* Legend */}
-                {/* <div className="absolute bottom-4 right-4 bg-white p-3 rounded-lg shadow-lg border">
+                {/* <div className="absolute bottom-4 right-4 bg-fgc dark:bg-fgcDark p-3 rounded-lg shadow-lg border">
           <div className="space-y-2">
-            <div className="text-xs font-medium text-gray-700 mb-2">Legend</div>
+            <div className="text-xs font-medium text-text dark:text-textDark mb-2">Legend</div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-red-600 rounded-full"></div>
               <span className="text-xs text-gray-600">Major Hubs</span>
@@ -585,7 +584,7 @@ Ports: ${countryData[countryName].ports}`}
 
                 {/* Port Details Panel */}
                 {selectedPort && (
-                    <div className="absolute top-4 left-4 bg-white p-4 rounded-lg shadow-lg border max-w-sm">
+                    <div className="absolute top-4 left-4 bg-fgc dark:bg-fgcDark p-4 rounded-lg shadow-lg border max-w-sm">
                         <div className="flex justify-between items-start mb-2">
                             <h3 className="font-semibold text-gray-900">{selectedPort.name}</h3>
                             <button
@@ -602,7 +601,7 @@ Ports: ${countryData[countryName].ports}`}
                             <p><strong>Coordinates:</strong> {selectedPort.lat.toFixed(2)}°, {selectedPort.lng.toFixed(2)}°</p>
                             {countryData[selectedPort.country] && (
                                 <div className="mt-2 pt-2 border-t">
-                                    <p className="font-medium text-gray-700">Country Data ({filters.fromYear}-{filters.toYear}):</p>
+                                    <p className="font-medium text-text dark:text-textDark">Country Data ({filters.fromYear}-{filters.toYear}):</p>
                                     <p>Volume: {formatNumber(countryData[selectedPort.country].volume)} units</p>
                                     <p>TEU: {formatNumber(countryData[selectedPort.country].teu)} containers</p>
                                     <p>Ports: {countryData[selectedPort.country].ports}</p>
@@ -626,10 +625,10 @@ Ports: ${countryData[countryName].ports}`}
                     {/* Info section */}
                     <div className="box-border content-stretch flex flex-row items-start justify-between p-0 relative shrink-0 w-full">
                         <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-start p-0 relative shrink-0">
-                            <div className="font-['Satoshi:Medium',_sans-serif] leading-[0] not-italic relative shrink-0 text-[#1e2d2a] text-[12px] text-left text-nowrap">
+                            <div className="font-['Satoshi:Medium',_sans-serif] leading-[0] not-italic relative shrink-0 text-text dark:text-textDark text-[12px] text-left text-nowrap">
                                 <p className="block leading-[1.5] whitespace-pre">Period: {filters.fromYear}-{filters.toYear}</p>
                             </div>
-                            <div className="font-['Satoshi:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[#666] text-[12px] text-left text-nowrap">
+                            <div className="font-['Satoshi:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-borderDark dark:text-border text-[12px] text-left text-nowrap">
                                 <p className="block leading-[1.5] whitespace-pre">Ports: {filteredPorts.length}</p>
                             </div>
                         </div>
@@ -643,7 +642,7 @@ Ports: ${countryData[countryName].ports}`}
                     </div>
 
                     {/* Map */}
-                    <div className="bg-[#ffffff] relative rounded-3xl shrink-0 w-full">
+                    <div className="bg-fgc relative rounded-3xl shrink-0 w-full">
                         <div className="relative">
                             <div className="box-border content-stretch flex flex-col gap-3 h-full items-start justify-start relative w-full">
                                 {renderWorldMap()}
@@ -665,7 +664,7 @@ Ports: ${countryData[countryName].ports}`}
                     </div> */}
                                     </div>
 
-                                    {/* <div className="font-['Satoshi:Medium',_sans-serif] leading-[0] not-italic relative shrink-0 text-[#1e2d2a] text-[16px] text-right text-nowrap">
+                                    {/* <div className="font-['Satoshi:Medium',_sans-serif] leading-[0] not-italic relative shrink-0 text-text dark:text-textDark text-[16px] text-right text-nowrap">
                     <p className="block leading-[1.5] whitespace-pre">
                       {Object.keys(countryData).length} active countries • {filteredPorts.length} ports displayed
                     </p>

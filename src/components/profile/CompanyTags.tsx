@@ -54,9 +54,9 @@ const companyTags = [
 
 export const CompanyTags: React.FC = () => {
   return (
-    <div className="gap-2 px-6 py-4 bg-[#f9f9f9] flex flex-col items-start relative self-stretch w-full flex-[0_0_auto] rounded-2xl">
+    <div className="gap-2 px-6 py-4 bg-fgc dark:bg-fgcDark flex flex-col items-start relative self-stretch w-full flex-[0_0_auto] rounded-2xl">
       <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-        <p className="relative w-fit mt-[-1.00px] [font-family:'Satoshi',Helvetica] font-medium text-[#1e2d2a] text-base sm:text-xl tracking-[0] leading-[30px] whitespace-nowrap">
+        <p className="relative w-fit mt-[-1.00px] [font-family:'Satoshi',Helvetica] font-medium text-text dark:text-textDark text-base sm:text-xl tracking-[0] leading-[30px] whitespace-nowrap">
           Company Tags &amp; Classification
         </p>
       </div>
@@ -65,13 +65,13 @@ export const CompanyTags: React.FC = () => {
         {companyTags.map(({ tag, count }, index) => (
           <div
             key={index}
-            className="inline-flex gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 flex-[0_0_auto] bg-white rounded items-center relative cursor-pointer hover:bg-black/15"
+            className="inline-flex gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 flex-[0_0_auto] bg-fgc dark:bg-fgcDark rounded items-center relative cursor-pointer hover:bg-black/15"
           >
-            <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi',Helvetica] font-medium text-[#1e2d2a] text-sm sm:text-base tracking-[0] leading-6 whitespace-nowrap">
+            <div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi',Helvetica] font-medium text-text dark:text-textDark text-sm sm:text-base tracking-[0] leading-6 whitespace-nowrap">
               {tag}
             </div>
 
-            <div className="mt-[-1.00px] [font-family:'Satoshi',Helvetica] font-medium text-[#529e7e] text-sm sm:text-base leading-6 whitespace-nowrap relative w-fit tracking-[0]">
+            <div className="mt-[-1.00px] [font-family:'Satoshi',Helvetica] font-medium text-primary text-sm sm:text-base leading-6 whitespace-nowrap relative w-fit tracking-[0]">
               {count}
             </div>
           </div>

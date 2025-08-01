@@ -102,7 +102,7 @@ const SavedManufacturers = () => {
 
 	const handleViewProfile = (supplierId: string) => {
 		// Implement view profile functionality
-		navigate("/supplier-profile");
+		navigate(`/supplier-profile?supplierId=${supplierId}`);
 		console.log("View profile for supplier:", supplierId);
 	};
 

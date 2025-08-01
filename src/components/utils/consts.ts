@@ -6,7 +6,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "1",
 		name: "TechCorp Manufacturing",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-16.svg",
+		image: "assets/images/Company-Profile/Profile Picture-4.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -21,7 +21,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "2",
 		name: "Global Tools Ltd",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -36,7 +36,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "3",
 		name: "Pacific Electronics",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-19.svg",
+		image: "assets/images/Company-Profile/Profile Picture-2.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -51,7 +51,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "4",
 		name: "BlendTech Manufacturing",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-18.svg",
+		image: "assets/images/Company-Profile/Profile Picture-3.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -66,7 +66,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "5",
 		name: "Global Tools Ltd",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -81,7 +81,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "6",
 		name: "Global Tools Ltd",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -96,7 +96,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "7",
 		name: "Pacific Electronics",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-19.svg",
+		image: "assets/images/Company-Profile/Profile Picture-2.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -111,7 +111,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "8",
 		name: "SmartHome Gadgets",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-14.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "India",
 		rating: 4.7,
 		isBookmarked: false,
@@ -126,7 +126,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "9",
 		name: "EcoLite Electronics",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-17.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "Vietnam",
 		rating: 4.6,
 		isBookmarked: false,
@@ -141,7 +141,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "10",
 		name: "Fusion Tech Industries",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-20.svg",
+		image: "assets/images/Company-Profile/Profile Picture-3.svg",
 		country: "Germany",
 		rating: 4.9,
 		isBookmarked: false,
@@ -156,7 +156,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "11",
 		name: "Precision Tools Inc",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-13.svg",
+		image: "assets/images/Company-Profile/Profile Picture-4.svg",
 		country: "India",
 		rating: 4.5,
 		isBookmarked: false,
@@ -171,7 +171,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "12",
 		name: "Nova Kitchenware",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-12.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "Vietnam",
 		rating: 4.6,
 		isBookmarked: false,
@@ -186,7 +186,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "13",
 		name: "SmartTech Partners",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-11.svg",
+		image: "assets/images/Company-Profile/Profile Picture-3.svg",
 		country: "Germany",
 		rating: 4.9,
 		isBookmarked: false,
@@ -201,7 +201,7 @@ export const suppliers: Supplier[] = [
 	{
 		id: "14",
 		name: "GreenWare Solutions",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-10.svg",
+		image: "assets/images/Company-Profile/Profile Picture-2.svg",
 		country: "India",
 		rating: 4.4,
 		isBookmarked: false,
@@ -219,7 +219,7 @@ export const suppliersSearchFilter: Supplier[] = [
 	{
 		id: "1",
 		name: "Global Tools Ltd",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -235,7 +235,7 @@ export const suppliersSearchFilter: Supplier[] = [
 	{
 		id: "2",
 		name: "TechCorp Manufacturing",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-16.svg",
+		image: "assets/images/Company-Profile/Profile Picture-4.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -251,7 +251,7 @@ export const suppliersSearchFilter: Supplier[] = [
 	{
 		id: "3",
 		name: "Global Tools Ltd",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -267,7 +267,7 @@ export const suppliersSearchFilter: Supplier[] = [
 	{
 		id: "4",
 		name: "BlendTech Manufacturing",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-18.svg",
+		image: "assets/images/Company-Profile/Profile Picture-3.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -283,7 +283,7 @@ export const suppliersSearchFilter: Supplier[] = [
 	{
 		id: "5",
 		name: "Pacific Electronics",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-19.svg",
+		image: "assets/images/Company-Profile/Profile Picture-2.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -299,7 +299,7 @@ export const suppliersSearchFilter: Supplier[] = [
 	{
 		id: "6",
 		name: "BlendTech Manufacturing",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-18.svg",
+		image: "assets/images/Company-Profile/Profile Picture-3.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -315,7 +315,7 @@ export const suppliersSearchFilter: Supplier[] = [
 	{
 		id: "7",
 		name: "Global Tools Ltd",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -331,7 +331,7 @@ export const suppliersSearchFilter: Supplier[] = [
 	{
 		id: "8",
 		name: "TechCorp Manufacturing",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-16.svg",
+		image: "assets/images/Company-Profile/Profile Picture-4.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -347,7 +347,7 @@ export const suppliersSearchFilter: Supplier[] = [
 	{
 		id: "9",
 		name: "Global Tools Ltd",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -363,7 +363,7 @@ export const suppliersSearchFilter: Supplier[] = [
 	{
 		id: "10",
 		name: "Pacific Electronics",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-19.svg",
+		image: "assets/images/Company-Profile/Profile Picture-2.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -382,7 +382,7 @@ export const RfqCenterInbox: Supplier[] = [
 	{
 		id: "1",
 		name: "Global Tools Ltd",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -397,7 +397,7 @@ export const RfqCenterInbox: Supplier[] = [
 	{
 		id: "2",
 		name: "BlendTech Manufacturing",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-18.svg",
+		image: "assets/images/Company-Profile/Profile Picture-3.svg",
 		country: "Germany",
 		rating: 4.8,
 		isBookmarked: false,
@@ -412,7 +412,7 @@ export const RfqCenterInbox: Supplier[] = [
 	{
 		id: "3",
 		name: "Pacific Electronics",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-19.svg",
+		image: "assets/images/Company-Profile/Profile Picture-2.svg",
 		country: "France",
 		rating: 4.8,
 		isBookmarked: false,
@@ -427,7 +427,7 @@ export const RfqCenterInbox: Supplier[] = [
 	{
 		id: "4",
 		name: "Global Tools Ltd",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "Newyork",
 		rating: 4.8,
 		isBookmarked: false,
@@ -442,7 +442,7 @@ export const RfqCenterInbox: Supplier[] = [
 	{
 		id: "5",
 		name: "TechCorp Manufacturing",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-16.svg",
+		image: "assets/images/Company-Profile/Profile Picture-4.svg",
 		country: "United States",
 		rating: 4.8,
 		isBookmarked: false,
@@ -457,7 +457,7 @@ export const RfqCenterInbox: Supplier[] = [
 	{
 		id: "6",
 		name: "Pacific Electronics",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-19.svg",
+		image: "assets/images/Company-Profile/Profile Picture-2.svg",
 		country: "Japan",
 		rating: 4.8,
 		isBookmarked: false,
@@ -472,7 +472,7 @@ export const RfqCenterInbox: Supplier[] = [
 	{
 		id: "7",
 		name: "Global Tools Ltd",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -487,7 +487,7 @@ export const RfqCenterInbox: Supplier[] = [
 	{
 		id: "8",
 		name: "BlendTech Manufacturing",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-18.svg",
+		image: "assets/images/Company-Profile/Profile Picture-3.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -502,7 +502,7 @@ export const RfqCenterInbox: Supplier[] = [
 	{
 		id: "9",
 		name: "Global Tools Ltd",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -517,7 +517,7 @@ export const RfqCenterInbox: Supplier[] = [
 	{
 		id: "10",
 		name: "TechCorp Manufacturing",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-16.svg",
+		image: "assets/images/Company-Profile/Profile Picture-4.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -534,7 +534,7 @@ export const RfqCenterSent: Supplier[] = [
 	{
 		id: "1",
 		name: "Custom Injection Molded Parts",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -549,7 +549,7 @@ export const RfqCenterSent: Supplier[] = [
 	{
 		id: "2",
 		name: "Stainless Steel Fasteners",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-18.svg",
+		image: "assets/images/Company-Profile/Profile Picture-3.svg",
 		country: "Germany",
 		rating: 4.8,
 		isBookmarked: false,
@@ -564,7 +564,7 @@ export const RfqCenterSent: Supplier[] = [
 	{
 		id: "3",
 		name: "Automotive Rubber Seals",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-19.svg",
+		image: "assets/images/Company-Profile/Profile Picture-2.svg",
 		country: "France",
 		rating: 4.8,
 		isBookmarked: false,
@@ -579,7 +579,7 @@ export const RfqCenterSent: Supplier[] = [
 	{
 		id: "4",
 		name: "Custom Injection Molded Parts",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "Newyork",
 		rating: 4.8,
 		isBookmarked: false,
@@ -594,7 +594,7 @@ export const RfqCenterSent: Supplier[] = [
 	{
 		id: "5",
 		name: "Custom Injection Molded Parts",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-16.svg",
+		image: "assets/images/Company-Profile/Profile Picture-4.svg",
 		country: "United States",
 		rating: 4.8,
 		isBookmarked: false,
@@ -609,7 +609,7 @@ export const RfqCenterSent: Supplier[] = [
 	{
 		id: "6",
 		name: "Custom Injection Molded Parts",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-19.svg",
+		image: "assets/images/Company-Profile/Profile Picture-2.svg",
 		country: "Japan",
 		rating: 4.8,
 		isBookmarked: false,
@@ -624,7 +624,7 @@ export const RfqCenterSent: Supplier[] = [
 	{
 		id: "7",
 		name: "Custom Injection Molded Parts",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -639,7 +639,7 @@ export const RfqCenterSent: Supplier[] = [
 	{
 		id: "8",
 		name: "Stainless Steel Fasteners",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-18.svg",
+		image: "assets/images/Company-Profile/Profile Picture-3.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -654,7 +654,7 @@ export const RfqCenterSent: Supplier[] = [
 	{
 		id: "9",
 		name: "Automotive Rubber Seals",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-15.svg",
+		image: "assets/images/Company-Profile/Profile Picture-1.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,
@@ -669,7 +669,7 @@ export const RfqCenterSent: Supplier[] = [
 	{
 		id: "10",
 		name: "TechCorp Manufacturing",
-		image: "https://c.animaapp.com/wtIZUsNi/img/random-pp-16.svg",
+		image: "assets/images/Company-Profile/Profile Picture-4.svg",
 		country: "China",
 		rating: 4.8,
 		isBookmarked: false,

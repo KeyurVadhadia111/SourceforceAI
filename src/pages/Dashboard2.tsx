@@ -15,7 +15,7 @@ const Dashboard2 = () => {
 									<img
 										className="relative w-14 h-14"
 										alt="Group"
-										src="https://c.animaapp.com/wtIZUsNi/img/group-17-1.svg"
+										src="assets/images/logo/logo-primary.svg"
 									/>
 
 									<div className="inline-flex flex-col items-start gap-3 relative flex-[0_0_auto]">
@@ -23,7 +23,7 @@ const Dashboard2 = () => {
 											<img
 												className="absolute w-8 h-8 top-3 left-3"
 												alt="Asterisk simple"
-												src="https://c.animaapp.com/wtIZUsNi/img/asterisksimple-7.svg"
+												src="assets/images/asterisksimple-7.svg"
 											/>
 										</div>
 
@@ -31,7 +31,7 @@ const Dashboard2 = () => {
 											<img
 												className="absolute w-8 h-8 top-3 left-3"
 												alt="Cube focus"
-												src="https://c.animaapp.com/wtIZUsNi/img/cubefocus-9.svg"
+												src="assets/images/cubefocus-9.svg"
 											/>
 										</div>
 
@@ -39,7 +39,7 @@ const Dashboard2 = () => {
 											<img
 												className="absolute w-8 h-8 top-3 left-3"
 												alt="Factory"
-												src="https://c.animaapp.com/wtIZUsNi/img/factory-9.svg"
+												src="assets/images/factory-9.svg"
 											/>
 										</div>
 
@@ -47,7 +47,7 @@ const Dashboard2 = () => {
 											<img
 												className="absolute w-8 h-8 top-3 left-3"
 												alt="Presentation chart"
-												src="https://c.animaapp.com/wtIZUsNi/img/presentationchart-9.svg"
+												src="assets/images/presentationchart-9.svg"
 											/>
 										</div>
 
@@ -55,7 +55,7 @@ const Dashboard2 = () => {
 											<img
 												className="absolute w-8 h-8 top-3 left-3"
 												alt="Heart half"
-												src="https://c.animaapp.com/wtIZUsNi/img/hearthalf-9.svg"
+												src="assets/images/hearthalf-9.svg"
 											/>
 										</div>
 
@@ -63,7 +63,7 @@ const Dashboard2 = () => {
 											<img
 												className="absolute w-8 h-8 top-3 left-3"
 												alt="Policy"
-												src="https://c.animaapp.com/wtIZUsNi/img/policy-1-7.svg"
+												src="assets/images/policy-1-7.svg"
 											/>
 										</div>
 
@@ -71,7 +71,7 @@ const Dashboard2 = () => {
 											<img
 												className="absolute w-8 h-8 top-3 left-3"
 												alt="Chat circle text"
-												src="https://c.animaapp.com/wtIZUsNi/img/chatcircletext-7.svg"
+												src="assets/images/chatcircletext-7.svg"
 											/>
 										</div>
 									</div>
@@ -80,13 +80,13 @@ const Dashboard2 = () => {
 								<img
 									className="relative w-14 h-14 object-cover"
 									alt="Photo by evan wise"
-									src="https://c.animaapp.com/wtIZUsNi/img/photo-by-evan-wise-9@2x.png"
+									src="assets/images/photo-by-evan-wise.png"
 								/>
 
 								<img
 									className="absolute w-[3px] h-[59px] top-[126px] left-px"
 									alt="Line"
-									src="https://c.animaapp.com/wtIZUsNi/img/line-3-7.svg"
+									src="assets/images/line-3-7.svg"
 								/>
 							</div>
 
@@ -95,14 +95,14 @@ const Dashboard2 = () => {
 									<img
 										className="relative w-[189.66px] h-[21.2px]"
 										alt="Union"
-										src="https://c.animaapp.com/wtIZUsNi/img/union-9.svg"
+										src="assets/images/logo/union-9.svg"
 									/>
 
 									<div className="relative w-6 h-6">
 										<img
 											className="w-3 h-1.5 top-[9px] absolute left-1.5"
 											alt="Direction down"
-											src="https://c.animaapp.com/wtIZUsNi/img/direction-down-9@2x.png"
+											src="assets/images/direction-down.png"
 										/>
 									</div>
 								</div>
@@ -113,7 +113,7 @@ const Dashboard2 = () => {
 											<img
 												className="relative w-6 h-6"
 												alt="Cloud sun"
-												src="https://c.animaapp.com/wtIZUsNi/img/cloudsun-7.svg"
+												src="assets/images/cloudsun-7.svg"
 											/>
 										</div>
 
@@ -121,7 +121,7 @@ const Dashboard2 = () => {
 											<img
 												className="relative w-6 h-6"
 												alt="Cloud moon"
-												src="https://c.animaapp.com/wtIZUsNi/img/cloudmoon-9.svg"
+												src="assets/images/cloudmoon-9.svg"
 											/>
 										</div>
 									</div>
@@ -130,7 +130,7 @@ const Dashboard2 = () => {
 										<img
 											className="relative w-6 h-6"
 											alt="Export"
-											src="https://c.animaapp.com/wtIZUsNi/img/export-9.svg"
+											src="assets/images/export-9.svg"
 										/>
 
 										<div className="relative w-fit mt-[-1.00px] [font-family:'Satoshi-Bold',Helvetica] font-bold text-white text-base tracking-[0] leading-6 whitespace-nowrap">
@@ -144,7 +144,7 @@ const Dashboard2 = () => {
 										<img
 											className="w-1 h-2 top-1 absolute left-1.5"
 											alt="Direction right"
-											src="https://c.animaapp.com/wtIZUsNi/img/direction-right-9@2x.png"
+											src="assets/images/direction-right.png"
 										/>
 									</div>
 								</div>

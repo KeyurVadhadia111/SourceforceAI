@@ -245,13 +245,13 @@ export const SupplierProfile: React.FC = () => {
           <AlternateAddresses />
           <CompanyTags /> */}
         </div>
-        <div className="relative self-stretch w-full h-px bg-[#eeeeee]" />
+        <div className="relative self-stretch w-full h-px bg-fgc dark:bg-fgcDark" />
         <div className="flex items-center justify-end gap-[223px] p-[30px] relative self-stretch w-full flex-[0_0_auto]">
           <div className="inline-flex items-center gap-4 relative flex-[0_0_auto] cursor-pointer"
             onClick={() => handleSendRFQ(supplierId)}
           >
             <div className="inline-flex items-center justify-center gap-2.5 px-6 py-2 sm:px-9 sm:py-3.5 relative flex-[0_0_auto] bg-[#529e7e] rounded-[50px] overflow-hidden">
-              <div className="relative w-fit mt-[-1.50px] [font-family:'Satoshi',Helvetica] font-medium text-white text-xs sm:text-base tracking-[0] leading-[22px] whitespace-nowrap"
+              <div className="relative w-fit mt-[-1.50px] [font-family:'Satoshi',Helvetica] font-medium text-textDark dark:text-text text-xs sm:text-base tracking-[0] leading-[22px] whitespace-nowrap"
 
               >
                 Send RFQ
@@ -280,16 +280,15 @@ export const SupplierProfile: React.FC = () => {
       <div
         ref={sidebarRef}
         onMouseLeave={handleMouseLeave}
-        className={`hidden md:block fixed top-0 right-0 h-full w-[424px] bg-white p-6 overflow-y-auto transition-transform duration-500 z-40
-    ${sidebarVisible ? "translate-x-0" : "translate-x-full"}
-  `}
+        className={`hidden md:block fixed top-0 right-0 h-full w-[424px] bg-white dark:bg-fgcDark p-6 overflow-y-auto transition-transform duration-500 z-40
+        ${sidebarVisible ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="mt-[105px] flex flex-col gap-4">
           {sectionBar.map((item, index) => (
             <div
               key={item.id}
               onClick={() => scrollToSection(index)}
-              className={`rounded-2xl p-4 border border-border text-text dark:text-textDark cursor-pointer transition ${visibleSection === item.id ? "bg-[#529e7e] text-white" : ""
+              className={`rounded-2xl p-4 border border-border text-text dark:text-textDark cursor-pointer transition ${visibleSection === item.id ? "bg-primary text-textDark dark:text-textDark" : ""
                 }`}
             >
               {item.title}
